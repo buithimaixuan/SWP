@@ -22,7 +22,13 @@ public class CustomerDAO {
     private ResultSet rs;
 
     public CustomerDAO() {
-    conn = DB.DBConnection.connect();
+         try {
+             conn = DB.DBConnection.connect();
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
     public Customer getCustomer(int acc_id){
         Customer cus = null;
