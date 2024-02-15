@@ -23,7 +23,13 @@ public class StaffDAO {
     private ResultSet rs;
 
     public StaffDAO() {
-        conn = DB.DBConnection.connect();
+        try {
+            conn = DB.DBConnection.connect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public Staff getStaff(int acc_id){
         Staff Staff = null;

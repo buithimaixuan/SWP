@@ -23,7 +23,13 @@ public class AccountDAO {
     private ResultSet rs;
 
     public AccountDAO() {
-        conn = DB.DBConnection.connect();
+        try {
+            conn = DB.DBConnection.connect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public Account getAccount(String us, String pass) {

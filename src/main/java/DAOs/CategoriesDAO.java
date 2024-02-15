@@ -24,7 +24,13 @@ public class CategoriesDAO {
     private ResultSet rs;
 
     public CategoriesDAO() {
-        conn = DB.DBConnection.connect();
+        try {
+            conn = DB.DBConnection.connect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CategoriesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public LinkedList<Categories> getAllCat() {
