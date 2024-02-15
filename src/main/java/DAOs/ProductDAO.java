@@ -29,7 +29,13 @@ public class ProductDAO {
      *
      */
     public ProductDAO() {
-        conn = DB.DBConnection.connect();
+        try {
+            conn = DB.DBConnection.connect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 //    public LinkedList<Product> getListProByCatId(int cat_id) {
