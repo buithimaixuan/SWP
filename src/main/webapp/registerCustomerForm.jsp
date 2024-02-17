@@ -24,7 +24,7 @@
                         <div class="card" style="border-radius: 1rem;">
                             <div class="row g-0">
                                 <div class="col-md-6 col-lg-6 d-none d-md-block">
-                                    <img class="w-100 h-100" src="Images/Lovecake.png" alt="login form" class="img-fluid"
+                                    <img class="w-100 h-100" src="images/Lovecake.png" alt="login form" class="img-fluid"
                                          style="border-radius: 1rem 0 0 1rem;" />
                                 </div>
                                 <div class="col-md-6 col-lg-6 d-flex align-items-center">
