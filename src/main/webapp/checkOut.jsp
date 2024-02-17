@@ -5,13 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : checkOut
     Created on : Feb 16, 2024, 5:49:59 PM
     Author     : DELL
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -83,8 +83,9 @@
     </head>
 
     <body>
-
-
+        
+        
+        <%@include file="headOfCart.jsp" %>
         <div class="container col-10 my-5 br-2 rounded">
             <h5 style="color: #631bf3;">Group4 Store</h3>
                 <div class="row g-3">

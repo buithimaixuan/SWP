@@ -21,8 +21,11 @@
     </head>
     <body>
         <div class="row">
-            <%@include file="SlideBarDashBoard.jsp" %>
-            <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 px-4 ps-4 mt-3" >
+            <%@include file="DashBoardSlideBarVer2.jsp" %>
+            <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 px-4 ps-4 mt-3" style="position: absolute;
+                 left: 265px;
+                 top: 0;
+                 width: 80%;">
                 <form method="" action="" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddPro()">
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Thêm mới sản phẩm</span>
@@ -128,7 +131,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex mt-0 w-100">
                             <div class="form-outline mt-4 w-100 col">
                                 <div class="d-flex">
@@ -145,7 +148,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex mt-0 w-100">
                             <div class="form-outline mt-4 w-100 col">
                                 <div class="d-flex">
@@ -162,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex mt-0 w-100">
                             <div class="form-outline mt-4 w-100 col">
                                 <div class="d-flex">

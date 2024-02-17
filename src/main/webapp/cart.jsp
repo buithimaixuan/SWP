@@ -8,22 +8,29 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <%@include file="headOfCart.jsp" %>
-        <div class="container">
-            <form method="post" class="form-inline container mt-3" action="OrderController"
-                  onsubmit="return validateCheckBox()">
-                <table id="example" class="display border border-2">
-                    <thead>
-                        <tr class="bg-info-subtle">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <title>JSP Page</title>
+    <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="container">
+        <form method="post" class="form-inline container mt-3 row" action="OrderController"
+            onsubmit="return validateCheckBox()">
+            <!-- <div class="col-lg-"></div> -->
+            <div class="col-lg-9">
+                <table id="example" class="display w-100">
+                    <thead class="bg-body-secondary border-bottom border-top">
+                        <tr style="line-height: 40px;">
                             <th>Chọn mua</th>
-                            <th>Mã sản phẩm</th>
                             <th>Sản phẩm</th>
+                            <th>Tên sản phẩm</th>
                             <th>Đơn giá</th>
                             <th>Số lượng</th>
                             <th>Thành tiền</th>
@@ -31,12 +38,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="checkbox" class="checkBuy">
+                        <tr class="border border-1">
+                            <td class="mx-2">
+                                <input type="checkbox" name="checkbox" class="checkBuy mx-2">
                             </td>
                             <td>
-                                1234
+                                <img class="pt-2" src="Images/Lovecake.png" alt="image"
+                                    style="width: 70px; height: 70px;">
                             </td>
 
                             <td>
@@ -45,7 +53,7 @@
                             <td>
                                 57.000
                             </td>
-                            <td class="w-25">
+                            <td>
                                 <div class="form-group d-flex justify-content-between">
                                     <a class="btn btn-sm btn-decre" href="#"><i class="fas fa-minus-square"></i></a>
                                     <input type="text" name="quantity" class="form-control" value="1" readonly>
@@ -56,15 +64,16 @@
                                 57.000
                             </td>
                             <td><a onclick="return confirm('Do you want to delete this cart?')" href="#"
-                                   class="btn btn-sm btn-danger">Remove</a>
+                                    class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="border border-1">
                             <td>
-                                <input type="checkbox" name="checkbox" class="checkBuy">
+                                <input type="checkbox" name="checkbox" class="checkBuy mx-2">
                             </td>
                             <td>
-                                1234
+                                <img class="pt-2" src="Images/Lovecake.png" alt="image"
+                                    style="width: 70px; height: 70px;">
                             </td>
 
                             <td>
@@ -84,16 +93,18 @@
                                 57.000
                             </td>
                             <td><a onclick="return confirm('Do you want to delete this cart?')" href="#"
-                                   class="btn btn-sm btn-danger">Remove</a>
+                                    class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="border border-1">
                             <td>
-                                <input type="checkbox" name="checkbox" class="checkBuy">
+                                <input type="checkbox" name="checkbox" class="checkBuy mx-2">
                             </td>
                             <td>
-                                1234
+                                <img class="pt-2" src="Images/Lovecake.png" alt="image"
+                                    style="width: 70px; height: 70px;">
                             </td>
+
 
                             <td>
                                 Bột làm bánh bao mikko 1kg
@@ -112,22 +123,27 @@
                                 57.000
                             </td>
                             <td><a onclick="return confirm('Do you want to delete this cart?')" href="#"
-                                   class="btn btn-sm btn-danger">Remove</a>
+                                    class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
 
                     </tbody>
                 </table>
 
-                <input type="submit" class="btn btn-success" value="Buy now" name="btnBuy">
+                <span class="error mt-2"></span>
+            </div>
+            <div class="col-lg-3">
+                <span class="fs-5 d-block fw-bold border-bottom" style="line-height: 40px;">Thông tin đơn
+                    hàng</span>
+                <div style="line-height: 80px;">
+                    <span class="fs-4">Tổng tiền: <span class="text-danger">120000đ</span></span>
 
-            </form>
-        </div>
+                </div>
+                <input type="submit" class="btn btn-outline-info text-black fs-5" value="Tiến hành đặt hàng"
+                    name="btnBuy">
+            </div>
+        </form>
+    </div>
+</body>
 
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <script>
-                                    new DataTable('#example');
-        </script>
-    </body>
 </html>
