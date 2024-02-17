@@ -19,6 +19,7 @@
     <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <%@include file="headOfCart.jsp" %>
 
     <div class="container">
         <form method="post" class="form-inline container mt-3 row" action="OrderController"

@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center">
-                        <a href=""><img class="border rounded-circle" src="Images/Lovecake.png" alt="logo"
+                        <a href=""><img class="border rounded-circle" src="images/Lovecake.png" alt="logo"
                                         style="width: 100px; height: 70px;"></a>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
