@@ -13,6 +13,7 @@
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link rel="stylesheet" href="./CSS/AddNewsForm.css"/>
+
         <style>
             .font-italic{
                 font-style: italic;
@@ -22,8 +23,11 @@
     </head>
     <body>
         <div class="row">
-            <%@include file="SlideBarDashBoard.jsp" %>
-            <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 px-4 ps-4 mt-3" >
+            <%@include file="DashBoardSlideBarVer2.jsp" %>
+            <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 mt-3" style="position: absolute;
+                 left: 265px;
+                 top: 0;
+                 width: 80%;">
                 <form method="" action="" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateForm()">
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Thêm mới thông tin</span>
