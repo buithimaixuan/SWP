@@ -5,6 +5,7 @@
 
 // Lấy ngày hiện tại
 var today = new Date();
+var selectedDate;
 var dd = String(today.getDate()).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); // nếu ngày và tháng nhỏ hơn 10 thì số đầu sẽ là số 0
 var yyyy = today.getFullYear();
@@ -17,7 +18,7 @@ document.getElementById('dayWriteNews').value = formattedDate;
 
 // Bắt sự kiện thay đổi của trường input
 document.getElementById('dayWriteNews').addEventListener('change', function () {
-    var selectedDate = new Date(this.value);
+    selectedDate = new Date(this.value);
 
     // So sánh ngày được chọn với ngày hiện tại
     if (selectedDate > today) {
@@ -28,28 +29,7 @@ document.getElementById('dayWriteNews').addEventListener('change', function () {
     }
 });
 
-// hiển thị hình ảnh đã chọn 
-function displayImage(event) {
-    var image = document.getElementById('displayImage');
-    var defaultImage = document.getElementById('defaultImage');
-    image.innerHTML = ''; // Xóa hình ảnh đang hiển thị trước đó
-
-    var file = event.target.files[0];
-    if (!file) {
-        image.appendChild(defaultImage); // Hiển thị hình ảnh mặc định nếu không có file được chọn
-        return;
-    }
-
-    var reader = new FileReader();
-    reader.onload = function (event) {
-        var img = document.createElement('img');
-        img.src = event.target.result;
-        img.style.maxWidth = '100%'; // Đảm bảo hình ảnh không vượt quá chiều rộng của phần tử cha
-        image.appendChild(img);
-    };
-    reader.readAsDataURL(file);
-}
-
+// hien thi hinh anh khi chon
 function displayImage(event, displayId) {
     var image = document.getElementById(displayId);
     var defaultImage = image.querySelector('.defaultImage');
@@ -70,7 +50,6 @@ function displayImage(event, displayId) {
     };
     reader.readAsDataURL(file);
 }
-
 
 // xóa hiển thị hình ảnh đã chọn 
 //function deleteImage() {
@@ -99,19 +78,19 @@ function validateAddPro() {
 
     var isValid = true;
 
-    if (proName === "" || price === "" ||  realPrice === "" || quantity === "" || description === ""){
-        alert("Vui lòng nhập đầy đủ thông tin cần thiết");
+    if (proName === "" || price === "" ||  realPrice === "" || quantity === "" || description === "" || selectedDate > today || parseFloat(realPrice) > parseFloat(price)){
+        alert("Vui lòng nhập đầy đủ và đúng thông tin cần thiết!");
     }
     if (proName === '') {
-        errorProName.innerHTML = "Tên sản phẩm không thể bỏ trống";
+        errorProName.innerHTML = "Tên sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (price === '') {
-        errorPrice.innerHTML = "Giá gốc sản phẩm không thể bỏ trống";
+        errorPrice.innerHTML = "Giá gốc sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (realPrice === '') {
-        errorRealPrice.innerHTML = "Giá bán sản phẩm không thể bỏ trống";
+        errorRealPrice.innerHTML = "Giá bán sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (parseFloat(realPrice) > parseFloat(price)) {
@@ -119,14 +98,13 @@ function validateAddPro() {
         isValid = false;
     }
     if (quantity === '') {
-        errorQuantity.innerHTML = "Số lượng sản phẩm không thể bỏ trống";
+        errorQuantity.innerHTML = "Số lượng sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (description === '') {
-        errorDescription.innerHTML = "Mô tả sản phẩm không thể bỏ trống";
+        errorDescription.innerHTML = "Mô tả sản phẩm không thể bỏ trống!";
         isValid = false;
     }
-
     return isValid;
 }
 
@@ -156,17 +134,16 @@ function validateForm() {
     var isValid = true;
 
     // bao loi cho trang add News
-    if (title === '' || contentMain === '' || content1 === '' || content2 === '' || content3 === '') {
-        alert("Vui lòng nhập đầy đủ thông tin!");
+    if (title === '' || contentMain === '' || content1 === '' || content2 === '' || content3 === '' || selectedDate > today) {
+        alert("Vui lòng nhập đầy đủ và đúng thông tin cần thiết!");
         isValid = false;
     }
-
     if (title === '') {
         errorTitle.innerHTML = "Tiêu đề không thể để trống!";
         isValid = false;
     }
     if (contentMain === '') {
-        errorContentMain.innerHTML = "Nội dung chính không thể bỏ trống";
+        errorContentMain.innerHTML = "Nội dung chính không thể bỏ trống!";
         isValid = false;
     }
     if (content1 === '') {
