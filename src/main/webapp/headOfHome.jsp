@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <title>LoveCake Shop</title>
-        <link rel="icon" type="image/png" href="Images/Lovecake.png">
+        <link rel="icon" type="image/png" href="images/Lovecake.png">
         <link rel="stylesheet" href="/CSS/style.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
     </head>
@@ -36,7 +36,7 @@
 
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center">
-                        <a href="/HomeController"><img class="border rounded-circle" src="/Images/Lovecake.png" alt="logo"
+                        <a href="/HomeController"><img class="border rounded-circle" src="/images/Lovecake.png" alt="logo"
                                         style="width: 100px; height: 70px;"></a>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="mid_user_option">
                                     <div class="avatar_display">
-                                        <img src="Images/Lovecake.png" alt="">
+                                        <img src="images/Lovecake.png" alt="">
                                     </div>s
                                     <div class="hello_user">
                                         Hello, <span>Tran Phuong Nam</span>
