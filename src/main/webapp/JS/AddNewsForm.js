@@ -99,7 +99,7 @@ function validateAddPro() {
 
     var isValid = true;
 
-    if (proName === "" || price === "" || realPrice === "" || quantity === "" || description === "") {
+    if (proName === "" || price === "" ||  realPrice === "" || quantity === "" || description === ""){
         alert("Vui lòng nhập đầy đủ thông tin cần thiết");
     }
     if (proName === '') {
