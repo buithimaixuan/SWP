@@ -44,7 +44,7 @@
                                 <input type="checkbox" name="checkbox" class="checkBuy mx-2">
                             </td>
                             <td>
-                                <img class="pt-2" src="Images/Lovecake.png" alt="image"
+                                <img class="pt-2" src="images/Lovecake.png" alt="image"
                                     style="width: 70px; height: 70px;">
                             </td>
 
@@ -73,7 +73,7 @@
                                 <input type="checkbox" name="checkbox" class="checkBuy mx-2">
                             </td>
                             <td>
-                                <img class="pt-2" src="Images/Lovecake.png" alt="image"
+                                <img class="pt-2" src="images/Lovecake.png" alt="image"
                                     style="width: 70px; height: 70px;">
                             </td>
 
@@ -102,7 +102,7 @@
                                 <input type="checkbox" name="checkbox" class="checkBuy mx-2">
                             </td>
                             <td>
-                                <img class="pt-2" src="Images/Lovecake.png" alt="image"
+                                <img class="pt-2" src="images/Lovecake.png" alt="image"
                                     style="width: 70px; height: 70px;">
                             </td>
 

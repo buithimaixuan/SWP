@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <title>LoveCake Shop</title>
-        <link rel="icon" type="image/png" href="/Images/Lovecake.png">
+        <link rel="icon" type="image/png" href="/images/Lovecake.png">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/CSS/style.css">
     </head>
@@ -182,7 +182,7 @@
                         </div>
                     </c:forEach>
                     <c:if test="${listPro !=null}">
-<!--                        <p class="h5 mt-1 border-2 border-bottom">Tat ca san pham</p>-->
+                        <!--                        <p class="h5 mt-1 border-2 border-bottom">Tat ca san pham</p>-->
                         <div class="row mx-1">
                             <c:forEach items="${listPro}" var="p">
                                 <div class="col-lg-3 pt-0 pt-3 ">
@@ -487,11 +487,14 @@
             </div>
 
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</body>
+        
+        <%@include file="footerOfHome.jsp" %>   
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </body>
 
 </html>
