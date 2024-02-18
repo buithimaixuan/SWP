@@ -18,7 +18,7 @@
             <div class="header_sidebar">
                 <div class="logo">
                     <a href="#">
-                        <img src="./Images/Lovecake.png" alt="">
+                        <img src="images/Lovecake.png" alt="">
                     </a>
                 </div>
                 <span>Dashboard</span>

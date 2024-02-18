@@ -13,7 +13,6 @@
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-        <link rel="icon" type="image/png" href="Images/Lovecake.png">
         <link rel="stylesheet" href="/CSS/footer.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <title>JSP Page</title>
@@ -29,7 +28,7 @@
                         <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
                             <!-- Content -->
                             <!-- <h6 class="text-uppercase fw-bold">Company name</h6> -->
-                            <a href=""><img class="border rounded-circle" src="/Images/Lovecake.png" alt="logo"
+                            <a href=""><img class="border rounded-circle" src="/images/Lovecake.png" alt="logo"
                                             style="width: 100px; height: 80px;"></a>
                             <p class="mt-3 text-secondary">
                                 Kiến thức cơ bản về đồ làm bánh 
