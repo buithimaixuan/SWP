@@ -84,6 +84,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+      HttpSession session = request.getSession();//tao session
+        
         AccountDAO dao = new AccountDAO();
         CustomerDAO cusDao = new CustomerDAO();
         StaffDAO staffDao = new StaffDAO();
@@ -97,15 +99,27 @@ public class LoginController extends HttpServlet {
             if (acc != null) {
                 Customer cus = cusDao.getCustomer(acc.getAcc_id());
                 if (cus != null) {
-                    HttpSession session = request.getSession();//tao session
+
                     session.setAttribute("account", cus);
+
                     response.sendRedirect("HomeController");
-                   
+
                 } else {
                     Staff staff = staffDao.getStaff(acc.getAcc_id());
+
+                    session.setAttribute("staff", staff);
+//                    if (staff.getPosition() =="admin") {
+//                        session.setAttribute("admin", "position");
+//                    } else if (staff.getPosition().equals(acc)) {
+//                        session.setAttribute("order manager", "position");
+//                    } else {
+//                        session.setAttribute("product manager", "position");
+//                   }
+                    response.sendRedirect("/AdminController");
                 }
             } else {
-
+                session.setAttribute("fail", "Không tìm thấy tài khoản!");
+                response.sendRedirect("/LoginController");
             }
 
         }

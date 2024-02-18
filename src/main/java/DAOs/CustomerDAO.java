@@ -49,6 +49,28 @@ public class CustomerDAO {
         
         return cus;
     }
+    public int createCus(Customer cus) {
+        int count = 0;
+        String sql = "insert into customer values(?,?,?,?,?,?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, cus.getAcc_id());
+            ps.setString(2, cus.getUsername());
+            ps.setString(3, Utils.Hashing.getMd5(cus.getPassword()));
+            ps.setString(4, cus.getFullname());
+            ps.setString(5, cus.getAvatar());
+            ps.setString(6, cus.getPhone_number());
+            ps.setString(7, cus.getEmail());
+            ps.setInt(8, 0);
+            ps.setInt(9, 0);
+            count = ps.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return count;
+    }
     
     
 }
