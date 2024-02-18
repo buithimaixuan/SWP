@@ -14,6 +14,7 @@
         <title>Document</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="CSS/validate.css"/>
     </head>
 
     <body>
@@ -30,34 +31,38 @@
                                 <div class="col-md-6 col-lg-6 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
 
-                                        <form method="post" action="LoginController">
+                                        <form method="post" action="LoginController" onsubmit="return validateInputs();">
 
                                             <div class="d-flex align-items-center mb-3 pb-1">
                                                 <span class="h1 fw-bold mb-0">Đăng nhập</span>
                                             </div>
 
-                                            <div class="form-outline mb-4">
+                                            <div class="form-outline mb-4 validate">
                                                 <label class="form-label">Tên đăng nhập</label>
-                                                <input type="text" id="username" name="txtUS"
+                                                <input type="text" id="userN" name="txtUS"
                                                        class="form-control form-control-lg" />
+                                                 <span class="error"></span>
 
                                             </div>
 
-                                            <div class="form-outline mb-4">
+                                            <div class="form-outline mb-4 validate">
                                                 <label class="form-label">Mật khẩu</label>
-                                                <input type="password" id="password" name="txtPwd"
+                                                <input type="password" id="pwd" name="txtPwd"
                                                        class="form-control form-control-lg" />
+                                                 <span class="error"></span>
 
                                             </div>
-
+                                            <div class="pt-1 mb-4">
+                                                <p class="text-danger">${fail}</p>
+                                            </div>
                                             <div class="pt-1 mb-4">
                                                 <input type="submit" class="btn btn-lg btn-block" name="btnLogin"
                                                        value="Login" style="background-color: #f1a8b6;">
                                             </div>
 
-                                            <a class="small text-muted" href="#!">Quên mật khẩu?</a>
+                                            <a class="small text-muted" href="/ResetPasswordController">Quên mật khẩu?</a>
                                             <p class="mb-5 pb-lg-2" style="color: #393f81;">Bạn Không có tài khoản? <a
-                                                    href="#!" style="color: #393f81;">Tạo tài khoản</a></p>
+                                                    href="/RegisterController" style="color: #393f81;">Tạo tài khoản</a></p>
                                         </form>
 
                                     </div>
@@ -71,6 +76,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/JS/validate.js"></script>
     </body>
 
 </html>

@@ -101,7 +101,7 @@ header .user_option {
   position: absolute;
   width: 400px;
   height: 360px;
-  background: #4544452d;
+  background: white;
   top: 15%;
   right: 2%;
   border-radius: 5px;
@@ -112,6 +112,7 @@ header .user_option {
   gap: 20px;
   transition: 0.25s;
   display: none;
+  box-shadow: -1px -1px 3px black;
 }
 header .user_option .top_user_option {
   height: 10%;

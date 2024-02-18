@@ -28,9 +28,9 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-2 col-md-3 col-sm-3 p-0   subnav">
+                    <div class="col-lg-2 col-md-3 col-sm-3 p-0 subnav">
                         <div class="categories border rounded-top border-dark">
-                            <a href="" class="text-decoration-none text-black">
+                            <a href="/ProductController" class="text-decoration-none text-black">
                                 <p class="hidden-sm hidden-xs text-center">DANH MỤC SẢN PHẨM</p>
                             </a>
                         </div>
@@ -39,119 +39,119 @@
                             <div class="slide-bar">
                                 <ul class="menu">
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Set nguyên liệu</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/setNguyenLieu">Set nguyên liệu</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Set nguyên liệu
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/setNguyenLieu/sinhNhat">Set nguyên liệu
                                                     bánh sinh nhật</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black " href="#">Set nguyên liệu
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black " href="/ProductController/setNguyenLieu/cookie">Set nguyên liệu
                                                     bánh cookie</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black " href="#">Set nguyên liệu
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black " href="/ProductController/setNguyenLieu/banhMi">Set nguyên liệu
                                                     bánh mì</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Set nguyên liệu
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/setNguyenLieu/anVat">Set nguyên liệu
                                                     bánh ăn vặt</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Set nguyên liệu
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/setNguyenLieu/socola">Set nguyên liệu
                                                     làm socola</a></p>
                                         </div>
                                     </li>
 
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Kem, Bơ, Sữa, Phô mai</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/kemBoSuaPhomai">Kem, Bơ, Sữa, Phô mai</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Bơ</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/kemBoSuaPhomai/bo">Bơ</a></p>
                                             <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black"
-                                                                   href="#">Whipping(Cream)</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Phô
+                                                                   href="/ProductController/kemBoSuaPhomai/Whipping">Whipping(Cream)</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/kemBoSuaPhomai/PhoMai">Phô
                                                     mai(cheese)</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black " href="#">Sữa và sản phẩm
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black " href="/ProductController/kemBoSuaPhomai/Sua">Sữa và sản phẩm
                                                     làm từ sữa</a></p>
                                         </div>
                                     </li>
 
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Bột làm bánh</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/botLamBanh">Bột làm bánh</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Bột mì làm
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/botLamBanh/BotMi">Bột mì làm
                                                     bánh</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Bột mì nguyên
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/botLamBanh/BotMiNguyenCam">Bột mì nguyên
                                                     cám</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Bột trộn
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/botLamBanh/BotTronSan">Bột trộn
                                                     sẵn</a></p>
 
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Bột làm bánh
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/botLamBanh/BotKhac">Bột làm bánh
                                                     khác</a></p>
                                         </div>
                                     </li>
 
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Phụ gia</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/phuGia">Phụ gia</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Men nở và phụ gia
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/phuGia/MenNo">Men nở và phụ gia
                                                     nhỏ</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Đường các
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/phuGia/Duong">Đường các
                                                     loại</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Hương liệu và
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/phuGia/HuongLieu">Hương liệu và
                                                     tinh dầu</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Màu thực
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/phuGia/Mau">Màu thực
                                                     phẩm</a></p>
                                         </div>
                                     </li>
 
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Nguyên liệu
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/nguyeLieuLamSocola">Nguyên liệu
                                                 làm socola</a><i class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Socola hạt</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Socola
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/nguyeLieuLamSocola/Hat">Socola hạt</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/nguyeLieuLamSocola/Thanh">Socola
                                                     thanh</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Nguyên liệu trang trí socola</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/nguyeLieuLamSocola/TrangTri">Nguyên liệu trang trí socola</a></p>
                                         </div>
                                     </li>
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Dụng cụ làm bánh</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/dungCuLamBanh">Dụng cụ làm bánh</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Dụng cụ đo lường</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Dụng cụ đảo, khuấy, trộn</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Dụng cụ cán, cắt</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Dụng cụ nhồi bột, nướng bánh</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/dungCuLamBanh/DoLuong">Dụng cụ đo lường</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/dungCuLamBanh/DaoTron">Dụng cụ đảo, khuấy, trộn</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/dungCuLamBanh/CanCat">Dụng cụ cán, cắt</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/dungCuLamBanh/NhoiNuong">Dụng cụ nhồi bột, nướng bánh</a></p>
 
                                         </div>
                                     </li>
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Khuôn, khay</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/khuonKhay">Khuôn, khay</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Khuôn bánh mì</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Khuôn bánh cookie</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Khuôn thạch, socola</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Khay nướng bánh</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/khuonKhay/KhuonBanhMi">Khuôn bánh mì</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/khuonKhay/KhuonCookie">Khuôn bánh cookie</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/khuonKhay/KhuonSocola">Khuôn thạch, socola</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/khuonKhay/KhayNuong">Khay nướng bánh</a></p>
                                         </div>
                                     </li>
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Túi, hộp bánh</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/tuiHopBanh">Túi, hộp bánh</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Hộp bánh gato</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Hộp bánh cupcake</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Hộp bánh cookie</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Túi bánh cookie</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none  text-blackm-0" href="#">Túi bánh mì</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/tuiHopBanh/HopGato">Hộp bánh gato</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/tuiHopBanh/HopCupcake">Hộp bánh cupcake</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/tuiHopBanh/HopCookie">Hộp bánh cookie</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/tuiHopBanh/TuiCookie">Túi bánh cookie</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none  text-black m-0" href="/ProductController/tuiHopBanh/TuiBanhMi">Túi bánh mì</a></p>
 
                                         </div>
                                     </li>
 
                                     <li class="item">
-                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="">Máy làm bánh</a><i
+                                        <p class="sub-btn m-0"><a class="text-decoration-none text-black" href="/ProductController/mayLamBanh">Máy làm bánh</a><i
                                                 class="fas fa-angle-right dropdown"></i></p>
                                         <div class="sub-menu m-0">
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="#">Lò nướng bánh</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Máy đánh trứng</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Cân điện tử</a></p>
-                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="#">Các loại máy & vật dụng khác</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black" href="/ProductController/mayLamBanh/LoNuong">Lò nướng bánh</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/mayLamBanh/DanhTrung">Máy đánh trứng</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/mayLamBanh/CanDienTu">Cân điện tử</a></p>
+                                            <p class="m-0 pb-0"><a class="sub-item text-decoration-none text-black m-0" href="/ProductController/mayLamBanh/MayKhac">Các loại máy & vật dụng khác</a></p>
                                         </div>
                                     </li>
                                 </ul>
@@ -161,7 +161,7 @@
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center">
-                        <a href=""><img class="border rounded-circle" src="/images/Lovecake.png" alt="logo"
+                        <a href="/HomeController"><img class="border rounded-circle" src="/images/Lovecake.png" alt="logo"
                                         style="width: 100px; height: 70px;"></a>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
@@ -181,7 +181,7 @@
                         <c:if test="${account!=null}">
                             <div>
                                 <span class="input-group-append ps-2">
-                                    <a class="text-white" href=""><i class="fa fa-cart-plus fs-5 ps-2 px-2"></i></a>
+                                    <a class="text-white" href="/CartController"><i class="fa fa-cart-plus fs-5 ps-2 px-2"></i></a>
                                 </span>
                                 <p>Giỏ hàng</p>
                             </div>
@@ -194,7 +194,7 @@
 
                             <div class="user">
                                 <div class="avartar">
-                                    <img src="images/Lovecake.png" alt="">
+                                    <img src="/images/Lovecake.png" alt="">
                                 </div>
                             </div>
 
@@ -202,19 +202,19 @@
                                 <div class="top_user_option">
                                     <i class="fa-solid fa-xmark"></i>
                                     <div>
-                                        <span class="email_display">namtpce170126@fpt.edu.vn</span>
+                                        <span class="email_display text-black">${account.email}</span>
                                     </div>
                                 </div>
                                 <div class="mid_user_option">
-                                    <div class="avatar_display">
-                                        <img src="images/Lovecake.png" alt="">
-                                    </div>s
-                                    <div class="hello_user">
-                                        Hello, <span>Tran Phuong Nam</span>
+                                    <div class="avatar_display border border-1">
+                                        <img src="/${account.avatar}" alt="">
+                                    </div>
+                                    <div class="hello_user text-black">
+                                        <span>Hello ${account.fullname}</span>
                                     </div>
                                 </div>
                                 <div class="bot_user_option">
-                                    <a href="#" class="signout_btn">
+                                    <a href="/LogoutController" class="signout_btn">
                                         <i class="fa-solid fa-right-from-bracket"></i>
                                         <span>Sign out</span>
                                     </a>
@@ -225,12 +225,14 @@
                                 </div>
                             </div>
                         </c:if>
-                        <div class="ms-5">
-                            <span class="input-group-append ps-2">
-                                <a class="text-white" href=""><i class="fa-solid fa-user fs-5 ps-2 px-2 ms-3"></i></a>
-                            </span>
-                            <p>Đăng nhập</p>
-                        </div>
+                        <c:if test="${account==null}">
+                            <div class="ms-5">
+                                <span class="input-group-append ps-2">
+                                    <a class="text-white" href="/LoginController"><i class="fa-solid fa-user fs-5 ps-2 px-2 ms-3"></i></a>
+                                </span>
+                                <p>Đăng nhập</p>
+                            </div>
+                        </c:if>
 
                     </div>
 

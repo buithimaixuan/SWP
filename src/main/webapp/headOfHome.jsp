@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <title>LoveCake Shop</title>
-        <link rel="icon" type="image/png" href="/images/Lovecake.png">
+        <link rel="icon" type="image/png" href="images/Lovecake.png">
         <link rel="stylesheet" href="/CSS/style.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
     </head>
@@ -56,7 +56,7 @@
                         <c:if test="${account!=null}">
                             <div>
                                 <span class="input-group-append ps-2">
-                                    <a class="text-white" href=""><i class="fa fa-cart-plus fs-5 ps-2 px-2"></i></a>
+                                    <a class="text-white" href="/CartController"><i class="fa fa-cart-plus fs-5 ps-2 px-2"></i></a>
                                 </span>
                                 <p>Giỏ hàng</p>
                             </div>
@@ -69,7 +69,7 @@
 
                             <div class="user">
                                 <div class="avartar">
-                                    <img src="/Images/Lovecake.png" alt="">
+                                    <img src="/images/Lovecake.png" alt="">
                                 </div>
                             </div>
 
@@ -77,19 +77,19 @@
                                 <div class="top_user_option">
                                     <i class="fa-solid fa-xmark"></i>
                                     <div>
-                                        <span class="email_display">namtpce170126@fpt.edu.vn</span>
+                                        <span class="email_display text-black">${account.email}</span>
                                     </div>
                                 </div>
                                 <div class="mid_user_option">
-                                    <div class="avatar_display">
-                                        <img src="images/Lovecake.png" alt="">
-                                    </div>s
-                                    <div class="hello_user">
-                                        Hello, <span>Tran Phuong Nam</span>
+                                    <div class="avatar_display border border-1">
+                                        <img src="/${account.avatar}" alt="">
+                                    </div>
+                                    <div class="hello_user text-black">
+                                         <span>Hello ${account.fullname}</span>
                                     </div>
                                 </div>
                                 <div class="bot_user_option">
-                                    <a href="#" class="signout_btn">
+                                    <a href="/LogoutController" class="signout_btn">
                                         <i class="fa-solid fa-right-from-bracket"></i>
                                         <span>Sign out</span>
                                     </a>

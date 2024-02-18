@@ -7,6 +7,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Dell
 */
 
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .categories {
   background-color: rgb(247, 187, 9);
   margin-top: 20px;
@@ -15,13 +22,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .categories p {
   padding-top: 20px;
 }
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 .slide-bar {
   backdrop-filter: blur(15px);
 }
