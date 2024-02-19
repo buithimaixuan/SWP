@@ -150,61 +150,108 @@
                 </div>
                 <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100">
                     <c:forEach items="${cat.entrySet()}" var="c">
-                        <div class="bg-danger-subtle mt-3 pb-3" style="border-radius: 10px;">
-                            <div class="d-flex justify-content-between mt-1">
-                                <p class="h4">${c.key}</p>
-
+                        <div class="mt-5 list_card">
+                            <div class="title_list_card">
+                                <p>${c.key}</p>
                             </div>
-                            <div class="row border-2 border-danger border-top mx-1">
+                            <div class="list_card_item">
 
                                 <c:forEach items="${c.value}" var="p">
-                                    <div class="col-lg-3 pt-0 pt-3 "  style="height: 320px;">
-                                        <div class="card  w-100 h-100">
-                                            <a href="">
-                                                <img src="/${p.pro_image}" class="card-img-top " alt="product img" style="height: 170px;">
-                                            </a>
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center" style="height: 50px">${p.pro_name}</h5>
-                                                <div class="d-flex">
-                                                    <div>
-                                                        <p class="card-text text-danger p-0 m-0">${p.discount}đ</p>
-                                                        <p class="card-text text-secondary p-0 m-0" style=" text-decoration: line-through;">${p.pro_price}đ</p>
-                                                    </div>
+                                    <!--NAM CODE CARD-->
+                                    <div class="card_product">
+                                        <a href="#" class="card_img">
+                                            <img src="/${p.pro_image}" alt="">
+                                        </a>
 
-                                                    <a href="" class="btn btn-danger p-0 mt-2" style="height: 30px; width: 36px; margin-left: 120px;"><i class="fa fa-cart-plus"></i></a> 
+                                        <div class="card_content">
+                                            <div class="card_top">
+                                                <a href="#" class="card_title">${p.pro_name}</a>
+                                            </div>
+
+                                            <div class="card_infor">
+                                                <div class="card_price">
+                                                    <c:if test="${p.discount == 0}">
+                                                        ${p.pro_price}đ
+                                                    </c:if>
+                                                    <c:if test="${p.discount > 0}">
+                                                        <span class="discount">${p.discount}đ</span>
+                                                        <span class="real_price" style=" text-decoration: line-through;">${p.pro_price}đ</span>    
+                                                    </c:if>
+
                                                 </div>
-
+                                                <a href="#" class="card_buy">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                    <span>MUA</span>
+                                                </a>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>    
+                                    <!--END NAM CODE-->
+                                    <!--                                    <div class="card_product col-lg-3 pt-0 pt-3 "  style="height: 320px;">
+                                                                            <div class="card  w-100 h-100">
+                                                                                <a href="">
+                                                                                    <img src="/${p.pro_image}" class="card-img-top " alt="product img" style="height: 170px;">
+                                                                                </a>
+                                                                                <div class="card-body">
+                                                                                    <h5 class="card-title text-center" style="height: 50px">${p.pro_name}</h5>
+                                                                                    <div class="d-flex">
+                                                                                        <div>
+                                                                                            <p class="card-text text-danger p-0 m-0">${p.discount}đ</p>
+                                                                                            <p class="card-text text-secondary p-0 m-0" style=" text-decoration: line-through;">${p.pro_price}đ</p>
+                                                                                        </div>
+                                    
+                                                                                        <a href="" class="btn btn-danger p-0 mt-2" style="height: 30px; width: 36px; margin-left: 120px;"><i class="fa fa-cart-plus"></i></a> 
+                                                                                    </div>
+                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
                                 </c:forEach>
                             </div> 
                         </div>
                     </c:forEach>
                     <c:if test="${listPro !=null}">
-                        <!--                        <p class="h5 mt-1 border-2 border-bottom">Tat ca san pham</p>-->
-                        <div class="row mx-1">
-                            <c:forEach items="${listPro}" var="p">
-                                <div class="col-lg-3 pt-0 pt-3 ">
-                                    <div class="card  w-100 h-100">
-                                        <a href="">
-                                            <img src="/${p.pro_image}" class="card-img-top " alt="product img" style="height: 300px;">
-                                        </a>
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center" style="height: 50px">${p.pro_name}</h5>
-                                            <div class="d-flex">
-                                                <div>
-                                                    <p class="card-text text-danger p-0 m-0">${p.discount}đ</p>
-                                                    <p class="card-text text-secondary p-0 m-0" style=" text-decoration: line-through;">${p.pro_price}đ</p>
-                                                </div>
 
-                                                <a href="" class="btn btn-danger p-0 mt-2" style="height: 30px; width: 36px; margin-left: 120px;"><i class="fa fa-cart-plus"></i></a> 
+                        <div class="mt-5 list_card">
+                            <div class="title_list_card">
+                                <p>Tất cả sản phẩm</p>
+                            </div>
+
+                            <div class="list_card_item">
+                                <c:forEach items="${listPro}" var="p">
+
+                                    <!--NAM CODE-->
+                                    <div class="card_product">
+                                        <a href="#" class="card_img">
+                                            <img src="/${p.pro_image}" alt="">
+                                        </a>
+
+                                        <div class="card_content">
+                                            <div class="card_top">
+                                                <a href="#" class="card_title">${p.pro_name}</a>
                                             </div>
 
+                                            <div class="card_infor">
+                                                <div class="card_price">
+                                                    <c:if test="${p.discount == 0}">
+                                                        ${p.pro_price}đ
+                                                    </c:if>
+                                                    <c:if test="${p.discount > 0}">
+                                                        <span class="discount">${p.discount}đ</span>
+                                                        <span class="real_price" style=" text-decoration: line-through;">${p.pro_price}đ</span>    
+                                                    </c:if>
+
+                                                </div>
+                                                <a href="#" class="card_buy">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                    <span>MUA</span>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </c:forEach>
+                                    </div>    
+                                    <!--END NAM CODE-->
+                                </c:forEach>
+                            </div>
                         </div>
 
                     </c:if>
@@ -487,7 +534,7 @@
             </div>
 
         </div>
-        
+
         <%@include file="footerOfHome.jsp" %>   
 
 
