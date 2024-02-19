@@ -49,7 +49,7 @@
                                 <a href="#!" class="text-secondary text-decoration-none">Trang chủ</a>
                             </p>
                             <p>
-                                <a href="#!" class="text-secondary text-decoration-none">Giới thiệu</a>
+                                <a href="about.jsp" class="text-secondary text-decoration-none">Giới thiệu</a>
                             </p>
                             <p>
                                 <a href="#!" class="text-secondary text-decoration-none">Tin tức</a>
