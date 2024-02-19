@@ -35,20 +35,27 @@
                         </a>
 
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center">
-                        <a href="/HomeController"><img class="border rounded-circle" src="/images/Lovecake.png" alt="logo"
-                                        style="width: 100px; height: 70px;"></a>
+                    <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center d-flex align-items-center justify-content-center">
+                        <a href="/HomeController" class="d-flex align-items-center justify-content-center rounded-circle" style="height: 80px; width: 80px; overflow: hidden">
+                            <img class="border rounded-circle" src="/images/Lovecake.png" alt="logo">
+                        </a>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
-                        <div class="input-group ">
-                            <input class="form-control border rounded-pill border-2" type="text" placeholder="search"
+                        <div class="search-box">
+<!--                            <input class="form-control border rounded-pill border-2" type="text" placeholder="search"
                                    id="example-search-input">
                             <span class="input-group-append">
                                 <button class="btn btn-outline-secondary bg-white border rounded-pill ms-n3 border-2"
                                         type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
-                            </span>
+                            </span>-->
+
+                            <!--NAM CODE HERE-->
+                            <input type="text" placeholder="Search...">
+                            <button id="searchBtn" type="submit" class="search-box-btn">
+                                <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -85,7 +92,7 @@
                                         <img src="/${account.avatar}" alt="">
                                     </div>
                                     <div class="hello_user text-black">
-                                         <span>Hello ${account.fullname}</span>
+                                        <span>Hello ${account.fullname}</span>
                                     </div>
                                 </div>
                                 <div class="bot_user_option">

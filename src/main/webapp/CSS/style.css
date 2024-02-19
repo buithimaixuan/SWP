@@ -72,6 +72,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 .categories:hover .slidebar {
   display: block;
 }
+/*SEARCH GROUP*/
+.search-box{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 2px 3px 8px rgba(255, 255, 255, 0.25);
+}
+.search-box input{
+    border: none;
+    outline: none;
+    padding: 10px;
+    flex: 1;
+}
+.search-box button{
+    padding: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.login-btn{
+    padding: 8px 17px;
+    font-weight: bold;
+    background: #f8de22;
+    color: #34495e;
+    border-radius: 20px;
+    transition: 0.15s ease;
+    border: 2px solid #f8de22;
+    box-shadow: 1px 1px 10px white;
+}
+.login-btn:hover{
+    background: transparent;
+    color: #f8de22;
+}
 
 /* USER option */
 .user {
@@ -194,4 +230,142 @@ img {
 
 .user_option.show_user_option {
   display: flex;
+}
+
+/*LIST CARD*/
+
+.list_card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.list_card a{
+    text-decoration: none;
+}
+.list_card .title_list_card{
+    height: 40px;
+    font-size: 14px;
+    color: #3e3e3e;
+    font-weight: 700;
+    border-bottom: solid 2px #ff6223;
+    padding: 0;
+}
+.list_card .title_list_card p{
+    color: #fff;
+    width: 27%;
+    text-transform: uppercase;
+    background-color: #ff6223;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    position: relative;
+}
+.list_card .title_list_card p::after{
+    content: "";
+    position: absolute;
+    background-color: #fff;
+    bottom: -0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 38px 0 0 42px;
+    border-color: transparent transparent transparent #ff6223;
+}
+
+.list_card .list_card_item{
+    --spacing: 20px;
+    --columns: 4;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+}
+.list_card .list_card_item .card_product{
+    width: calc(calc(100% / var(--columns)) - var(--spacing));
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: var(--spacing);
+    border-radius: 7px;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: 0px 7px 29px 0px rgba(100, 100, 111, 0.2);
+    margin-top: 20px;
+}
+.card_product .card_img{
+    padding: 15px 10px;
+}
+.card_product .card_img img{
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: 0.25s;
+}
+.card_product .card_img:hover img{
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.388);
+}
+.card_content{
+    flex: 1;
+    padding: 10px 10px 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.card_title{
+    font-weight: 600;
+    font-size: 14px;
+    color: #3e3d3e;
+    transition: 0.2s; 
+    flex: 1; 
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-work;
+}
+.card_title:hover{
+    color: #f4bb14;
+}
+.card_infor{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    margin-top: auto;
+    flex-shrink: 0;
+}
+.card_price{
+    color: #f01c1c;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card_price .real_price{
+    font-size: 13px;
+    color: #3e3e3e;
+    font-weight: 500;
+}
+.card_infor .card_buy{
+    padding: 7px;
+    background: #ff6223;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.card_buy:hover{
+    background: #f4bb14;
 }
