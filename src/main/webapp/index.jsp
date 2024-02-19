@@ -188,7 +188,7 @@
                                 <div class="col-lg-3 pt-0 pt-3 ">
                                     <div class="card  w-100 h-100">
                                         <a href="">
-                                            <img src="/${p.pro_image}" class="card-img-top " alt="product img" style="height: 300px;">
+                                            <img src="${p.pro_image}" class="card-img-top " alt="product img" style="height: 300px;">
                                         </a>
                                         <div class="card-body">
                                             <h5 class="card-title text-center" style="height: 50px">${p.pro_name}</h5>
