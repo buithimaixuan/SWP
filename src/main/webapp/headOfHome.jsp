@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
-                        <div class="search-box">
+                        <form class="search-box" method="post" action="ProductController">
 <!--                            <input class="form-control border rounded-pill border-2" type="text" placeholder="search"
                                    id="example-search-input">
                             <span class="input-group-append">
@@ -52,11 +52,11 @@
                             </span>-->
 
                             <!--NAM CODE HERE-->
-                            <input type="text" placeholder="Search...">
-                            <button id="searchBtn" type="submit" class="search-box-btn">
+                            <input name="value-search" type="text" value="${getSearch}"  placeholder="Search...">
+                            <button id="searchBtn" name="search-btn" type="submit" class="search-box-btn">
                                 <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                             </button>
-                        </div>
+                        </form>
                     </div>
                     <div
                         class="col-lg-3 col-md-3 col-sm-3 d-flex align-items-center justify-content-between text-white pt-2 ps-5 px-0">
