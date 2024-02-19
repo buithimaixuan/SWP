@@ -1223,6 +1223,16 @@ public class ProductController extends HttpServlet {
                                                                                                                                                                                                     response.sendRedirect("/ProductController/mayLamBanh/MayKhac");
                                                                                                                                                                                                 }
 
+                                                                                                                                                                                            } else {
+                                                                                                                                                                                                // KHOA code
+                                                                                                                                                                                                if (path.startsWith("/ProductController/timKiem/")) {
+                                                                                                                                                                                                    String valueSearch = (String) request.getSession().getAttribute("valueSearch");
+                                                                                                                                                                                                    request.setAttribute("getSearch", valueSearch);
+                                                                                                                                                                                                    LinkedList<Product> list = dao.getListProByProName(valueSearch);
+                                                                                                                                                                                                    request.setAttribute("listPro", list);
+
+                                                                                                                                                                                                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                                                                                                                                                                                                }
                                                                                                                                                                                             }
                                                                                                                                                                                         }
                                                                                                                                                                                     }
@@ -1282,7 +1292,12 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //        KHOA CODE
+        if (request.getParameter("search-btn") != null) {
+            String valueSearch = request.getParameter("value-search");
+            request.getSession().setAttribute("valueSearch", valueSearch);
+            response.sendRedirect("/ProductController/timKiem/" + valueSearch + "");
+        }
     }
 
     /**

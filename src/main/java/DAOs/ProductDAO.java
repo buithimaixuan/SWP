@@ -315,6 +315,37 @@ public class ProductDAO {
 
         return list;
     }
+    
+    /**
+     * KHOA code
+     * @param pro_name
+     * @return linkedlist<Product>
+     * show all product of pro_name
+     */
+    public LinkedList<Product> getListProByProName(String pro_name) {
+        LinkedList<Product> list = new LinkedList<>();
+        String sql = "select * from product where pro_name like N'%"+pro_name+"%';";
+        try {
+
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product pro = new Product(rs.getInt("pro_id"),
+                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+                        rs.getString("origin"), rs.getString("brand"),
+                        rs.getDouble("mass"), rs.getString("ingredient"),
+                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+                        rs.getDouble("discount"),
+                        rs.getNString("pro_description"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+                list.add(pro);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
 
     /**
      *
