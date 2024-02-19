@@ -45,7 +45,7 @@
                             <input type="file" name="newsPic" id="newsPic" accept="image/*" onchange="displayImage(event, 'displayImage')" class="border form-control form-control-lg">
                         </div>
                         <div id="displayImage" class="mt-2 w-25">
-                            <img src="./Images/no_image.png" alt="No Image" id="defaultImage" style="max-width: 100%;">
+                            <img src="./images/no_image.png" alt="No Image" id="defaultImage" style="max-width: 100%;">
                         </div>
                     </div>
 

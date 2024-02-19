@@ -126,8 +126,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="displayImage1" class="mt-2 h-100">
-                                    <img src="./Images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                <div id="displayImage1" class="mt-2 h-75">
+                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -143,8 +143,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="displayImage2" class="mt-2 h-100">
-                                    <img src="./Images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                <div id="displayImage2" class="mt-2 h-75">
+                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -160,8 +160,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="displayImage3" class="mt-2 h-100">
-                                    <img src="./Images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                <div id="displayImage3" class="mt-2 h-75">
+                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -177,14 +177,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="displayImage4" class="mt-2 h-100">
-                                    <img src="./Images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                <div id="displayImage4" class="mt-2 h-75">
+                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-group form-outline mt-4">
+                    <div class="form-group form-outline mt-5    ">
                         <textarea type="text" id="description" name="description" placeholder="Mô tả và thông tin khác"
                                   class="form-control form-control-lg" rows="8" cols="10" style="max-height: 150px;"></textarea>
                         <label class="form-label">Mô tả và thông tin khác</label>
