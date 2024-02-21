@@ -19,6 +19,7 @@
         <title>LoveCake Shop</title>
         <link rel="icon" type="image/png" href="/images/Lovecake.png">
         <link rel="stylesheet" href="CSS/cart.css">
+        <link rel="stylesheet" href="/CSS/style.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
     </head>
 
@@ -160,12 +161,21 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center">
+<!--                    <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center">
                         <a href="/HomeController"><img class="border rounded-circle" src="/images/Lovecake.png" alt="logo"
                                         style="width: 100px; height: 70px;"></a>
+                    </div>-->
+                    
+                    <!--NAM CODE HERE-->
+                    <div class="col-lg-2 col-md-3 col-sm-3 pt-2 pb-2 text-center d-flex align-items-center justify-content-center">
+                        <a href="/HomeController" class="d-flex align-items-center justify-content-center rounded-circle" style="height: 80px; width: 80px; overflow: hidden">
+                            <img class="border rounded-circle" src="/images/Lovecake.png" alt="logo">
+                        </a>
                     </div>
+                    <!--END NAM CODE-->
+                    
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
-                        <div class="input-group ">
+<!--                        <div class="input-group ">
                             <input class="form-control border rounded-pill border-2" type="text" placeholder="search"
                                    id="example-search-input">
                             <span class="input-group-append">
@@ -174,7 +184,17 @@
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
-                        </div>
+                        </div>-->
+
+                        <!--NAM CODE SEARCH BOX HERE-->
+                        
+                        <form class="search-box" method="post" action="ProductController">
+                            <input name="value-search" type="text" value="${getSearch}"  placeholder="Search...">
+                            <button id="searchBtn" name="search-btn" type="submit" class="search-box-btn">
+                                <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                            </button>
+                        </form>  
+                        <!--END NAM CODE-->
                     </div>
                     <div
                         class="col-lg-3 col-md-3 col-sm-3 d-flex align-items-center justify-content-between text-white pt-2 ps-5 px-0">
