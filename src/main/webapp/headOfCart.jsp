@@ -30,7 +30,7 @@
                 <div class="row">
 
                     <div class="col-lg-2 col-md-3 col-sm-3 p-0 subnav">
-                        <div class="categories border rounded-top border-dark">
+                        <div class="cart_categories border rounded-top border-dark" style="height: 76px;">
                             <a href="/ProductController" class="text-decoration-none text-black">
                                 <p class="hidden-sm hidden-xs text-center">DANH MỤC SẢN PHẨM</p>
                             </a>
