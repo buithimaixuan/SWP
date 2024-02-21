@@ -69,7 +69,7 @@
                                 <div class="form-hover">
                                     <input readonly type="text" id="" name="" placeholder="Thương hiệu" value="abc"
                                            class="form-control form-control-lg" />
-                                    <label class="form-label">Thương hiệu (option)</label>
+                                    <label class="form-label">Thương hiệu</label>
                                 </div>
                             </div>
 
@@ -77,7 +77,7 @@
                                 <div class="form-hover">
                                     <input readonly type="text" id="" name="" placeholder="Khối lượng" value="15"
                                            class="form-control form-control-lg" />
-                                    <label class="form-label">Khối lượng (option)</label>
+                                    <label class="form-label">Khối lượng</label>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                                 <div class="form-hover">
                                     <input readonly type="text" id="" name="" placeholder="Thành phần" value="xyz"
                                            class="form-control form-control-lg" />
-                                    <label class="form-label">Thành phần (option)</label>
+                                    <label class="form-label">Thành phần</label>
                                 </div>
                             </div>
 
