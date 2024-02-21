@@ -1,7 +1,7 @@
 <%-- 
-    Document   : AddProForm
-    Created on : Feb 12, 2024, 3:05:47 PM
-    Author     : Dell
+    Document   : UpdateProForm
+    Created on : Jan 21, 2024, 1:14:47 PM
+    Author     : HP
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,7 +21,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Create New Product</title>
+        <title>Update Product</title>
     </head>
     <body>
         <div class="row">
@@ -32,53 +32,53 @@
                  width: 80%;">
                 <form method="" action="" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddPro()">
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Thêm mới sản phẩm</span>
+                        <span class="h3 fw-bold">Cập nhật sản phẩm</span>
                     </div>
                     <div class="d-flex" style="gap: 20px">
                         <div class="w-100">
-                            <div class="form-outline w-100 form-group">
+                            <div class="form-outline w-100 form-group hover-shadow">
                                 <div class="form-hover">
-                                    <input type="text" id="proName" name="proName" placeholder="Tên sản phẩm"
+                                    <input type="text" id="proName" name="proName" placeholder="Tên sản phẩm" value="san pham 1"
                                            class="form-control form-control-lg" />
                                     <label for="proName" class="form-label">Tên sản phẩm</label>
                                 </div>
-                                <span class="error errorProName text-danger fw-bold font-italic"></span>
+                                    <span class="error errorProName text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="price" name="price" placeholder="Giá gốc"
+                                    <input type="number" id="price" name="price" placeholder="Giá gốc" value="3"
                                            class="form-control form-control-lg" />
                                     <label for="price" class="form-label">Giá gốc</label>
                                 </div>
-                                <span class="error errorPrice text-danger fw-bold font-italic"></span>
+                                    <span class="error errorPrice text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán"
+                                    <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán" value="2"
                                            class="form-control form-control-lg" />
                                     <label for="realPrice" class="form-label">Giá bán</label>
                                 </div>
-                                <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
+                                    <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="quantity" name="quantity" placeholder="Số lượng"
+                                    <input type="number" id="quantity" name="quantity" placeholder="Số lượng" value="22"
                                            class="form-control form-control-lg" />
                                     <label for="quantity" class="form-label">Số lượng</label>
                                 </div>
-                                <span class="error errorQuantity text-danger fw-bold font-italic"></span>
+                                    <span class="error errorQuantity text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="" name="" placeholder="Thương hiệu"
+                                    <input type="text" id="" name="" placeholder="Thương hiệu" 
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Thương hiệu (option)</label>
                                 </div>
-                                <span class="error"></span>
+                                    <span class="error"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
@@ -87,7 +87,7 @@
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Khối lượng (option)</label>
                                 </div>
-                                <span class="error "></span>
+                                    <span class="error "></span>
                             </div>
                         </div>
 
@@ -98,7 +98,7 @@
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Thành phần (option)</label>
                                 </div>
-                                <span class="error "></span>
+                                    <span class="error "></span>
                             </div>
 
                             <div class="form-outline mt-3 w-100 mb-0">
@@ -130,14 +130,14 @@
                             <div class="form-outline mt-4">
                                 <label class="form-label h5">Ngày tạo sản phẩm</label>
                                 <div class="form-hover">
-                                    <input type="date" id="dayWriteNews" name="dayWriteNews" class="form-control form-control-lg" />
+                                    <input type="date" id="dayWriteNews" name="dayWriteNews" value="2024-02-11" class="form-control form-control-lg" />
+                                    <span id="dateError" class="text-danger fw-bold font-italic"></span>
                                 </div>
-                                <span id="dateError" class="text-danger fw-bold font-italic"></span>
                             </div>
                         </div>
                     </div>
 
-                    <label class="form-label h5 mt-4" >Hình ảnh sản phẩm: </label>
+                    <label class="form-label h5 mt-4">Hình ảnh sản phẩm: </label>
                     <div class="d-flex mt-0" style="gap: 20px">
                         <div class="d-flex mt-0 w-100">
                             <div class="form-outline mt-4 w-100 col">
@@ -163,8 +163,8 @@
                                 <div class="d-flex">
                                     <div class="validate form-outline col">
                                         <label class="form-label h5">Hình ảnh 2</label>
-                                        <div class="d-flex">
-                                            <div class="form-hover">
+                                        <div class="form-hover">
+                                            <div class="d-flex">
                                                 <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage2')" 
                                                        class="border form-control form-control-lg">
                                             </div>
@@ -219,13 +219,14 @@
                     <div class="form-group form-outline mt-5    ">
                         <div class="form-hover">
                             <textarea type="text" id="description" name="description" placeholder="Mô tả và thông tin khác"
-                                      class="form-control form-control-lg" rows="8" cols="10" style="max-height: 150px;"></textarea>
+                                      class="form-control form-control-lg" rows="8" cols="10" 
+                                      style="max-height: 150px;">Mo ta san pham</textarea>
                             <label class="form-label">Mô tả và thông tin khác</label>
                         </div>
                         <span class="error errorDescription text-danger font-italic fw-bold"></span>
                     </div>
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-AddProduct" class="btn btn-success w-100" style="font-size: 20px" value="Create New Product"/>
+                        <input type="submit" name="btn-UpdateProduct" class="btn btn-success w-100" style="font-size: 20px" value="Update Product"/>
                     </div> 
                 </form>
             </div>
