@@ -40,8 +40,8 @@ public class OrderDAO {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Order ord = new Order(rs.getInt("o_id"), rs.getInt("cus_id"),
-                        rs.getString("image_payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
-                        rs.getLong("total_price"), rs.getInt("isDelete"));
+                        rs.getString("payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
+                        rs.getDouble("total_price"), rs.getInt("isDelete"));
                 orderList.add(ord);
             }
         } catch (SQLException ex) {
@@ -58,8 +58,8 @@ public class OrderDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 obj = new Order(rs.getInt("o_id"), rs.getInt("cus_id"),
-                        rs.getString("image_payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
-                        rs.getLong("total_price"), rs.getInt("isDelete"));
+                        rs.getString("payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
+                        rs.getDouble("total_price"), rs.getInt("isDelete"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,11 +73,11 @@ public class OrderDAO {
             PreparedStatement ps = conn.prepareStatement("Insert into [orders] values(?, ?, ?, ?, ?, ?, ?, ?)");
             ps.setInt(1, obj.getO_id());
             ps.setInt(2, obj.getCus_id());
-            ps.setString(3, obj.getImage_payment());
+            ps.setString(3, obj.getPayment());
             ps.setString(4, obj.getAddress());
             ps.setString(5, obj.getStatus());
             ps.setDate(6, obj.getO_date());
-            ps.setLong(7, obj.getTotal_price());
+            ps.setDouble(7, obj.getTotal_price());
             ps.setInt(8, obj.getIsDelete());
             count = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -89,12 +89,12 @@ public class OrderDAO {
     public int editOrder(int o_id, Order obj) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("update [orders] set image_payment=?, address=?, status=?, o_date=?. total_price=?, isDelete=? where o_id=?");
-            ps.setString(1, obj.getImage_payment());
+            PreparedStatement ps = conn.prepareStatement("update [orders] set payment=?, address=?, status=?, o_date=?. total_price=?, isDelete=? where o_id=?");
+            ps.setString(1, obj.getPayment());
             ps.setString(2, obj.getAddress());
             ps.setString(3, obj.getStatus());
             ps.setDate(4, obj.getO_date());
-            ps.setLong(5, obj.getTotal_price());
+            ps.setDouble(5, obj.getTotal_price());
             ps.setInt(6, obj.getIsDelete());
             ps.setInt(7, o_id);
             count = ps.executeUpdate();
