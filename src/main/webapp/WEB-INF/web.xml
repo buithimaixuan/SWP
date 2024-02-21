@@ -28,6 +28,10 @@
         <servlet-name>AdminController</servlet-name>
         <servlet-class>Controllers.AdminController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>adminHome</servlet-name>
+        <servlet-class>adminHome</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -69,7 +73,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
-        <url-pattern>/AdminController</url-pattern>
+        <url-pattern>/AdminController/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
