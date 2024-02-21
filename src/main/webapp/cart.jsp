@@ -22,9 +22,9 @@
     <%@include file="headOfCart.jsp" %>
 
     <div class="container">
-        <form method="post" class="form-inline container mt-3 row" action="OrderController"
+        <form method="post" class="form-inline container mt-5 row" action="OrderController"
             onsubmit="return validateCheckBox()">
-            <!-- <div class="col-lg-"></div> -->
+             <div class="fs-5">Giỏ hàng</div> 
             <div class="col-lg-9">
                 <table id="example" class="display w-100">
                     <thead class="bg-body-secondary border-bottom border-top">
@@ -33,7 +33,7 @@
                             <th>Sản phẩm</th>
                             <th>Tên sản phẩm</th>
                             <th>Đơn giá</th>
-                            <th>Số lượng</th>
+                            <th style="text-align: center;">Số lượng</th>
                             <th>Thành tiền</th>
                             <th>Cancel</th>
                         </tr>
@@ -55,10 +55,10 @@
                                 57.000
                             </td>
                             <td>
-                                <div class="form-group d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-decre" href="#"><i class="fas fa-minus-square"></i></a>
-                                    <input type="text" name="quantity" class="form-control" value="1" readonly>
-                                    <a class="btn bnt-sm btn-incre" href="#"><i class="fas fa-plus-square"></i></a>
+                                <div class="form-group d-flex justify-content-center">
+                                    <a class="btn btn-sm btn-decre" href="#"><i class="fas fa-minus-square fs-3 mt-1 text-black-50"></i></a>
+                                    <input type="text" name="quantity" class="form-control text-center" value="1" style="width: 50px;">
+                                    <a class="btn bnt-sm btn-incre" href="#"><i class="fas fa-plus-square fs-3 mt-1 text-black-50"></i></a>
                                 </div>
                             </td>
                             <td>
@@ -68,66 +68,6 @@
                                     class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
-                        <tr class="border border-1">
-                            <td>
-                                <input type="checkbox" name="checkbox" class="checkBuy mx-2">
-                            </td>
-                            <td>
-                                <img class="pt-2" src="images/Lovecake.png" alt="image"
-                                    style="width: 70px; height: 70px;">
-                            </td>
-
-                            <td>
-                                Bột làm bánh bao mikko 1kg
-                            </td>
-                            <td>
-                                57.000
-                            </td>
-                            <td class="w-25">
-                                <div class="form-group d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-decre" href="#"><i class="fas fa-minus-square"></i></a>
-                                    <input type="text" name="quantity" class="form-control" value="1" readonly>
-                                    <a class="btn bnt-sm btn-incre" href="#"><i class="fas fa-plus-square"></i></a>
-                                </div>
-                            </td>
-                            <td>
-                                57.000
-                            </td>
-                            <td><a onclick="return confirm('Do you want to delete this cart?')" href="#"
-                                    class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-                        <tr class="border border-1">
-                            <td>
-                                <input type="checkbox" name="checkbox" class="checkBuy mx-2">
-                            </td>
-                            <td>
-                                <img class="pt-2" src="images/Lovecake.png" alt="image"
-                                    style="width: 70px; height: 70px;">
-                            </td>
-
-
-                            <td>
-                                Bột làm bánh bao mikko 1kg
-                            </td>
-                            <td>
-                                57.000
-                            </td>
-                            <td class="w-25">
-                                <div class="form-group d-flex justify-content-between">
-                                    <a class="btn btn-sm btn-decre" href="#"><i class="fas fa-minus-square"></i></a>
-                                    <input type="text" name="quantity" class="form-control" value="1" readonly>
-                                    <a class="btn bnt-sm btn-incre" href="#"><i class="fas fa-plus-square"></i></a>
-                                </div>
-                            </td>
-                            <td>
-                                57.000
-                            </td>
-                            <td><a onclick="return confirm('Do you want to delete this cart?')" href="#"
-                                    class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
-                            </td>
-                        </tr>
-
                     </tbody>
                 </table>
 
