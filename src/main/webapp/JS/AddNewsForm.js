@@ -78,7 +78,7 @@ function validateAddPro() {
 
     var isValid = true;
 
-    if (proName === "" || price === "" ||  realPrice === "" || quantity === "" || description === "" || selectedDate > today || parseFloat(realPrice) > parseFloat(price)){
+    if (proName === "" || price === "" || realPrice === "" || quantity === "" || description === "" || selectedDate > today || parseFloat(realPrice) > parseFloat(price)) {
         alert("Vui lòng nhập đầy đủ và đúng thông tin cần thiết!");
     }
     if (proName === '') {
@@ -159,5 +159,59 @@ function validateForm() {
         return false;
     }
 
+    return isValid;
+}
+
+
+
+
+function validateAddStaff() {
+    var userStaff = document.getElementById('userStaff').value.trim();
+    var price = document.getElementById('price').value.trim();
+    var realPrice = document.getElementById('realPrice').value.trim();
+    var quantity = document.getElementById('quantity').value.trim();
+    var description = document.getElementById('description').value.trim();
+
+    var errorUserStaff = document.querySelector(".errorUserStaff");
+    var errorPrice = document.querySelector(".errorPrice");
+    var errorRealPrice = document.querySelector(".errorRealPrice");
+    var errorQuantity = document.querySelector(".errorQuantity");
+    var errorDescription = document.querySelector(".errorDescription");
+
+    errorUserStaff.innerHTML = '';
+    errorPrice.innerHTML = '';
+    errorRealPrice.innerHTML = '';
+    errorQuantity.innerHTML = '';
+    errorDescription.innerHTML = '';
+
+    var isValid = true;
+
+    if (userStaff === "" || price === "" || realPrice === "" || quantity === "" || description === "" || selectedDate > today || parseFloat(realPrice) > parseFloat(price)) {
+        alert("Vui lòng nhập đầy đủ và đúng thông tin cần thiết!");
+    }
+    if (userStaff === '') {
+        errorUserStaff.innerHTML = "Tên sản phẩm không thể bỏ trống!";
+        isValid = false;
+    }
+    if (price === '') {
+        errorPrice.innerHTML = "Giá gốc sản phẩm không thể bỏ trống!";
+        isValid = false;
+    }
+    if (realPrice === '') {
+        errorRealPrice.innerHTML = "Giá bán sản phẩm không thể bỏ trống!";
+        isValid = false;
+    }
+    if (parseFloat(realPrice) > parseFloat(price)) {
+        errorRealPrice.innerHTML = "Giá gốc phải nhỏ hơn hoặc bằng giá bán";
+        isValid = false;
+    }
+    if (quantity === '') {
+        errorQuantity.innerHTML = "Số lượng sản phẩm không thể bỏ trống!";
+        isValid = false;
+    }
+    if (description === '') {
+        errorDescription.innerHTML = "Mô tả sản phẩm không thể bỏ trống!";
+        isValid = false;
+    }
     return isValid;
 }

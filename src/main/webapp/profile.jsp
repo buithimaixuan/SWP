@@ -218,6 +218,9 @@
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" id="avatar">
                             </div>
+                             <div class="mt-3 d-flex justify-content-center">
+                                <img src="https://th.bing.com/th/id/OIP.YEb__fTopff_H61Ouq69UAHaFj?w=219&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="avatar" class="normal-avatar rounded-circle img-fluid" style="width: 150px;">
+                            </div>
                         </div>
                         <div class="row mb-6">
                             <div class="col-md-12 d-flex justify-content-end">

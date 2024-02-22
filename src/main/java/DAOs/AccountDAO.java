@@ -54,7 +54,7 @@ public class AccountDAO {
         return acc;
 
     }
-    
+
     public int createAcc(Account acc) {
         int count = 0;
         String sql = "insert into account values(?,?,?,?,?,?,?)";
@@ -142,7 +142,7 @@ public class AccountDAO {
 
         return count;
     }
-    
+
     public int getResetCodeByEmail(String email) {
         String sql = "select code_reset from Account where email=?";
         int otp = 0;
@@ -150,13 +150,45 @@ public class AccountDAO {
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
-            if(rs.next()){
-                 otp = Integer.parseInt(rs.getString("code_reset"));
+            if (rs.next()) {
+                otp = Integer.parseInt(rs.getString("code_reset"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return otp;
     }
+
+    public void updatePassword(int acc_id, String newPassword) throws SQLException {
+         String hashedPassword = Utils.Hashing.getMd5(newPassword);
+        String sql = "UPDATE account SET password = ? WHERE acc_id = ?";
+        try ( PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, hashedPassword);
+            statement.setInt(2, acc_id);
+            int rowsUpdated = statement.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("Không có tài khoản nào được cập nhật.");
+            } else {
+                System.out.println("Mật khẩu đã được cập nhật thành công cho tài khoản có ID " + acc_id);
+            }
+        }
+    }
+
+    // Phương thức update mật khẩu trong bảng account
+//    public void updatePasdsword(int accountId, String newPassword) {
+//        String hashedPassword = Utils.Hashing.getMd5(newPassword);
+//
+//        try ( Connection connection = DriverManager.getConnection(url, username, password)) {
+//            String sql = "UPDATE account SET password = ? WHERE acc_id = ?";
+//            try ( PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+//                preparedStatement.setString(1, hashedPassword);
+//                preparedStatement.setInt(2, accountId);
+//                preparedStatement.executeUpdate();
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 }
