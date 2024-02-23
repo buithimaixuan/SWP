@@ -54,7 +54,58 @@ public class AccountDAO {
         return acc;
 
     }
-    
+
+    public Account getAccByEmail(String email) {
+
+        Account acc = null;
+        String sql = "select * from account where email=? and isDelete=0";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                acc = new Account(rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
+                        rs.getInt("code_reset"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return acc;
+
+    }
+
+    public int editPassword(String password, String email) {
+        int count = 0;
+        String sql = "update Account set password=? where email=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, Utils.Hashing.getMd5(password));
+            ps.setString(2, email);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return count;
+    }
+
+    public int getResetCodeByEmail(String email) {
+        String sql = "select code_reset from Account where email=?";
+        int otp = 0;
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                otp = Integer.parseInt(rs.getString("code_reset"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return otp;
+    }
+
     public int createAcc(Account acc) {
         int count = 0;
         String sql = "insert into account values(?,?,?,?,?,?,?)";
@@ -142,21 +193,6 @@ public class AccountDAO {
 
         return count;
     }
-    
-    public int getResetCodeByEmail(String email) {
-        String sql = "select code_reset from Account where email=?";
-        int otp = 0;
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                 otp = Integer.parseInt(rs.getString("code_reset"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return otp;
-    }
 
+   
 }
