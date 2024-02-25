@@ -37,24 +37,24 @@ public class StaffDAO {
     public Staff getStaff(int acc_id) {
         Staff Staff = null;
         String sql = "select * from staff where acc_id=?";
-         try {
-             ps = conn.prepareStatement(sql);
-             ps.setInt(1, acc_id);
-             rs = ps.executeQuery();
-             if (rs.next()) {
-                 Staff = new Staff(rs.getInt("staff_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
-                         rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
-                         rs.getDate("birthday"), rs.getString("gender"), rs.getString("address"),
-                         rs.getString("position"), rs.getDate("begin_work"), rs.getDate("end_work"), rs.getInt("code_reset"), rs.getInt("isDelete"));
-             }
-         } catch (SQLException ex) {
-             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, acc_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Staff = new Staff(rs.getInt("staff_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
+                        rs.getDate("birthday"), rs.getString("gender"), rs.getString("address"),
+                        rs.getString("position"), rs.getDate("begin_work"), rs.getDate("end_work"), rs.getInt("code_reset"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return Staff;
     }
-    
-    public ResultSet getAllStaff(){
+
+    public ResultSet getAllStaff() {
         ResultSet rs = null;
         String sql = "select staff_id, username, fullname, gender, position, isDelete from staff";
         try {
@@ -65,8 +65,8 @@ public class StaffDAO {
         }
         return rs;
     }
-    
-    public Staff addNewStaff(Staff obj){
+
+    public Staff addNewStaff(Staff obj) {
         int count = 0;
         String sql = "Insert into staff(acc_id, username, password, fullname, phone_number, email, birthday, gender, address, position, begin_work, isDelete) values(?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
@@ -83,15 +83,15 @@ public class StaffDAO {
             ps.setString(10, obj.getPosition());
             ps.setDate(11, obj.getBegin_work());
             ps.setInt(12, obj.getIsDelete());
-            
+
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return (count == 0) ? null : obj;
     }
-    
-    public Staff editStaff(int staff_id, Staff staff){
+
+    public Staff editStaff(int staff_id, Staff staff) {
         int count = 0;
         String sql = "Update staff set username = ?, password = ?, fullname = ?, phone_number = ?, email = ?, birthday = ?, gender = ?, address = ?, position = ?, begin_work = ? where staff_id = ?";
         try {
@@ -107,15 +107,15 @@ public class StaffDAO {
             ps.setString(9, staff.getPosition());
             ps.setDate(10, staff.getBegin_work());
             ps.setInt(11, staff_id);
-            
+
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return (count == 0) ? null : staff;
     }
-    
-    public Staff getStaffById(int staff_id){
+
+    public Staff getStaffById(int staff_id) {
         Staff obj = null;
         String sql = "Select * from staff where staff_id = ?";
         try {
@@ -123,26 +123,16 @@ public class StaffDAO {
             ps.setInt(1, staff_id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                 obj = new Staff(rs.getInt("staff_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
-                         rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
-                         rs.getDate("birthday"), rs.getString("gender"), rs.getString("address"),
-                         rs.getString("position"), rs.getDate("begin_work"), rs.getDate("end_work"), rs.getInt("code_reset"), rs.getInt("isDelete"));
-
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, acc_id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                Staff = new Staff(rs.getInt("staff_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
+                obj = new Staff(rs.getInt("staff_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
                         rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
                         rs.getDate("birthday"), rs.getString("gender"), rs.getString("address"),
                         rs.getString("position"), rs.getDate("begin_work"), rs.getDate("end_work"), rs.getInt("code_reset"), rs.getInt("isDelete"));
+
             }
         } catch (SQLException ex) {
-            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return Staff;
+        return obj;
     }
 
     public int editPassword(String password, String email) {
@@ -173,25 +163,22 @@ public class StaffDAO {
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return obj;
+        return fullName;
     }
-    
-    public boolean isDelete(int staff_id, Date current){
+
+    public boolean isDelete(int staff_id, Date current) {
         int count = 0;
-        String sql  = "Update staff set isDelete = 1, end_work = ? where staff_id = ?";
+        String sql = "Update staff set isDelete = 1, end_work = ? where staff_id = ?";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);            
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDate(1, current);
             ps.setInt(2, staff_id);
-            
+
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return (count == 0) ? false : true;
-    }
-        return fullName;
     }
 
 }
