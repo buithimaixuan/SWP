@@ -49,10 +49,10 @@
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center avatar">
-                          
+
                                 <!--                                <img src=""
                                                                      alt="avatar" class="normal-avatar rounded-circle img-fluid" style="width: 150px;">-->
-                                <h5 class="my-3">${account.fullname}</h5>
+                                <h5 class="my-3">${staff.fullname}</h5>
                                 <!--<p class="text-muted mb-4">Can Tho</p>-->
                                 <div class="d-flex justify-content-center mb-2">
                                     <!--                                    <button type="submit" class="btn" style="background-color: rgb(247, 187, 9);"
@@ -80,7 +80,7 @@
                                         <p class="mb-0">FullName</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${account.fullname}</p>
+                                        <p class="text-muted mb-0">${staff.fullname}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -89,7 +89,7 @@
                                         <p class="mb-0">Email</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${account.email}</p>
+                                        <p class="text-muted mb-0">${staff.email}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -98,7 +98,7 @@
                                         <p class="mb-0">Phone</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${account.phone_number}</p>
+                                        <p class="text-muted mb-0">${staff.phone_number}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -107,7 +107,7 @@
                                         <p class="mb-0">UserName</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${account.username}</p>
+                                        <p class="text-muted mb-0">${staff.username}</p>
                                     </div>
                                 </div>
 
@@ -137,6 +137,9 @@
                         </div>
 
 
+                        <!--//        public Staff(int staff_id, int acc_id, String username, String password, String fullnameRR,
+                        //            String phone_numberRR, String emailRR, Date birthdayR, String genderRS, String addressR,
+                        //            String positionRR, Date begin_workRS, Date end_workRS, int code_reset, int isDelete)-->
 
                         <div class="col-lg-8" id="updateProfile">
                             <h3 style="color: #9d00ff;" class="my-3">Update Information</h3>
@@ -148,16 +151,25 @@
                                         <label for="fullName" class="col-sm-2 col-form-label">FullName</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="fullname" name="fullname"
-                                                   class="form-control form-control-lg" value="${account.fullname}" />
+                                                   class="form-control form-control-lg" value="${staff.fullname}" />
                                             <span class="error"></span>
                                             <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-sm-2 col-form-label">Username</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="username" name="username"
+                                                   class="form-control form-control-lg" value="${staff.username}" />
+                                            <span class="error"></span>
+                                            <span class="text-danger" id="result"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
                                             <input type="email" id="email" name="email"
-                                                   class="form-control form-control-lg" value="${account.email}"/>
+                                                   class="form-control form-control-lg" value="${staff.email}"/>
                                             <span class="error""></span>
                                             <span class="text-danger" id="resultEmail"></span>
                                         </div>
@@ -166,9 +178,45 @@
                                         <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="phone" name="phone"
-                                                   class="form-control form-control-lg" value="${account.phone_number}" />
+                                                   class="form-control form-control-lg" value="${staff.phone_number}" />
                                             <span class="error"></span>
                                             <span class="text-danger" id="resultPhone"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-sm-2 col-form-label">Birthday</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" id="birthday" name="birthday"
+                                                   class="form-control form-control-lg" value="${staff.birthday}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-sm-2 col-form-label">Address</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" id="address" name="address"
+                                                   class="form-control form-control-lg" value="${staff.address}" />
+                                            <span class="error"></span>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="row mb-3">
+                                                                            <label for="fullName" class="col-sm-2 col-form-label">Position</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input readonly="" type="text" id="position" name="position"
+                                                                                       class="form-control form-control-lg" value="" />
+                                                                                <span class="error"></span>"
+                                                                                <span class="text-danger"></span>
+                                                                            </div>
+                                                                        </div>-->
+                                    <div class="row mb-3">
+                                        <label for="fullName" class="col-sm-2 col-form-label">Position</label>
+                                        <div class="col-sm-10">
+                                            <input readonly="" type="text" id="position" name="position"
+                                                   class="form-control form-control-lg" value="${staff.position}" />
+                                            <!--                                            <option value="second">Quản lý đơn hàng</option>
+                                                                                        <option value="third">Quản lý thông tin</option>-->
+
                                         </div>
                                     </div>
 
@@ -235,12 +283,12 @@
         <script src="/JS/validate.js"></script>
         <script>
                                     $(document).ready(function () {
-                                        $('#user').change(function () {
-                                            var user = $('#user').val();
+                                        $('#username').change(function () {
+                                            var user = $('#username').val();
                                             $.ajax({
                                                 type: 'POST',
                                                 data: {user: user},
-                                                url: 'UpdateCustomerController',
+                                                url: 'StaffController',
                                                 success: function (result) {
                                                     $('#result').html(result);
                                                 }
@@ -254,7 +302,7 @@
                                             $.ajax({
                                                 type: 'POST',
                                                 data: {email: email},
-                                                url: 'UpdateCustomerController',
+                                                url: 'StaffController',
                                                 success: function (result) {
                                                     $('#resultEmail').html(result);
                                                 }
@@ -268,7 +316,7 @@
                                             $.ajax({
                                                 type: 'POST',
                                                 data: {phone: phone},
-                                                url: 'UpdateCustomerController',
+                                                url: 'StaffController',
                                                 success: function (result) {
                                                     $('#resultPhone').html(result);
                                                 }

@@ -23,6 +23,7 @@ import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 /**
@@ -94,19 +95,16 @@ public class StaffController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        public Staff(int staff_id, int acc_id, String username, String password, String fullnameR,
-//            String phone_number, String email, Date birthday, String gender, String address,
-//            String position, Date begin_work, Date end_work, int code_reset, int isDelete)
-        
-        
-        
-        
+
         HttpSession session = request.getSession();
         Account as = (Account) request.getSession().getAttribute("account");
-        Customer cs = (Customer) request.getSession().getAttribute("account");
-        String phoneNumber = as.getPhone_number();
-        String email = as.getEmail();
+
+        Staff ss = (Staff) request.getSession().getAttribute("staff");
+//        String name = ss.getUsername();
+
+        String phoneNumber = ss.getPhone_number();
+        String email = ss.getEmail();
+        String username = ss.getUsername();
 
         AccountDAO adao = new AccountDAO();
         CustomerDAO cdao = new CustomerDAO();
@@ -131,37 +129,33 @@ public class StaffController extends HttpServlet {
             System.out.println("done check OldPass");
 
             // lấy account trong session
-            String username = as.getUsername();
-            String fullname = as.getFullname();
+//            String username = as.getUsername();
+            String fullname = ss.getFullname();
 
             //lấy customer trong session
-            String avatar = cs.getAvatar();
-
             //lấy staff trong session
-//            String gender = ss.getGender();
-//            String address = ss.getAddress();
-//            String position = ss.getPosition();
-//            Date birthday = ss.getBirthday();
-//            Date begin = ss.getBegin_work();
-//            Date end = ss.getEnd_work();
-            int accId = as.getAcc_id();
-            int cusId = cs.getCus_id();
-//            int staId = ss.getStaff_id();
+            String gender = ss.getGender();
+            String address = ss.getAddress();
+            String position = ss.getPosition();
+            Date birthday = ss.getBirthday();
+            Date begin = ss.getBegin_work();
+            Date end = ss.getEnd_work();
+            int accId = ss.getAcc_id();
+            int staffId = ss.getStaff_id();
 
+//            int staId = ss.getStaff_id();
             System.out.println(username + ".." + accId);
 
             Account acdc = new Account(accId, username, newPasswordHashed, fullname, phoneNumber, email, 0, 0);
-            Customer cus = new Customer(cusId, accId, username, newPasswordHashed, fullname, avatar, phoneNumber, email, 0, 0);
-//            Staff sta = new Staff(staId, accId, username, newPassword, fullname, phoneNumber, email, birthday, gender, address, position, begin, end, 0, 0);
+            Staff sss = new Staff(staffId, accId, username, newPasswordHashed, fullname, phoneNumber, email, birthday, gender, address, position, begin, end, 0, 0);
 
             System.out.println("day");
             int resultAcc = adao.updateAcc(acdc);
-            int resultCus = cdao.updateCus(cus);
+            int resultSS = sdao.updateStaff(sss);
 //            int resultSta = sdao.updateStaff(sta);
 
             System.out.println("ok update account");
-            if (resultAcc > 0 && resultCus > 0) {
-                session.setAttribute("account", cus);
+            if (resultAcc > 0 && resultSS > 0) {
 
                 response.sendRedirect("/StaffController");
 
@@ -172,6 +166,19 @@ public class StaffController extends HttpServlet {
             }
         }
         if (request.getParameter("btnUpdatefStaff") != null) {
+//            String usern = request.getParameter("username");
+//            LinkedList<String> listUsername = adao.getAllUserName();
+//            for (String s : listUsername) {
+//                if (!usern.equals(name)) {
+//                    if (s.equals(usern)) {
+//                        response.setContentType("text/html");
+//                        PrintWriter out = response.getWriter();
+//                        out.print("This username is already existed!");
+//                        break;
+//                    }
+//                }
+//            }
+
             String emailUser = request.getParameter("email");
 
             LinkedList<String> listEmail = adao.getAllEmail();
@@ -181,7 +188,7 @@ public class StaffController extends HttpServlet {
                         response.setContentType("text/html");
                         PrintWriter out = response.getWriter();
                         out.print("This email is already existed!");
-                        return;
+                        break;
                     }
                 }
             }
@@ -195,56 +202,41 @@ public class StaffController extends HttpServlet {
                         response.setContentType("text/html");
                         PrintWriter out = response.getWriter();
                         out.print("This phone is already existed!");
-                        return;
+                        break;
                     }
                 }
             }
-            System.out.println("done connect");
-
-            String fileName = null;
-            String pathAvatar = request.getParameter("avatar_old");
-
-            try {
-                Part part = request.getPart("avatar");
-                String realPart = request.getServletContext().getRealPath("/images");
-
-                // Kiểm tra nếu có file mới được chọn
-                if (part != null && part.getSize() > 0) {
-                    fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    if (!Files.exists(Paths.get(realPart))) {
-                        Files.createDirectory(Paths.get(realPart));
-                    }
-                    part.write(realPart + "/" + fileName);
-                    pathAvatar = "images/" + fileName; // Lưu đường dẫn của hình mới
-                } else {
-                    // Không có file mới được chọn, sử dụng giá trị hình cũ
-                    pathAvatar = request.getParameter("avatar_old");
-
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            System.out.println("done connect upStaff");
 
             String fullnameU = request.getParameter("fullname");
             String emailU = request.getParameter("email");
             String phoneU = request.getParameter("phone");
+//            String positionU = request.getParameter("position");
+            String addressU = request.getParameter("address");
+            Date birthdayU = Date.valueOf(request.getParameter("birthday"));
 
-            int accId = as.getAcc_id();
-            int cusId = cs.getCus_id();
-            String password = as.getPassword();
-            String username = as.getUsername();
+//            Date birthdayU = ss.getBirthday();
+            Date beginU = ss.getBegin_work();
+            Date endU = ss.getEnd_work();
+
+            int accId = ss.getAcc_id();
+            int staffId = ss.getStaff_id();
+            String gender = ss.getGender();
+            String password = ss.getPassword();
+//            String usernameU = ss.getUsername();
+            String positionU = ss.getPosition();
 
             System.out.println(username + ".update." + accId);
             Account acdc = new Account(accId, username, password, fullnameU, phoneU, emailU, 0, 0);
-            Customer cus = new Customer(cusId, accId, username, password, fullnameU, pathAvatar, phoneU, emailU, 0, 0);
+            Staff sss = new Staff(staffId, accId, username, password, fullnameU, phoneU, emailU, birthdayU, gender, addressU, positionU, beginU, endU, 0, 0);
 
             int resultAcc = adao.updateAcc(acdc);
-            int resultCus = cdao.updateCus(cus);
+            int resultStt = sdao.updateStaff(sss);
 
             System.out.println("ok update account");
-            if (resultAcc > 0 && resultCus > 0) {
+            if (resultAcc > 0 && resultStt > 0) {
 
-                session.setAttribute("account", cus);
+                session.setAttribute("staff", sss);
                 response.sendRedirect("/StaffController");
             } else {
                 session.setAttribute("fail", "That bai");
