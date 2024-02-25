@@ -4,12 +4,21 @@
  */
 package Controllers;
 
+import DAOs.NewsDAO;
+import DAOs.StaffDAO;
+import Models.News;
+import Models.Staff;
+import DAOs.ProductDAO;
+import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.Date;
+import java.util.LinkedList;
 
 /**
  *
@@ -59,6 +68,9 @@ public class AdminController extends HttpServlet {
         if (path.endsWith("/AdminController")) {
             request.getRequestDispatcher("/DashBoardSlideBarVer2.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListPro")) {
+            ProductDAO pdao = new ProductDAO();
+            LinkedList<Product> listPro = pdao.getAllPro();
+            request.setAttribute("listPro", listPro);
             request.getRequestDispatcher("/adminListPro.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListProHistory")) {
@@ -70,8 +82,54 @@ public class AdminController extends HttpServlet {
             request.getRequestDispatcher("/adminListOrderHis.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListNews")) {
+            NewsDAO newsDAO = new NewsDAO();
+            LinkedList<News> listNews = newsDAO.getAll();
+            request.setAttribute("listNews", listNews);
             request.getRequestDispatcher("/adminListNews.jsp").forward(request, response);
 
+        } else if (path.endsWith("/AdminController/AddNews")) {
+            request.getRequestDispatcher("/AddNewsForm.jsp").forward(request, response);
+
+        } else if (path.endsWith("/AdminController/UpdateNews")) {
+            int news_id = Integer.parseInt(request.getParameter("news_id"));
+
+            NewsDAO newsDAO = new NewsDAO();
+            News news = newsDAO.getNews(news_id);
+
+            String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
+            // Đặt thông tin tin tức vào thuộc tính của request để truyền tới trang UpdateNewsForm.jsp
+            request.setAttribute("news_id", news_id);
+
+            request.setAttribute("title", news.getTitle());
+            request.setAttribute("contentMain", news.getTitle_content());
+            request.setAttribute("image_url", images_url);
+            request.setAttribute("content1", news.getContent1());
+            request.setAttribute("content2", news.getContent2());
+            request.setAttribute("content3", news.getContent3());
+            request.setAttribute("dayWriteNews", news.getCreate_date());
+
+            // Chuyển hướng tới trang UpdateNewsForm.jsp
+            request.getRequestDispatcher("/UpdateNewsForm.jsp").forward(request, response);
+        } else if (path.endsWith("/AdminController/DeleteNews")) {
+            int news_id = Integer.parseInt(request.getParameter("news_id"));
+
+            NewsDAO newsDAO = new NewsDAO();
+            News news = newsDAO.getNews(news_id);
+
+            String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
+            // Đặt thông tin tin tức vào thuộc tính của request để truyền tới trang UpdateNewsForm.jsp
+            request.setAttribute("news_id", news_id);
+
+            request.setAttribute("title", news.getTitle());
+            request.setAttribute("contentMain", news.getTitle_content());
+            request.setAttribute("image_url", images_url);
+            request.setAttribute("content1", news.getContent1());
+            request.setAttribute("content2", news.getContent2());
+            request.setAttribute("content3", news.getContent3());
+            request.setAttribute("dayWriteNews", news.getCreate_date());
+
+            // Chuyển hướng tới trang UpdateNewsForm.jsp
+            request.getRequestDispatcher("/DeleteNewsForm.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListNewsHistory")) {
             request.getRequestDispatcher("/adminListNewsHis.jsp").forward(request, response);
 
@@ -95,7 +153,49 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        NewsDAO newsDAO = new NewsDAO();
+        StaffDAO staffDAO = new StaffDAO();
+        Staff staff = new Staff();
+        HttpSession session = request.getSession();
+        staff = (Staff) session.getAttribute("staff");
+
+        if (request.getParameter("btn-AddNews") != null) {
+            if (staff != null && staff.getStaff_id() > 0) {
+                int staff_id = staff.getStaff_id();
+                String title = request.getParameter("title");
+                String image_url = request.getParameter("newsPic");
+                String title_content = request.getParameter("contentMain");
+                String content1 = request.getParameter("content1");
+                String content2 = request.getParameter("content2");
+                String content3 = request.getParameter("content3");
+                Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
+
+                newsDAO.AddNewNews(staff_id, title, image_url, title_content, content1, content2, content3, create_date);
+                response.sendRedirect(request.getContextPath() + "/AdminController/adminListNews");
+            }
+        } else if (request.getParameter("btn-UpdateNews") != null) {
+            if (staff != null && staff.getStaff_id() > 0) {
+                int news_id = Integer.parseInt(request.getParameter("news_id"));
+                String title = request.getParameter("title");
+                String image_url = request.getParameter("newsPic");
+                String title_content = request.getParameter("contentMain");
+                String content1 = request.getParameter("content1");
+                String content2 = request.getParameter("content2");
+                String content3 = request.getParameter("content3");
+                Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
+
+                News news = new News(news_id, staff.getStaff_id(), title, image_url, title_content, content1, content2, content3, create_date, 0);
+                newsDAO.UpdateNews(news, news_id);
+
+                response.sendRedirect(request.getContextPath() + "/AdminController/adminListNews");
+            }
+        } else if (request.getParameter("btn-DeleteNews") != null) {
+            int news_id = Integer.parseInt(request.getParameter("news_id"));
+
+            newsDAO.DeleteNews(news_id);
+
+            response.sendRedirect(request.getContextPath() + "/AdminController/adminListNews");
+        }
     }
 
     /**

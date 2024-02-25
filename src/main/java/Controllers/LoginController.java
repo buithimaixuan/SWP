@@ -84,8 +84,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      HttpSession session = request.getSession();//tao session
-        
+        HttpSession session = request.getSession();//tao session
+
         AccountDAO dao = new AccountDAO();
         CustomerDAO cusDao = new CustomerDAO();
         StaffDAO staffDao = new StaffDAO();

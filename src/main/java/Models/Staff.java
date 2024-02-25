@@ -34,6 +34,7 @@ public class Staff extends Account {
         this.position = position;
         this.begin_work = begin_work;
         this.end_work = end_work;
+
     }
     
     public Staff(int staff_id, int acc_id, String username, String password, String fullname,
@@ -46,6 +47,7 @@ public class Staff extends Account {
         this.address = address;
         this.position = position;
         this.begin_work = begin_work;
+
     }
 
     public Staff(String username, String password, String fullname, String phone_number, String email, Date birthday, String gender, String address, String position, Date begin_work) {

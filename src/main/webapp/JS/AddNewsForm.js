@@ -51,12 +51,6 @@ function displayImage(event, displayId) {
     reader.readAsDataURL(file);
 }
 
-// xóa hiển thị hình ảnh đã chọn 
-//function deleteImage() {
-//    var img = document.getElementById('displayImage');
-//    img.innerHTML = '';
-//}
-
 function validateAddPro() {
     var proName = document.getElementById('proName').value.trim();
     var price = document.getElementById('price').value.trim();
@@ -112,20 +106,20 @@ function validateAddPro() {
 function validateForm() {
     //loi o trang Add News
     var title = document.getElementById('title').value.trim();
-    var contentMain = document.getElementById('contentMain').value.trim();
+    var title_content = document.getElementById('title_content').value.trim();
     var content1 = document.getElementById('content1').value.trim();
     var content2 = document.getElementById('content2').value.trim();
     var content3 = document.getElementById('content3').value.trim();
 
     var errorTitle = document.querySelector(".errorTitle");
-    var errorContentMain = document.querySelector(".errorContentMain");
+    var errorTitle_content = document.querySelector(".errorTitle_content");
     var errorContent1 = document.querySelector(".errorContent1");
     var errorContent2 = document.querySelector(".errorContent2");
     var errorContent3 = document.querySelector(".errorContent3");
     var error = document.querySelector(".error");
 
     errorTitle.innerHTML = '';
-    errorContentMain.innerHTML = '';
+    errorTitle_content.innerHTML = '';
     errorContent1.innerHTML = '';
     errorContent2.innerHTML = '';
     errorContent3.innerHTML = '';
@@ -134,16 +128,16 @@ function validateForm() {
     var isValid = true;
 
     // bao loi cho trang add News
-    if (title === '' || contentMain === '' || content1 === '' || content2 === '' || content3 === '' || selectedDate > today) {
+    if (title.trim() === '' || title_content === '' || content1 === '' || content2 === '' || content3 === '' || selectedDate > today) {
         alert("Vui lòng nhập đầy đủ và đúng thông tin cần thiết!");
         isValid = false;
     }
-    if (title === '') {
+    if (title.trim() === null) {
         errorTitle.innerHTML = "Tiêu đề không thể để trống!";
         isValid = false;
     }
-    if (contentMain === '') {
-        errorContentMain.innerHTML = "Nội dung chính không thể bỏ trống!";
+    if (title_content.trim() === null) {
+        errorTitle_content.innerHTML = "Nội dung chính không thể bỏ trống!";
         isValid = false;
     }
     if (content1 === '') {
@@ -158,6 +152,5 @@ function validateForm() {
         errorContent3.innerHTML = "Nội dung 3 không thể bỏ trống";
         return false;
     }
-
     return isValid;
 }

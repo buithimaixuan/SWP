@@ -35,6 +35,12 @@
     <servlet>
         <servlet-name>StaffController</servlet-name>
         <servlet-class>Controllers.StaffController</servlet-class>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>Controllers.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerController</servlet-name>
+        <servlet-class>Controllers.CustomerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -82,6 +88,12 @@
     <servlet-mapping>
         <servlet-name>StaffController</servlet-name>
         <url-pattern>/StaffController/*</url-pattern>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/ResetPasswordController/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerController</servlet-name>
+        <url-pattern>/CustomerController/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

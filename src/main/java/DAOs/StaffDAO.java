@@ -33,7 +33,8 @@ public class StaffDAO {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public Staff getStaff(int acc_id){
+
+    public Staff getStaff(int acc_id) {
         Staff Staff = null;
         String sql = "select * from staff where acc_id=?";
          try {
@@ -126,10 +127,53 @@ public class StaffDAO {
                          rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
                          rs.getDate("birthday"), rs.getString("gender"), rs.getString("address"),
                          rs.getString("position"), rs.getDate("begin_work"), rs.getDate("end_work"), rs.getInt("code_reset"), rs.getInt("isDelete"));
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, acc_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                Staff = new Staff(rs.getInt("staff_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
+                        rs.getDate("birthday"), rs.getString("gender"), rs.getString("address"),
+                        rs.getString("position"), rs.getDate("begin_work"), rs.getDate("end_work"), rs.getInt("code_reset"), rs.getInt("isDelete"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return Staff;
+    }
+
+    public int editPassword(String password, String email) {
+        int count = 0;
+        String sql = "update Staff set password=? where email=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, Utils.Hashing.getMd5(password));
+            ps.setString(2, email);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return count;
+    }
+
+    public String getFullNameByID(int staff_id) {
+        String fullName = null;
+        String sql = "SELECT fullname FROM staff WHERE staff_id=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, staff_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                fullName = rs.getString("fullname");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return obj;
     }
     
@@ -147,4 +191,7 @@ public class StaffDAO {
         }
         return (count == 0) ? false : true;
     }
+        return fullName;
+    }
+
 }
