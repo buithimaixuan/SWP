@@ -5,13 +5,15 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <link rel="stylesheet" href="./CSS/AddNewsForm.css"/>
+        <link rel="stylesheet" href="/CSS/AddNewsForm.css"/>
         <style>
             .font-italic{
                 font-style: italic;
@@ -30,7 +32,8 @@
                  left: 265px;
                  top: 0;
                  width: 80%;">
-                <form method="" action="" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddPro()">
+                <form method="post" action="ProductController" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" 
+                      onsubmit="return validateAddPro()" >
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Thêm mới sản phẩm</span>
                     </div>
@@ -63,14 +66,14 @@
                                 <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
                             </div>
 
-                            <div class="form-group form-outline mt-4 w-100">
+<!--                            <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input type="number" id="quantity" name="quantity" placeholder="Số lượng"
                                            class="form-control form-control-lg" />
                                     <label for="quantity" class="form-label">Số lượng</label>
                                 </div>
                                 <span class="error errorQuantity text-danger fw-bold font-italic"></span>
-                            </div>
+                            </div>-->
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
@@ -105,7 +108,9 @@
                                 <label class="form-label h5">Loại sản phẩm</label>
                                 <div class="form-hover">
                                     <select class="w-100 form-control form-control-lg">
+                                        <c:forEach items="" var="">
                                         <option value="value">Việt Nam</option>
+                                        </c:forEach>
                                         <option value="value">Trung quốc</option>
                                         <option value="value">Mỹ</option>
                                         <option value="value">Hàn</option>
@@ -146,14 +151,15 @@
                                         <label class="form-label h5">Hình ảnh 1</label>
                                         <div class="form-hover">
                                             <div class="d-flex">
-                                                <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage1')" 
+                                                <input type="file" name="proPic1" id="proPic1"
                                                        class="border form-control form-control-lg">
                                             </div>
+                                            <!--accept="image/*" onchange="displayImage(event, 'displayImage1')-->
                                         </div>
                                     </div>
                                 </div>
                                 <div id="displayImage1" class="mt-2 h-75">
-                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                    <img src="/images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -165,14 +171,14 @@
                                         <label class="form-label h5">Hình ảnh 2</label>
                                         <div class="d-flex">
                                             <div class="form-hover">
-                                                <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage2')" 
+                                                <input type="file" name="proPic2" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage2')" 
                                                        class="border form-control form-control-lg">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="displayImage2" class="mt-2 h-75">
-                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                    <img src="/images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -184,14 +190,14 @@
                                         <label class="form-label h5">Hình ảnh 3</label>
                                         <div class="form-hover">
                                             <div class="d-flex">
-                                                <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage3')" 
+                                                <input type="file" name="proPic3" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage3')" 
                                                        class="border form-control form-control-lg">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="displayImage3" class="mt-2 h-75">
-                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                    <img src="/images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -203,14 +209,14 @@
                                         <label class="form-label h5">Hình ảnh 4</label>
                                         <div class="form-hover">
                                             <div class="d-flex">
-                                                <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage4')" 
+                                                <input type="file" name="proPic4" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage4')" 
                                                        class="border form-control form-control-lg">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="displayImage4" class="mt-2 h-75">
-                                    <img src="./images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
+                                    <img src="/images/no_image.png" alt="No Image" id="defaultImage1" style="max-width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -225,7 +231,7 @@
                         <span class="error errorDescription text-danger font-italic fw-bold"></span>
                     </div>
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-AddProduct" class="btn btn-success w-100" style="font-size: 20px" value="Create New Product"/>
+                        <input type="submit" name="AddProduct" class="btn btn-success w-100" style="font-size: 20px" value="Create New Product"/>
                     </div> 
                 </form>
             </div>
@@ -233,6 +239,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-        <script src="JS/AddNewsForm.js"></script>
+        <script src="/JS/AddNewsForm.js"></script>
     </body>
 </html>

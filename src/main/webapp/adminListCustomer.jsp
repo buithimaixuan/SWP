@@ -53,6 +53,9 @@
             <div style="flex: 1; position: absolute; width: 80%;top: 0; left: 265px;">
                 <h1 class="m-2">Quản lý hàng khách</h1>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
+                    <p class="btn btn-warning m-2" style="width: 200px;">
+                        <a href="/CustomerController/Create" class="text-decoration-none text-dark">Thêm mới khách hàng</a>
+                    </p>
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
@@ -71,9 +74,8 @@
                                     <td class="text-start align-middle">${ph.quanInStock}</td>
                                     <td class="text-start align-middle">${ph.quanOnOrder}</td>
                                     <td class="text-start">
-                                        <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                        <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                        <a href="" class="btn btn-primary">Xóa</i></a>
+                                        
                                     </td>
                                 </tr>
                             </c:forEach>

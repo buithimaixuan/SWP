@@ -45,33 +45,36 @@
                 <h1 class="m-2">Quản lý sản phẩm</h1>  </p>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
-                        <a href="AddProForm.jsp" class="text-decoration-none text-dark">Thêm mới sản phẩm</a>
+                        <a href="/ProductController/Create" class="text-decoration-none text-dark">Thêm mới sản phẩm</a>
                     </p>
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="text-start">Mã SP</th>
                                 <th class="text-start">Tên SP</th>
+                                <th class="text-start">anh</th>
                                 <th class="text-start">SL</th>
                                 <th class="text-start">SL đặt hàng</th>
                                 <th class="text-start">SL thêm vào</th>
                                 <th class="text-start">SL giảm</th>
                                 <th class="text-start">SL trả lại</th>
-                                <th class="text-start">Ngày</th>
                                 <th class="text-start">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listPH}" var="ph">
+                            <c:forEach items="${listPro}" var="ph">
                                 <tr>
                                     <td class="text-start align-middle">${ph.pro_id}</td>
                                     <td class="text-start align-middle">${ph.pro_name}</td>
-                                    <td class="text-start align-middle">${ph.quanInStock}</td>
-                                    <td class="text-start align-middle">${ph.quanOnOrder}</td>
-                                    <td class="text-start align-middle">${ph.quanAdded}</td>
-                                    <td class="text-start align-middle">${ph.quanDelete}</td>
-                                    <td class="text-start align-middle">${ph.quanOrderCancel}</td>
-                                    <td class="text-start align-middle">${ph.date_update}</td>
+                                    <td class="text-start align-middle">
+                                        <img src="/${ph.pro_image}" alt="alt" style="width: 70px; height: 70px;"/>
+                                    </td>
+                                    <td class="text-start align-middle">${ph.origin}</td>
+                                    <td class="text-start align-middle">${ph.brand}</td>
+                                    <td class="text-start align-middle">${ph.mass}</td>
+                                    <td class="text-start align-middle">${ph.pro_quantity}</td>
+                                    <td class="text-start align-middle">${ph.pro_price}</td>
+<!--                                    <td class="text-start align-middle"></td>-->
                                     <td class="text-start">
                                         <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
                                         <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
