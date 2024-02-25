@@ -4,6 +4,8 @@
     Author     : PC
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="DAOs.StaffDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -51,6 +53,18 @@
             .position-tab{
                 width: 15%;
             }
+            table th, table td{
+                font-size: 13px;
+            }
+            .dt-length label, .dt-search label{
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .action_staff{
+                margin-left: 7px;
+                color: #3498db;
+            }
         </style>
     </head>
     <body>
@@ -60,9 +74,9 @@
                 <h1 class="m-2">Quản lý nhân viên</h1>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
-                        <a href="AddProForm.jsp" class="text-decoration-none text-dark">Tạo tài khoản</a>
+                        <a href="/StaffController" class="text-decoration-none text-dark">Tạo tài khoản</a>
                     </p>
-                    <table id="example" class="table table-responsive" style="width:100%">
+                    <table id="listStaff" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="text-start nv-tab">Mã NV</th>
@@ -74,20 +88,49 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listPH}" var="ph">
-                                <tr>
-                                    <td class="text-start align-middle nv-tab">${ph.pro_id}</td>
-                                    <td class="text-start align-middle username-tab">${ph.pro_name}</td>
-                                    <td class="text-start align-middle">${ph.quanInStock}</td>
-                                    <td class="text-start align-middle gender-tab">${ph.quanOrderCancel}</td>
-                                    <td class="text-start align-middle position-tab">${ph.quanAdded}</td>
-                                    <td class="text-start">
-                                        <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                        <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <%
+                                StaffDAO sdao = new StaffDAO();
+                                ResultSet rs = sdao.getAllStaff();
+
+                                if (rs != null) {
+                                    while (rs.next()) {
+                            %>
+                            <tr>
+                                <td class="text-start align-middle nv-tab"><%= rs.getInt("staff_id")%></td>
+                                <td class="text-start align-middle username-tab"><%= rs.getString("username")%></td>
+                                <td class="text-start align-middle"><%= rs.getString("fullname")%></td>
+                                <td class="text-start align-middle gender-tab"><%= rs.getString("gender")%></td>
+                                <td class="text-start align-middle position-tab"><%= rs.getString("position")%></td>
+                                <td class="text-start">
+                                    <%
+                                        if (rs.getInt("isDelete") == 0) {
+                                    %>
+                                    <a href="/StaffController/DetailStaff/<%= rs.getInt("staff_id")%>" class="action_staff view_detail">Xem chi tiết</a>
+                                    <a href="/StaffController/EditStaff/<%= rs.getInt("staff_id")%>" class="action_staff edit">Chỉnh sửa</a>
+                                    <a href="/StaffController/DeleteStaff/<%= rs.getInt("staff_id")%>" class="action_staff delete">Xóa</a>
+                                    <%
+                                    } else {
+                                    %>
+                                    <a href="/StaffController/DetailStaff/<%= rs.getInt("staff_id")%>" class="action_staff view_detail">Xem chi tiết</a>
+                                    <small style="font-size: 13px; color: #3e3e3e1f; font-style: italic">Tài khoản vô hiệu hóa</small>
+                                    <%
+                                        }
+                                    %>
+
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            } else {
+                            %>
+                        <div class="d-flex align-items-center justify-content-center vh-100">
+                            <div class="text-center">
+                                <p class="fs-3"> Không tìm thấy nhân viên </p>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %> 
                         <tbody>  
                     </table>
                 </div>
@@ -98,7 +141,10 @@
         <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
         <script src="https://cdn.datatables.net/2.0.0/js/dataTables.bootstrap5.js"></script>
         <script>
-            new DataTable('#example');
+            new DataTable('#listStaff');
+
+            document.querySelector('.dt-length label').innerText = "Chọc lọc";
+            document.querySelector('.dt-search label').innerText = "Tìm kiếm:"
         </script>
     </body>
 </html>
