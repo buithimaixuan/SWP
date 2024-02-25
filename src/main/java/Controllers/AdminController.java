@@ -5,18 +5,25 @@
 package Controllers;
 
 import DAOs.NewsDAO;
-import DAOs.StaffDAO;
+import DAOs.NewsHistoryDAO;
 import Models.News;
+import Models.NewsHistory;
 import Models.Staff;
 import DAOs.ProductDAO;
 import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.LinkedList;
 
@@ -24,6 +31,12 @@ import java.util.LinkedList;
  *
  * @author Dell
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50
+)
+@WebServlet(name = "AdminController", urlPatterns = {"/AdminController"})
 public class AdminController extends HttpServlet {
 
     /**
@@ -154,26 +167,51 @@ public class AdminController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         NewsDAO newsDAO = new NewsDAO();
-        StaffDAO staffDAO = new StaffDAO();
         Staff staff = new Staff();
         HttpSession session = request.getSession();
         staff = (Staff) session.getAttribute("staff");
 
         if (request.getParameter("btn-AddNews") != null) {
-            if (staff != null && staff.getStaff_id() > 0) {
-                int staff_id = staff.getStaff_id();
-                String title = request.getParameter("title");
-                String image_url = request.getParameter("newsPic");
-                String title_content = request.getParameter("contentMain");
-                String content1 = request.getParameter("content1");
-                String content2 = request.getParameter("content2");
-                String content3 = request.getParameter("content3");
-                Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
+            try {
+                String fileName1 = null;
+                Part part = request.getPart("newsPic");
+                if (part != null && part.getSize() > 0) {
+                    String realPart = getServletContext().getRealPath("/images");
+                    fileName1 = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                    if (fileName1 == null || fileName1.equals("")) {
+                        fileName1 = "no_image.png";
+                    }
+                    if (!Files.exists(Paths.get(realPart))) {
+                        Files.createDirectory(Paths.get(realPart));
+                    }
+                    part.write(realPart + "/" + fileName1);
+                } else {
+                    // Nếu không có ảnh được chọn, sử dụng ảnh mặc định
+                    fileName1 = "no_image.png";
+                }
 
-                newsDAO.AddNewNews(staff_id, title, image_url, title_content, content1, content2, content3, create_date);
-                response.sendRedirect(request.getContextPath() + "/AdminController/adminListNews");
+                if (staff != null && staff.getStaff_id() > 0) {
+                    int staff_id = staff.getStaff_id();
+                    String title = request.getParameter("title");
+                    String image_url = fileName1; // Sử dụng tên file ảnh đã lấy được
+                    String title_content = request.getParameter("contentMain");
+                    String content1 = request.getParameter("content1");
+                    String content2 = request.getParameter("content2");
+                    String content3 = request.getParameter("content3");
+                    Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
+
+                    newsDAO.AddNewNews(staff_id, title, "images/" + image_url, title_content, content1, content2, content3, create_date);
+                    response.sendRedirect(request.getContextPath() + "/AdminController/adminListNews");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Xử lý lỗi khi có ngoại lệ xảy ra
+                // Có thể redirect về trang lỗi hoặc hiển thị thông báo lỗi
+                request.setAttribute("error", "Đã xảy ra lỗi khi thêm tin tức.");
+                request.getRequestDispatcher("/error.jsp").forward(request, response);
             }
         } else if (request.getParameter("btn-UpdateNews") != null) {
+
             if (staff != null && staff.getStaff_id() > 0) {
                 int news_id = Integer.parseInt(request.getParameter("news_id"));
                 String title = request.getParameter("title");

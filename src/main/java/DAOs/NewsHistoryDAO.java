@@ -53,6 +53,31 @@ public class NewsHistoryDAO {
         return list;
     }
     
-    
+    public int AddNewsHistory(NewsHistory newsHis) {
+        int count = 0;
+        String sql = "insert into [news_history] values(?,?,?,?,?,?,?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, 0);
+            ps.setInt(2, newsHis.getNews_id());
+            ps.setInt(3, newsHis.getStaff_id());
+            ps.setString(4, newsHis.getTitle());
+            ps.setString(5, newsHis.getImage_url());
+            ps.setString(6, newsHis.getTitle_content());
+            ps.setString(7, newsHis.getContent1());
+            ps.setString(8, newsHis.getContent2());
+            ps.setString(9, newsHis.getContent3());
+            ps.setDate(10, new java.sql.Date(newsHis.getCreate_date().getTime()));
+            ps.setInt(11, 0);
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
     
 }

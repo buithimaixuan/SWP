@@ -38,7 +38,7 @@
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Chỉnh sửa tin tức</span>
                     </div>
-                    <input type="text" id="news_id" name="news_id" value="${news_id}" />
+                    <input type="hidden" id="news_id" name="news_id" value="${news_id}" />
 
                     <div class="form-group w-100">
                         <div class="form-hover">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                         <div id="displayImage" class="mt-2 w-25">
-                            <img src="../images/${image_url}" alt="Hình ảnh tin tức" id="newsImage" style="max-width: 100%;">
+                            <img src="/${image_url}" alt="Hình ảnh tin tức" id="newsImage" style="max-width: 100%;">
                         </div>
                     </div>
 
