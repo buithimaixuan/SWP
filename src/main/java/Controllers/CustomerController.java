@@ -6,8 +6,10 @@ package Controllers;
 
 import DAOs.AccountDAO;
 import DAOs.CustomerDAO;
+import DAOs.NewsDAO;
 import Models.Account;
 import Models.Customer;
+import Models.News;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -75,8 +77,24 @@ public class CustomerController extends HttpServlet {
         String path = request.getRequestURI();
         if (path.endsWith("/CustomerController/Create")) {
             request.getRequestDispatcher("/AddCusAdmin.jsp").forward(request, response);
-        }else  if (path.endsWith("/CustomerController/ok")) {
+        } else if (path.endsWith("/CustomerController/ok")) {
             request.getRequestDispatcher("/ok.jsp").forward(request, response);
+        } else if (path.endsWith("CustomerController/listNews")) {
+            NewsDAO newsDAO = new NewsDAO();
+
+            LinkedList<News> listNewsTop5 = newsDAO.getTop5News();
+            LinkedList<News> listNewsTop3 = newsDAO.getTop3News();
+            request.setAttribute("listNewsTop5", listNewsTop5);
+            request.setAttribute("listNewsTop3", listNewsTop3);
+
+            request.getRequestDispatcher("/listAllNews.jsp").forward(request, response);
+        } else if (path.endsWith("CustomerController/newsDetail")) {
+            int news_id = Integer.parseInt(request.getParameter("news_id"));
+
+            NewsDAO newsDAO = new NewsDAO();
+            News news = newsDAO.getNews(news_id);
+            request.setAttribute("news", news);
+            request.getRequestDispatcher("/newsDetail.jsp").forward(request, response);
         }
     }
 
@@ -130,30 +148,29 @@ public class CustomerController extends HttpServlet {
             }
         }
 
-         String fileName = null;
-            String pathAvatar = request.getParameter("avatar_old");
+        String fileName = null;
+        String pathAvatar = request.getParameter("avatar_old");
 
-            try {
-                Part part = request.getPart("newsPic");
-                String realPart = request.getServletContext().getRealPath("/images");
+        try {
+            Part part = request.getPart("newsPic");
+            String realPart = request.getServletContext().getRealPath("/images");
 
-                // Kiểm tra nếu có file mới được chọn
-                if (part != null && part.getSize() > 0) {
-                    fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-                    if (!Files.exists(Paths.get(realPart))) {
-                        Files.createDirectory(Paths.get(realPart));
-                    }
-                    part.write(realPart + "/" + fileName);
-                    pathAvatar = "images/" + fileName; // Lưu đường dẫn của hình mới
-                } else {
-                    // Không có file mới được chọn, sử dụng giá trị hình cũ
-                    pathAvatar = request.getParameter("avatar_old");
-
+            // Kiểm tra nếu có file mới được chọn
+            if (part != null && part.getSize() > 0) {
+                fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                part.write(realPart + "/" + fileName);
+                pathAvatar = "images/" + fileName; // Lưu đường dẫn của hình mới
+            } else {
+                // Không có file mới được chọn, sử dụng giá trị hình cũ
+                pathAvatar = request.getParameter("avatar_old");
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (request.getParameter("btn-AddNews") != null) {
             String fullname = request.getParameter("fullname");
@@ -177,6 +194,7 @@ public class CustomerController extends HttpServlet {
             }
 
         }
+
     }
 
     /**
