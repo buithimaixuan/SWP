@@ -32,7 +32,17 @@ public class Account {
         this.code_reset = code_reset;
         this.isDelete = isDelete;
     }
-
+    
+//    NAM CODE
+    public Account(String username, String password, String fullname, String phone_number, String email) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.phone_number = phone_number;
+        this.email = email;
+    }
+    
+    
     public int getAcc_id() {
         return acc_id;
     }
