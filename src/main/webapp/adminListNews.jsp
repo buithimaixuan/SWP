@@ -4,6 +4,10 @@
     Author     : PC
 --%>
 
+<%@page import="DAOs.NewsDAO"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="Models.News"%>
+<%@page import="DAOs.StaffDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -19,7 +23,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
-        <title>JSP Page</title>
+        <title>Quản lý tin tức</title>
         <style>
             .btn{
                 cursor: pointer;
@@ -48,30 +52,40 @@
                 <h1 class="m-2">Quản lý tin tức</h1>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
-                        <a href="AddProForm.jsp" class="text-decoration-none text-dark">Thêm mới tin tức</a>
+                        <a href="AddNews" class="text-decoration-none text-dark">Thêm mới tin tức</a>
                     </p>
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
                                 <th class="text-start news-tab">Mã TT</th>
                                 <th class="text-start">Tiêu đề</th>
-                                <th class="text-start">Tác giả</th>
+                                <th class="text-start">Tên tác giả</th>
+                                <th class="text-start">Ngày viết</th>
                                 <th class="text-start">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listPH}" var="ph">
-                                <tr>
-                                    <td class="text-start align-middle news-tab">${ph.pro_id}</td>
-                                    <td class="text-start align-middle">${ph.pro_id}</td>
-                                    <td class="text-start align-middle">${ph.pro_id}</td>
-                                    <td class="text-start">
-                                        <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                        <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <%
+                                StaffDAO staffDAO = new StaffDAO();
+                                NewsDAO newsDAO = new NewsDAO();
+                                LinkedList<News> listNews = newsDAO.getAll();
+                                for (News element : listNews) {
+                                    String fullname = staffDAO.getFullNameByID(element.getStaff_id());
+                            %>
+                            <tr>
+                                <td class="text-start align-middle news-tab"><%= element.getNews_id()%></td>
+                                <td class="text-start align-middle"><%= element.getTitle()%></td>
+                                <td class="text-start align-middle"><%= fullname%></td>
+                                <td class="text-start align-middle"><%= element.getCreate_date()%></td>
+                                <td class="text-start">
+                                    <a class="btn btn-primary">Xem chi tiết</a>
+                                    <a href="UpdateNews?news_id=<%= element.getNews_id()%>" class="btn btn-success">Chỉnh sửa</a>
+                                    <a href="DeleteNews?news_id=<%= element.getNews_id()%>" class="btn btn-danger">Xóa</a>
+                                </td>
+                            </tr>
+                            <%
+                                }
+                            %>
                         <tbody>  
                     </table>
                 </div>

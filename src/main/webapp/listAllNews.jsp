@@ -197,6 +197,5 @@
             </div>
         </div>
     </body>
-    <%@include file="" %>
     <script src="./JS/listAllNews.js"></script>
 </html>
