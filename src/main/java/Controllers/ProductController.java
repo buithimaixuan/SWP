@@ -6,7 +6,10 @@ package Controllers;
 
 import DAOs.CategoriesDAO;
 import DAOs.ProductDAO;
+import DAOs.ProductImagesDAO;
+import Models.Categories;
 import Models.Product;
+import Models.ProductImages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,6 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -1292,6 +1296,9 @@ public class ProductController extends HttpServlet {
         }
 
         if (path.endsWith("/ProductController/Create")) {
+            CategoriesDAO cdao = new CategoriesDAO();
+            LinkedList<Categories> list = cdao.getAllCat();
+            request.setAttribute("listCat", list);
             request.getRequestDispatcher("/AddProForm.jsp").forward(request, response);
         }
     }
@@ -1313,14 +1320,21 @@ public class ProductController extends HttpServlet {
             request.getSession().setAttribute("valueSearch", valueSearch);
             response.sendRedirect("/ProductController/timKiem/" + valueSearch + "");
         }
-        
-        String fileName1 = null;
+
+       
+        ProductDAO pdao = new ProductDAO();
+        ProductImagesDAO pIdao = new ProductImagesDAO();
+        if (request.getParameter("AddProduct") != null) {
+             String fileName1 = null;
         try {
             Part part = request.getPart("proPic1");
             String realPart = request.getServletContext().getRealPath("/images");
 
             fileName1 = Paths.get(part.getSubmittedFileName())
                     .getFileName().toString();
+            if (fileName1 == null || fileName1.equals("")) {
+                fileName1 = "no_image.png";
+            }
             if (!Files.exists(Paths.get(realPart))) {
                 Files.createDirectory(Paths.get(realPart));
             }
@@ -1334,6 +1348,9 @@ public class ProductController extends HttpServlet {
 
             fileName2 = Paths.get(part.getSubmittedFileName())
                     .getFileName().toString();
+            if (fileName2 == null || fileName2.equals("")) {
+                fileName2 = "no_image.png";
+            }
             if (!Files.exists(Paths.get(realPart))) {
                 Files.createDirectory(Paths.get(realPart));
             }
@@ -1347,6 +1364,9 @@ public class ProductController extends HttpServlet {
 
             fileName3 = Paths.get(part.getSubmittedFileName())
                     .getFileName().toString();
+            if (fileName3 == null || fileName3.equals("")) {
+                fileName3 = "no_image.png";
+            }
             if (!Files.exists(Paths.get(realPart))) {
                 Files.createDirectory(Paths.get(realPart));
             }
@@ -1360,17 +1380,43 @@ public class ProductController extends HttpServlet {
 
             fileName4 = Paths.get(part.getSubmittedFileName())
                     .getFileName().toString();
+            if (fileName4 == null || fileName4.equals("")) {
+                fileName4 = "no_image.png";
+            }
             if (!Files.exists(Paths.get(realPart))) {
                 Files.createDirectory(Paths.get(realPart));
             }
             part.write(realPart + "/" + fileName4);
         } catch (Exception e) {
         }
-        // xuan code
-        if (request.getParameter("AddProduct") != null) {
+            int cat_id = Integer.valueOf(request.getParameter("cat_id"));
             String proName = request.getParameter("proName");
             Double price = Double.valueOf(request.getParameter("price"));
-            
+            Double discount = Double.valueOf(request.getParameter("realPrice"));
+            String orgin = request.getParameter("origin");
+            String brand = request.getParameter("brand");
+            Double mass = Double.valueOf(request.getParameter("mass"));
+            String ingredient = request.getParameter("ingredient");
+            Date dayWritePro = Date.valueOf(request.getParameter("dayWriteNews"));
+            String description = request.getParameter("description");
+            Product pro = new Product(0, cat_id, proName, "images/" + fileName1,
+                    orgin, brand, mass, ingredient, 0, price, discount, description, dayWritePro, 0);
+            int pro_id = pdao.addPro(pro);
+            if (pro_id != 0) {
+                ProductImages proImage1 = new ProductImages(0, pro_id, "images/" + fileName2);
+                ProductImages proImage2 = new ProductImages(0, pro_id, "images/" + fileName3);
+                ProductImages proImage3 = new ProductImages(0, pro_id, "images/" + fileName4);
+                int addProImage1 = pIdao.addProductImage(proImage1);
+                int addProImage2 = pIdao.addProductImage(proImage2);
+                int addProImage3 = pIdao.addProductImage(proImage3);
+                if (addProImage1 != 0 && addProImage2 != 0 && addProImage3 != 0) {
+
+                    response.sendRedirect("/AdminController/adminListPro");
+                }
+            } else {
+                response.sendRedirect("/ProductController/Create");
+            }
+
         }
 
     }

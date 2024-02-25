@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,15 +20,32 @@ import java.util.LinkedList;
 public class ProductImagesDAO {
 
     private Connection connection;
+    private PreparedStatement ps;
+    private ResultSet rs;
 
-    public void addProductImage(ProductImages productImage) throws SQLException {
-        String query = "INSERT INTO product_images (pro_img_id, pro_id, image_url) VALUES (?, ?, ?)";
-        try ( PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, productImage.getPro_img_id());
-            statement.setInt(2, productImage.getPro_id());
-            statement.setString(3, productImage.getImage_url());
-            statement.executeUpdate();
+    public ProductImagesDAO() {
+        try {
+            connection = DB.DBConnection.connect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductImagesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductImagesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public int addProductImage(ProductImages productImage) {
+        int count = 0;
+        String query = "INSERT INTO product_images VALUES (?, ?)";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productImage.getPro_id());
+            ps.setString(2, productImage.getImage_url());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductImagesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return count;
     }
 
     public LinkedList<ProductImages> getProductImagesByProductId(int productId) throws SQLException {
@@ -52,9 +71,9 @@ public class ProductImagesDAO {
         try ( PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, productId);
             int deleteIs = statement.executeUpdate();
-            if (deleteIs > 0) {     
+            if (deleteIs > 0) {
                 return 1;
-            } else     {         
+            } else {
                 return 0;
             }
         }
