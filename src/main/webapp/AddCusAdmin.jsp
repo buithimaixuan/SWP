@@ -32,7 +32,7 @@
                  left: 265px;
                  top: 0;
                  width: 80%;">
-                <form method="post" action="" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateFormCus()">
+                <form method="post" action="CustomerController" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateFormCus()">
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Thêm mới khách hàng</span>
                     </div>
@@ -45,16 +45,29 @@
                         <span class="errorFullname text-danger fw-bold font-italic"></span>
                     </div>
 
+                    <!--                    <div class="form-outline mt-4 w-100">
+                                            <div class="validate form-outline col">
+                                                <label class="form-label h5">Avatar</label>
+                                                <div class="form-hover">
+                                                    <input type="file" name="newsPic" id="newsPic"
+                                                           onchange="displayImage(event, 'displayImage')" 
+                                                           class="border form-control form-control-lg">
+                                                </div>
+                                            </div>
+                                            <div id="displayImage" class="mt-2 w-25">
+                                                <img src="/images/no_image.png" alt="No Image" id="defaultImage" style="max-width: 100%;">
+                                            </div>
+                                        </div>-->
+
                     <div class="form-outline mt-4 w-100">
                         <div class="validate form-outline col">
-                            <label class="form-label h5">Avatar</label>
-                            <div class="form-hover">
-                                <input type="file" name="newsPic" id="newsPic" accept="image/*" 
-                                       onchange="displayImage(event, 'displayImage')" 
+                            <label for="avatar" class="col-sm-2 col-form-label">Avatar</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" id="newsPic" name="newsPic" onchange="displayImage(event, 'displayImage')" 
                                        class="border form-control form-control-lg">
+                                <input type="hidden" id="avatar_old" class="form-control" name="avatar_old" value="/images/no_image.png">
+
                             </div>
-                        </div>
-                        <div id="displayImage" class="mt-2 w-25">
                             <img src="/images/no_image.png" alt="No Image" id="defaultImage" style="max-width: 100%;">
                         </div>
                     </div>
@@ -109,58 +122,58 @@
         crossorigin="anonymous"></script>
 
         <script>
-                                           $(document).ready(function () {
-                                               $('#user').change(function () {
-                                                   var user = $('#user').val();
-                                                   $.ajax({
-                                                       type: 'POST',
-                                                       data: {user: user},
-                                                       url: 'CustomerController',
-                                                       success: function (result) {
-                                                           $('#result').html(result);
+                                    $(document).ready(function () {
+                                        $('#user').change(function () {
+                                            var user = $('#user').val();
+                                            $.ajax({
+                                                type: 'POST',
+                                                data: {user: user},
+                                                url: 'CustomerController',
+                                                success: function (result) {
+                                                    $('#result').html(result);
 
-                                                       }
+                                                }
 
-                                                   });
+                                            });
 
-                                               });
+                                        });
 
 
-                                           });
+                                    });
 
-                                           $(document).ready(function () {
-                                               $('#email').change(function () {
-                                                   var email = $('#email').val();
-                                                   $.ajax({
-                                                       type: 'POST',
-                                                       data: {email: email},
-                                                       url: 'CustomerController',
-                                                       success: function (result) {
-                                                           $('#resultEmail').html(result);
+                                    $(document).ready(function () {
+                                        $('#email').change(function () {
+                                            var email = $('#email').val();
+                                            $.ajax({
+                                                type: 'POST',
+                                                data: {email: email},
+                                                url: 'CustomerController',
+                                                success: function (result) {
+                                                    $('#resultEmail').html(result);
 
-                                                       }
+                                                }
 
-                                                   });
+                                            });
 
-                                               });
+                                        });
 
-                                           });
-                                           $(document).ready(function () {
-                                               $('#phone').change(function () {
-                                                   var phone = $('#phone').val();
-                                                   $.ajax({
-                                                       type: 'POST',
-                                                       data: {phone: phone},
-                                                       url: 'CustomerController',
-                                                       success: function (result) {
-                                                           $('#resultPhone').html(result);
+                                    });
+                                    $(document).ready(function () {
+                                        $('#phone').change(function () {
+                                            var phone = $('#phone').val();
+                                            $.ajax({
+                                                type: 'POST',
+                                                data: {phone: phone},
+                                                url: 'CustomerController',
+                                                success: function (result) {
+                                                    $('#resultPhone').html(result);
 
-                                                       }
+                                                }
 
-                                                   });
+                                            });
 
-                                               });
-                                           });
+                                        });
+                                    });
         </script>
         <script src="/JS/AddCusAdmin.js"></script>
     </body>
