@@ -11,3 +11,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     height: 15px;
     object-fit: cover;
 }
+
+a{
+    color: #3e3e3e;
+    text-decoration: none;
+    transition: 0.15s;
+}

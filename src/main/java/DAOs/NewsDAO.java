@@ -74,9 +74,46 @@ public class NewsDAO {
         return news;
     }
 
+    public News getTop1News() {
+        News news = null;
+        String sql = "SELECT TOP 1 * FROM news ORDER BY create_date DESC";
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                news = new News(rs.getInt("news_id"), rs.getInt("staff_id"), rs.getString("title"),
+                        rs.getString("image_url"), rs.getString("title_content"), rs.getString("content1"),
+                        rs.getString("content2"), rs.getString("content3"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return news;
+    }
+
+    public LinkedList<News> getTop3News() {
+        LinkedList<News> list = new LinkedList<>();
+        String sql = "Select top 3 * from news";
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                News news = new News(rs.getInt("news_id"), rs.getInt("staff_id"), rs.getString("title"),
+                        rs.getString("image_url"), rs.getString("title_content"), rs.getString("content1"),
+                        rs.getString("content2"), rs.getString("content3"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+                list.add(news);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
     public LinkedList<News> getTop5News() {
         LinkedList<News> list = new LinkedList<>();
-        String sql = "Select top 4 * from news order by create_date ASC";
+        String sql = "Select top 5 * from news order by create_date ASC";
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
