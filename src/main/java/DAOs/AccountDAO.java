@@ -34,6 +34,23 @@ public class AccountDAO {
         }
     }
 
+    public Account getAccount2(String username) {
+        Account acc = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from account where username = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                acc = new Account(rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
+                        rs.getInt("code_reset"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return acc;
+    }
+
     public Account getAccount(String us, String pass) {
 
         Account acc = null;
@@ -54,7 +71,22 @@ public class AccountDAO {
         return acc;
 
     }
-    
+
+    public boolean checkPassword(String password) {
+        String sql = "SELECT * FROM account WHERE password = ?";
+        try (
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, Utils.Hashing.getMd5(password));
+            System.out.println("...pass nhap vao :" + password);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // nếu có kết quả trả về, mật khẩu khớp
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public int createAcc(Account acc) {
         int count = 0;
         String sql = "insert into account values(?,?,?,?,?,?,?)";
@@ -142,7 +174,7 @@ public class AccountDAO {
 
         return count;
     }
-    
+
     public int getResetCodeByEmail(String email) {
         String sql = "select code_reset from Account where email=?";
         int otp = 0;
@@ -150,13 +182,33 @@ public class AccountDAO {
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
-            if(rs.next()){
-                 otp = Integer.parseInt(rs.getString("code_reset"));
+            if (rs.next()) {
+                otp = Integer.parseInt(rs.getString("code_reset"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return otp;
+    }
+
+    public int updateAcc(Account acc) {
+        int count = 0;
+        String sql = "UPDATE account SET username =? , password=?, fullname = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE acc_id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, acc.getUsername());
+            ps.setString(2, acc.getPassword());
+            ps.setString(3, acc.getFullname());
+            ps.setString(4, acc.getPhone_number());
+            ps.setString(5, acc.getEmail());
+            ps.setInt(6, 0);
+            ps.setInt(7, 0);
+            ps.setInt(8, acc.getAcc_id());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 
 }

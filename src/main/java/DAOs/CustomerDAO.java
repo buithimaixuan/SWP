@@ -4,11 +4,13 @@
  */
 package DAOs;
 
+import Models.Account;
 import Models.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,38 +19,41 @@ import java.util.logging.Logger;
  * @author Dell
  */
 public class CustomerDAO {
-     private Connection conn;
+
+    private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
 
     public CustomerDAO() {
-         try {
-             conn = DB.DBConnection.connect();
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+            conn = DB.DBConnection.connect();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    public Customer getCustomer(int acc_id){
+
+    public Customer getCustomer(int acc_id) {
         Customer cus = null;
         String sql = "select * from customer where acc_id=?";
-         try {
-             ps = conn.prepareStatement(sql);
-             ps.setInt(1, acc_id);
-             rs = ps.executeQuery();
-             if(rs.next()){
-                 cus = new Customer(rs.getInt("cus_id"), rs.getInt("acc_id"),
-                         rs.getString("username"), rs.getString("password"), 
-                         rs.getString("fullname"), rs.getString("avatar"), rs.getString("phone_number"), 
-                         rs.getString("email"), rs.getInt("code_reset"), rs.getInt("isDelete"));
-             }
-         } catch (SQLException ex) {
-             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, acc_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cus = new Customer(rs.getInt("cus_id"), rs.getInt("acc_id"),
+                        rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("avatar"), rs.getString("phone_number"),
+                        rs.getString("email"), rs.getInt("code_reset"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return cus;
     }
+
     public int createCus(Customer cus) {
         int count = 0;
         String sql = "insert into customer values(?,?,?,?,?,?,?,?,?)";
@@ -71,6 +76,27 @@ public class CustomerDAO {
 
         return count;
     }
-    
-    
+
+     public int updateCus(Customer cus) {
+        int count = 0;
+        String sql = "UPDATE customer SET acc_id =? , username =? , password=?, fullname = ? , avatar = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE cus_id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, cus.getAcc_id());
+            ps.setString(2, cus.getUsername());
+            ps.setString(3, cus.getPassword());
+            ps.setString(4, cus.getFullname());
+            ps.setString(5, cus.getAvatar());
+            ps.setString(6, cus.getPhone_number());
+            ps.setString(7,  cus.getEmail());
+            ps.setInt(8, 0);
+            ps.setInt(9, 0);
+            ps.setInt(10, cus.getCus_id());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
 }

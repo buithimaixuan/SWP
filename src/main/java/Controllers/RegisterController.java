@@ -148,6 +148,7 @@ public class RegisterController extends HttpServlet {
             String phone = request.getParameter("phone");
             String username = request.getParameter("username");
             String passowrd = request.getParameter("password");
+            
             Account acc = new Account(0, username, passowrd, fullname, phone, email, 0, 0);
             int acc_id = accdao.createAcc(acc);
             if (acc_id != 0) {

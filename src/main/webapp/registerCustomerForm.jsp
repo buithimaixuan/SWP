@@ -60,7 +60,6 @@
                                                    class="form-control form-control-lg" />
                                             <span class="error"></span>
                                             <span class="text-danger" id="resultPhone"></span>
-
                                         </div>
                                         <div class="form-outline mb-2 validate">
                                             <label class="form-label">Avatar</label>

@@ -42,14 +42,14 @@
                     </div>
                     <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
                         <form class="search-box" method="post" action="ProductController">
-<!--                            <input class="form-control border rounded-pill border-2" type="text" placeholder="search"
-                                   id="example-search-input">
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-secondary bg-white border rounded-pill ms-n3 border-2"
-                                        type="button">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>-->
+                            <!--                            <input class="form-control border rounded-pill border-2" type="text" placeholder="search"
+                                                               id="example-search-input">
+                                                        <span class="input-group-append">
+                                                            <button class="btn btn-outline-secondary bg-white border rounded-pill ms-n3 border-2"
+                                                                    type="button">
+                                                                <i class="fa fa-search"></i>
+                                                            </button>
+                                                        </span>-->
 
                             <!--NAM CODE HERE-->
                             <input name="value-search" type="text" value="${getSearch}"  placeholder="Search...">
@@ -76,7 +76,7 @@
 
                             <div class="user">
                                 <div class="avartar">
-                                    <img src="/images/Lovecake.png" alt="">
+                                    <img src="${account.avatar}" alt="">
                                 </div>
                             </div>
 
@@ -100,10 +100,12 @@
                                         <i class="fa-solid fa-right-from-bracket"></i>
                                         <span>Sign out</span>
                                     </a>
-                                    <a href="#" class="view_profile">
+                                    <a href="/UpdateCustomerController" class="view_profile">
                                         <i class="fa-solid fa-user"></i>
                                         <span>View profile</span>
                                     </a>
+                        
+
                                 </div>
                             </div>
                         </c:if>
