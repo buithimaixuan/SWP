@@ -50,7 +50,7 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="price" name="price" placeholder="Giá gốc"
+                                    <input type="number" step="0.01" min="0" max="99999999.99" id="price" name="price" placeholder="Giá gốc"
                                            class="form-control form-control-lg" />
                                     <label for="price" class="form-label">Giá gốc</label>
                                 </div>
@@ -59,7 +59,7 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán"
+                                    <input type="number" step="0.01" min="0" max="99999999.99" id="realPrice" name="realPrice" placeholder="Giá bán"
                                            class="form-control form-control-lg" />
                                     <label for="realPrice" class="form-label">Giá bán</label>
                                 </div>
@@ -77,7 +77,7 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="" name="" placeholder="Thương hiệu"
+                                    <input type="text" id="" name="brand" placeholder="Thương hiệu"
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Thương hiệu (option)</label>
                                 </div>
@@ -86,7 +86,7 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="" name="" placeholder="Khối lượng"
+                                    <input type="number" step="0.01" min="0" max="99999999.99" id="" name="mass" placeholder="Khối lượng"
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Khối lượng (option)</label>
                                 </div>
@@ -97,7 +97,7 @@
                         <div class="w-100">
                             <div class="form-group form-outline w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="" name="" placeholder="Thành phần"
+                                    <input type="text" id="" name="ingredient" placeholder="Thành phần"
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Thành phần (option)</label>
                                 </div>
@@ -107,14 +107,10 @@
                             <div class="form-outline mt-3 w-100 mb-0">
                                 <label class="form-label h5">Loại sản phẩm</label>
                                 <div class="form-hover">
-                                    <select class="w-100 form-control form-control-lg">
-                                        <c:forEach items="" var="">
-                                        <option value="value">Việt Nam</option>
+                                    <select class="w-100 form-control form-control-lg" name="cat_id">
+                                        <c:forEach items="${listCat}" var="c">
+                                        <option value="${c.cat_id}">${c.typeCategories}</option>
                                         </c:forEach>
-                                        <option value="value">Trung quốc</option>
-                                        <option value="value">Mỹ</option>
-                                        <option value="value">Hàn</option>
-                                        <option value="value">Thái Lan</option>
                                     </select>
                                 </div>
                             </div>
@@ -122,12 +118,12 @@
                             <div class="form-outline mt-3">
                                 <label class="form-label h5">Xuất xứ</label>
                                 <div class="form-hover">
-                                    <select class="w-100 form-control form-control-lg">
-                                        <option value="value">Việt Nam</option>
-                                        <option value="value">Trung quốc</option>
-                                        <option value="value">Mỹ</option>
-                                        <option value="value">Hàn</option>
-                                        <option value="value">Thái Lan</option>
+                                    <select class="w-100 form-control form-control-lg" name="origin">
+                                        <option value="Việt Nam">Việt Nam</option>
+                                        <option value="Trung quốc">Trung quốc</option>
+                                        <option value="Mỹ">Mỹ</option>
+                                        <option value="Hàn">Hàn</option>
+                                        <option value="Thái Lan">Thái Lan</option>
                                     </select>
                                 </div>
                             </div>
@@ -151,10 +147,9 @@
                                         <label class="form-label h5">Hình ảnh 1</label>
                                         <div class="form-hover">
                                             <div class="d-flex">
-                                                <input type="file" name="proPic1" id="proPic1"
+                                                <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage1')"
                                                        class="border form-control form-control-lg">
                                             </div>
-                                            <!--accept="image/*" onchange="displayImage(event, 'displayImage1')-->
                                         </div>
                                     </div>
                                 </div>

@@ -128,21 +128,20 @@ public class RegisterController extends HttpServlet {
             }
         }
 
-        String fileName = null;
-        try {
-            Part part = request.getPart("avatar");
-            String realPart = request.getServletContext().getRealPath("/images");
-
-            fileName = Paths.get(part.getSubmittedFileName())
-                    .getFileName().toString();
-            if (!Files.exists(Paths.get(realPart))) {
-                Files.createDirectory(Paths.get(realPart));
-            }
-            part.write(realPart + "/" + fileName);
-        } catch (Exception e) {
-        }
-
         if (request.getParameter("register") != null) {
+            String fileName = null;
+            try {
+                Part part = request.getPart("avatar");
+                String realPart = request.getServletContext().getRealPath("/images");
+
+                fileName = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName);
+            } catch (Exception e) {
+            }
             String fullname = request.getParameter("fullname");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
