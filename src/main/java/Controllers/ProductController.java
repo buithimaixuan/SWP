@@ -10,9 +10,14 @@ import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -21,6 +26,12 @@ import java.util.Map;
  *
  * @author Dell
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024 * 2,
+        maxFileSize = 1024 * 1024 * 10,
+        maxRequestSize = 1024 * 1024 * 50
+)
+@WebServlet(name = "ProductController", urlPatterns = {"/ProductController"})
 public class ProductController extends HttpServlet {
 
     /**
@@ -1279,6 +1290,10 @@ public class ProductController extends HttpServlet {
                 }
             }
         }
+
+        if (path.endsWith("/ProductController/Create")) {
+            request.getRequestDispatcher("/AddProForm.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -1298,6 +1313,66 @@ public class ProductController extends HttpServlet {
             request.getSession().setAttribute("valueSearch", valueSearch);
             response.sendRedirect("/ProductController/timKiem/" + valueSearch + "");
         }
+        
+        String fileName1 = null;
+        try {
+            Part part = request.getPart("proPic1");
+            String realPart = request.getServletContext().getRealPath("/images");
+
+            fileName1 = Paths.get(part.getSubmittedFileName())
+                    .getFileName().toString();
+            if (!Files.exists(Paths.get(realPart))) {
+                Files.createDirectory(Paths.get(realPart));
+            }
+            part.write(realPart + "/" + fileName1);
+        } catch (Exception e) {
+        }
+        String fileName2 = null;
+        try {
+            Part part = request.getPart("proPic2");
+            String realPart = request.getServletContext().getRealPath("/images");
+
+            fileName2 = Paths.get(part.getSubmittedFileName())
+                    .getFileName().toString();
+            if (!Files.exists(Paths.get(realPart))) {
+                Files.createDirectory(Paths.get(realPart));
+            }
+            part.write(realPart + "/" + fileName2);
+        } catch (Exception e) {
+        }
+        String fileName3 = null;
+        try {
+            Part part = request.getPart("proPic2");
+            String realPart = request.getServletContext().getRealPath("/images");
+
+            fileName3 = Paths.get(part.getSubmittedFileName())
+                    .getFileName().toString();
+            if (!Files.exists(Paths.get(realPart))) {
+                Files.createDirectory(Paths.get(realPart));
+            }
+            part.write(realPart + "/" + fileName3);
+        } catch (Exception e) {
+        }
+        String fileName4 = null;
+        try {
+            Part part = request.getPart("proPic2");
+            String realPart = request.getServletContext().getRealPath("/images");
+
+            fileName4 = Paths.get(part.getSubmittedFileName())
+                    .getFileName().toString();
+            if (!Files.exists(Paths.get(realPart))) {
+                Files.createDirectory(Paths.get(realPart));
+            }
+            part.write(realPart + "/" + fileName4);
+        } catch (Exception e) {
+        }
+        // xuan code
+        if (request.getParameter("AddProduct") != null) {
+            String proName = request.getParameter("proName");
+            Double price = Double.valueOf(request.getParameter("price"));
+            
+        }
+
     }
 
     /**

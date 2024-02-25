@@ -4,12 +4,15 @@
  */
 package Controllers;
 
+import DAOs.ProductDAO;
+import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.LinkedList;
 
 /**
  *
@@ -59,6 +62,9 @@ public class AdminController extends HttpServlet {
         if (path.endsWith("/AdminController")) {
             request.getRequestDispatcher("/DashBoardSlideBarVer2.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListPro")) {
+            ProductDAO pdao = new ProductDAO();
+            LinkedList<Product> listPro = pdao.getAllPro();
+            request.setAttribute("listPro", listPro);
             request.getRequestDispatcher("/adminListPro.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListProHistory")) {
