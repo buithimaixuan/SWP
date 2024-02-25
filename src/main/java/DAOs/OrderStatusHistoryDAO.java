@@ -38,7 +38,8 @@ public class OrderStatusHistoryDAO {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                OrderStatusHistory ods = new OrderStatusHistory(rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getDate("create_date"));
+                OrderStatusHistory ods = new OrderStatusHistory(rs.getInt("o_his_id"),rs.getInt("o_id"), rs.getInt("staff_id"), 
+                        rs.getString("status"), rs.getDate("create_date"));
                 orderStatusList.add(ods);
             }
         } catch (SQLException ex) {
@@ -47,14 +48,14 @@ public class OrderStatusHistoryDAO {
         return orderStatusList;
     }
 
-    public OrderStatusHistory getOrderStatusByID(int o_id) {
+    public OrderStatusHistory getOrderStatusByID(int o_his_id) {
         OrderStatusHistory obj = null;
         try {
-            PreparedStatement ps = conn.prepareStatement("select * from [order_status_history] where o_id=?");
-            ps.setInt(1, o_id);
+            PreparedStatement ps = conn.prepareStatement("select * from [order_status_history] where o_his_id=?");
+            ps.setInt(1, o_his_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                obj = new OrderStatusHistory(rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getDate("create_date"));
+                obj = new OrderStatusHistory(rs.getInt("o_his_id"),rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getDate("create_date"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusHistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -77,13 +78,13 @@ public class OrderStatusHistoryDAO {
         return count;
     }
 
-    public int editOrderStatus(int o_id, OrderStatusHistory obj) {
+    public int editOrderStatus(int o_his_id, OrderStatusHistory obj) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("update [order_status_history] set status=?, create_date=? where o_id=?");
+            PreparedStatement ps = conn.prepareStatement("update [order_status_history] set status=?, create_date=? where o_his_id=?");
             ps.setString(1, obj.getStatus());
             ps.setDate(2, obj.getCreate_date());
-            ps.setInt(3, o_id);
+            ps.setInt(3, o_his_id);
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusHistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,11 +92,11 @@ public class OrderStatusHistoryDAO {
         return count;
     }
 
-    public int deleteOrderStatus(int o_id) {
+    public int deleteOrderStatus(int o_his_id) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("delete from [order_status_history] where o_id=?");
-            ps.setInt(1, o_id);
+            PreparedStatement ps = conn.prepareStatement("delete from [order_status_history] where o_his_id=?");
+            ps.setInt(1, o_his_id);
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusHistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
