@@ -66,4 +66,21 @@ public class StaffDAO {
 
         return count;
     }
+
+    public String getFullNameByID(int staff_id) {
+        String fullName = null;
+        String sql = "SELECT fullname FROM staff WHERE staff_id=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, staff_id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                fullName = rs.getString("fullname");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return fullName;
+    }
+
 }
