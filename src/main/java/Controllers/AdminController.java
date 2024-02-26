@@ -7,7 +7,6 @@ package Controllers;
 
 import DAOs.CustomerDAO;
 import DAOs.OrderStatusHistoryDAO;
-=======
 import DAOs.NewsDAO;
 import DAOs.NewsHistoryDAO;
 import Models.News;
@@ -18,8 +17,8 @@ import DAOs.ProductDAO;
 import DAOs.ProductHistoryDAO;
 import Models.Customer;
 import Models.OrderStatusHistory;
-import Models.ProHis;
 import Models.Product;
+import Models.ProductHistory;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -97,7 +96,7 @@ public class AdminController extends HttpServlet {
 
         } else if (path.endsWith("/AdminController/adminListProHistory")) {
             ProductHistoryDAO phdao = new ProductHistoryDAO();
-            LinkedList<ProHis> listProHis = phdao.getAllProHis();
+            LinkedList<ProductHistory> listProHis = phdao.getAllProHis();
             request.setAttribute("listProHis", listProHis);
             request.getRequestDispatcher("/adminListProHis.jsp").forward(request, response);
 

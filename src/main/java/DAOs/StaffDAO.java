@@ -150,7 +150,6 @@ public class StaffDAO {
         return count;
     }
 
-
     public int updateStaff(Staff staff) {
         int count = 0;
         String sql = "UPDATE staff SET acc_id =? , username =? , password=?, fullname = ? ,"
@@ -168,8 +167,8 @@ public class StaffDAO {
             ps.setString(8, staff.getGender());
             ps.setString(9, staff.getAddress());
             ps.setString(10, staff.getPosition());
-            ps.setDate(11, staff.getBegin_word());
-            ps.setDate(12, staff.getEnd_word());
+            ps.setDate(11, staff.getBegin_work());
+            ps.setDate(12, staff.getEnd_work());
             ps.setInt(13, 0);
             ps.setInt(14, 0);
             ps.setInt(15, staff.getStaff_id());
@@ -178,6 +177,7 @@ public class StaffDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
 
     public String getFullNameByID(int staff_id) {
         String fullName = null;
