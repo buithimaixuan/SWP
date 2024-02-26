@@ -77,13 +77,16 @@
                                 LinkedList<Customer> listAcc = accDAO.getAll();
                                 for (Account element : listAcc) {
                             %>
+                            
                             <tr>
                                 <td class="text-start align-middle kh-tab"><%= element.getAcc_id()%></td>
                                 <td class="text-start align-middle username-tab"><%= element.getUsername()%></td>
                                 <td class="text-start align-middle"><%= element.getFullname()%></td>
                                 <td class="text-start align-middle"><%= element.getPhone_number()%></td>
                                 <td class="text-start">
-                                      <a href="/CustomerController/DeleteCusAdmin?cus_id=<%= element.getAcc_id()%>" class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                    <a href="/CustomerController/DeleteCusAdmin?cus_id=<%= element.getAcc_id()%>" class="btn btn-danger">
+                                        <i class="fa fa-trash text-white"></i></i></a>
+                                </td>
 
                             </tr>
 
