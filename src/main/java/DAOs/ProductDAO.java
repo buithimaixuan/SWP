@@ -353,6 +353,33 @@ public class ProductDAO {
         }
         return count;
     }
+    
+    /**
+     * KHOA code
+     * @param pro_id
+     * Lay sp bang ProID
+     */ 
+    public Product getProductByID(int pro_id) {
+        Product pro = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [product] where pro_id=?");
+            ps.setInt(1, pro_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                pro = new Product(rs.getInt("pro_id"),
+                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+                        rs.getString("origin"), rs.getString("brand"),
+                        rs.getDouble("mass"), rs.getString("ingredient"),
+                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+                        rs.getDouble("discount"),
+                        rs.getNString("pro_description"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pro;
+    }
 
     /**
      *

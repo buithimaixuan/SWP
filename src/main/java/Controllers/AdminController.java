@@ -9,6 +9,7 @@ import DAOs.CustomerDAO;
 import DAOs.OrderStatusHistoryDAO;
 import DAOs.NewsDAO;
 import DAOs.NewsHistoryDAO;
+import DAOs.OrderDAO;
 import Models.News;
 import Models.NewsHistory;
 import Models.Staff;
@@ -16,6 +17,7 @@ import Models.Staff;
 import DAOs.ProductDAO;
 import DAOs.ProductHistoryDAO;
 import Models.Customer;
+import Models.Order;
 import Models.OrderStatusHistory;
 import Models.Product;
 import Models.ProductHistory;
@@ -100,6 +102,10 @@ public class AdminController extends HttpServlet {
             request.getRequestDispatcher("/adminListProHis.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListOrder")) {
+            OrderDAO oDAO = new OrderDAO();
+            LinkedList<Order> orderList = oDAO.getAllOrders();
+            request.setAttribute("orderList", orderList);
+            
             request.getRequestDispatcher("/adminListOrder.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListOrderHistory")) {
             OrderStatusHistoryDAO ohdao = new OrderStatusHistoryDAO();
@@ -169,7 +175,7 @@ public class AdminController extends HttpServlet {
             LinkedList<Customer> listCus = cdao.getAllCus();
             request.setAttribute("listCus", listCus);
             request.getRequestDispatcher("/adminListCustomer.jsp").forward(request, response);
-        }
+        } 
     }
 
     /**
