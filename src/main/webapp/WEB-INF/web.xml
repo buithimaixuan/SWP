@@ -35,6 +35,8 @@
     <servlet>
         <servlet-name>StaffController</servlet-name>
         <servlet-class>Controllers.StaffController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ResetPasswordController</servlet-name>
         <servlet-class>Controllers.ResetPasswordController</servlet-class>
     </servlet>
@@ -92,6 +94,8 @@
     <servlet-mapping>
         <servlet-name>StaffController</servlet-name>
         <url-pattern>/StaffController/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ResetPasswordController</servlet-name>
         <url-pattern>/ResetPasswordController/*</url-pattern>
     </servlet-mapping>
