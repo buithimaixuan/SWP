@@ -144,7 +144,8 @@ public class CustomerDAO {
         }
         return count;
     }
-       public int updateCus(Customer cus) {
+
+    public int updateCus(Customer cus) {
         int count = 0;
         String sql = "UPDATE customer SET acc_id =? , username =? , password=?, fullname = ? , avatar = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE cus_id = ?";
         try {
@@ -155,7 +156,7 @@ public class CustomerDAO {
             ps.setString(4, cus.getFullname());
             ps.setString(5, cus.getAvatar());
             ps.setString(6, cus.getPhone_number());
-            ps.setString(7,  cus.getEmail());
+            ps.setString(7, cus.getEmail());
             ps.setInt(8, 0);
             ps.setInt(9, 0);
             ps.setInt(10, cus.getCus_id());
@@ -165,16 +166,34 @@ public class CustomerDAO {
         }
         return count;
     }
-       public static void main(String[] args) {
+    
+    //KHOA's CODE
+    // Them tim customer bang cusid
+    public Customer getCustomerByCusID(int cus_id) {
+        Customer obj = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [customer] where cus_id=?");
+            ps.setInt(1, cus_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obj = new Customer(rs.getInt("cus_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"), rs.getString("fullname"), rs.getString("avatar"), rs.getString("phone_number"), rs.getString("email"), rs.getInt("code_reset"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+
+    public static void main(String[] args) {
         CustomerDAO cdao = new CustomerDAO();
-        LinkedList<Customer> list =new LinkedList<>();
-           try {
-               list = cdao.getAllCus();
-               System.out.println(list.get(1).getAcc_id());
-               
-           } catch (Exception e) {
-               System.out.println("noooo");
-           }
-        
+        LinkedList<Customer> list = new LinkedList<>();
+        try {
+            list = cdao.getAllCus();
+            System.out.println(list.get(1).getAcc_id());
+
+        } catch (Exception e) {
+            System.out.println("noooo");
+        }
+
     }
 }
