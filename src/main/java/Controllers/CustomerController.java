@@ -89,8 +89,8 @@ public class CustomerController extends HttpServlet {
 
             request.getRequestDispatcher("/listAllNews.jsp").forward(request, response);
         } else if (path.endsWith("CustomerController/newsDetail")) {
+            
             int news_id = Integer.parseInt(request.getParameter("news_id"));
-
             NewsDAO newsDAO = new NewsDAO();
             News news = newsDAO.getNews(news_id);
             request.setAttribute("news", news);

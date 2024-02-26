@@ -7,6 +7,7 @@ package DAOs;
 import DB.DBConnection;
 import Models.NewsHistory;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,14 +54,14 @@ public class NewsHistoryDAO {
         return list;
     }
     
-    public int AddNewsHistory(NewsHistory newsHis) {
+    public int AddNewsHis(NewsHistory newsHis) {
         int count = 0;
-        String sql = "insert into [news_history] values(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into [news_history] values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, 0);
-            ps.setInt(2, newsHis.getNews_id());
-            ps.setInt(3, newsHis.getStaff_id());
+            ps.setInt(1, newsHis.getNews_id());
+            ps.setInt(2, newsHis.getStaff_id());
+            ps.setString(3, newsHis.getAction());
             ps.setString(4, newsHis.getTitle());
             ps.setString(5, newsHis.getImage_url());
             ps.setString(6, newsHis.getTitle_content());
@@ -78,6 +79,28 @@ public class NewsHistoryDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+    
+    public void AddNewsHistory(int news_id, int staff_id, String action, String title, String image_url, String title_content, String content1, String content2, String content3, Date create_date) {
+        String sql = "INSERT INTO [news_history] value ([news_id], [staff_id], [title], [image_url], [title_content], [content1], [content2], [content3], [create_date], [isDelete]) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, news_id);
+            ps.setInt(2, staff_id);
+            ps.setString(3, action);
+            ps.setString(4, title);
+            ps.setString(5, image_url);
+            ps.setString(6, title_content);
+            ps.setString(7, content1);
+            ps.setString(8, content2);
+            ps.setString(9, content3);
+            ps.setDate(10, new java.sql.Date(create_date.getTime()));
+            ps.setInt(11, 0);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
     
 }
