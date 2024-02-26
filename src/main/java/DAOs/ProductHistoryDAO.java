@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,5 +63,10 @@ public class ProductHistoryDAO {
     }
     return count;
 }
+    public LinkedList<ProductHistory> getAllProHis(){
+        LinkedList<ProductHistory> list = new LinkedList<>();
+        
+        return list;
+    }
 
 }

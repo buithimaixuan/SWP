@@ -167,8 +167,7 @@ public class CustomerController extends HttpServlet {
             }
         }
 
-
-        if (request.getParameter("btnAddNews") != null) {
+        if (request.getParameter("btn-AddNews") != null) {
             String fileName = null;
             try {
                 Part part = request.getPart("avatar");
@@ -179,22 +178,9 @@ public class CustomerController extends HttpServlet {
 
                 System.out.println("hinh :" + fileName);
 
-                if(fileName == null || fileName.equals("")){
-                    fileName="no_image.png";
+                if (fileName == null || fileName.equals("")) {
+                    fileName = "no_image.png";
                 }
-                
-                
-
-        String fileName = null;
-        String pathAvatar = request.getParameter("avatar_old");
-
-        try {
-            Part part = request.getPart("newsPic");
-            String realPart = request.getServletContext().getRealPath("/images");
-
-            // Kiểm tra nếu có file mới được chọn
-            if (part != null && part.getSize() > 0) {
-                fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 
                 if (!Files.exists(Paths.get(realPart))) {
                     Files.createDirectory(Paths.get(realPart));
@@ -203,20 +189,6 @@ public class CustomerController extends HttpServlet {
 
             } catch (Exception e) {
             }
-
-
-                pathAvatar = "images/" + fileName; // Lưu đường dẫn của hình mới
-            } else {
-                // Không có file mới được chọn, sử dụng giá trị hình cũ
-                pathAvatar = request.getParameter("avatar_old");
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (request.getParameter("btn-AddNews") != null) {
-
             String fullname = request.getParameter("fullname");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
@@ -239,7 +211,8 @@ public class CustomerController extends HttpServlet {
             }
         }
 
-        if (request.getParameter("btnDeleteCus") != null) {
+        if (request.getParameter(
+                "btnDeleteCus") != null) {
             CustomerDAO cdao = new CustomerDAO();
             AccountDAO acdao = new AccountDAO();
             int cusId = Integer.parseInt(request.getParameter("cus_id"));
@@ -265,7 +238,6 @@ public class CustomerController extends HttpServlet {
             }
 
         }
-
     }
 
     /**

@@ -165,4 +165,16 @@ public class CustomerDAO {
         }
         return count;
     }
+       public static void main(String[] args) {
+        CustomerDAO cdao = new CustomerDAO();
+        LinkedList<Customer> list =new LinkedList<>();
+           try {
+               list = cdao.getAllCus();
+               System.out.println(list.get(1).getAcc_id());
+               
+           } catch (Exception e) {
+               System.out.println("noooo");
+           }
+        
+    }
 }
