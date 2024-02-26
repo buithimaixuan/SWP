@@ -74,9 +74,26 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();//tao session
         String path = request.getRequestURI();
         if (path.endsWith("/CustomerController/Create")) {
             request.getRequestDispatcher("/AddCusAdmin.jsp").forward(request, response);
+        } else if (path.endsWith("/CustomerController/DeleteCusAdmin")) {
+            int cus_id = Integer.parseInt(request.getParameter("cus_id"));
+            CustomerDAO acdao = new CustomerDAO();
+            Customer cuss = acdao.getCustomer(cus_id);
+            request.setAttribute("username", cuss.getUsername());
+            request.setAttribute("password", cuss.getPassword());
+            request.setAttribute("fullname", cuss.getFullname());
+            request.setAttribute("avatar", cuss.getAvatar());
+            request.setAttribute("phone_number", cuss.getPhone_number());
+            request.setAttribute("email", cuss.getEmail());
+            request.setAttribute("code_reset", cuss.getCode_reset());
+            request.setAttribute("isDelete", cuss.getIsDelete());
+            request.setAttribute("acc_id", cuss.getAcc_id());
+            request.setAttribute("cus_id", cuss.getCus_id());
+
+            request.getRequestDispatcher("/DeleteCusAdmin.jsp").forward(request, response);
         } else if (path.endsWith("/CustomerController/ok")) {
             request.getRequestDispatcher("/ok.jsp").forward(request, response);
         } else if (path.endsWith("CustomerController/listNews")) {
@@ -95,6 +112,7 @@ public class CustomerController extends HttpServlet {
             News news = newsDAO.getNews(news_id);
             request.setAttribute("news", news);
             request.getRequestDispatcher("/newsDetail.jsp").forward(request, response);
+
         }
     }
 
@@ -109,6 +127,7 @@ public class CustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         HttpSession session = request.getSession();
 
         AccountDAO accdao = new AccountDAO();
@@ -148,6 +167,24 @@ public class CustomerController extends HttpServlet {
             }
         }
 
+
+        if (request.getParameter("btnAddNews") != null) {
+            String fileName = null;
+            try {
+                Part part = request.getPart("avatar");
+                String realPart = request.getServletContext().getRealPath("/images");
+
+                fileName = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+
+                System.out.println("hinh :" + fileName);
+
+                if(fileName == null || fileName.equals("")){
+                    fileName="no_image.png";
+                }
+                
+                
+
         String fileName = null;
         String pathAvatar = request.getParameter("avatar_old");
 
@@ -158,10 +195,16 @@ public class CustomerController extends HttpServlet {
             // Kiểm tra nếu có file mới được chọn
             if (part != null && part.getSize() > 0) {
                 fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
                 if (!Files.exists(Paths.get(realPart))) {
                     Files.createDirectory(Paths.get(realPart));
                 }
                 part.write(realPart + "/" + fileName);
+
+            } catch (Exception e) {
+            }
+
+
                 pathAvatar = "images/" + fileName; // Lưu đường dẫn của hình mới
             } else {
                 // Không có file mới được chọn, sử dụng giá trị hình cũ
@@ -173,17 +216,19 @@ public class CustomerController extends HttpServlet {
         }
 
         if (request.getParameter("btn-AddNews") != null) {
+
             String fullname = request.getParameter("fullname");
             String email = request.getParameter("email");
             String phone = request.getParameter("phone");
             String username = request.getParameter("username");
-            String passowrd = request.getParameter("pass");
-            Account acc = new Account(0, username, passowrd, fullname, phone, email, 0, 0);
+            String password = request.getParameter("pass");
+            Account acc = new Account(0, username, password, fullname, phone, email, 0, 0);
             int acc_id = accdao.createAcc(acc);
             if (acc_id != 0) {
-                Customer cus = new Customer(0, acc_id, username, passowrd, fullname, pathAvatar, phone, email, 0, 0);
+                Customer cus = new Customer(0, acc_id, username, password, fullname, "images/" + fileName, phone, email, 0, 0);
                 int createCus = cusdao.createCus(cus);
                 if (createCus != 0) {
+
                     response.sendRedirect("/AdminController/adminListCustomer");
                 } else {
                     response.sendRedirect("/CustomerController");
@@ -191,6 +236,32 @@ public class CustomerController extends HttpServlet {
 
             } else {
                 response.sendRedirect("/CustomerController");
+            }
+        }
+
+        if (request.getParameter("btnDeleteCus") != null) {
+            CustomerDAO cdao = new CustomerDAO();
+            AccountDAO acdao = new AccountDAO();
+            int cusId = Integer.parseInt(request.getParameter("cus_id"));
+            int accId = Integer.parseInt(request.getParameter("acc_id"));
+
+            System.out.println("account id : " + accId);
+            System.out.println("cus id : " + cusId);
+
+            try {
+                int deleteC = cdao.deleteCus(cusId);
+                int deleteA = acdao.deleteAcc(accId);
+                if (deleteC > 0 && deleteA > 0) {
+                    System.out.println("Xoa acc cus thanh cong");
+                    response.sendRedirect("/AdminController/adminListCustomer");
+                } else {
+                    response.sendRedirect("/AdminController/adminListCustomer");
+
+                }
+            } catch (Exception e) {
+                // Xử lý exception tùy ý
+                e.printStackTrace();
+                response.getWriter().println("An error occurred.");
             }
 
         }

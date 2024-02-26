@@ -4,6 +4,8 @@
     Author     : Dell
 --%>
 
+<%@page import="Models.Account"%>
+<%@page import="DAOs.AccountDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,18 +28,27 @@
     <body>
         <div class="row">
             <%@include file="DashBoardSlideBarVer2.jsp" %>
+
+
             <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 mt-3" style="position: absolute;
                  left: 265px;
                  top: 0;
                  width: 80%;">
-                <form method="post" action="" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px">
+                <form method="post" action="CustomerController" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px">
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Xóa khách hàng</span>
                     </div>
 
+                    <div class="form-group w-100" >
+                        <div class="form-hover">
+                            <input type="hidden" id="acc_id" name="acc_id" placeholder="" class="form-control form-control-lg" value="${acc_id}" readonly/>
+                            <input type="hidden" id="cus_id" name="cus_id" placeholder="" class="form-control form-control-lg" value="${cus_id}" readonly/>
+                        </div>
+                        <span class="errorFullname text-danger fw-bold font-italic"></span>
+                    </div>
                     <div class="form-group w-100">
                         <div class="form-hover">
-                            <input type="text" id="fullname" name="fullname" placeholder="Họ và tên" class="form-control form-control-lg" readonly/>
+                            <input type="text" id="fullname" name="fullname" placeholder="Họ và tên" class="form-control form-control-lg" value="${fullname}" readonly/>
                             <label for="fullname" class="form-label">Họ và tên</label>
                         </div>
                         <span class="errorFullname text-danger fw-bold font-italic"></span>
@@ -49,39 +60,39 @@
                             <div class="form-hover">
                                 <input type="file" name="newsPic" id="newsPic" accept="image/*" 
                                        onchange="displayImage(event, 'displayImage')" 
-                                       class="border form-control form-control-lg" readonly>
+                                       class="border form-control form-control-lg" value="${avatar}" readonly>
                             </div>
                         </div>
                         <div id="displayImage" class="mt-2 w-25">
-                            <img src="./images/no_image.png" alt="No Image" id="defaultImage" style="max-width: 100%;">
+                            <img src="${account.avatar}" alt="No Image" id="defaultImage" style="max-width: 100%;">
                         </div>
                     </div>
 
 
                     <div class="form-group w-100 mt-4">
                         <div class="form-hover">
-                            <input type="text" id="email" name="email" placeholder="Email" class="form-control form-control-lg" readonly/>
+                            <input type="text" id="email" name="email" placeholder="Email" class="form-control form-control-lg" value="${email}" readonly/>
                             <label for="email" class="form-label">Email</label>
                         </div>
                         <span class="errorEmail text-danger fw-bold font-italic"></span>
                     </div>
                     <div class="form-group w-100 mt-4">
                         <div class="form-hover">
-                            <input type="text" id="Phone" name="Phone" placeholder="Số điện thoại" class="form-control form-control-lg" readonly/>
+                            <input type="text" id="Phone" name="Phone" placeholder="Số điện thoại" value="${phone_number}" class="form-control form-control-lg" readonly/>
                             <label for="Phone" class="form-label">Số điện thoại</label>
                         </div>
                         <span class="errorPhone text-danger fw-bold font-italic"></span>
                     </div>
                     <div class="form-group w-100 mt-4">
                         <div class="form-hover">
-                            <input type="text" id="username" name="username" placeholder="Tên đăng nhập" class="form-control form-control-lg" readonly/>
+                            <input type="text" id="username" name="username" value="${username}" placeholder="Tên đăng nhập" class="form-control form-control-lg" readonly/>
                             <label for="username" class="form-label">Tên đăng nhập</label>
                         </div>
                         <span class="errorUsername text-danger fw-bold font-italic"></span>
                     </div>
                     <div class="form-group w-100 mt-4">
                         <div class="form-hover">
-                            <input type="password" id="pass" name="pass" placeholder="Mật khẩu" class="form-control form-control-lg" readonly/>
+                            <input type="password" id="pass" name="pass" value="${password}" placeholder="Mật khẩu" class="form-control form-control-lg" readonly/>
                             <label for="pass" class="form-label">Mật khẩu</label>
                         </div>
                         <span class="errorPass text-danger fw-bold font-italic"></span>
@@ -91,12 +102,12 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-AddNews" class="btn btn-success w-100" style="font-size: 20px" value="Delete Customer"/>
+                        <input type="submit" name="btnDeleteCus" class="btn btn-success w-100" style="font-size: 20px" value="Delete Customer"/>
                     </div>  
                 </form>
             </div>
         </div>
-
+     
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

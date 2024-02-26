@@ -22,6 +22,7 @@
         <title>JSP Page</title>
 
         <style>
+            
             .btn{
                 cursor: pointer;
             }
@@ -36,15 +37,15 @@
             .admin-dashboard{
                 display: flex;
             }
-            
+
             .nv-tab{
                 width: 10%;
             }
-            
+
             .date-tab{
                 width: 20%;
             }
-            
+
             .proid-tab{
                 width: 18%;
             }
@@ -67,13 +68,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listPH}" var="ph">
+                            <c:forEach items="${listProHis}" var="listPH">
                                 <tr>
-                                    <td class="text-start align-middle nv-tab">${ph.pro_id}</td>
-                                    <td class="text-start align-middle proid-tab">${ph.pro_name}</td>
-                                    <td class="text-start align-middle">${ph.pro_name}</td>
-                                    <td class="text-start align-middle">${ph.quanInStock}</td>
-                                    <td class="text-start align-middle date-tab">${ph.quanOnOrder}</td>
+                                    <td class="text-start align-middle nv-tab">${listPH.staff_id}</td>
+                                    <td class="text-start align-middle proid-tab">${listPH.pro_id}</td>
+                                    <td class="text-start align-middle">${listPH.pro_name}</td>
+                                    <td class="text-start">
+                                        <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
+                                        <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
+                                        <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                    </td>
+                                    <td class="text-start align-middle date-tab">${listPH.create_date}</td>
                                 </tr>
                             </c:forEach>
                         </tbody><!-- comment -->

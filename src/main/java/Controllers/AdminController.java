@@ -4,12 +4,21 @@
  */
 package Controllers;
 
+
+import DAOs.CustomerDAO;
+import DAOs.OrderStatusHistoryDAO;
+=======
 import DAOs.NewsDAO;
 import DAOs.NewsHistoryDAO;
 import Models.News;
 import Models.NewsHistory;
 import Models.Staff;
+
 import DAOs.ProductDAO;
+import DAOs.ProductHistoryDAO;
+import Models.Customer;
+import Models.OrderStatusHistory;
+import Models.ProHis;
 import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -87,11 +96,19 @@ public class AdminController extends HttpServlet {
             request.getRequestDispatcher("/adminListPro.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListProHistory")) {
+            ProductHistoryDAO phdao = new ProductHistoryDAO();
+            LinkedList<ProHis> listProHis = phdao.getAllProHis();
+            request.setAttribute("listProHis", listProHis);
             request.getRequestDispatcher("/adminListProHis.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListOrder")) {
             request.getRequestDispatcher("/adminListOrder.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListOrderHistory")) {
+            OrderStatusHistoryDAO ohdao = new OrderStatusHistoryDAO();
+            LinkedList<OrderStatusHistory> listOrdHis = ohdao.getAllOrderStatus();
+            System.out.println("show order his ");
+            request.setAttribute("listOrdHis", listOrdHis);
+             System.out.println("set order ");
             request.getRequestDispatcher("/adminListOrderHis.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListNews")) {
@@ -150,8 +167,10 @@ public class AdminController extends HttpServlet {
             request.getRequestDispatcher("/adminListStaff.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListCustomer")) {
+            CustomerDAO cdao = new CustomerDAO();
+            LinkedList<Customer> listCus = cdao.getAllCus();
+            request.setAttribute("listCus", listCus);
             request.getRequestDispatcher("/adminListCustomer.jsp").forward(request, response);
-
         }
     }
 

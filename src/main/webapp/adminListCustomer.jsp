@@ -4,6 +4,11 @@
     Author     : PC
 --%>
 
+<%@page import="Models.Customer"%>
+<%@page import="DAOs.CustomerDAO"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="DAOs.AccountDAO"%>
+<%@page import="Models.Account"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -67,19 +72,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listPH}" var="ph">
-                                <tr>
-                                    <td class="text-start align-middle kh-tab">${ph.pro_id}</td>
-                                    <td class="text-start align-middle username-tab">${ph.pro_name}</td>
-                                    <td class="text-start align-middle">${ph.quanInStock}</td>
-                                    <td class="text-start align-middle">${ph.quanOnOrder}</td>
-                                    <td class="text-start">
-                                        <a href="" class="btn btn-primary">Xóa</i></a>
-                                        
-                                    </td>
-                                </tr>
-                            </c:forEach>
+                            <%
+                                CustomerDAO accDAO = new CustomerDAO();
+                                LinkedList<Customer> listAcc = accDAO.getAll();
+                                for (Account element : listAcc) {
+                            %>
+                            <tr>
+                                <td class="text-start align-middle kh-tab"><%= element.getAcc_id()%></td>
+                                <td class="text-start align-middle username-tab"><%= element.getUsername()%></td>
+                                <td class="text-start align-middle"><%= element.getFullname()%></td>
+                                <td class="text-start align-middle"><%= element.getPhone_number()%></td>
+                                <td class="text-start">
+                                      <a href="/CustomerController/DeleteCusAdmin?cus_id=<%= element.getAcc_id()%>" class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+
+                            </tr>
+
                         </tbody>  
+                        <%                            }
+                        %>
                     </table>
                 </div>
             </div>  

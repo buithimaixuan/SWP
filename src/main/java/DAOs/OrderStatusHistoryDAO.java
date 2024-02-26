@@ -19,7 +19,10 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class OrderStatusHistoryDAO {
+
     Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
 
     public OrderStatusHistoryDAO() {
         try {
@@ -35,10 +38,10 @@ public class OrderStatusHistoryDAO {
         LinkedList<OrderStatusHistory> orderStatusList = new LinkedList<>();
         String sql = "select * from [order_status_history]";
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            ResultSet rs = preparedStatement.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             while (rs.next()) {
-                OrderStatusHistory ods = new OrderStatusHistory(rs.getInt("o_his_id"),rs.getInt("o_id"), rs.getInt("staff_id"), 
+                OrderStatusHistory ods = new OrderStatusHistory(rs.getInt("o_his_id"), rs.getInt("o_id"), rs.getInt("staff_id"),
                         rs.getString("status"), rs.getDate("create_date"));
                 orderStatusList.add(ods);
             }
@@ -55,7 +58,7 @@ public class OrderStatusHistoryDAO {
             ps.setInt(1, o_his_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                obj = new OrderStatusHistory(rs.getInt("o_his_id"),rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getDate("create_date"));
+                obj = new OrderStatusHistory(rs.getInt("o_his_id"), rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getDate("create_date"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusHistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
