@@ -26,9 +26,12 @@ import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -108,6 +111,38 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/ProductController");
             }
 
+        } else if (path.endsWith("/ProductController/proDetail")) {
+            ProductDAO productDAO = new ProductDAO();
+            Product product = new Product();
+            ProductImagesDAO productImagesDAO = new ProductImagesDAO();
+
+            int pro_id = Integer.parseInt(request.getParameter("pro_id"));
+
+            product = productDAO.getProduct(pro_id);
+            String pro_name = product.getPro_name();
+            String pro_image = product.getPro_image();
+            String brand = product.getBrand();
+            String origin = product.getOrigin();
+            String ingredient = product.getIngredient();
+            double mass = product.getMass();
+            String pro_description = product.getPro_description();
+            int pro_quantity = product.getPro_quantity();
+            
+            request.setAttribute("pro_id", pro_id);
+            request.setAttribute("pro_name", pro_name);
+            request.setAttribute("pro_image", pro_image);
+            request.setAttribute("brand", brand);
+            request.setAttribute("origin", origin);
+            request.setAttribute("ingredient", ingredient);
+            request.setAttribute("mass", mass);
+            request.setAttribute("pro_description", pro_description);
+            request.setAttribute("pro_quantity", pro_quantity);
+
+            LinkedList<ProductImages> productImages = productImagesDAO.getProductImagesByProductId(pro_id);
+
+            request.setAttribute("productImages", productImages);
+
+            request.getRequestDispatcher("/proDetail.jsp").forward(request, response);
         } else {
             if (path.endsWith("/ProductController/setNguyenLieu")) {
                 CategoriesDAO catdao = new CategoriesDAO();
@@ -1422,7 +1457,7 @@ public class ProductController extends HttpServlet {
                 int addProImage1 = pIdao.addProductImage(proImage1);
                 int addProImage2 = pIdao.addProductImage(proImage2);
                 int addProImage3 = pIdao.addProductImage(proImage3);
-                if (addProImage1 != 0 && addProImage2 != 0 && addProImage3 != 0 && addPh!=0) {
+                if (addProImage1 != 0 && addProImage2 != 0 && addProImage3 != 0 && addPh != 0) {
 
                     response.sendRedirect("/AdminController/adminListPro");
                 }

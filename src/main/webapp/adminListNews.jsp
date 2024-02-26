@@ -78,7 +78,7 @@
                                 <td class="text-start align-middle"><%= fullname%></td>
                                 <td class="text-start align-middle"><%= element.getCreate_date()%></td>
                                 <td class="text-start">
-                                    <a class="btn btn-primary">Xem chi tiết</a>
+                                    <a href="AdminNewsDetail?news_id=<%= element.getNews_id()%>" class="btn btn-primary">Xem chi tiết</a>
                                     <a href="UpdateNews?news_id=<%= element.getNews_id()%>" class="btn btn-success">Chỉnh sửa</a>
                                     <a href="DeleteNews?news_id=<%= element.getNews_id()%>" class="btn btn-danger">Xóa</a>
                                 </td>
