@@ -12,6 +12,11 @@
         <title>Dash Board</title>
         <link rel="stylesheet" href="/CSS/dashboardnamver2.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
+        <style>
+            ul,ol{
+                padding-left: 0; 
+            }
+        </style>
     </head>
     <body>
         <div class="sidebar">

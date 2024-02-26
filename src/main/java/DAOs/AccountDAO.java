@@ -7,6 +7,7 @@ package DAOs;
 import Models.Account;
 import Models.News;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -245,6 +246,7 @@ public class AccountDAO {
         return count;
     }
 
+
     public int deleteAcc(int acc_id) {
         int count = 0;
         try {
@@ -261,18 +263,33 @@ public class AccountDAO {
         String sql = "UPDATE account SET username =? , password=?, fullname = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE acc_id = ?";
         try {
             ps = conn.prepareStatement(sql);
+
+    
+    
+    public Account updateAccStaff(int acc_id, Account acc){
+        int count = 0;
+        String sql = "Update account set username = ?, password = ?, fullname = ?, phone_number = ?, email = ? where acc_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+
             ps.setString(1, acc.getUsername());
             ps.setString(2, acc.getPassword());
             ps.setString(3, acc.getFullname());
             ps.setString(4, acc.getPhone_number());
             ps.setString(5, acc.getEmail());
+
             ps.setInt(6, 0);
             ps.setInt(7, 0);
             ps.setInt(8, acc.getAcc_id());
+=======
+            ps.setInt(6, acc_id);
+            
+
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return count;
     }
 
@@ -290,4 +307,24 @@ public class AccountDAO {
             return false;
         }
     }
+
+        return (count == 0) ? null : acc;
+    }
+    
+    public boolean isDelete(int acc_id, Date current){
+        int count = 0;
+        String sql  = "Update account set isDelete = 1 where acc_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, acc_id);
+            
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return (count == 0) ? false : true;
+    }
+
+   
+
 }

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -38,31 +39,7 @@ public class ProductDAO {
         }
     }
 
-//    public LinkedList<Product> getListProByCatId(int cat_id) {
-//        LinkedList<Product> list = new LinkedList<>();
-//        String sql = "select * from product where cat_id=?";
-//        try {
-//
-//            ps = conn.prepareStatement(sql);
-//            ps.setInt(1, cat_id);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Product pro = new Product(rs.getInt("pro_id"),
-//                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
-//                        rs.getString("origin"), rs.getString("brand"),
-//                        rs.getDouble("mass"), rs.getString("ingredient"),
-//                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
-//                        rs.getDouble("discount"),
-//                        rs.getNString("pro_description"), rs.getDate("create_date"),
-//                        rs.getInt("isDelete"));
-//                list.add(pro);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return list;
-//    }
+
     /**
      *
      * @param cat_name
@@ -345,6 +322,36 @@ public class ProductDAO {
         }
 
         return list;
+    }
+    
+    public int addPro(Product pro){
+        int count = 0;
+        String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        try {
+           ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, pro.getCat_id());
+            ps.setString(2, pro.getPro_name());
+            ps.setString(3, pro.getPro_image());
+            ps.setString(4, pro.getOrigin());
+            ps.setString(5, pro.getBrand());
+            ps.setDouble(6, pro.getMass());
+            ps.setString(7, pro.getIngredient());
+            ps.setInt(8, pro.getPro_quantity());
+            ps.setDouble(9, pro.getPro_price());
+            ps.setDouble(10, pro.getDiscount());
+            ps.setString(11, pro.getPro_description());
+            ps.setDate(12, pro.getCreate_date());
+            ps.setInt(13, pro.getIsDelete());
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                count = rs.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 
     /**
