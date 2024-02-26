@@ -25,7 +25,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Xóa tin tức</title>
+        <title>Chi tiết tin tức</title>
     </head>
     <body>
         <div class="row">
@@ -38,9 +38,23 @@
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Xóa tin tức</span>
                     </div>
-                    <input type="hidden" id="news_id" name="news_id" value="${news_id}" />
-
                     <div class="form-group w-100">
+                        <div class="form-hover">
+                            <input type="text" id="title" name="title" placeholder="Mã tin tức" value="${news_id}" class="form-control form-control-lg" readonly/>
+                            <label for="title" class="form-label">Mã tin tức</label>
+                        </div>
+                        <span class="errorTitle text-danger fw-bold font-italic"></span>
+                    </div>
+
+                    <div class="form-group w-100 mt-4">
+                        <div class="form-hover">
+                            <input type="text" id="title" name="title" placeholder="Mã nhân viên" value="${staff_id}" class="form-control form-control-lg" readonly/>
+                            <label for="title" class="form-label">Mã nhân viên</label>
+                        </div>
+                        <span class="errorTitle text-danger fw-bold font-italic"></span>
+                    </div>
+                            
+                    <div class="form-group w-100 mt-4">
                         <div class="form-hover">
                             <input type="text" id="title" name="title" placeholder="Tiêu đề" value="${title}" class="form-control form-control-lg" readonly/>
                             <label for="title" class="form-label">Tiêu đề</label>
@@ -51,11 +65,11 @@
                     <div class="form-outline mt-4 w-100">
                         <div class="validate form-outline col">
                             <label class="form-label h5">Hình ảnh</label>
-                            <div class="form-hover">
-                                <input type="file" name="newsPic" id="newsPic" accept="image/*" value="${image_url}" readonly
-                                       onchange="displayImage(event, 'displayImage')" 
-                                       class="border form-control form-control-lg">
-                            </div>
+                            <!--                            <div class="form-hover">
+                                                            <input type="file" name="newsPic" id="newsPic" accept="image/*" value="${image_url}"
+                                                                   onchange="displayImage(event, 'displayImage')" 
+                                                                   class="border form-control form-control-lg" readonly>
+                                                        </div>-->
                         </div>
                         <div id="displayImage" class="mt-2 w-25">
                             <img src="/${image_url}" alt="Hình ảnh tin tức" id="newsImage" style="max-width: 100%;">
@@ -109,7 +123,7 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-DeleteNews" class="btn btn-success w-100" style="font-size: 20px" value="Xóa tin tức"/>
+                        <a href="adminListNews" class="btn btn-success w-100" style="font-size: 20px">Quay lại trang danh sách tin tức</a>
                     </div>  
                 </form>
             </div>

@@ -4,7 +4,6 @@
  */
 package Controllers;
 
-
 import DAOs.CustomerDAO;
 import DAOs.OrderStatusHistoryDAO;
 import DAOs.NewsDAO;
@@ -112,7 +111,7 @@ public class AdminController extends HttpServlet {
             LinkedList<OrderStatusHistory> listOrdHis = ohdao.getAllOrderStatus();
             System.out.println("show order his ");
             request.setAttribute("listOrdHis", listOrdHis);
-             System.out.println("set order ");
+            System.out.println("set order ");
             request.getRequestDispatcher("/adminListOrderHis.jsp").forward(request, response);
 
         } else if (path.endsWith("/AdminController/adminListNews")) {
@@ -131,9 +130,7 @@ public class AdminController extends HttpServlet {
             News news = newsDAO.getNews(news_id);
 
             String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
-            // Đặt thông tin tin tức vào thuộc tính của request để truyền tới trang UpdateNewsForm.jsp
             request.setAttribute("news_id", news_id);
-
             request.setAttribute("title", news.getTitle());
             request.setAttribute("contentMain", news.getTitle_content());
             request.setAttribute("image_url", images_url);
@@ -164,6 +161,25 @@ public class AdminController extends HttpServlet {
 
             // Chuyển hướng tới trang UpdateNewsForm.jsp
             request.getRequestDispatcher("/DeleteNewsForm.jsp").forward(request, response);
+        } else if (path.endsWith("/AdminController/AdminNewsDetail")) {
+            int news_id = Integer.parseInt(request.getParameter("news_id"));
+
+            NewsDAO newsDAO = new NewsDAO();
+            News news = newsDAO.getNews(news_id);
+
+            String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
+            request.setAttribute("news_id", news_id);
+            request.setAttribute("staff_id", news.getStaff_id());
+            request.setAttribute("title", news.getTitle());
+            request.setAttribute("contentMain", news.getTitle_content());
+            request.setAttribute("image_url", images_url);
+            request.setAttribute("content1", news.getContent1());
+            request.setAttribute("content2", news.getContent2());
+            request.setAttribute("content3", news.getContent3());
+            request.setAttribute("dayWriteNews", news.getCreate_date());
+
+            // Chuyển hướng tới trang UpdateNewsForm.jsp
+            request.getRequestDispatcher("/AdminNewsDetail.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListNewsHistory")) {
             request.getRequestDispatcher("/adminListNewsHis.jsp").forward(request, response);
 
