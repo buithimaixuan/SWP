@@ -24,7 +24,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Create News</title>
+        <title>Thêm tin tức</title>
     </head>
     <body>
         <div class="row">
@@ -51,7 +51,7 @@
                         <div class="validate form-outline col">
                             <label class="form-label h5">Hình ảnh</label>
                             <div class="form-hover">
-                                <input type="file" name="newsPic" id="newsPic" accept="image/*" required
+                                <input type="file" name="newsPic" id="newsPic" accept="image/*"
                                        onchange="displayImage(event, 'displayImage')" 
                                        class="border form-control form-control-lg">
                             </div>
@@ -108,7 +108,7 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-AddNews" class="btn btn-success w-100" style="font-size: 20px" value="Create News"/>
+                        <input type="submit" name="btn-AddNews" class="btn btn-success w-100" style="font-size: 20px" value="Thêm tin tức"/>
                     </div>  
                 </form>
             </div>

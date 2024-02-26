@@ -215,9 +215,23 @@ public class NewsDAO {
             ps.setInt(1, news_id);
             ps.executeUpdate();
         } catch (SQLException ex) {
-            // Xử lý lỗi nếu cần
-            ex.printStackTrace();
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public int getLatestNewsId() {
+        int latestNewsId = 0;
+        String sql = "SELECT MAX(news_id) AS news_id FROM news";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                latestNewsId = rs.getInt("news_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return latestNewsId;
     }
 
 }
