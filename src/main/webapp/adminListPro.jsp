@@ -45,7 +45,7 @@
                 <h1 class="m-2">Quản lý sản phẩm</h1>  </p>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
-                        <a href="/ProductController/Create" class="text-decoration-none text-dark">Thêm mới sản phẩm</a>
+                        <a href="/ProductController/AddPro" class="text-decoration-none text-dark">Thêm mới sản phẩm</a>
                     </p>
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>

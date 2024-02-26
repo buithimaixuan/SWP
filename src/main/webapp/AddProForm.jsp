@@ -32,12 +32,12 @@
                  left: 265px;
                  top: 0;
                  width: 80%;">
-                <form method="post" action="ProductController" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" 
-                      onsubmit="return validateAddPro()" >
+                <form method="post" action="ProductController" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px;" 
+                      onsubmit="return validateAddProduct()" >
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Thêm mới sản phẩm</span>
                     </div>
-                    <div class="d-flex" style="gap: 20px">
+                    <div class="d-flex" style="gap: 20px;">
                         <div class="w-100">
                             <div class="form-outline w-100 form-group">
                                 <div class="form-hover">
@@ -50,7 +50,7 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" step="0.01" min="0" max="99999999.99" id="price" name="price" placeholder="Giá gốc"
+                                    <input type="number" id="price" name="price" placeholder="Giá gốc"
                                            class="form-control form-control-lg" />
                                     <label for="price" class="form-label">Giá gốc</label>
                                 </div>
@@ -59,49 +59,49 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" step="0.01" min="0" max="99999999.99" id="realPrice" name="realPrice" placeholder="Giá bán"
+                                    <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán"
                                            class="form-control form-control-lg" />
                                     <label for="realPrice" class="form-label">Giá bán</label>
                                 </div>
                                 <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
                             </div>
 
-<!--                            <div class="form-group form-outline mt-4 w-100">
-                                <div class="form-hover">
-                                    <input type="number" id="quantity" name="quantity" placeholder="Số lượng"
-                                           class="form-control form-control-lg" />
-                                    <label for="quantity" class="form-label">Số lượng</label>
-                                </div>
-                                <span class="error errorQuantity text-danger fw-bold font-italic"></span>
-                            </div>-->
+                            <!--                            <div class="form-group form-outline mt-4 w-100">
+                                                            <div class="form-hover">
+                                                                <input type="number" id="quantity" name="quantity" placeholder="Số lượng"
+                                                                       class="form-control form-control-lg" />
+                                                                <label for="quantity" class="form-label">Số lượng</label>
+                                                            </div>
+                                                            <span class="error errorQuantity text-danger fw-bold font-italic"></span>
+                                                        </div>-->
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="" name="brand" placeholder="Thương hiệu"
+                                    <input type="text" id="brand" name="brand" placeholder="Thương hiệu"
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Thương hiệu (option)</label>
                                 </div>
-                                <span class="error"></span>
+                                <span class="error errorBrand text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" step="0.01" min="0" max="99999999.99" id="" name="mass" placeholder="Khối lượng"
+                                    <input type="text" id="mass" name="mass" placeholder="Khối lượng"
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Khối lượng (option)</label>
                                 </div>
-                                <span class="error "></span>
+                                <span class="error errorMass text-danger fw-bold font-italic"></span>
                             </div>
                         </div>
 
                         <div class="w-100">
                             <div class="form-group form-outline w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="" name="ingredient" placeholder="Thành phần"
+                                    <input type="text" id="ingredient" name="ingredient" placeholder="Thành phần"
                                            class="form-control form-control-lg" />
                                     <label class="form-label">Thành phần (option)</label>
                                 </div>
-                                <span class="error "></span>
+                                <span class="error errorIngredient text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-outline mt-3 w-100 mb-0">
@@ -109,7 +109,7 @@
                                 <div class="form-hover">
                                     <select class="w-100 form-control form-control-lg" name="cat_id">
                                         <c:forEach items="${listCat}" var="c">
-                                        <option value="${c.cat_id}">${c.typeCategories}</option>
+                                            <option value="${c.cat_id}">${c.typeCategories}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -150,6 +150,7 @@
                                                 <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage1')"
                                                        class="border form-control form-control-lg">
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -234,6 +235,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-        <script src="/JS/AddNewsForm.js"></script>
+        <script src="/JS/AddProAdmin.js"></script>
     </body>
 </html>

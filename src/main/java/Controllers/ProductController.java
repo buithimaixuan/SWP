@@ -6,10 +6,13 @@ package Controllers;
 
 import DAOs.CategoriesDAO;
 import DAOs.ProductDAO;
+import DAOs.ProductHistoryDAO;
 import DAOs.ProductImagesDAO;
 import Models.Categories;
 import Models.Product;
+import Models.ProductHistory;
 import Models.ProductImages;
+import Models.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,6 +21,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -1295,7 +1299,7 @@ public class ProductController extends HttpServlet {
             }
         }
 
-        if (path.endsWith("/ProductController/Create")) {
+        if (path.endsWith("/ProductController/AddPro")) {
             CategoriesDAO cdao = new CategoriesDAO();
             LinkedList<Categories> list = cdao.getAllCat();
             request.setAttribute("listCat", list);
@@ -1321,74 +1325,77 @@ public class ProductController extends HttpServlet {
             response.sendRedirect("/ProductController/timKiem/" + valueSearch + "");
         }
 
-       
+//       xuan code 
+        HttpSession session = request.getSession();
+        Staff staff = (Staff) session.getAttribute("staff");
+        int staff_id = staff.getStaff_id();
         ProductDAO pdao = new ProductDAO();
         ProductImagesDAO pIdao = new ProductImagesDAO();
         if (request.getParameter("AddProduct") != null) {
-             String fileName1 = null;
-        try {
-            Part part = request.getPart("proPic1");
-            String realPart = request.getServletContext().getRealPath("/images");
+            String fileName1 = null;
+            try {
+                Part part = request.getPart("proPic1");
+                String realPart = request.getServletContext().getRealPath("/images");
 
-            fileName1 = Paths.get(part.getSubmittedFileName())
-                    .getFileName().toString();
-            if (fileName1 == null || fileName1.equals("")) {
-                fileName1 = "no_image.png";
+                fileName1 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName1 == null || fileName1.equals("")) {
+                    fileName1 = "no_image.png";
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName1);
+            } catch (Exception e) {
             }
-            if (!Files.exists(Paths.get(realPart))) {
-                Files.createDirectory(Paths.get(realPart));
-            }
-            part.write(realPart + "/" + fileName1);
-        } catch (Exception e) {
-        }
-        String fileName2 = null;
-        try {
-            Part part = request.getPart("proPic2");
-            String realPart = request.getServletContext().getRealPath("/images");
+            String fileName2 = null;
+            try {
+                Part part = request.getPart("proPic2");
+                String realPart = request.getServletContext().getRealPath("/images");
 
-            fileName2 = Paths.get(part.getSubmittedFileName())
-                    .getFileName().toString();
-            if (fileName2 == null || fileName2.equals("")) {
-                fileName2 = "no_image.png";
+                fileName2 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName2 == null || fileName2.equals("")) {
+                    fileName2 = "no_image.png";
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName2);
+            } catch (Exception e) {
             }
-            if (!Files.exists(Paths.get(realPart))) {
-                Files.createDirectory(Paths.get(realPart));
-            }
-            part.write(realPart + "/" + fileName2);
-        } catch (Exception e) {
-        }
-        String fileName3 = null;
-        try {
-            Part part = request.getPart("proPic2");
-            String realPart = request.getServletContext().getRealPath("/images");
+            String fileName3 = null;
+            try {
+                Part part = request.getPart("proPic3");
+                String realPart = request.getServletContext().getRealPath("/images");
 
-            fileName3 = Paths.get(part.getSubmittedFileName())
-                    .getFileName().toString();
-            if (fileName3 == null || fileName3.equals("")) {
-                fileName3 = "no_image.png";
+                fileName3 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName3 == null || fileName3.equals("")) {
+                    fileName3 = "no_image.png";
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName3);
+            } catch (Exception e) {
             }
-            if (!Files.exists(Paths.get(realPart))) {
-                Files.createDirectory(Paths.get(realPart));
-            }
-            part.write(realPart + "/" + fileName3);
-        } catch (Exception e) {
-        }
-        String fileName4 = null;
-        try {
-            Part part = request.getPart("proPic2");
-            String realPart = request.getServletContext().getRealPath("/images");
+            String fileName4 = null;
+            try {
+                Part part = request.getPart("proPic4");
+                String realPart = request.getServletContext().getRealPath("/images");
 
-            fileName4 = Paths.get(part.getSubmittedFileName())
-                    .getFileName().toString();
-            if (fileName4 == null || fileName4.equals("")) {
-                fileName4 = "no_image.png";
+                fileName4 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName4 == null || fileName4.equals("")) {
+                    fileName4 = "no_image.png";
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName4);
+            } catch (Exception e) {
             }
-            if (!Files.exists(Paths.get(realPart))) {
-                Files.createDirectory(Paths.get(realPart));
-            }
-            part.write(realPart + "/" + fileName4);
-        } catch (Exception e) {
-        }
             int cat_id = Integer.valueOf(request.getParameter("cat_id"));
             String proName = request.getParameter("proName");
             Double price = Double.valueOf(request.getParameter("price"));
@@ -1403,18 +1410,24 @@ public class ProductController extends HttpServlet {
                     orgin, brand, mass, ingredient, 0, price, discount, description, dayWritePro, 0);
             int pro_id = pdao.addPro(pro);
             if (pro_id != 0) {
+
+                ProductHistoryDAO ph = new ProductHistoryDAO();
+                ProductHistory proHis = new ProductHistory(0, staff.getStaff_id(), pro_id, cat_id, proName,
+                        pro.getPro_image(), orgin, brand, mass, ingredient, 0, price, discount, description,
+                        0, "Tạo mới", dayWritePro);
+                int addPh = ph.addProHistory(proHis);
                 ProductImages proImage1 = new ProductImages(0, pro_id, "images/" + fileName2);
                 ProductImages proImage2 = new ProductImages(0, pro_id, "images/" + fileName3);
                 ProductImages proImage3 = new ProductImages(0, pro_id, "images/" + fileName4);
                 int addProImage1 = pIdao.addProductImage(proImage1);
                 int addProImage2 = pIdao.addProductImage(proImage2);
                 int addProImage3 = pIdao.addProductImage(proImage3);
-                if (addProImage1 != 0 && addProImage2 != 0 && addProImage3 != 0) {
+                if (addProImage1 != 0 && addProImage2 != 0 && addProImage3 != 0 && addPh!=0) {
 
                     response.sendRedirect("/AdminController/adminListPro");
                 }
             } else {
-                response.sendRedirect("/ProductController/Create");
+                response.sendRedirect("/ProductController/AddPro");
             }
 
         }
