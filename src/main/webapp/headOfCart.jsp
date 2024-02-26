@@ -237,7 +237,7 @@
                                         <i class="fa-solid fa-right-from-bracket"></i>
                                         <span>Sign out</span>
                                     </a>
-                                    <a href="#" class="view_profile">
+                                    <a href="/UpdateCustomerController" class="view_profile">
                                         <i class="fa-solid fa-user"></i>
                                         <span>View profile</span>
                                     </a>

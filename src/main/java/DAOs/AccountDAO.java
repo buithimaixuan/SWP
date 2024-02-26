@@ -5,6 +5,7 @@
 package DAOs;
 
 import Models.Account;
+import Models.News;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,7 +55,39 @@ public class AccountDAO {
         return acc;
 
     }
+  public boolean checkEmailExists(String email) {
+        String sql = "SELECT COUNT(*) AS count FROM account WHERE email = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Xử lý ngoại lệ, nếu cần
+        }
+        return false;
+    }
 
+    public boolean checkPhoneExists(String phone) {
+        String sql = "SELECT COUNT(*) AS count FROM account WHERE phone_number = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, phone);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Xử lý ngoại lệ, nếu cần
+        }
+        return false;
+    }
     public Account getAccByEmail(String email) {
 
         Account acc = null;
@@ -147,6 +180,24 @@ public class AccountDAO {
         return list;
     }
 
+    public LinkedList<Account> getAll() {
+        LinkedList<Account> list = new LinkedList<>();
+        String sql = "Select * from account";
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Account acc = new Account(rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"),
+                        rs.getString("fullname"), rs.getString("phone_number"), rs.getString("email"),
+                        rs.getInt("code_reset"), rs.getInt("isDelete"));
+                list.add(acc);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return list;
+    }
+
     public LinkedList<String> getAllEmail() {
         LinkedList<String> list = new LinkedList<>();
         String sql = "select email from account";
@@ -194,5 +245,49 @@ public class AccountDAO {
         return count;
     }
 
-   
+    public int deleteAcc(int acc_id) {
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("delete from account where acc_id=?");
+            ps.setInt(1, acc_id);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+   public int updateAcc(Account acc) {
+        int count = 0;
+        String sql = "UPDATE account SET username =? , password=?, fullname = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE acc_id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, acc.getUsername());
+            ps.setString(2, acc.getPassword());
+            ps.setString(3, acc.getFullname());
+            ps.setString(4, acc.getPhone_number());
+            ps.setString(5, acc.getEmail());
+            ps.setInt(6, 0);
+            ps.setInt(7, 0);
+            ps.setInt(8, acc.getAcc_id());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    public boolean checkPassword(String password) {
+        String sql = "SELECT * FROM account WHERE password = ?";
+        try (
+                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, Utils.Hashing.getMd5(password));
+            System.out.println("...pass nhap vao :" + password);
+            try ( ResultSet rs = stmt.executeQuery()) {
+                return rs.next(); // nếu có kết quả trả về, mật khẩu khớp
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

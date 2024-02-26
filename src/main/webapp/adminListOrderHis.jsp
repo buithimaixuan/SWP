@@ -38,7 +38,7 @@
             .admin-dashboard{
                 display: flex;
             }
-            
+
             .nv-tab{
                 width: 10%;
             }
@@ -56,20 +56,24 @@
                                 <th class="text-start nv-tab">Mã NV</th>
                                 <th class="text-start">Mã đơn hàng</th>
                                 <th class="text-start">Trạng thái</th>
-                                <th class="text-start">Thao tác</th>
+                                <th class="text-start">Trạng thái</th>
+
                                 <th class="text-start">Ngày thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${listPH}" var="ph">
-                            <tr>
-                                <td class="text-start align-middle nv-tab">${ph.pro_id}</td>
-                                <td class="text-start align-middle">${ph.pro_id}</td>
-                                <td class="text-start align-middle">${ph.pro_id}</td>
-                                <td class="text-start align-middle">${ph.pro_id}</td>
-                                <td class="text-start align-middle">${ph.pro_id}</td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach items="${listOrdHis}" var="pp">
+                                <tr>
+                                    <td class="text-start align-middle nv-tab">${pp.staff_id}</td>
+                                    <td class="text-start align-middle">${pp.o_id}</td>
+                                    <td class="text-start align-middle">${pp.status}</td>
+                                    <td class="text-start align-middle">${pp.o_his_id}</td>
+
+                                    <td class="text-start align-middle">${pp.create_date}</td>
+                                </tr>
+                            </c:forEach>
+                       
+
                         </tbody><!-- comment -->
                     </table>
                 </div>

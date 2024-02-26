@@ -53,7 +53,7 @@
                 </li>
             </ul>
             <div class="bot_sidebar">
-                <a class="btn_logout" href="#"><i class="fa-solid fa-right-from-bracket"></i>Profile</a>
+                <a class="btn_logout" href="/StaffController"><i class="fa-solid fa-right-from-bracket"></i>Profile</a>
                 <a class="btn_logout" href="/LogoutController"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
             </div>
         </div>

@@ -66,4 +66,34 @@ public class StaffDAO {
 
         return count;
     }
+
+    public int updateStaff(Staff staff) {
+        int count = 0;
+        String sql = "UPDATE staff SET acc_id =? , username =? , password=?, fullname = ? ,"
+                + " phone_number = ?, email = ? ,birthday =? ,gender=?,address=?,"
+                + "position=?,begin_work=?,end_work=?, code_reset= ? , isDelete= ? WHERE staff_id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, staff.getAcc_id());
+            ps.setString(2, staff.getUsername());
+            ps.setString(3, staff.getPassword());
+            ps.setString(4, staff.getFullname());
+            ps.setString(5, staff.getPhone_number());
+            ps.setString(6, staff.getEmail());
+            ps.setDate(7, staff.getBirthday());
+            ps.setString(8, staff.getGender());
+            ps.setString(9, staff.getAddress());
+            ps.setString(10, staff.getPosition());
+            ps.setDate(11, staff.getBegin_word());
+            ps.setDate(12, staff.getEnd_word());
+            ps.setInt(13, 0);
+            ps.setInt(14, 0);
+            ps.setInt(15, staff.getStaff_id());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
 }
