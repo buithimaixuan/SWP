@@ -4,11 +4,14 @@
  */
 package Controllers;
 
+import DAOs.CartDAO;
 import DAOs.CategoriesDAO;
 import DAOs.ProductDAO;
 import DAOs.ProductHistoryDAO;
 import DAOs.ProductImagesDAO;
+import Models.Cart;
 import Models.Categories;
+import Models.Customer;
 import Models.Product;
 import Models.ProductHistory;
 import Models.ProductImages;
@@ -1361,12 +1364,12 @@ public class ProductController extends HttpServlet {
         }
 
 //       xuan code 
-        HttpSession session = request.getSession();
+        if (request.getParameter("AddProduct") != null) {
+            HttpSession session = request.getSession();
         Staff staff = (Staff) session.getAttribute("staff");
         int staff_id = staff.getStaff_id();
         ProductDAO pdao = new ProductDAO();
         ProductImagesDAO pIdao = new ProductImagesDAO();
-        if (request.getParameter("AddProduct") != null) {
             String fileName1 = null;
             try {
                 Part part = request.getPart("proPic1");
@@ -1464,7 +1467,50 @@ public class ProductController extends HttpServlet {
             } else {
                 response.sendRedirect("/ProductController/AddPro");
             }
-
+        }
+        
+//        NAM CODE
+        if (request.getParameter("btnAddCart") != null) {
+            ProductDAO pdao = new ProductDAO();
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            if (cus == null) {
+                response.sendRedirect("/HomeController");
+            } else {
+                CartDAO cdao = new CartDAO();
+                
+                int proId = Integer.parseInt(request.getParameter("product-id"));
+                System.out.println(proId);
+                
+                Product pro = pdao.getProductByID(proId);
+                System.out.println(pro.getPro_name());
+                Cart checkProductCart = null;
+                try {
+                    checkProductCart = cdao.getCartByProId(proId);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(checkProductCart == null){
+                    int proQuantityCart = 1;
+                    Cart cart = new Cart(cus.getCus_id(), proId, 1, pro.getPro_price());
+                    int cartStatus;
+                    try {
+                        cartStatus = cdao.createCart(cart);
+                        response.sendRedirect("/HomeController");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else{
+                    int addQuantityCart = checkProductCart.getPro_quantity() + 1;
+                    double addPriceCart = addQuantityCart * pro.getPro_price();
+                    Cart updateCart = new Cart(cus.getCus_id(), proId, addQuantityCart, addPriceCart);
+                    try {
+                        int updateStatus = cdao.editCart(proId, updateCart);
+                        response.sendRedirect("/HomeController");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }        
+            }
         }
 
     }

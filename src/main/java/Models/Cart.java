@@ -10,7 +10,6 @@ package Models;
  */
 public class Cart {
 
-    private int cart_id;
     private int cus_id;
     private int pro_id;
     private int pro_quantity;
@@ -19,23 +18,14 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int cart_id, int cus_id, int pro_id, int pro_quantity, double cart_price) {
-        this.cart_id = cart_id;
+    public Cart(int cus_id, int pro_id, int pro_quantity, double cart_price) {
         this.cus_id = cus_id;
         this.pro_id = pro_id;
         this.pro_quantity = pro_quantity;
         this.cart_price = cart_price;
     }
 
- 
-
-    public int getCart_id() {
-        return cart_id;
-    }
-
-    public void setCart_id(int cart_id) {
-        this.cart_id = cart_id;
-    }
+    
 
     public int getCus_id() {
         return cus_id;

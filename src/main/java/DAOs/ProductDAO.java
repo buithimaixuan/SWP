@@ -406,32 +406,7 @@ public class ProductDAO {
      */
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        try {
-            LinkedList<Product> list = dao.pagingAllPro(1);
-            if (!list.isEmpty()) {
-                System.out.println("coa list");
-                for (Product product : list) {
-                    System.out.println(product.getPro_description());
-                }
-            } else {
-                System.out.println("null oi");
-            }
-
-//            CategoriesDAO catdao = new CategoriesDAO();
-//            ProductDAO pdao = new ProductDAO();
-//            LinkedList<String> cat = catdao.getAllCatName();
-//            Map<String, LinkedList<Product>> map = new HashMap<>();
-//            LinkedList<Product> pro = new LinkedList<>();
-//
-//            for (String c : cat) {
-//                pro = pdao.get4ProByCatName(c);
-//                System.out.println(pro.get(0).getCat_id());
-//                map.put(c, pro);
-//                pro = new LinkedList<>();
-//            }
-        } catch (Exception e) {
-        }
-
+        System.out.println(dao.getProduct(21).getPro_name());
     }
 
 }
