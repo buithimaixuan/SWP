@@ -5,12 +5,21 @@
 
 package Controllers;
 
+import DAOs.CartDAO;
+import DAOs.ProductDAO;
+import Models.Cart;
+import Models.Customer;
+import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -53,9 +62,31 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        CartDAO cdao = new CartDAO();
        String path = request.getRequestURI();
         if (path.endsWith("/CartController")) {
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            System.out.println(cus.getCus_id());
+            LinkedList<Cart> listCart = null;
+            try {
+                listCart = cdao.getAllCarts(cus.getCus_id());
+            } catch (SQLException ex) {
+                Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println(listCart);
+            request.setAttribute("listCart", listCart);
             request.getRequestDispatcher("/cart.jsp").forward(request, response);
+        } else if(path.startsWith("/CartController/delete/")){
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            String[] s = path.split("/");
+            int pro_id = Integer.parseInt(s[s.length - 1]);
+            int isDelete = cdao.delete(cus.getCus_id(), pro_id);
+            
+            if(isDelete != 0){
+                response.sendRedirect("/CartController");
+            } else{
+                response.sendRedirect("/CartController");
+            }
         }
     } 
 
@@ -69,7 +100,7 @@ public class CartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /** 

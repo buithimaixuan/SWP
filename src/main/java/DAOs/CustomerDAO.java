@@ -188,10 +188,16 @@ public class CustomerDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
-
+    }
     
     //KHOA's CODE
     // Them tim customer bang cusid
+
+    /**
+     *
+     * @param cus_id
+     * @return
+     */
     public Customer getCustomerByCusID(int cus_id) {
         Customer obj = null;
         try {
@@ -205,7 +211,6 @@ public class CustomerDAO {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return obj;
-
     }
 
     public static void main(String[] args) {
