@@ -1,4 +1,10 @@
 <%-- 
+    Document   : detailProAdmin
+    Created on : Feb 28, 2024, 12:28:46 AM
+    Author     : Dell
+--%>
+
+<%-- 
     Document   : UpdateProForm
     Created on : Jan 21, 2024, 1:14:47 PM
     Author     : HP
@@ -13,16 +19,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="/CSS/AddNewsForm.css"/>
+        <title>Delete Product</title>
         <style>
-            .font-italic{
-                font-style: italic;
-            }
             .form-hover:hover {
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Update Product</title>
     </head>
     <body>
         <div class="row">
@@ -34,7 +37,7 @@
                 <form method="post" action="ProductController" enctype="multipart/form-data" 
                       class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddProduct()">
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Cập nhật sản phẩm</span>
+                        <span class="h3 fw-bold">Xóa sản phẩm</span>
                     </div>
                     <div class="d-flex" style="gap: 20px">
                         <div class="w-100">
@@ -49,7 +52,7 @@
                             <div class="form-outline w-100 form-group hover-shadow mt-4">
                                 <div class="form-hover">
                                     <input type="text" id="proName" name="proName" placeholder="Tên sản phẩm" value="${pEdit.pro_name}"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly />
                                     <label for="proName" class="form-label">Tên sản phẩm</label>
                                 </div>
                                 <span class="error errorProName text-danger fw-bold font-italic"></span>
@@ -58,7 +61,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input type="number" id="price" name="price" placeholder="Giá gốc" value="${pEdit.pro_price}"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="price" class="form-label">Giá gốc</label>
                                 </div>
                                 <span class="error errorPrice text-danger fw-bold font-italic"></span>
@@ -67,7 +70,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán" value="${pEdit.discount}"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly />
                                     <label for="realPrice" class="form-label">Giá bán</label>
                                 </div>
                                 <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
@@ -85,16 +88,16 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input type="text" id="brand" name="brand" placeholder="Thương hiệu" 
-                                           class="form-control form-control-lg" value="${pEdit.brand}"/>
+                                           class="form-control form-control-lg" value="${pEdit.brand}" readonly/>
                                     <label class="form-label">Thương hiệu (option)</label>
                                 </div>
-                                 <span class="error errorBrand text-danger fw-bold font-italic"></span>
+                                <span class="error errorBrand text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input type="text" id="mass" name="mass" placeholder="Khối lượng"
-                                           class="form-control form-control-lg" value="${pEdit.mass}"/>
+                                           class="form-control form-control-lg" value="${pEdit.mass}" readonly/>
                                     <label class="form-label">Khối lượng (option)</label>
                                 </div>
                                 <span class="error errorMass text-danger fw-bold font-italic"></span>
@@ -105,16 +108,16 @@
                             <div class="form-group form-outline w-100">
                                 <div class="form-hover">
                                     <input type="text" id="ingredient" name="ingredient" placeholder="Thành phần"
-                                           class="form-control form-control-lg" value="${pEdit.ingredient}"/>
+                                           class="form-control form-control-lg" value="${pEdit.ingredient}" readonly/>
                                     <label class="form-label">Thành phần (option)</label>
                                 </div>
-                               <span class="error errorIngredient text-danger fw-bold font-italic"></span>
+                                <span class="error errorIngredient text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-outline mt-3 w-100 mb-0">
                                 <label class="form-label h5">Loại sản phẩm</label>
                                 <div class="form-hover">
-                                    <select class="w-100 form-control form-control-lg" name="cat_id">
+                                    <select class="w-100 form-control form-control-lg" name="cat_id" readonly>
                                         <c:forEach items="${listCat}" var="c">
                                             <option value="${c.cat_id}"  <c:if test="${pEdit.cat_id==c.cat_id}"> selected</c:if>>${c.typeCategories}</option>
                                         </c:forEach>
@@ -122,25 +125,25 @@
                                 </div>
                             </div>
 
-                           <div class="form-outline mt-3">
+                            <div class="form-outline mt-3">
                                 <label class="form-label h5">Xuất xứ</label>
                                 <div class="form-hover">
-                                    <select class="w-100 form-control form-control-lg" name="origin">
+                                    <select class="w-100 form-control form-control-lg" name="origin" readonly>
                                         <option value="Việt Nam" <c:if test="${pEdit.origin=='Việt Nam'}"> selected</c:if>>Việt Nam</option>
                                         <option value="Trung quốc"  <c:if test="${pEdit.origin=='Trung quốc'}"> selected</c:if>>Trung quốc</option>
                                         <option value="Mỹ"  <c:if test="${pEdit.origin=='Mỹ'}"> selected</c:if>>Mỹ</option>
                                         <option value="Hàn"  <c:if test="${pEdit.origin=='Hàn'}"> selected</c:if>>Hàn</option>
                                         <option value="Thái Lan"  <c:if test="${pEdit.origin=='Thái Lan'}"> selected</c:if>>Thái Lan</option>
-                                        </select>
-                                    </div>
+                                    </select>
                                 </div>
+                            </div>
 
 
 
-                                <div class="form-outline mt-4">
-                                    <label class="form-label h5">Ngày tạo sản phẩm</label>
-                                    <div class="form-hover">
-                                        <input type="date" id="dayWriteNews" name="dayWriteNews" value="${pEdit.create_date}" class="form-control form-control-lg" />
+                            <div class="form-outline mt-4">
+                                <label class="form-label h5">Ngày tạo sản phẩm</label>
+                                <div class="form-hover">
+                                    <input type="date" id="dayWriteNews" name="dayWriteNews" value="${pEdit.create_date}" class="form-control form-control-lg" readonly/>
                                     <span id="dateError" class="text-danger fw-bold font-italic"></span>
                                 </div>
                             </div>
@@ -157,7 +160,7 @@
                                         <div class="form-hover">
                                             <div class="d-flex">
                                                 <input type="file" name="proPic1" id="proPic1" accept="image/*" onchange="displayImage(event, 'displayImage1')" 
-                                                       class="border form-control form-control-lg">
+                                                       class="border form-control form-control-lg" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -176,7 +179,7 @@
                                         <div class="form-hover">
                                             <div class="d-flex">
                                                 <input type="file" name="proPic2" id="proPic2" accept="image/*" onchange="displayImage(event, 'displayImage2')" 
-                                                       class="border form-control form-control-lg">
+                                                       class="border form-control form-control-lg" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -196,7 +199,7 @@
                                         <div class="form-hover">
                                             <div class="d-flex">
                                                 <input type="file" name="proPic3" id="proPic3" accept="image/*" onchange="displayImage(event, 'displayImage3')" 
-                                                       class="border form-control form-control-lg">
+                                                       class="border form-control form-control-lg" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +218,7 @@
                                         <div class="form-hover">
                                             <div class="d-flex">
                                                 <input type="file" name="proPic4" id="proPic4" accept="image/*" onchange="displayImage(event, 'displayImage4')" 
-                                                       class="border form-control form-control-lg">
+                                                       class="border form-control form-control-lg" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -230,14 +233,14 @@
                     <div class="form-group form-outline mt-5    ">
                         <div class="form-hover">
                             <textarea type="text" id="description" name="description" placeholder="Mô tả và thông tin khác"
-                                      class="form-control form-control-lg" rows="8" cols="10" 
+                                      class="form-control form-control-lg" rows="8" cols="10" readonly
                                       style="max-height: 150px;">${pEdit.pro_description}</textarea>
                             <label class="form-label">Mô tả và thông tin khác</label>
                         </div>
                         <span class="error errorDescription text-danger font-italic fw-bold"></span>
                     </div>
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="EditProduct" class="btn btn-success w-100" style="font-size: 20px" value="Update Product"/>
+                        <a class="btn btn-success w-100 text-decoration-none" href="/AdminController/adminListPro" style="font-size: 20px" >Back to list</a>
                     </div> 
                 </form>
             </div>
@@ -245,6 +248,5 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-        <script src="/JS/AddProAdmin.js"></script>
     </body>
 </html>

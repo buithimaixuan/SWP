@@ -62,7 +62,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listOrdHis}" var="pp">
+                            <c:forEach items="${listProHis}" var="pp">
                                 <tr>
                                     <td class="text-start align-middle nv-tab">${pp.staff_id}</td>
                                     <td class="text-start align-middle">${pp.o_id}</td>
