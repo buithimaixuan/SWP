@@ -37,7 +37,7 @@
         <div class="content">
             <div class="layout1">
                 <div class="layout1_title">
-                    <a href="#">Các bài viết nổi bật</a>
+                    <a href="listNews">Các bài viết nổi bật</a>
                 </div>
                 <div class="layout1_content">
                     <aside>
@@ -48,7 +48,7 @@
                             String fullname = staffDAO.getFullNameByID(news.getStaff_id());
                         %>
                         <a href="./newsDetail?news_id=<%= news.getNews_id()%>" class="other_img">
-                            <img src="../images/<%= news.getImage_url()%>" alt="">
+                            <img src="/<%= news.getImage_url()%>" alt="">
                         </a>
                         <div class="card_news_bot">
                             <a href="./newsDetail?news_id=<%= news.getNews_id()%>"> <%= news.getTitle()%></a>
@@ -74,7 +74,7 @@
                         %>
                         <div class="right_card">
                             <a href="./newsDetail?news_id=<%= element.getNews_id()%>">
-                                <img src="../images/<%= image_url%>" alt="">
+                                <img src="/<%= image_url%>" alt="">
                             </a>
                             <div class="bot_right_card">
                                 <a href="./newsDetail?news_id=<%= element.getNews_id()%>"><%= title%></a>
@@ -108,7 +108,7 @@
                     %>
                     <div class="card_news">
                         <a href="./newsDetail?news_id=<%= element.getNews_id()%>" class="other_img">
-                            <img src="../images/<%= image_url%>" alt="">
+                            <img src="/<%= image_url%>" alt="">
                         </a>
                         <div class="card_news_bot">
                             <a href="./newsDetail?news_id=<%= element.getNews_id()%>"><%= title%></a>

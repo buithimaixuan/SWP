@@ -39,7 +39,6 @@ public class ProductDAO {
         }
     }
 
-
     /**
      *
      * @param cat_name
@@ -292,16 +291,17 @@ public class ProductDAO {
 
         return list;
     }
-    
+
     /**
      * KHOA code
+     *
      * @param pro_name
      * @return linkedlist<Product>
      * show all product of pro_name
      */
     public LinkedList<Product> getListProByProName(String pro_name) {
         LinkedList<Product> list = new LinkedList<>();
-        String sql = "select * from product where pro_name like N'%"+pro_name+"%';";
+        String sql = "select * from product where pro_name like N'%" + pro_name + "%';";
         try {
 
             ps = conn.prepareStatement(sql);
@@ -323,12 +323,12 @@ public class ProductDAO {
 
         return list;
     }
-    
-    public int addPro(Product pro){
+
+    public int addPro(Product pro) {
         int count = 0;
         String sql = "insert into product values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
-           ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, pro.getCat_id());
             ps.setString(2, pro.getPro_name());
             ps.setString(3, pro.getPro_image());
@@ -344,14 +344,60 @@ public class ProductDAO {
             ps.setInt(13, pro.getIsDelete());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
-            if(rs.next()){
+            if (rs.next()) {
                 count = rs.getInt(1);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+    
+    /**
+     * KHOA code
+     * @param pro_id
+     * Lay sp bang ProID
+     */ 
+    public Product getProductByID(int pro_id) {
+        Product pro = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [product] where pro_id=?");
+            ps.setInt(1, pro_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                pro = new Product(rs.getInt("pro_id"),
+                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+                        rs.getString("origin"), rs.getString("brand"),
+                        rs.getDouble("mass"), rs.getString("ingredient"),
+                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+                        rs.getDouble("discount"),
+                        rs.getNString("pro_description"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pro;
+    }
+
+    public Product getProduct(int pro_id) {
+        Product product = null;
+        String sql = "select * from product where pro_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, pro_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                product = new Product(rs.getInt("pro_id"), rs.getInt("cat_id"), rs.getString("pro_name"),
+                        rs.getString("pro_image"), rs.getString("origin"), rs.getString("brand"), rs.getDouble("mass"),
+                        rs.getString("ingredient"), rs.getInt("pro_quantity"), rs.getDouble("pro_price"), rs.getDouble("discount"),
+                        rs.getString("pro_description"), rs.getDate("create_date"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return product;
     }
 
     /**

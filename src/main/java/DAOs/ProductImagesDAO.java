@@ -4,6 +4,7 @@
  */
 package DAOs;
 
+import Controllers.ProductController;
 import Models.ProductImages;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -48,22 +49,44 @@ public class ProductImagesDAO {
         return count;
     }
 
-    public LinkedList<ProductImages> getProductImagesByProductId(int productId) throws SQLException {
+    public LinkedList<ProductImages> getProductImagesByProductId(int productId) {
         LinkedList<ProductImages> productImages = new LinkedList<>();
         String query = "SELECT * FROM product_images WHERE pro_id = ?";
-        try ( PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, productId);
-            try ( ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    ProductImages productImage = new ProductImages();
-                    productImage.setPro_img_id(resultSet.getInt("pro_img_id"));
-                    productImage.setPro_id(resultSet.getInt("pro_id"));
-                    productImage.setImage_url(resultSet.getString("image_url"));
-                    productImages.add(productImage);
+        try {
+            try ( PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, productId);
+                try ( ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        ProductImages productImage = new ProductImages();
+                        productImage.setPro_img_id(resultSet.getInt("pro_img_id"));
+                        productImage.setPro_id(resultSet.getInt("pro_id"));
+                        productImage.setImage_url(resultSet.getString("image_url"));
+                        productImages.add(productImage);
+                    }
                 }
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return productImages;
+    }
+
+    public LinkedList<ProductImages> getProductImage(int news_id) {
+        LinkedList<ProductImages> newsList = new LinkedList<>();
+        String sql = "SELECT * FROM news WHERE news_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, news_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductImages news = new ProductImages(rs.getInt("pro_img_id"), rs.getInt("pro_id"), rs.getString("image_url"));
+                newsList.add(news);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return newsList;
     }
 
     public int deleteProductImageByProductId(int productId) throws SQLException {

@@ -101,4 +101,21 @@ public class OrderDetailDAO {
         }
         return count;
     }
+    
+    public LinkedList<OrderDetail> getAllOrderDetailsByOrderID(int o_id) {
+        LinkedList<OrderDetail> orderDetailList = new LinkedList<>();
+        String sql = "select * from [order_detail] where o_id = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, o_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                OrderDetail odt = new OrderDetail(rs.getInt("o_id"), rs.getInt("pro_id"), rs.getInt("quantity"));
+                orderDetailList.add(odt);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orderDetailList;
+    }
 }

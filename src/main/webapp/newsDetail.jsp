@@ -23,9 +23,9 @@
 
         <section id="main">
             <div class="address">
-                <a href="#">Trang chủ</a> <span class="from_to"></span>
-                <a href="#">Blog</a> <span class="from_to"></span>
-                <span class="name_product_add">${news.getTitle()}</span>
+                <!--<a href="">Trang chủ</a> <span class="from_to"></span>-->
+                <a style="font-size: 1.3rem" class="fw-bold" href="listNews">Blog</a> <i class="fa-solid fa-chevron-right"></i>
+                <span style="font-size: 1.3rem" class="name_product_add fw-bold">${news.getTitle()}</span>
             </div>
 
             <div class="content">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="img_news">
                         <div>
-                            <img src="../images/${news.getImage_url()}" alt="">
+                            <img src="/${news.getImage_url()}" alt="">
                         </div>
                     </div>
                     <div>
@@ -83,14 +83,14 @@
                         %>
                         <div class="card_news">
                             <a href="./newsDetail?news_id=<%= element.getNews_id()%>" class="other_img">
-                                <img src="../images/Lovecake.png" alt="">
+                                <img src="/<%= element.getImage_url()%>" alt="">
                             </a>
 
                             <div class="card_news_bot">
-                                <a href="./newsDetail"><%= element.getTitle() %></a>
+                                <a href="./newsDetail"><%= element.getTitle()%></a>
                                 <div class="other_infor">
-                                    <span><i class="fa-regular fa-clock"></i> <%= element.getCreate_date() %></span>
-                                    <span><i class="fa-solid fa-feather-pointed"></i> <%= fullname %></span>
+                                    <span><i class="fa-regular fa-clock"></i> <%= element.getCreate_date()%></span>
+                                    <span><i class="fa-solid fa-feather-pointed"></i> <%= fullname%></span>
                                 </div>
                             </div>
                         </div>

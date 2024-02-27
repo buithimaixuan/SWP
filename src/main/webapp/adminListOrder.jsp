@@ -52,29 +52,28 @@
                             <tr>
                                 <th class="text-start">Mã đơn hàng</th>
                                 <th class="text-start">Trạng thái</th>
-                                <th class="text-start">Địa chỉ</th>
                                 <th class="text-start">Tổng tiền</th>
                                 <th class="text-start">Ngày mua</th>
-                                <th class="text-start">Đã xóa</th>
                                 <th class="text-start">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${listPH}" var="ph">
-                            <tr>
-                                <td class="text-start align-middle">${ph.pro_id}</td>
-                                <td class="text-start align-middle">${ph.pro_name}</td>
-                                <td class="text-start align-middle">${ph.quanInStock}</td>
-                                <td class="text-start align-middle">${ph.quanOnOrder}</td>
-                                <td class="text-start align-middle">${ph.quanAdded}</td>
-                                <td class="text-start align-middle">${ph.quanDelete}</td>
-                                <td class="text-start">
-                                    <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                    <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                    <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                            <c:forEach items="${orderList}" var="ol">
+                                <tr>
+                                    <td class="text-start align-middle">${ol.o_id}</td>
+                                    <td class="text-start align-middle">${ol.status}</td>
+                                    <td class="text-start align-middle">${ol.total_price}</td>
+                                    <td class="text-start align-middle">${ol.o_date}</td>
+                                    <td class="text-start">
+                                        <c:if test="${ol.isDelete == 0}">
+                                            <a href="/OrderController/OrderDetailAdmin/${ol.o_id}" class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
+                                            <a href="/OrderController/UpdateOrderAdmin/${ol.o_id}" class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
+                                            <a href="/OrderController/DeleteOrderAdmin/${ol.o_id}" class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                        </c:if>
+                                        <c:if test="${ol.isDelete == 1}"></c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                         </tbody><!-- comment -->
                     </table>
                 </div>

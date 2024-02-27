@@ -167,6 +167,7 @@ public class CustomerDAO {
         return count;
     }
 
+
     public int deleteCusAdmin(Customer cus) {
         int count = 0;
         String sql = "UPDATE customer SET acc_id =? , username =? , password=?, fullname = ? , avatar = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE cus_id = ?";
@@ -187,6 +188,24 @@ public class CustomerDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+
+    
+    //KHOA's CODE
+    // Them tim customer bang cusid
+    public Customer getCustomerByCusID(int cus_id) {
+        Customer obj = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [customer] where cus_id=?");
+            ps.setInt(1, cus_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obj = new Customer(rs.getInt("cus_id"), rs.getInt("acc_id"), rs.getString("username"), rs.getString("password"), rs.getString("fullname"), rs.getString("avatar"), rs.getString("phone_number"), rs.getString("email"), rs.getInt("code_reset"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+
     }
 
     public static void main(String[] args) {
