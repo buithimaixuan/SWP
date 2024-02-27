@@ -166,6 +166,29 @@ public class CustomerDAO {
         }
         return count;
     }
+
+
+    public int deleteCusAdmin(Customer cus) {
+        int count = 0;
+        String sql = "UPDATE customer SET acc_id =? , username =? , password=?, fullname = ? , avatar = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE cus_id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, cus.getAcc_id());
+            ps.setString(2, cus.getUsername());
+            ps.setString(3, cus.getPassword());
+            ps.setString(4, cus.getFullname());
+            ps.setString(5, cus.getAvatar());
+            ps.setString(6, cus.getPhone_number());
+            ps.setString(7, cus.getEmail());
+            ps.setInt(8, 0);
+            ps.setInt(9, 1);
+            ps.setInt(10, cus.getCus_id());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+
     
     //KHOA's CODE
     // Them tim customer bang cusid
@@ -182,6 +205,7 @@ public class CustomerDAO {
             Logger.getLogger(CustomerDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return obj;
+
     }
 
     public static void main(String[] args) {
