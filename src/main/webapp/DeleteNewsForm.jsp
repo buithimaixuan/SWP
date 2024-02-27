@@ -25,7 +25,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Update News</title>
+        <title>Xóa tin tức</title>
     </head>
     <body>
         <div class="row">
@@ -34,9 +34,9 @@
                  left: 265px;
                  top: 0;
                  width: 80%;">
-                <form method="post" action="DeleteNews" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateForm()">
+                <form method="post" action="DeleteNews" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateForm()">
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Chỉnh sửa tin tức</span>
+                        <span class="h3 fw-bold">Xóa tin tức</span>
                     </div>
                     <input type="hidden" id="news_id" name="news_id" value="${news_id}" />
 
@@ -52,9 +52,9 @@
                         <div class="validate form-outline col">
                             <label class="form-label h5">Hình ảnh</label>
                             <div class="form-hover">
-                                <input type="file" name="newsPic" id="newsPic" accept="image/*" value="${image_url}"
+                                <input type="file" name="newsPic" id="newsPic" accept="image/*" value="${image_url}" readonly
                                        onchange="displayImage(event, 'displayImage')" 
-                                       class="border form-control form-control-lg" readonly>
+                                       class="border form-control form-control-lg">
                             </div>
                         </div>
                         <div id="displayImage" class="mt-2 w-25">
@@ -109,7 +109,7 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-DeleteNews" class="btn btn-success w-100" style="font-size: 20px" value="Update News"/>
+                        <input type="submit" name="btn-DeleteNews" class="btn btn-success w-100" style="font-size: 20px" value="Xóa tin tức"/>
                     </div>  
                 </form>
             </div>

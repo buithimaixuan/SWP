@@ -56,11 +56,28 @@ public class AccountDAO {
         return acc;
 
     }
-  public boolean checkEmailExists(String email) {
+
+    public boolean checkEmailExists(String email) {
         String sql = "SELECT COUNT(*) AS count FROM account WHERE email = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt("count");
+                return count > 0;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Xử lý ngoại lệ, nếu cần
+        }
+        return false;
+    }
+    public boolean checkUsernameExists(String username) {
+        String sql = "SELECT COUNT(*) AS count FROM account WHERE username = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt("count");
@@ -89,6 +106,7 @@ public class AccountDAO {
         }
         return false;
     }
+
     public Account getAccByEmail(String email) {
 
         Account acc = null;
@@ -246,7 +264,6 @@ public class AccountDAO {
         return count;
     }
 
-
     public int deleteAcc(int acc_id) {
         int count = 0;
         try {
@@ -258,8 +275,8 @@ public class AccountDAO {
         }
         return count;
     }
-    
-  public int updateAcc(Account acc) {
+
+    public int updateAcc(Account acc) {
         int count = 0;
         String sql = "UPDATE account SET username =? , password=?, fullname = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE acc_id = ?";
         try {
@@ -278,8 +295,8 @@ public class AccountDAO {
         }
         return count;
     }
-    
-     public Account updateAccStaff(int acc_id, Account acc){
+
+    public Account updateAccStaff(int acc_id, Account acc) {
         int count = 0;
         String sql = "Update account set username = ?, password = ?, fullname = ?, phone_number = ?, email = ? where acc_id = ?";
         try {
@@ -290,7 +307,7 @@ public class AccountDAO {
             ps.setString(4, acc.getPhone_number());
             ps.setString(5, acc.getEmail());
             ps.setInt(6, acc_id);
-            
+
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -312,14 +329,14 @@ public class AccountDAO {
             return false;
         }
     }
-    
-    public boolean isDelete(int acc_id, Date current){
+
+    public boolean isDelete(int acc_id, Date current) {
         int count = 0;
-        String sql  = "Update account set isDelete = 1 where acc_id = ?";
+        String sql = "Update account set isDelete = 1 where acc_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, acc_id);
-            
+
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -327,6 +344,24 @@ public class AccountDAO {
         return (count == 0) ? false : true;
     }
 
-   
+    public int deleteAccAdmin(Account acc) {
+        int count = 0;
+        String sql = "UPDATE account SET username =? , password=?, fullname = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE acc_id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, acc.getUsername());
+            ps.setString(2, acc.getPassword());
+            ps.setString(3, acc.getFullname());
+            ps.setString(4, acc.getPhone_number());
+            ps.setString(5, acc.getEmail());
+            ps.setInt(6, 0);
+            ps.setInt(7, 1);
+            ps.setInt(8, acc.getAcc_id());
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
 
 }

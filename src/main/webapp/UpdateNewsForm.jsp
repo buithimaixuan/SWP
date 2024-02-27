@@ -25,7 +25,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Update News</title>
+        <title>Chỉnh sửa tin tức</title>
     </head>
     <body>
         <div class="row">
@@ -109,7 +109,7 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-UpdateNews" class="btn btn-success w-100" style="font-size: 20px" value="Update News"/>
+                        <input type="submit" name="btn-UpdateNews" class="btn btn-success w-100" style="font-size: 20px" value="Chỉnh sửa tin tức"/>
                     </div>  
                 </form>
             </div>

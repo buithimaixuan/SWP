@@ -106,8 +106,8 @@ public class CustomerController extends HttpServlet {
 
             request.getRequestDispatcher("/listAllNews.jsp").forward(request, response);
         } else if (path.endsWith("CustomerController/newsDetail")) {
+            
             int news_id = Integer.parseInt(request.getParameter("news_id"));
-
             NewsDAO newsDAO = new NewsDAO();
             News news = newsDAO.getNews(news_id);
             request.setAttribute("news", news);
@@ -129,12 +129,14 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-
-        AccountDAO accdao = new AccountDAO();
+        CustomerDAO cdao = new CustomerDAO();
+        AccountDAO acdao = new AccountDAO();
+//        AccountDAO acdao = new AccountDAO();
         CustomerDAO cusdao = new CustomerDAO();
-
+        Account as = (Account) request.getSession().getAttribute("account");
+        Customer cs = (Customer) request.getSession().getAttribute("account");
         String usern = request.getParameter("user");
-        LinkedList<String> listUsername = accdao.getAllUserName();
+        LinkedList<String> listUsername = acdao.getAllUserName();
         for (String s : listUsername) {
             if (s.equals(usern)) {
                 response.setContentType("text/html");
@@ -145,7 +147,7 @@ public class CustomerController extends HttpServlet {
         }
 
         String emailUser = request.getParameter("email");
-        LinkedList<String> listEmail = accdao.getAllEmail();
+        LinkedList<String> listEmail = acdao.getAllEmail();
         for (String s : listEmail) {
             if (s.equals(emailUser)) {
                 response.setContentType("text/html");
@@ -157,7 +159,7 @@ public class CustomerController extends HttpServlet {
 
 //        check duplicate username
         String userPhone = request.getParameter("phone");
-        LinkedList<String> listPhone = accdao.getAllPhone();
+        LinkedList<String> listPhone = acdao.getAllPhone();
         for (String s : listPhone) {
             if (s.equals(userPhone)) {
                 response.setContentType("text/html");
@@ -167,7 +169,7 @@ public class CustomerController extends HttpServlet {
             }
         }
 
-        if (request.getParameter("btn-AddNews") != null) {
+        if (request.getParameter("btnAddNews") != null) {
             String fileName = null;
             try {
                 Part part = request.getPart("avatar");
@@ -195,7 +197,7 @@ public class CustomerController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("pass");
             Account acc = new Account(0, username, password, fullname, phone, email, 0, 0);
-            int acc_id = accdao.createAcc(acc);
+            int acc_id = acdao.createAcc(acc);
             if (acc_id != 0) {
                 Customer cus = new Customer(0, acc_id, username, password, fullname, "images/" + fileName, phone, email, 0, 0);
                 int createCus = cusdao.createCus(cus);
@@ -210,35 +212,67 @@ public class CustomerController extends HttpServlet {
                 response.sendRedirect("/CustomerController");
             }
         }
+//        if (request.getParameter("btnDeleteCus") != null) {
+//
+//            int cusId = Integer.parseInt(request.getParameter("cus_id"));
+//            int accId = Integer.parseInt(request.getParameter("acc_id"));
+//
+//            System.out.println("account id : " + accId);
+//            System.out.println("cus id : " + cusId);
+//
+//            try {
+//                int deleteC = cdao.deleteCus(cusId);
+//                int deleteA = acdao.deleteAcc(accId);
+//                if (deleteC > 0 && deleteA > 0) {
+//                    System.out.println("Xoa acc cus thanh cong");
+//                    response.sendRedirect("/AdminController/adminListCustomer");
+//                } else {
+//                    response.sendRedirect("/AdminController/adminListCustomer");
+//
+//                }
+//            } catch (Exception e) {
+//                // Xử lý exception tùy ý
+//                e.printStackTrace();
+//                response.getWriter().println("An error occurred.");
+//            }
+//
+//        }
 
-        if (request.getParameter(
-                "btnDeleteCus") != null) {
-            CustomerDAO cdao = new CustomerDAO();
-            AccountDAO acdao = new AccountDAO();
-            int cusId = Integer.parseInt(request.getParameter("cus_id"));
-            int accId = Integer.parseInt(request.getParameter("acc_id"));
+        if (request.getParameter("btnDeleteCus") != null) {
+            System.out.println("done connect");
+
+            int accId = Integer.valueOf(request.getParameter("acc_id"));
+            int cusId = Integer.valueOf(request.getParameter("cus_id"));
+            String phoneU = request.getParameter("Phone");
+            String emailU = request.getParameter("email");
+            String fullnameU = request.getParameter("fullname");
+            String password =request.getParameter("pass");
+            String pathAvatar = request.getParameter("avatar");
+            String username = request.getParameter("username");
+
+            System.out.println("avatar...." + pathAvatar);
+            
+            System.out.println(username + ".update." + accId);
+            Account acdc = new Account(accId, username, password, fullnameU, phoneU, emailU, 0, 1);
+            Customer cus = new Customer(cusId, accId, username, password, fullnameU, pathAvatar, phoneU, emailU, 0, 1);
 
             System.out.println("account id : " + accId);
             System.out.println("cus id : " + cusId);
 
-            try {
-                int deleteC = cdao.deleteCus(cusId);
-                int deleteA = acdao.deleteAcc(accId);
-                if (deleteC > 0 && deleteA > 0) {
-                    System.out.println("Xoa acc cus thanh cong");
-                    response.sendRedirect("/AdminController/adminListCustomer");
-                } else {
-                    response.sendRedirect("/AdminController/adminListCustomer");
+            int resultAcc = acdao.deleteAccAdmin(acdc);
+            int resultCus = cdao.deleteCusAdmin(cus);
 
-                }
-            } catch (Exception e) {
-                // Xử lý exception tùy ý
-                e.printStackTrace();
-                response.getWriter().println("An error occurred.");
+            System.out.println("ok update account");
+            if (resultAcc > 0 && resultCus > 0) {
+
+                session.setAttribute("account", cus);
+                response.sendRedirect("/AdminController/adminListCustomer");
+            } else {
+                session.setAttribute("fail", "That bai");
+                response.sendRedirect("/AdminController/adminListCustomer");
             }
-
         }
-    }
+        }
 
     /**
      * Returns a short description of the servlet.

@@ -41,8 +41,7 @@ public class OrderStatusHistoryDAO {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                OrderStatusHistory ods = new OrderStatusHistory(rs.getInt("o_his_id"), rs.getInt("o_id"), rs.getInt("staff_id"),
-                        rs.getString("status"), rs.getDate("create_date"));
+                OrderStatusHistory ods = new OrderStatusHistory(rs.getInt("o_his_id") ,rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getString("action"), rs.getDate("create_date"));
                 orderStatusList.add(ods);
             }
         } catch (SQLException ex) {
@@ -58,7 +57,7 @@ public class OrderStatusHistoryDAO {
             ps.setInt(1, o_his_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                obj = new OrderStatusHistory(rs.getInt("o_his_id"), rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getDate("create_date"));
+                obj = new OrderStatusHistory(rs.getInt("o_his_id") ,rs.getInt("o_id"), rs.getInt("staff_id"), rs.getString("status"), rs.getString("action"), rs.getDate("create_date"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusHistoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,11 +68,12 @@ public class OrderStatusHistoryDAO {
     public int addOrderStatus(OrderStatusHistory obj) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("insert into [order_status_history] values(?, ?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("insert into [order_status_history] values(?, ?, ?, ?, ?)");
             ps.setInt(1, obj.getO_id());
             ps.setInt(2, obj.getStaff_id());
             ps.setString(3, obj.getStatus());
-            ps.setDate(4, obj.getCreate_date());
+            ps.setString(4, obj.getAction());
+            ps.setDate(5, obj.getCreate_date());
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderStatusHistoryDAO.class.getName()).log(Level.SEVERE, null, ex);

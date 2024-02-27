@@ -4,11 +4,14 @@
  */
 package Controllers;
 
+import DAOs.CartDAO;
 import DAOs.CategoriesDAO;
 import DAOs.ProductDAO;
 import DAOs.ProductHistoryDAO;
 import DAOs.ProductImagesDAO;
+import Models.Cart;
 import Models.Categories;
+import Models.Customer;
 import Models.Product;
 import Models.ProductHistory;
 import Models.ProductImages;
@@ -27,10 +30,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Dell
@@ -109,6 +114,38 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/ProductController");
             }
 
+        } else if (path.endsWith("/ProductController/proDetail")) {
+            ProductDAO productDAO = new ProductDAO();
+            Product product = new Product();
+            ProductImagesDAO productImagesDAO = new ProductImagesDAO();
+
+            int pro_id = Integer.parseInt(request.getParameter("pro_id"));
+
+            product = productDAO.getProduct(pro_id);
+            String pro_name = product.getPro_name();
+            String pro_image = product.getPro_image();
+            String brand = product.getBrand();
+            String origin = product.getOrigin();
+            String ingredient = product.getIngredient();
+            double mass = product.getMass();
+            String pro_description = product.getPro_description();
+            int pro_quantity = product.getPro_quantity();
+            
+            request.setAttribute("pro_id", pro_id);
+            request.setAttribute("pro_name", pro_name);
+            request.setAttribute("pro_image", pro_image);
+            request.setAttribute("brand", brand);
+            request.setAttribute("origin", origin);
+            request.setAttribute("ingredient", ingredient);
+            request.setAttribute("mass", mass);
+            request.setAttribute("pro_description", pro_description);
+            request.setAttribute("pro_quantity", pro_quantity);
+
+            LinkedList<ProductImages> productImages = productImagesDAO.getProductImagesByProductId(pro_id);
+
+            request.setAttribute("productImages", productImages);
+
+            request.getRequestDispatcher("/proDetail.jsp").forward(request, response);
         } else {
             if (path.endsWith("/ProductController/setNguyenLieu")) {
                 CategoriesDAO catdao = new CategoriesDAO();
@@ -1388,10 +1425,12 @@ public class ProductController extends HttpServlet {
 //       xuan code 
         if (request.getParameter("AddProduct") != null) {
             HttpSession session = request.getSession();
+
             Staff staff = (Staff) session.getAttribute("staff");//get staff id
             int staff_id = staff.getStaff_id();
             ProductDAO pdao = new ProductDAO();
             ProductImagesDAO pIdao = new ProductImagesDAO();
+
 
             String fileName1 = null;
             try {
@@ -1489,8 +1528,8 @@ public class ProductController extends HttpServlet {
             } else {
                 response.sendRedirect("/ProductController/AddPro");
             }
-
         }
+
 
         //edit product o day
         if (request.getParameter("EditProduct") != null) {
@@ -1632,6 +1671,50 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/ProductController/Delete");
             }
 
+        }
+              
+//        NAM CODE
+        if (request.getParameter("btnAddCart") != null) {
+            ProductDAO pdao = new ProductDAO();
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            if (cus == null) {
+                response.sendRedirect("/HomeController");
+            } else {
+                CartDAO cdao = new CartDAO();
+                
+                int proId = Integer.parseInt(request.getParameter("product-id"));
+                System.out.println(proId);
+                
+                Product pro = pdao.getProductByID(proId);
+                System.out.println(pro.getPro_name());
+                Cart checkProductCart = null;
+                try {
+                    checkProductCart = cdao.getCartByProId(proId);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(checkProductCart == null){
+                    int proQuantityCart = 1;
+                    Cart cart = new Cart(cus.getCus_id(), proId, 1, pro.getPro_price());
+                    int cartStatus;
+                    try {
+                        cartStatus = cdao.createCart(cart);
+                        response.sendRedirect("/HomeController");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else{
+                    int addQuantityCart = checkProductCart.getPro_quantity() + 1;
+                    double addPriceCart = addQuantityCart * pro.getPro_price();
+                    Cart updateCart = new Cart(cus.getCus_id(), proId, addQuantityCart, addPriceCart);
+                    try {
+                        int updateStatus = cdao.editCart(proId, updateCart);
+                        response.sendRedirect("/HomeController");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }        
+            }
         }
 
     }

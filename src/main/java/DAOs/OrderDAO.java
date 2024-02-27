@@ -107,12 +107,60 @@ public class OrderDAO {
     public int deleteOrder(int o_id) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("delete from [orders] where o_id=?");
+            PreparedStatement ps = conn.prepareStatement("update [orders] set isDelete=1 where o_id=?");
             ps.setInt(1, o_id);
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+    
+    public int editOrderStatus(int o_id, Order obj) {
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("update [orders] set status=? where o_id=?");
+            ps.setString(1, obj.getStatus());
+            ps.setInt(2, o_id);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+    
+    public LinkedList<Order> getAllOrdersByCusId(int cus_id) {
+        LinkedList<Order> orderList = new LinkedList<>();
+        String sql = "select * from [orders] where cus_id=?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, cus_id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Order ord = new Order(rs.getInt("o_id"), rs.getInt("cus_id"),
+                        rs.getString("payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
+                        rs.getDouble("total_price"), rs.getInt("isDelete"));
+                orderList.add(ord);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orderList;
+    }
+    
+    public Order getOrderWhenPay() {
+        Order obj = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select top 1 * from [orders] order by o_id desc");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obj = new Order(rs.getInt("o_id"), rs.getInt("cus_id"),
+                        rs.getString("payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
+                        rs.getDouble("total_price"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
     }
 }

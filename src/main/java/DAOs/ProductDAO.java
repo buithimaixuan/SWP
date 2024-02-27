@@ -39,6 +39,7 @@ public class ProductDAO {
         }
     }
 
+
     public Product getProById(int id) {
 
         String sql = "select * from product where pro_id=?";
@@ -62,6 +63,7 @@ public class ProductDAO {
         }
         return pro;
     }
+
 
     /**
      *
@@ -400,7 +402,6 @@ public class ProductDAO {
             if (rs.next()) {
                 count = rs.getInt(1);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -446,6 +447,52 @@ public class ProductDAO {
         }
         return count;
     }
+    
+    /**
+     * KHOA code
+     * @param pro_id
+     * Lay sp bang ProID
+     */ 
+    public Product getProductByID(int pro_id) {
+        Product pro = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [product] where pro_id=?");
+            ps.setInt(1, pro_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                pro = new Product(rs.getInt("pro_id"),
+                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+                        rs.getString("origin"), rs.getString("brand"),
+                        rs.getDouble("mass"), rs.getString("ingredient"),
+                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+                        rs.getDouble("discount"),
+                        rs.getNString("pro_description"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pro;
+    }
+
+    public Product getProduct(int pro_id) {
+        Product product = null;
+        String sql = "select * from product where pro_id = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, pro_id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                product = new Product(rs.getInt("pro_id"), rs.getInt("cat_id"), rs.getString("pro_name"),
+                        rs.getString("pro_image"), rs.getString("origin"), rs.getString("brand"), rs.getDouble("mass"),
+                        rs.getString("ingredient"), rs.getInt("pro_quantity"), rs.getDouble("pro_price"), rs.getDouble("discount"),
+                        rs.getString("pro_description"), rs.getDate("create_date"), rs.getInt("isDelete"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return product;
+    }
 
     /**
      *
@@ -453,32 +500,7 @@ public class ProductDAO {
      */
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        try {
-            LinkedList<Product> list = dao.pagingAllPro(1);
-            if (!list.isEmpty()) {
-                System.out.println("coa list");
-                for (Product product : list) {
-                    System.out.println(product.getPro_description());
-                }
-            } else {
-                System.out.println("null oi");
-            }
-
-//            CategoriesDAO catdao = new CategoriesDAO();
-//            ProductDAO pdao = new ProductDAO();
-//            LinkedList<String> cat = catdao.getAllCatName();
-//            Map<String, LinkedList<Product>> map = new HashMap<>();
-//            LinkedList<Product> pro = new LinkedList<>();
-//
-//            for (String c : cat) {
-//                pro = pdao.get4ProByCatName(c);
-//                System.out.println(pro.get(0).getCat_id());
-//                map.put(c, pro);
-//                pro = new LinkedList<>();
-//            }
-        } catch (Exception e) {
-        }
-
+        System.out.println(dao.getProduct(21).getPro_name());
     }
 
 }

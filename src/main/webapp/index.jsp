@@ -158,7 +158,8 @@
 
                                 <c:forEach items="${c.value}" var="p">
                                     <!--NAM CODE CARD-->
-                                    <div class="card_product">
+                                    <form method="post" action="ProductController" class="card_product">
+                                        <input type="hidden" name="product-id" value="${p.pro_id}"/>
                                         <a href="#" class="card_img">
                                             <img src="/${p.pro_image}" alt="">
                                         </a>
@@ -179,33 +180,14 @@
                                                     </c:if>
 
                                                 </div>
-                                                <a href="#" class="card_buy">
+                                                <button class="card_buy" type="submit" name="btnAddCart">
                                                     <i class="fa-solid fa-cart-shopping"></i>
-                                                    <span>MUA</span>
-                                                </a>
+                                                    <span>Thêm</span>
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>    
+                                    </form>    
                                     <!--END NAM CODE-->
-                                    <!--                                    <div class="card_product col-lg-3 pt-0 pt-3 "  style="height: 320px;">
-                                                                            <div class="card  w-100 h-100">
-                                                                                <a href="">
-                                                                                    <img src="/${p.pro_image}" class="card-img-top " alt="product img" style="height: 170px;">
-                                                                                </a>
-                                                                                <div class="card-body">
-                                                                                    <h5 class="card-title text-center" style="height: 50px">${p.pro_name}</h5>
-                                                                                    <div class="d-flex">
-                                                                                        <div>
-                                                                                            <p class="card-text text-danger p-0 m-0">${p.discount}đ</p>
-                                                                                            <p class="card-text text-secondary p-0 m-0" style=" text-decoration: line-through;">${p.pro_price}đ</p>
-                                                                                        </div>
-                                    
-                                                                                        <a href="" class="btn btn-danger p-0 mt-2" style="height: 30px; width: 36px; margin-left: 120px;"><i class="fa fa-cart-plus"></i></a> 
-                                                                                    </div>
-                                    
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>-->
                                 </c:forEach>
                             </div> 
                         </div>
@@ -221,7 +203,8 @@
                                 <c:forEach items="${listPro}" var="p">
 
                                     <!--NAM CODE-->
-                                    <div class="card_product">
+                                    <form action="ProductController" method="post" class="card_product">
+                                        <input type="hidden" name="product-id" value="${p.pro_id}"/>
                                         <a href="#" class="card_img">
                                             <img src="/${p.pro_image}" alt="">
                                         </a>
@@ -242,13 +225,13 @@
                                                     </c:if>
 
                                                 </div>
-                                                <a href="#" class="card_buy">
+                                                <button class="card_buy" name="btnAddCart" type="submit">
                                                     <i class="fa-solid fa-cart-shopping"></i>
-                                                    <span>MUA</span>
-                                                </a>
+                                                    <span>Thêm</span>
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>    
+                                    </form>    
                                     <!--END NAM CODE-->
                                 </c:forEach>
                             </div>
