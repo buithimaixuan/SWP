@@ -54,10 +54,9 @@
                                 <th class="text-start">Tên SP</th>
                                 <th class="text-start">anh</th>
                                 <th class="text-start">SL</th>
-                                <th class="text-start">SL đặt hàng</th>
-                                <th class="text-start">SL thêm vào</th>
-                                <th class="text-start">SL giảm</th>
-                                <th class="text-start">SL trả lại</th>
+                                <th class="text-start">Gia goc</th>
+                                <th class="text-start">Gia ban</th>
+
                                 <th class="text-start">Thao tác</th>
                             </tr>
                         </thead>
@@ -69,16 +68,21 @@
                                     <td class="text-start align-middle">
                                         <img src="/${ph.pro_image}" alt="alt" style="width: 70px; height: 70px;"/>
                                     </td>
-                                    <td class="text-start align-middle">${ph.origin}</td>
-                                    <td class="text-start align-middle">${ph.brand}</td>
-                                    <td class="text-start align-middle">${ph.mass}</td>
+
                                     <td class="text-start align-middle">${ph.pro_quantity}</td>
                                     <td class="text-start align-middle">${ph.pro_price}</td>
-<!--                                    <td class="text-start align-middle"></td>-->
+                                    <td class="text-start align-middle">${ph.discount}</td>
+                                    <!--                                    <td class="text-start align-middle"></td>-->
                                     <td class="text-start">
-                                        <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                        <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                        <c:if test="${ph.isDelete==0}" >
+                                            <a href="/ProductController/Detail/${ph.pro_id}" class="btn btn-primary mt-3">Xem chi tiêt</i></a>
+
+                                            <a href="/ProductController/Edit/${ph.pro_id}" class="btn btn-success mt-3">Câp nhât</a>
+                                            <a href="/ProductController/Delete/${ph.pro_id}" class="btn btn-danger mt-3">Xóa</a>
+                                        </c:if>
+                                        <c:if test="${ph.isDelete!=0}">
+                                            <p class="btn btn-secondary mt-3">Ðã xóa</p>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>

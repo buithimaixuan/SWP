@@ -90,7 +90,7 @@ public class AdminController extends HttpServlet {
             request.getRequestDispatcher("/DashBoardSlideBarVer2.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListPro")) {
             ProductDAO pdao = new ProductDAO();
-            LinkedList<Product> listPro = pdao.getAllPro();
+            LinkedList<Product> listPro = pdao.getAllProAdmin();
             request.setAttribute("listPro", listPro);
             request.getRequestDispatcher("/adminListPro.jsp").forward(request, response);
 

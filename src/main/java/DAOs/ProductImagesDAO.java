@@ -53,52 +53,66 @@ public class ProductImagesDAO {
         LinkedList<ProductImages> productImages = new LinkedList<>();
         String query = "SELECT * FROM product_images WHERE pro_id = ?";
         try {
-            try ( PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setInt(1, productId);
-                try ( ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        ProductImages productImage = new ProductImages();
-                        productImage.setPro_img_id(resultSet.getInt("pro_img_id"));
-                        productImage.setPro_id(resultSet.getInt("pro_id"));
-                        productImage.setImage_url(resultSet.getString("image_url"));
-                        productImages.add(productImage);
-                    }
-                }
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ProductImages productImage = new ProductImages(rs.getInt("pro_img_id"), rs.getInt("pro_id"), rs.getString("image_url"));
+                productImages.add(productImage);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductImagesDAO.class.getName()).log(Level.SEVERE, null, ex);      
         }
 
         return productImages;
     }
 
-    public LinkedList<ProductImages> getProductImage(int news_id) {
-        LinkedList<ProductImages> newsList = new LinkedList<>();
-        String sql = "SELECT * FROM news WHERE news_id = ?";
+
+    public int editProImages(int piId, String image) {
+        int count = 0;
+        String sql = "update product_images set image_url=? where pro_img_id=?";
         try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, news_id);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                ProductImages news = new ProductImages(rs.getInt("pro_img_id"), rs.getInt("pro_id"), rs.getString("image_url"));
-                newsList.add(news);
-            }
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, image);
+            ps.setInt(2, piId);
+
+            count = ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductImagesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return newsList;
+
+        return count;
     }
 
-    public int deleteProductImageByProductId(int productId) throws SQLException {
+
+
+//     public LinkedList<ProductImages> getProductImage(int news_id) {
+//         LinkedList<ProductImages> newsList = new LinkedList<>();
+//         String sql = "SELECT * FROM news WHERE news_id = ?";
+//         try {
+//             PreparedStatement ps = connection.prepareStatement(sql);
+//             ps.setInt(1, news_id);
+//             ResultSet rs = ps.executeQuery();
+//             while (rs.next()) {
+//                 ProductImages news = new ProductImages(rs.getInt("pro_img_id"), rs.getInt("pro_id"), rs.getString("image_url"));
+//                 newsList.add(news);
+//             }
+//         } catch (SQLException ex) {
+//             Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+//         return newsList;
+//     }
+
+    public int deleteProductImageByProductId(int productId) {
+        int count = 0;
         String query = "DELETE FROM product_images WHERE pro_id = ?";
-        try ( PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, productId);
-            int deleteIs = statement.executeUpdate();
-            if (deleteIs > 0) {
-                return 1;
-            } else {
-                return 0;
-            }
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setInt(1, productId);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductImagesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return count;
     }
 }

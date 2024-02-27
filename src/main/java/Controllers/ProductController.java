@@ -29,13 +29,13 @@ import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 /**
  *
  * @author Dell
@@ -1343,6 +1343,65 @@ public class ProductController extends HttpServlet {
             request.setAttribute("listCat", list);
             request.getRequestDispatcher("/AddProForm.jsp").forward(request, response);
         }
+        if (path.startsWith("/ProductController/Edit")) {
+            int pro_id = -1;
+            try {
+                String[] url = path.trim().split("/");
+                pro_id = Integer.valueOf(url[url.length - 1]);
+                ProductDAO pdao = new ProductDAO();
+                Product pro = pdao.getProById(pro_id);
+                CategoriesDAO cdao = new CategoriesDAO();
+                ProductImagesDAO pIdao = new ProductImagesDAO();
+                LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
+                LinkedList<Categories> list = cdao.getAllCat();
+                request.setAttribute("listPI", listPI);
+                request.setAttribute("listCat", list);
+                request.setAttribute("pEdit", pro);
+                request.getRequestDispatcher("/UpdateProForm.jsp").forward(request, response);
+            } catch (Exception e) {
+                response.sendRedirect("/AdminController/listadminListPro");
+            }
+
+        }
+
+        if (path.startsWith("/ProductController/Delete")) {
+            int pro_id = -1;
+            try {
+                String[] url = path.trim().split("/");
+                pro_id = Integer.valueOf(url[url.length - 1]);
+                ProductDAO pdao = new ProductDAO();
+                Product pro = pdao.getProById(pro_id);
+                CategoriesDAO cdao = new CategoriesDAO();
+                ProductImagesDAO pIdao = new ProductImagesDAO();
+                LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
+                LinkedList<Categories> list = cdao.getAllCat();
+                request.setAttribute("listPI", listPI);
+                request.setAttribute("listCat", list);
+                request.setAttribute("pEdit", pro);
+                request.getRequestDispatcher("/DeleteProForm.jsp").forward(request, response);
+            } catch (Exception e) {
+                response.sendRedirect("/AdminController/listadminListPro");
+            }
+        }
+        if (path.startsWith("/ProductController/Detail")) {
+            int pro_id = -1;
+            try {
+                String[] url = path.trim().split("/");
+                pro_id = Integer.valueOf(url[url.length - 1]);
+                ProductDAO pdao = new ProductDAO();
+                Product pro = pdao.getProById(pro_id);
+                CategoriesDAO cdao = new CategoriesDAO();
+                ProductImagesDAO pIdao = new ProductImagesDAO();
+                LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
+                LinkedList<Categories> list = cdao.getAllCat();
+                request.setAttribute("listPI", listPI);
+                request.setAttribute("listCat", list);
+                request.setAttribute("pEdit", pro);
+                request.getRequestDispatcher("/detailProAdmin.jsp").forward(request, response);
+            } catch (Exception e) {
+                response.sendRedirect("/AdminController/listadminListPro");
+            }
+        }
     }
 
     /**
@@ -1366,10 +1425,13 @@ public class ProductController extends HttpServlet {
 //       xuan code 
         if (request.getParameter("AddProduct") != null) {
             HttpSession session = request.getSession();
-        Staff staff = (Staff) session.getAttribute("staff");
-        int staff_id = staff.getStaff_id();
-        ProductDAO pdao = new ProductDAO();
-        ProductImagesDAO pIdao = new ProductImagesDAO();
+
+            Staff staff = (Staff) session.getAttribute("staff");//get staff id
+            int staff_id = staff.getStaff_id();
+            ProductDAO pdao = new ProductDAO();
+            ProductImagesDAO pIdao = new ProductImagesDAO();
+
+
             String fileName1 = null;
             try {
                 Part part = request.getPart("proPic1");
@@ -1460,15 +1522,157 @@ public class ProductController extends HttpServlet {
                 int addProImage1 = pIdao.addProductImage(proImage1);
                 int addProImage2 = pIdao.addProductImage(proImage2);
                 int addProImage3 = pIdao.addProductImage(proImage3);
-                if (addProImage1 != 0 && addProImage2 != 0 && addProImage3 != 0 && addPh != 0) {
 
-                    response.sendRedirect("/AdminController/adminListPro");
-                }
+                response.sendRedirect("/AdminController/adminListPro");
+
             } else {
                 response.sendRedirect("/ProductController/AddPro");
             }
         }
-        
+
+
+        //edit product o day
+        if (request.getParameter("EditProduct") != null) {
+            HttpSession session = request.getSession();
+            Staff staff = (Staff) session.getAttribute("staff");//get staff id
+            int staff_id = staff.getStaff_id();
+            ProductDAO pdao = new ProductDAO();
+            ProductImagesDAO pIdao = new ProductImagesDAO();
+            int id = Integer.valueOf(request.getParameter("proId"));
+
+            Product pro = pdao.getProById(id);
+            int cat_id = Integer.valueOf(request.getParameter("cat_id"));
+            int quantity = Integer.valueOf(request.getParameter("quantity"));
+            String proName = request.getParameter("proName");
+            Double price = Double.valueOf(request.getParameter("price"));
+            Double discount = Double.valueOf(request.getParameter("realPrice"));
+            String orgin = request.getParameter("origin");
+            String brand = request.getParameter("brand");
+            Double mass = Double.valueOf(request.getParameter("mass"));
+            String ingredient = request.getParameter("ingredient");
+            Date dayWritePro = Date.valueOf(request.getParameter("dayWriteNews"));
+            String description = request.getParameter("description");
+            LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(id);
+            String fileName1 = null;
+            try {
+                Part part = request.getPart("proPic1");
+                String realPart = request.getServletContext().getRealPath("/images");
+
+                fileName1 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName1 == null || fileName1.equals("")) {
+                    String[] split = pro.getPro_image().split("/");
+                    fileName1 = split[split.length - 1];
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName1);
+            } catch (Exception e) {
+            }
+            String fileName2 = null;
+            try {
+                Part part = request.getPart("proPic2");
+                String realPart = request.getServletContext().getRealPath("/images");
+
+                fileName2 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName2 == null || fileName2.equals("")) {
+                    String[] split = listPI.get(0).getImage_url().split("/");
+                    fileName2 = split[split.length - 1];
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName2);
+            } catch (Exception e) {
+            }
+            String fileName3 = null;
+            try {
+                Part part = request.getPart("proPic3");
+                String realPart = request.getServletContext().getRealPath("/images");
+
+                fileName3 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName3 == null || fileName3.equals("")) {
+                    String[] split = listPI.get(1).getImage_url().split("/");
+                    fileName3 = split[split.length - 1];
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName3);
+            } catch (Exception e) {
+            }
+            String fileName4 = null;
+            try {
+                Part part = request.getPart("proPic4");
+                String realPart = request.getServletContext().getRealPath("/images");
+
+                fileName4 = Paths.get(part.getSubmittedFileName())
+                        .getFileName().toString();
+                if (fileName4 == null || fileName4.equals("")) {
+                    String[] split = listPI.get(2).getImage_url().split("/");
+                    fileName4 = split[split.length - 1];
+                }
+                if (!Files.exists(Paths.get(realPart))) {
+                    Files.createDirectory(Paths.get(realPart));
+                }
+                part.write(realPart + "/" + fileName4);
+            } catch (Exception e) {
+            }
+
+            Product proEdit = new Product(id, cat_id, proName, "images/" + fileName1,
+                    orgin, brand, mass, ingredient, quantity, price, discount, description, dayWritePro, 0);
+            int edit = pdao.editPro(proEdit);
+            if (edit != 0) {
+                LocalDate date = LocalDate.now();
+                Date create_date = Date.valueOf(date);
+                ProductHistoryDAO ph = new ProductHistoryDAO();
+                ProductHistory proHis = new ProductHistory(0, staff.getStaff_id(), proEdit.getPro_id(), cat_id, proName,
+                        pro.getPro_image(), orgin, brand, mass, ingredient, quantity, price, discount, description,
+                        0, "Cap nhat", create_date);
+                int addPh = ph.addProHistory(proHis);
+
+                int editProImage1 = pIdao.editProImages(listPI.get(0).getPro_img_id(), "images/" + fileName2);
+                int editProImage2 = pIdao.editProImages(listPI.get(1).getPro_img_id(), "images/" + fileName3);
+                int editProImage3 = pIdao.editProImages(listPI.get(2).getPro_img_id(), "images/" + fileName4);
+
+                response.sendRedirect("/AdminController/adminListPro");
+
+            } else {
+                response.sendRedirect("/ProductController/Edit");
+            }
+        }
+        //delete product
+        if (request.getParameter("DeletePro") != null) {
+            HttpSession session = request.getSession();
+            Staff staff = (Staff) session.getAttribute("staff");//get staff id
+            int staff_id = staff.getStaff_id();
+            ProductDAO pdao = new ProductDAO();
+            ProductImagesDAO pIdao = new ProductImagesDAO();
+            int id = Integer.valueOf(request.getParameter("proId"));
+            int deletePro = pdao.deletePro(id);
+
+            if (deletePro != 0) {
+                LocalDate date = LocalDate.now();
+                Date create_date = Date.valueOf(date);
+                Product pro = pdao.getProById(id);
+                ProductHistoryDAO ph = new ProductHistoryDAO();
+                ProductHistory proHis = new ProductHistory(0, staff.getStaff_id(), pro.getPro_id(), pro.getCat_id(), pro.getPro_name(),
+                        pro.getPro_image(), pro.getOrigin(), pro.getBrand(), pro.getMass(), pro.getIngredient(), pro.getPro_quantity(),
+                        pro.getPro_price(), pro.getDiscount(), pro.getPro_description(),
+                        1, "Xoa", create_date);
+                int addPh = ph.addProHistory(proHis);
+                int deleteProImage = pIdao.deleteProductImageByProductId(id);
+                response.sendRedirect("/AdminController/adminListPro");
+
+            } else {
+                response.sendRedirect("/ProductController/Delete");
+            }
+
+        }
+              
 //        NAM CODE
         if (request.getParameter("btnAddCart") != null) {
             ProductDAO pdao = new ProductDAO();
