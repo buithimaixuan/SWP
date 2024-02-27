@@ -1336,6 +1336,27 @@ public class ProductController extends HttpServlet {
                 }
             }
         }
+        
+        if (path.startsWith("/ProductController/DetailProduct")) {
+            int pro_id = -1;
+            try {
+                String[] url = path.trim().split("/");
+                pro_id = Integer.valueOf(url[url.length - 1]);
+                ProductDAO pdao = new ProductDAO();
+                Product pro = pdao.getProById(pro_id);
+                
+                CategoriesDAO cdao = new CategoriesDAO();
+                ProductImagesDAO pIdao = new ProductImagesDAO();
+                LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
+                Categories cat = cdao.getCatById(pro.getCat_id());
+                request.setAttribute("listPI", listPI);
+                request.setAttribute("cat", cat);
+                request.setAttribute("pro", pro);
+                request.getRequestDispatcher("/proDetail.jsp").forward(request, response);
+            } catch (Exception e) {
+                response.sendRedirect("/HomeController");
+            }
+        }
 
         if (path.endsWith("/ProductController/AddPro")) {
             CategoriesDAO cdao = new CategoriesDAO();
@@ -1402,6 +1423,7 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/AdminController/listadminListPro");
             }
         }
+        
     }
 
     /**

@@ -160,7 +160,7 @@
                                     <!--NAM CODE CARD-->
                                     <form method="post" action="ProductController" class="card_product">
                                         <input type="hidden" name="product-id" value="${p.pro_id}"/>
-                                        <a href="#" class="card_img">
+                                        <a href="/ProductController/DetailProduct/${p.pro_id}" class="card_img">
                                             <img src="/${p.pro_image}" alt="">
                                         </a>
 
@@ -205,7 +205,7 @@
                                     <!--NAM CODE-->
                                     <form action="ProductController" method="post" class="card_product">
                                         <input type="hidden" name="product-id" value="${p.pro_id}"/>
-                                        <a href="#" class="card_img">
+                                        <a href="/ProductController/DetailProduct/${p.pro_id}" class="card_img">
                                             <img src="/${p.pro_image}" alt="">
                                         </a>
 

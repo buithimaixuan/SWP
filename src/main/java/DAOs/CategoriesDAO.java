@@ -32,7 +32,22 @@ public class CategoriesDAO {
             Logger.getLogger(CategoriesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    public Categories getCatById(int id){
+        Categories cat = null;
+        String sql = "select * from categories where cat_id=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cat = new Categories(rs.getInt("cat_id"), rs.getNString("cat_name"),
+                        rs.getNString("typeCategories"), rs.getNString("cat_description"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cat;
+    }
     public LinkedList<Categories> getAllCat() {
         LinkedList<Categories> list = new LinkedList<>();
         String sql = "select * from categories";

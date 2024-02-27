@@ -21,9 +21,9 @@
             <div class="content">
 
                 <div id="address_page">
-                    <a href="#" class="text-decoration-none" style=" color: #ff6123;">Trang chủ</a> <span class="from_to">></span>
-                    <a href="#" class="text-decoration-none" style=" color: #ff6123;">Nguyên liệu làm bánh</a> <span class="from_to">></span>
-                    <span class="name_product_add">${pro_name}</span>
+                    <a href="/HomeController" class="text-decoration-none" style=" color: #ff6123;">Trang chủ</a> <span class="from_to">></span>
+                    <a class="text-decoration-none" style=" color: #ff6123;">${cat.typeCategories}</a> <span class="from_to">></span>
+                    <span class="name_product_add">${pro.pro_name}</span>
                 </div>
 
                 <div id="product_detail_container">
@@ -37,16 +37,16 @@
                                 <i class="fa-solid fa-arrow-left"></i>
                             </span>
                             <div class="img_wrap">
-                                <img src="./images/no_image.png" alt="Lovecake">
+                                <img src="/${pro.pro_image}" alt="Lovecake">
                             </div>
                         </div>
                         <div class="list_img">
                             <div>
-                                <img src="/${pro_image}" alt="">
+                                <img src="/${pro.pro_image}" alt="">
                             </div>
-                            <c:forEach items="${productImages}" var="pro">
+                            <c:forEach items="${listPI}" var="p">
                             <div>
-                                <img src="/${pro.getImage_url()}" alt="">
+                                <img src="/${p.image_url}" alt="">
                             </div>
                             </c:forEach>
                         </div>
@@ -55,8 +55,8 @@
                     <div class="infor_product">
 
                         <div class="intro_product">
-                            <div class="name_product">${pro_name}</div>
-                            <div class="id_product">Mã sản phẩm: <span>${pro_id}</span></div>
+                            <div class="name_product">${pro.pro_name}</div>
+                            <div class="id_product">Mã sản phẩm: <span>${pro.pro_id}</span></div>
                             <div class="cost_product"></div>
                         </div>
 
@@ -102,22 +102,22 @@
                             </div>
                             <div class="more_infor_content">
                                 <div class="brand">
-                                    - Thương hiệu: <span>${brand}</span>
+                                    - Thương hiệu: <span>${pro.brand}</span>
                                 </div>
                                 <div class="origin">
-                                    - Xuất xứ: <span>${origin}</span>
+                                    - Xuất xứ: <span>${pro.origin}</span>
                                 </div>
                                 <div class="component">
-                                    - Thành phần: <span>${ingredient}</span>
+                                    - Thành phần: <span>${pro.ingredient}</span>
                                 </div>
                                 <div class="weight">
-                                    - Trọng lượng: <span>${mass}kg</span>
+                                    - Trọng lượng: <span>${pro.mass}kg</span>
                                 </div>
                                 <div class="usesage">
-                                    - Công dụng: <span>${pro_description}</span>
+                                    - Công dụng: <span>${pro.pro_description}</span>
                                 </div>
                                 <div class="preserve">
-                                    - Số lượng trong kho: <span>${pro_quantity}</span>
+                                    - Số lượng trong kho: <span>${pro.pro_quantity}</span>
                                 </div>
                             </div>
                         </div>
