@@ -344,19 +344,12 @@ public class AccountDAO {
         return (count == 0) ? false : true;
     }
 
-    public int deleteAccAdmin(Account acc) {
+    public int deleteAccAdmin(int acc_id) {
         int count = 0;
-        String sql = "UPDATE account SET username =? , password=?, fullname = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE acc_id = ?";
+        String sql = "UPDATE account SET isDelete= 1 WHERE acc_id = ?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1, acc.getUsername());
-            ps.setString(2, acc.getPassword());
-            ps.setString(3, acc.getFullname());
-            ps.setString(4, acc.getPhone_number());
-            ps.setString(5, acc.getEmail());
-            ps.setInt(6, 0);
-            ps.setInt(7, 1);
-            ps.setInt(8, acc.getAcc_id());
+            ps.setInt(1, acc_id);
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);

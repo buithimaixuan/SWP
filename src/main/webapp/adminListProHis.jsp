@@ -73,10 +73,8 @@
                                     <td class="text-start align-middle nv-tab">${listPH.staff_id}</td>
                                     <td class="text-start align-middle proid-tab">${listPH.pro_id}</td>
                                     <td class="text-start align-middle">${listPH.pro_name}</td>
-                                    <td class="text-start">
-                                        <a class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                        <a class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                        <a class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                    <td class="text-start align-middle ">
+                                        ${listPH.action}
                                     </td>
                                     <td class="text-start align-middle date-tab">${listPH.create_date}</td>
                                 </tr>

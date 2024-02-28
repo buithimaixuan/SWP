@@ -114,7 +114,7 @@ public class CustomerDAO {
 
     public LinkedList<Customer> getAllCus() {
         LinkedList<Customer> listCus = new LinkedList<>();
-        String sql = "select * from customer where isDelete=0";
+        String sql = "select * from customer";
         try {
 
             ps = conn.prepareStatement(sql);
@@ -168,21 +168,12 @@ public class CustomerDAO {
     }
 
 
-    public int deleteCusAdmin(Customer cus) {
+    public int deleteCusAdmin(int cus_id) {
         int count = 0;
-        String sql = "UPDATE customer SET acc_id =? , username =? , password=?, fullname = ? , avatar = ? , phone_number = ?, email = ? , code_reset= ? , isDelete= ? WHERE cus_id = ?";
+        String sql = "UPDATE customer SET isDelete= 1 WHERE cus_id = ?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, cus.getAcc_id());
-            ps.setString(2, cus.getUsername());
-            ps.setString(3, cus.getPassword());
-            ps.setString(4, cus.getFullname());
-            ps.setString(5, cus.getAvatar());
-            ps.setString(6, cus.getPhone_number());
-            ps.setString(7, cus.getEmail());
-            ps.setInt(8, 0);
-            ps.setInt(9, 1);
-            ps.setInt(10, cus.getCus_id());
+            ps.setInt(1, cus_id);
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
