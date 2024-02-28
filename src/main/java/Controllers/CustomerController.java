@@ -243,24 +243,14 @@ public class CustomerController extends HttpServlet {
 
             int accId = Integer.valueOf(request.getParameter("acc_id"));
             int cusId = Integer.valueOf(request.getParameter("cus_id"));
-            String phoneU = request.getParameter("Phone");
-            String emailU = request.getParameter("email");
-            String fullnameU = request.getParameter("fullname");
-            String password =request.getParameter("pass");
-            String pathAvatar = request.getParameter("avatar");
-            String username = request.getParameter("username");
-
-            System.out.println("avatar...." + pathAvatar);
             
-            System.out.println(username + ".update." + accId);
-            Account acdc = new Account(accId, username, password, fullnameU, phoneU, emailU, 0, 1);
-            Customer cus = new Customer(cusId, accId, username, password, fullnameU, pathAvatar, phoneU, emailU, 0, 1);
+            Customer cus = cdao.getCustomer(accId);
 
             System.out.println("account id : " + accId);
             System.out.println("cus id : " + cusId);
 
-            int resultAcc = acdao.deleteAccAdmin(acdc);
-            int resultCus = cdao.deleteCusAdmin(cus);
+            int resultAcc = acdao.deleteAccAdmin(accId);
+            int resultCus = cdao.deleteCusAdmin(cusId);
 
             System.out.println("ok update account");
             if (resultAcc > 0 && resultCus > 0) {

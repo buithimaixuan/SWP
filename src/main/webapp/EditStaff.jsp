@@ -60,7 +60,7 @@
                             
                             <div class="form-outline w-100 form-group">
                                 <div class="form-hover">
-                                    <input value="<%= getStaff.getUsername() %>" type="text" id="username" name="username" placeholder="Tên đăng nhập" class="form-control form-control-lg" />
+                                    <input value="<%= getStaff.getUsername() %>" type="text" id="username" name="username" readonly placeholder="Tên đăng nhập" class="form-control form-control-lg" />
                                     <label for="username" class="form-label">Tên đăng nhập</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
@@ -69,7 +69,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getPassword() %>" type="password" id="password" name="password" placeholder="Mật khẩu"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly />
                                     <label for="password" class="form-label">Mật khẩu</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
@@ -78,7 +78,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getFullname() %>" type="text" id="fullname" name="fullname" placeholder="Tên nhân viên"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="fullname" class="form-label">Tên nhân viên</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
@@ -87,7 +87,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getPhone_number() %>" type="text" id="phone" name="phone" placeholder="Số điện thoại"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="phone" class="form-label">Số điện thoại</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
@@ -96,7 +96,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getEmail() %>" type="email" id="email" name="email" placeholder="Email"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="email" class="form-label">Email</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
@@ -105,7 +105,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getBirthday() %>" type="date" id="birthday" name="birthday" placeholder="Ngày sinh"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="birthday" class="form-label">Ngày sinh</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
@@ -130,17 +130,21 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getAddress() %>" type="text" id="address" name="address" placeholder="Địa chỉ"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="address" class="form-label">Địa chỉ</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
                             </div>
 
-                            <div class="form-group form-outline mt-4 w-100">
+                            <div class="form-outline mt-4 w-100 mb-0">
+                                <label for="position" class="form-label h5">Vị trí</label>
                                 <div class="form-hover">
-                                    <input value="<%= getStaff.getPosition()%>" type="text" id="position" name="position" placeholder="Vị trí"
-                                           class="form-control form-control-lg" />
-                                    <label for="position" class="form-label">Vị trí</label>
+                                    
+                                    <select id="position" name="position" class="w-100 form-control form-control-lg" >
+                                        <option value="<%= getStaff.getPosition()%>">product manager</option>
+                                        <option value="<%= getStaff.getPosition()%>">order manager</option>
+                                        <option value="<%= getStaff.getPosition()%>">news manager</option>
+                                    </select>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
                             </div>
@@ -148,7 +152,7 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <input value="<%= getStaff.getBegin_work()%>" type="date" id="begin_work" name="begin_work" placeholder="Ngày làm việc"
-                                           class="form-control form-control-lg" />
+                                           class="form-control form-control-lg" readonly/>
                                     <label for="begin_work" class="form-label">Ngày làm việc</label>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
