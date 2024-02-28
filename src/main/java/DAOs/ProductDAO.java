@@ -493,6 +493,23 @@ public class ProductDAO {
         }
         return product;
     }
+    
+    /**
+     * KHOA code
+     *
+     */
+    public int editProQuan(int pro_id, Product obj) {
+        int count = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement("update [product] set pro_quantity=? where pro_id=?");
+            ps.setInt(1, obj.getPro_quantity());
+            ps.setInt(2, pro_id);
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
 
     /**
      *

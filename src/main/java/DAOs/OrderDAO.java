@@ -70,15 +70,14 @@ public class OrderDAO {
     public int addOrder(Order obj) {
         int count = 0;
         try {
-            PreparedStatement ps = conn.prepareStatement("Insert into [orders] values(?, ?, ?, ?, ?, ?, ?, ?)");
-            ps.setInt(1, obj.getO_id());
-            ps.setInt(2, obj.getCus_id());
-            ps.setString(3, obj.getPayment());
-            ps.setString(4, obj.getAddress());
-            ps.setString(5, obj.getStatus());
-            ps.setDate(6, obj.getO_date());
-            ps.setDouble(7, obj.getTotal_price());
-            ps.setInt(8, obj.getIsDelete());
+            PreparedStatement ps = conn.prepareStatement("Insert into [orders] values(?, ?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, obj.getCus_id());
+            ps.setString(2, obj.getPayment());
+            ps.setString(3, obj.getAddress());
+            ps.setString(4, obj.getStatus());
+            ps.setDate(5, obj.getO_date());
+            ps.setDouble(6, obj.getTotal_price());
+            ps.setInt(7, obj.getIsDelete());
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,10 +147,11 @@ public class OrderDAO {
         return orderList;
     }
     
-    public Order getOrderWhenPay() {
+    public Order getOrderWhenPay(int cus_id) {
         Order obj = null;
         try {
-            PreparedStatement ps = conn.prepareStatement("select top 1 * from [orders] order by o_id desc");
+            PreparedStatement ps = conn.prepareStatement("select top 1 * from [orders] where cus_id=? order by o_id desc");
+            ps.setInt(1, cus_id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 obj = new Order(rs.getInt("o_id"), rs.getInt("cus_id"),
@@ -163,4 +163,5 @@ public class OrderDAO {
         }
         return obj;
     }
+    
 }

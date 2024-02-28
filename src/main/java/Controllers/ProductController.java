@@ -1351,7 +1351,7 @@ public class ProductController extends HttpServlet {
                 Categories cat = cdao.getCatById(pro.getCat_id());
                 request.setAttribute("listPI", listPI);
                 request.setAttribute("cat", cat);
-                request.setAttribute("pro", pro);
+                request.getSession().setAttribute("pro", pro);
                 request.getRequestDispatcher("/proDetail.jsp").forward(request, response);
             } catch (Exception e) {
                 response.sendRedirect("/HomeController");
@@ -1736,6 +1736,21 @@ public class ProductController extends HttpServlet {
                         Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }        
+            }
+        }
+        
+        // KHOA Code's
+        // Buy In Shop
+        if (request.getParameter("btnBuyNow") != null) {
+            Product getProDetail = (Product) request.getSession().getAttribute("pro");
+            Customer getCusWhenBuy = (Customer) request.getSession().getAttribute("account");
+            int quantityInShop = Integer.parseInt(request.getParameter("quantityBuyInShop"));
+
+            if (getCusWhenBuy != null) {
+                request.getSession().setAttribute("quantityBuyNow", quantityInShop);
+                response.sendRedirect("/OrderController/BuyInShop");
+            } else {
+                response.sendRedirect("/ProductController/DetailProduct/" + getProDetail.getPro_id());
             }
         }
 

@@ -31,7 +31,7 @@
             <%
                 CartDAO cdao = new CartDAO();
             %>
-            <form class="form-inline container mt-5 row">
+            <form class="form-inline container mt-5 row" action="CartController" method="post">
                 <div class="fs-5 title">Giỏ hàng</div> 
                 <div class="col-lg-9">
 
@@ -64,7 +64,7 @@
                             %>
                             <tr class="border border-1">
                                 <td class="mx-2">
-                                    <input value="<%= pro.getPro_id()%>" type="checkbox" name="checkbox" class="checkBuy mx-2">
+                                    <input value="<%= pro.getPro_id()%>" type="checkbox" name="checkBoxID" class="checkBuy mx-2">
                                 </td>
                                 <td>
                                     <img class="pt-2" src="/<%= pro.getPro_image()%>" alt="image"
@@ -126,7 +126,7 @@
                         if (!listCart.isEmpty()) {
                     %>
                     <input type="submit" class="btn btn-outline-info text-black fs-5" value="Tiến hành đặt hàng"
-                           name="btnBuy">
+                           name="btnBuyInCart">
                     <%
                         }
                     %>

@@ -45,16 +45,17 @@
                                 <img src="/${pro.pro_image}" alt="">
                             </div>
                             <c:forEach items="${listPI}" var="p">
-                            <div>
-                                <img src="/${p.image_url}" alt="">
-                            </div>
+                                <div>
+                                    <img src="/${p.image_url}" alt="">
+                                </div>
                             </c:forEach>
                         </div>
                     </div>
 
-                    <div class="infor_product">
+                    <form class="infor_product" action="ProductController" method="post">
 
                         <div class="intro_product">
+                            <input type="hidden" name="proID" value="${pro.pro_id}">
                             <div class="name_product">${pro.pro_name}</div>
                             <div class="id_product">Mã sản phẩm: <span>${pro.pro_id}</span></div>
                             <div class="cost_product"></div>
@@ -68,7 +69,7 @@
                                           onclick="this.parentNode.querySelector('input[type=number]').stepDown();">
                                         <i class="fa-solid fa-minus"></i>
                                     </span>
-                                    <input type="number" value="1" min="1" max="10">
+                                    <input type="number" name="quantityBuyInShop" value="1" min="1" max="10">
                                     <span class="increase"
                                           onclick="this.parentNode.querySelector('input[type=number]').stepUp();">
                                         <i class="fa-solid fa-plus"></i>
@@ -76,22 +77,22 @@
                                 </div>
                             </div>
                             <div class="option_product">
-                                <a href="#" class="buyNow_btn text-decoration-none">
+                                <button type="submit" name="btnBuyNow" class="buyNow_btn text-decoration-none">
                                     <div>
                                         <i class="fa-solid fa-bag-shopping"></i>Mua ngay
                                     </div>
                                     <div>
                                         Giao hàng tận tay quý khách
                                     </div>
-                                </a>
-                                <a href="#" class="addCart_btn text-decoration-none">
+                                </button>
+                                <button href="#" class="addCart_btn text-decoration-none">
                                     <div>
                                         <i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng
                                     </div>
                                     <div>
                                         Chọn vào giỏ hàng để mua
                                     </div>
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -122,7 +123,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </form>
                 </div>
 
                 <!-- SẢN PHẨM HOT -->

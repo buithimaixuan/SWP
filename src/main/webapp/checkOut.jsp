@@ -4,6 +4,11 @@
     Author     : Vu Minh Uyen
 --%>
 
+<%@page import="Models.Cart"%>
+<%@page import="Models.Product"%>
+<%@page import="DAOs.CartDAO"%>
+<%@page import="DAOs.ProductDAO"%>
+<%@page import="Models.Customer"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
@@ -32,7 +37,7 @@
                 font-size: 0.8rem;
             }
 
-     
+
 
             .dathangButon:hover {
                 background-color: rgb(255, 0, 64);
@@ -41,7 +46,7 @@
 
             .input-group {
                 --primary: #74e3ff;
-           }
+            }
 
             .input {
                 all: unset;
@@ -83,238 +88,257 @@
     </head>
 
     <body>
-        
-        
+
+
         <%@include file="headOfCart.jsp" %>
         <div class="container col-10 my-5 br-2 rounded">
-            <h5 style="color: #631bf3;">Group4 Store</h3>
-                <div class="row g-3">
-                    <div class="col-4 order-md-last">
-                        <h6 class="d-flex justify-content-between align-item-center">
-                            <span class="text-muted">Đơn hàng</span>
-                            <span class="badge bg-secondary rounded-pill">3</span>
-                        </h6>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex justify-content-between">
-                                <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
+            <h3 style="color: #631bf3;">Group4 Store</h3>
+            <form class="row g-3" action="OrderController" method="post">
+                <%
+                    String[] listCartBuy = (String[]) request.getSession().getAttribute("finalCart");
+                    double amount = 0;
+                %>
+                <div class="col-4 order-md-last">
+                    <h6 class="d-flex justify-content-between align-item-center">
+                        <span class="text-muted">Đơn hàng</span>
+                        <c:choose>
+                            <c:when test="${finalPro != null}">
+                                <span class="badge bg-secondary rounded-pill">1</span>
+                            </c:when>
+                            <c:when test="${finalCart != null}">
+                                <span class="badge bg-secondary rounded-pill"><%= listCartBuy.length%></span>
+                            </c:when>
+                        </c:choose>
+                    </h6>
+
+                    <c:choose>
+                        <c:when test="${finalCart != null}">
+                            <ul class="list-group">
+                                <%
+                                    Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
+                                    ProductDAO pDAO = new ProductDAO();
+                                    CartDAO caDAO = new CartDAO();
+                                    for (int i = 0; i < listCartBuy.length; i++) {
+                                        int proID = Integer.parseInt(listCartBuy[i]);
+                                        Product getProInCheckout = pDAO.getProductByID(proID);
+                                        Cart getCartInCheckout = caDAO.getCartByProAndCusID(getCusWhenPay.getCus_id(), proID);
+
+                                %>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
+                                    <div>
+                                        <h6><%= getProInCheckout.getPro_name()%></h6>
+                                        <span class="text-muted"><%= getProInCheckout.getBrand()%></span>
+                                    </div>
+                                    <%
+                                        if (getProInCheckout.getDiscount() < getProInCheckout.getPro_price()) {
+                                            amount += getProInCheckout.getDiscount() * getCartInCheckout.getPro_quantity();
+                                    %>
+                                    <span class="text-muted"><%= getProInCheckout.getDiscount() * getCartInCheckout.getPro_quantity()%>đ</span>
+                                    <%
+                                    } else {
+                                        amount += getProInCheckout.getPro_price() * getCartInCheckout.getPro_quantity();
+                                    %>
+                                    <span class="text-muted"><%= getProInCheckout.getPro_price() * getCartInCheckout.getPro_quantity()%>đ</span>
+                                    <%
+                                        }
+                                    %>
+                                </li>
+                                <%
+                                    }
+                                %>
+                            </ul>
+                        </c:when>
+                        <c:when test="${finalPro != null}">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
+                                    <div>
+                                        <input type="hidden" name="proIDBill" value="${finalPro.pro_id}">
+                                        <input type="hidden" name="quantityBill" value="${quantityBuyNow}">
+                                        <h6>${finalPro.pro_name}</h6>
+                                        <span class="text-muted">${finalPro.brand}</span>
+                                    </div>
+                                    <c:choose>
+                                        <c:when test="${finalPro.discount < finalPro.pro_price}">
+                                            <span class="text-muted">${finalPro.discount*quantityBuyNow}đ</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span class="text-muted">${finalPro.pro_price*quantityBuyNow}đ</span>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </li>
+                            </ul>
+                        </c:when>
+                    </c:choose>
+
+                    <hr>
+                    <li class="d-flex justify-content-between">
+                        <div>
+                            <h6>Tổng cộng</h6>
+                        </div>
+                        <c:choose>
+                            <c:when test="${finalCart != null}">
+                                <h4 style="color: #00ffa2;"><%= amount%>đ </h4>
+                            </c:when>
+                            <c:when test="${finalCart != null}">
+                                <c:choose>
+                                    <c:when test="${finalPro.discount < finalPro.pro_price}">
+                                        <h4 style="color: #00ffa2;">${finalPro.discount*quantityBuyNow}đ </h4>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h4 style="color: #00ffa2;">${finalPro.pro_price*quantityBuyNow}đ </h4>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:when>
+                        </c:choose>
+                    </li>
+                    <br>
+                    <div style="display: flex;">
+                        <a style="margin-right: auto; text-decoration: none;" href="">
+                            < Quay về giỏ hàng</a>
+
+                        <button name="payBtn" type="submit" class="dathangButon btn mb-4"
+                                style="width: 50%;background-color: rgb(104, 39, 255);"
+                                onclick="validateForm()">ĐẶT HÀNG</button>
+                    </div>
+                </div>
+                
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>Thông tin giao hàng</h6>
+                            <div id="checkoutForm" onsubmit="return false;">
                                 <div>
-                                    <h6>Bánh kẹo</h6>
-                                    <span class="text-muted">Bánh kẹp ngon Hàn Quốc</span>
+                                    <div class="col-12" style="padding-bottom: 15px;">
+                                        <div class="input-group">
+                                            <input name="fullname" class="input" required type="text" id="username"
+                                                   style="width: 100%;">
+                                            <label class="label" for="username">FullName</label>
+                                        </div>
+                                        <div class="error-message" id="username-error"></div>
+                                    </div>
+                                    <div class="col-12" style="padding-bottom: 15px;">
+                                        <div class="input-group">
+                                            <input name="phonenumber" class="input" required type="tel" id="phone" style="width: 100%;">
+                                            <label class="label" for="phone">SĐT</label>
+                                        </div>
+                                        <div class="error-message" id="phone-error"></div>
+                                    </div>
+                                    <div class="col-12" style="padding-bottom: 15px;">
+                                        <div class="input-group">
+                                            <input name="email" class="input" required type="email" id="email" style="width: 100%;">
+                                            <label class="label" for="email">Email</label>
+                                        </div>
+                                        <div class="error-message" id="email-error"></div>
+                                    </div>
+                                    <div class="col-12" style="padding-bottom: 15px;">
+                                        <div class="input-group">
+                                            <input name="address1" class="input" required type="text" id="address" style="width: 100%;">
+                                            <label class="label" for="address">Address</label>
+                                        </div>
+                                        <div class="error-message" id="address-error"></div>
+                                    </div>
+
+
+                                    <div class="col-12" style="padding-bottom: 15px;margin-right: 10px;">
+                                        <label class="form-label" for="district">Tỉnh <select class="form-select" name="address2"
+                                                                                              id="district">
+                                                <option>Kiên Giang</option>
+                                                <option>Tân Hiệp</option>
+                                            </select></label>
+                                        <label class="form-label" for="district">Huyện <select class="form-select" name="address3"
+                                                                                               id="district">
+                                                <option>Cần Thơ</option>
+                                                <option>Tân Hiệp</option>
+                                            </select></label>
+
+                                    </div>
                                 </div>
-                                <span class="text-muted">50.000đ</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between ">
-                                <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
-                                <div>
-                                    <h6>Bánh kẹo</h6>
-                                    <span class="text-muted">Bánh kẹp ngon Hàn Quốc</span>
-                                </div>
-                                <span class="text-muted">50.000đ</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between">
-                                <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
-                                <div>
-                                    <h6>Bánh kẹo</h6>
-                                    <span class="text-muted">Bánh kẹp ngon Hàn Quốc</span>
-                                </div>
-                                <span class="text-muted">50.000đ</span>
-                            </li>
-
-                        </ul>
-
-                        <br>
-                        <li class=" d-flex justify-content-between">
-                            <div>
-                                <h6>Tạm tính</h6>
                             </div>
-                            <span class="text-muted">180.000đ</span>
-                        </li>
-                        <li class="d-flex justify-content-between">
-                            <div>
-                                <h6>Phí Vận chuyển</h6>
-                            </div>
-                            <span class="text-muted">20.000đ</span>
-                        </li>
-
-
-
-                        <hr>
-                        <li class="d-flex justify-content-between">
-                            <div>
-                                <h6>Tổng cộng</h6>
-                            </div>
-                            <h4 style="color: #00ffa2;">200.000đ </h4>
-                        </li>
-                        <br>
-                        <div style="display: flex;">
-                            <a style="margin-right: auto; text-decoration: none;" href="">
-                                < Quay về giỏ hàng</a>
-
-                            <button type="submit" class="dathangButon btn mb-4"
-                                    style="width: 50%;background-color: rgb(104, 39, 255);"
-                                    onclick="validateForm()">ĐẶT HÀNG</button>
-
-
-
                         </div>
 
 
-                    </div>
-                    <div class="col-8">
-                        <div class="row">
-                            <div class="col-6">
-                                <h6>Thông tin giao hàng</h6>
-                                <form id="checkoutForm" onsubmit="return false;">
+                        <div class="col-6">
+                            <h6>Vận chuyển</h6>
+                            <div class="form-check">
+                                <li class="list-group-item d-flex justify-content-between">
                                     <div>
-                                        <div class="col-12" style="padding-bottom: 15px;">
-                                            <div class="input-group">
-                                                <input class="input" required type="text" id="username"
-                                                       style="width: 100%;">
-                                                <label class="label" for="username">FullName</label>
-                                            </div>
-                                            <div class="error-message" id="username-error"></div>
-                                        </div>
-                                        <div class="col-12" style="padding-bottom: 15px;">
-                                            <div class="input-group">
-                                                <input class="input" required type="tel" id="phone" style="width: 100%;">
-                                                <label class="label" for="phone">SĐT</label>
-                                            </div>
-                                            <div class="error-message" id="phone-error"></div>
-                                        </div>
-                                        <div class="col-12" style="padding-bottom: 15px;">
-                                            <div class="input-group">
-                                                <input class="input" required type="email" id="email" style="width: 100%;">
-                                                <label class="label" for="email">Email</label>
-                                            </div>
-                                            <div class="error-message" id="email-error"></div>
-                                        </div>
-                                        <div class="col-12" style="padding-bottom: 15px;">
-                                            <div class="input-group">
-                                                <input class="input" required type="text" id="address" style="width: 100%;">
-                                                <label class="label" for="address">Address</label>
-                                            </div>
-                                            <div class="error-message" id="address-error"></div>
-                                        </div>
-
-
-                                        <div class="col-12" style="padding-bottom: 15px;margin-right: 10px;">
-                                            <label class="form-label" for="district">Tỉnh <select class="form-select"
-                                                                                                  id="district">
-                                                    <option>Kiên Giang</option>
-                                                    <option>Tân Hiệp</option>
-                                                </select></label>
-                                            <label class="form-label" for="district">Huyện <select class="form-select"
-                                                                                                   id="district">
-                                                    <option>Cần Thơ</option>
-                                                    <option>Tân Hiệp</option>
-                                                </select></label>
-
-                                        </div>
-
-                                        <div class="col-12" style="padding-bottom: 15px; width: 100%;">
-                                            <div class="input-group">
-                                                <!-- <textarea class="input" rows="3" cols="51" id="note"></textarea> -->
-                                                <input class="input" required type="text" style="width: 100%;">
-                                                <label class="label" for="username">Notes</label>
-                                            </div>
-                                        </div>
+                                        <!-- <input type="checkbox" class="form-check-input cod" name="paymentMethod"> -->
+                                        <h6 class="text-success">Giao hàng tận nhà</h6>
                                     </div>
-                                </form>
+                                    <span class="text-muted">Miễn phí</span>
+                                </li>
                             </div>
 
 
-                            <div class="col-6">
-                                <h6>Vận chuyển</h6>
-                                <div class="form-check">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div>
-                                            <!-- <input type="checkbox" class="form-check-input cod" name="paymentMethod"> -->
-                                            <h6 class="text-success">Giao hàng tận nhà</h6>
-                                        </div>
-                                        <span class="text-muted">20.000đ</span>
-                                    </li>
-                                </div>
+                            <h6 style="padding-top: 50px;">Thanh toán</h6>
 
-
-                                <h6 style="padding-top: 50px;">Thanh toán</h6>
-
-                                <div class="form-check">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div>
-                                            <input type="radio" class="form-check-input cod" name="paymentMethod" checked>
-                                            <label class="form-check-label">Thanh toán COD</label>
-                                        </div>
-                                        <img src="https://th.bing.com/th/id/R.8ea4398b8e3f3bd9243156d01387c4e2?rik=73MFykivpgJj2w&pid=ImgRaw&r=0"
-                                             alt="" style="width: 10%;">
-                                    </li>
-                                </div>
-                                <div class="form-check">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div>
-                                            <input type="radio" class="form-check-input cod" name="paymentMethod">
-                                            <label class="form-check-label">Banking</label>
-                                        </div>
-                                        <img src="https://th.bing.com/th/id/OIP.CzeBJe1U2Z9GMtcmRLtTigHaEo?w=238&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                                             alt="" style="width: 10%;">
-                                    </li>
-                                </div>
-
-                                <div class="form-check">
-                                    <li class="list-group-item d-flex justify-content-between">
-                                        <div>
-                                            <input type="radio" class="form-check-input cod" name="paymentMethod">
-                                            <label class="form-check-label">Momo</label>
-                                        </div>
-                                        <img src="https://th.bing.com/th/id/OIP.8A3oGCqKXQ3uYNyfTXyNNgAAAA?w=181&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                                             alt="" style="width: 10%;">
-                                    </li>
-                                </div>
-                                <br>
+                            <div class="form-check">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <div>
+                                        <input type="radio" class="form-check-input cod" name="paymentMethod" value="COD" checked>
+                                        <label class="form-check-label">Thanh toán COD</label>
+                                    </div>
+                                    <img src="https://th.bing.com/th/id/R.8ea4398b8e3f3bd9243156d01387c4e2?rik=73MFykivpgJj2w&pid=ImgRaw&r=0"
+                                         alt="" style="width: 10%;">
+                                </li>
                             </div>
+
+                            <div class="form-check">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <div>
+                                        <input type="radio" class="form-check-input cod" name="paymentMethod" value="VNPay">
+                                        <label class="form-check-label">VNPay</label>
+                                    </div>
+                                    <img src="https://th.bing.com/th/id/OIP.8A3oGCqKXQ3uYNyfTXyNNgAAAA?w=181&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                                         alt="" style="width: 10%;">
+                                </li>
+                            </div>
+                            <br>
                         </div>
                     </div>
                 </div>
-                <hr>
-                <!-- <div style="padding-left: 450px;">
-                <a href="" style="text-decoration: none;">Thank You</a>
-            </div> -->
+            </form>
+            <hr>
+        </div>
 
 
 
 
-                <script>
-                    function validateForm() {
-                        var form = document.getElementById('checkoutForm');
-                        var inputs = form.querySelectorAll('input[required]');
-                        var isValid = true;
+        <script>
+            function validateForm() {
+                var form = document.getElementById('checkoutForm');
+                var inputs = form.querySelectorAll('input[required]');
+                var isValid = true;
 
-                        var phoneRegex = /^\d{10,11}$/;
-                        var emailRegex = /^\S+@\S+\.\S+$/;
+                var phoneRegex = /^\d{10,11}$/;
+                var emailRegex = /^\S+@\S+\.\S+$/;
 
-                        inputs.forEach(function (input) {
-                            var errorId = input.id + '-error';
-                            var errorMessage = '';
+                inputs.forEach(function (input) {
+                    var errorId = input.id + '-error';
+                    var errorMessage = '';
 
-                            if (!input.value.trim()) {
-                                errorMessage = 'Vui lòng nhập thông tin.';
-                                isValid = false;
-                            } else if (input.id === 'phone' && !phoneRegex.test(input.value)) {
-                                errorMessage = 'Số điện thoại không hợp lệ.';
-                                isValid = false;
-                            } else if (input.id === 'email' && !emailRegex.test(input.value)) {
-                                errorMessage = 'Email không hợp lệ.';
-                                isValid = false;
-                            }
-
-                            document.getElementById(errorId).textContent = errorMessage;
-                            input.classList.toggle('invalid-field', errorMessage !== '');
-                        });
-
-                        return isValid;
+                    if (!input.value.trim()) {
+                        errorMessage = 'Vui lòng nhập thông tin.';
+                        isValid = false;
+                    } else if (input.id === 'phone' && !phoneRegex.test(input.value)) {
+                        errorMessage = 'Số điện thoại không hợp lệ.';
+                        isValid = false;
+                    } else if (input.id === 'email' && !emailRegex.test(input.value)) {
+                        errorMessage = 'Email không hợp lệ.';
+                        isValid = false;
                     }
-                </script>
+
+                    document.getElementById(errorId).textContent = errorMessage;
+                    input.classList.toggle('invalid-field', errorMessage !== '');
+                });
+
+                return isValid;
+            }
+        </script>
 
 
-                </body>
+    </body>
 
-                </html>
+</html>

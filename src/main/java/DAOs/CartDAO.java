@@ -146,4 +146,22 @@ public class CartDAO {
         }
     }
     
+    // Khoa's Code
+    // Lay Pro ID cua khach hang khac nhau
+    public Cart getCartByProAndCusID(int cus_id, int pro_id) {
+        Cart obj = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement("select * from [cart] where cus_id=? and pro_id=?");
+            ps.setInt(1, cus_id);
+            ps.setInt(2, pro_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obj = new Cart(rs.getInt("cus_id"), rs.getInt("pro_id"), rs.getInt("pro_quantity"), rs.getDouble("cart_price"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
+    
 }
