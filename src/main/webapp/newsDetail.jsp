@@ -24,6 +24,7 @@
         <section id="main">
             <div class="address">
                 <!--<a href="">Trang chủ</a> <span class="from_to"></span>-->
+                <a style="font-size: 1.3rem" class="fw-bold" href="/HomeController">Trang chủ</a> <i class="fa-solid fa-chevron-right"></i>
                 <a style="font-size: 1.3rem" class="fw-bold" href="listNews">Blog</a> <i class="fa-solid fa-chevron-right"></i>
                 <span style="font-size: 1.3rem" class="name_product_add fw-bold">${news.getTitle()}</span>
             </div>
