@@ -188,7 +188,7 @@ public class CustomerDAO {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
-
+    }
     
     //KHOA's CODE
     // Them tim customer bang cusid
