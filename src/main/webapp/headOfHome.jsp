@@ -69,7 +69,7 @@
                             </div>
                             <div>
                                 <span class="input-group-append ms-4">
-                                    <a href="" class="text-white"><i class="fa fa-newspaper-o"></i></a>
+                                    <a href="/OrderController/OrderList" class="text-white"><i class="fa fa-newspaper-o"></i></a>
                                 </span>
                                 <p>Đơn hàng</p>
                             </div>

@@ -99,6 +99,22 @@ public class CategoriesDAO {
         }
         return list;
     }
+    
+    public Categories getCatByCatID(int cat_id) {
+        Categories obj = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [categories] where cat_id=?");
+            ps.setInt(1, cat_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obj = new Categories(rs.getInt("cat_id"), rs.getNString("cat_name"),
+                        rs.getNString("typeCategories"), rs.getNString("cat_description"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 
     public static void main(String[] args) {
         CategoriesDAO dao = new CategoriesDAO();
