@@ -256,6 +256,43 @@ public class OrderController extends HttpServlet {
 
             request.setAttribute("getOrderWhenPay", getOrderWhenPay);
             request.getRequestDispatcher("/paySuccess.jsp").forward(request, response);
+        } else if (path.endsWith("/OrderController/OrderList")) {
+            System.out.println("kitra");
+            OrderDAO oDAO = new OrderDAO();
+            Customer cusSession = (Customer) request.getSession().getAttribute("account");
+            int cusID = cusSession.getCus_id();
+
+            LinkedList<Order> orderListCus = oDAO.getAllOrdersByCusId(cusID);
+            request.setAttribute("orderListCus", orderListCus);
+            request.getRequestDispatcher("/ListOrderCusVer2.jsp").forward(request, response);
+        } else if (path.startsWith("/OrderController/OrderDetailCustomer/")) {
+            String s[] = path.split("/");
+            int orderID = Integer.parseInt(s[s.length - 1]);
+            OrderDAO oDAO = new OrderDAO();
+            OrderDetailDAO odDAO = new OrderDetailDAO();
+            CustomerDAO cuDAO = new CustomerDAO();
+            
+            System.out.println("OrderID");
+            System.out.println(orderID);
+
+            Order getOrderByID = oDAO.getOrderByID(orderID);
+            LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+            System.out.println("Kich thuoc mang");
+            System.out.println(odList.size());
+
+            request.setAttribute("getOrderByID", getOrderByID);
+            request.setAttribute("odList", odList);
+            request.setAttribute("quantityOrderDetail", odList.size());
+            request.getRequestDispatcher("/OrderDetailCusVer2.jsp").forward(request, response);
+        } else if (path.startsWith("/OrderController/OrderDeleteCustomer/")) {
+            String s[] = path.split("/");
+            int orderID = Integer.parseInt(s[s.length - 1]);
+            OrderDAO oDAO = new OrderDAO();
+
+            Order orderEdit = new Order(0, 0, "", "", "Đã hủy", null, 0, 0);
+            int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+
+            response.sendRedirect("/OrderController/OrderList");
         }
     } 
 

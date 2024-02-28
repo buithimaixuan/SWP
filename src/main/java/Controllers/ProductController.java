@@ -1750,7 +1750,7 @@ public class ProductController extends HttpServlet {
                 request.getSession().setAttribute("quantityBuyNow", quantityInShop);
                 response.sendRedirect("/OrderController/BuyInShop");
             } else {
-                response.sendRedirect("/ProductController/DetailProduct/" + getProDetail.getPro_id());
+                response.sendRedirect("/LoginController");
             }
         }
 
