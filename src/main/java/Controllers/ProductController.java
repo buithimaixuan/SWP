@@ -1700,7 +1700,7 @@ public class ProductController extends HttpServlet {
             ProductDAO pdao = new ProductDAO();
             Customer cus = (Customer) request.getSession().getAttribute("account");
             if (cus == null) {
-                response.sendRedirect("/HomeController");
+                response.sendRedirect("/LoginController");
             } else {
                 CartDAO cdao = new CartDAO();
                 
@@ -1708,7 +1708,7 @@ public class ProductController extends HttpServlet {
                 System.out.println(proId);
                 
                 Product pro = pdao.getProductByID(proId);
-                System.out.println(pro.getPro_name());
+                
                 Cart checkProductCart = null;
                 try {
                     checkProductCart = cdao.getCartByProId(proId);
@@ -1716,8 +1716,11 @@ public class ProductController extends HttpServlet {
                     Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if(checkProductCart == null){
-                    int proQuantityCart = 1;
-                    Cart cart = new Cart(cus.getCus_id(), proId, 1, pro.getPro_price());
+                    double current_price = pro.getPro_price();
+                    if(pro.getPro_price() > pro.getDiscount()){
+                        current_price = pro.getDiscount();
+                    }
+                    Cart cart = new Cart(cus.getCus_id(), proId, 1, current_price);
                     int cartStatus;
                     try {
                         cartStatus = cdao.createCart(cart);
@@ -1727,17 +1730,81 @@ public class ProductController extends HttpServlet {
                     }
                 } else{
                     int addQuantityCart = checkProductCart.getPro_quantity() + 1;
-                    double addPriceCart = addQuantityCart * pro.getPro_price();
-                    Cart updateCart = new Cart(cus.getCus_id(), proId, addQuantityCart, addPriceCart);
-                    try {
-                        int updateStatus = cdao.editCart(proId, updateCart);
+                    double current_price = pro.getPro_price();
+                    if(pro.getPro_price() > pro.getDiscount()){
+                        current_price = pro.getDiscount();
+                    }
+                    int isChangeQuantity = cdao.updateQuantityCart(cus.getCus_id(), proId, addQuantityCart);
+                    if(isChangeQuantity != 0){
+                        int isChangePrice = cdao.updatePriceCart(cus.getCus_id(), proId, current_price * addQuantityCart);
                         response.sendRedirect("/HomeController");
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                    } else{
+                        response.sendRedirect("/HomeController");
                     }
                 }        
             }
         }
+        
+        if (request.getParameter("btnAddCartDetail") != null) {
+            ProductDAO pdao = new ProductDAO();
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            
+            if (cus == null) {
+                response.sendRedirect("/LoginController");
+            } else {
+                CartDAO cdao = new CartDAO();
+                
+                int proId = Integer.parseInt(request.getParameter("proID"));
+                
+                Product pro = pdao.getProductByID(proId);
+                
+                Cart checkProductCart = null;
+                try {
+                    checkProductCart = cdao.getCartByProId(proId);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                int proQuantityCart = Integer.parseInt(request.getParameter("quantityBuyInShop"));
+                
+                if(checkProductCart == null){
+                    double current_price = pro.getPro_price();
+                    if(pro.getPro_price() > pro.getDiscount()){
+                        current_price = pro.getDiscount();
+                    }
+                    Cart cart = new Cart(cus.getCus_id(), proId, proQuantityCart, current_price * proQuantityCart);
+                    int cartStatus;
+                    try {
+                        cartStatus = cdao.createCart(cart);
+                        response.sendRedirect("/HomeController");
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else{
+                    int addQuantityCart = checkProductCart.getPro_quantity() + proQuantityCart;
+                    double current_price = pro.getPro_price();
+                    if(pro.getPro_price() > pro.getDiscount()){
+                        current_price = pro.getDiscount();
+                    }
+                    int isChangeQuantity = cdao.updateQuantityCart(cus.getCus_id(), proId, addQuantityCart);
+                    if(isChangeQuantity != 0){
+                        int isChangePrice = cdao.updatePriceCart(cus.getCus_id(), proId, current_price * addQuantityCart);
+                        response.sendRedirect("/HomeController");
+                    } else{
+                        response.sendRedirect("/HomeController");
+                    }
+//                    int addQuantityCart = checkProductCart.getPro_quantity() + proQuantityCart;
+//                    double addPriceCart = addQuantityCart * pro.getPro_price();
+//                    Cart updateCart = new Cart(cus.getCus_id(), proId, addQuantityCart, addPriceCart);
+//                    try {
+//                        int updateStatus = cdao.editCart(proId, updateCart);
+//                        response.sendRedirect("/HomeController");
+//                    } catch (SQLException ex) {
+//                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+                }        
+            }
+        }
+        
         
         // KHOA Code's
         // Buy In Shop

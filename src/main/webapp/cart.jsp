@@ -92,13 +92,18 @@
                                 </td>
                                 <td>
                                     <div class="form-group d-flex justify-content-center">
-                                        <button name="decrease_quan" value="<%= pro.getPro_id()%>" class="decrease_quan btn btn-sm btn-decre" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); DecreaseQuan(this);"><i class="fas fa-minus-square fs-3 mt-1 text-black-50"></i></button>
-                                        <input type="number" name="quantity" class="proQuantity form-control text-center" min="1" max="<%= pro.getPro_quantity()%>" value="<%= item.getPro_quantity()%>" style="width: 50px;">
-                                        <button name="increase_quan" value="<%= pro.getPro_id()%>" class="increase_quan btn bnt-sm btn-incre" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); IncreaseQuan(this);"><i class="fas fa-plus-square fs-3 mt-1 text-black-50"></i></button>
+                                        <a name="decrease_quan" href="/CartController/decreaseQuantity/<%= pro.getPro_id() %>" class="decrease_quan btn btn-sm btn-decre" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); DecreaseQuan(this);"><i class="fas fa-minus-square fs-3 mt-1 text-black-50"></i></a>
+                                        <input type="number" name="quantity" class="proQuantity form-control text-center" min="1" max="<%= pro.getPro_quantity() %>" value="<%= item.getPro_quantity() %>" style="width: 50px;">
+                                        <a name="increase_quan" href="/CartController/increaseQuantity/<%= pro.getPro_id() %>" class="increase_quan btn bnt-sm btn-incre" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); IncreaseQuan(this);"><i class="fas fa-plus-square fs-3 mt-1 text-black-50"></i></a>
+<!--                                        <button name="decrease_quan" value="" class="decrease_quan btn btn-sm btn-decre" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); DecreaseQuan(this);"><i class="fas fa-minus-square fs-3 mt-1 text-black-50"></i></button>
+                                        <input type="number" name="quantity" class="proQuantity form-control text-center" min="1" max="" value="" style="width: 50px;">
+                                        <button name="increase_quan" value="" class="increase_quan btn bnt-sm btn-incre" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); IncreaseQuan(this);"><i class="fas fa-plus-square fs-3 mt-1 text-black-50"></i></button>-->
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="price_cart"></span>
+                                    <span class="price_cart">
+                                        <%= item.getCart_price() %>
+                                    </span>
                                 </td>
                                 <td><a onclick="return confirm('Do you want to delete this cart?')" href="/CartController/delete/<%= item.getPro_id()%>"
                                        class="btn btn-sm btn-danger">Xóa</a>
@@ -119,8 +124,7 @@
                     <span class="fs-5 d-block fw-bold border-bottom" style="line-height: 40px;">Thông tin đơn
                         hàng</span>
                     <div style="line-height: 80px;">
-                        <span class="fs-4">Tổng tiền: <span class="total_price text-danger"></span></span>
-
+                        <span class="fs-4">Tổng tiền: <span class="total_price text-danger"><%= cdao.getTotalPrice(listCart) %></span></span>
                     </div>
                     <%
                         if (!listCart.isEmpty()) {
@@ -135,6 +139,25 @@
                 </div>
             </form>
         </div>
+
+        <script>
+            function DecreaseQuan(obj) {
+                $.ajax({
+                    url: "/CartController",
+                    type: "get", //send it through get method
+                    data: {
+                        proId: obj.value,
+                        quantity: obj.nextElementSibling.value
+                    },
+                    success: function (data) {
+                        
+                    },
+                    error: function (xhr) {
+                        //Do Something to handle error
+                    }
+                });
+            }
+        </script>
     </body>
 
 </html>
