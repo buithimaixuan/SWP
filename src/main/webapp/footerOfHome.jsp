@@ -52,7 +52,7 @@
                                 <a href="about.jsp" class="text-secondary text-decoration-none">Giới thiệu</a>
                             </p>
                             <p>
-                                <a href="CustomerController/listNews" class="text-secondary text-decoration-none">Tin tức</a>
+                                <a href="/CustomerController/listNews" class="text-secondary text-decoration-none">Tin tức</a>
                             </p>
                         </div>
                         <!-- Grid column -->
