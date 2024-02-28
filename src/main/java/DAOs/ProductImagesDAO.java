@@ -84,25 +84,6 @@ public class ProductImagesDAO {
         return count;
     }
 
-
-
-//     public LinkedList<ProductImages> getProductImage(int news_id) {
-//         LinkedList<ProductImages> newsList = new LinkedList<>();
-//         String sql = "SELECT * FROM news WHERE news_id = ?";
-//         try {
-//             PreparedStatement ps = connection.prepareStatement(sql);
-//             ps.setInt(1, news_id);
-//             ResultSet rs = ps.executeQuery();
-//             while (rs.next()) {
-//                 ProductImages news = new ProductImages(rs.getInt("pro_img_id"), rs.getInt("pro_id"), rs.getString("image_url"));
-//                 newsList.add(news);
-//             }
-//         } catch (SQLException ex) {
-//             Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
-//         }
-//         return newsList;
-//     }
-
     public int deleteProductImageByProductId(int productId) {
         int count = 0;
         String query = "DELETE FROM product_images WHERE pro_id = ?";
