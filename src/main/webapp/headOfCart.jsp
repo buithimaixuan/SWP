@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <title>LoveCake Shop</title>
         <link rel="icon" type="image/png" href="/images/Lovecake.png">
-        <link rel="stylesheet" href="CSS/cart.css">
+        <link rel="stylesheet" href="/CSS/cart.css">
         <link rel="stylesheet" href="/CSS/style.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
     </head>

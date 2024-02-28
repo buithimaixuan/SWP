@@ -22,38 +22,40 @@
             <div class="card px-4">
                 <i class="pt-3 fa-solid fa-circle-check fa-4x"></i>
                 <p class="h8 py-3">Thanh toán thành công</p>
-                <div class="row gx-3">
-                    <div class="col-12">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Phương thức thanh toán</p>
-                            <p class="mb-3">Chuyển khoảng</p>
+                <c:if test="${getOrderWhenPay != null}">
+                    <div class="row gx-3">
+                        <div class="col-12">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Phương thức thanh toán</p>
+                                <p class="mb-3">${getOrderWhenPay.payment}</p>
+                            </div>
+                        </div>
+                        <c:choose>
+                            <c:when test="${getOrderWhenPay.payment == 'COD'}">                           
+                            </c:when>
+                            <c:otherwise>
+                                <div class="col-12">
+                                    <div class="d-flex flex-column">
+                                        <p class="text mb-1">Ngân hàng</p>
+                                        <p class="mb-3">NCB</p>
+                                    </div>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                        <div class="col-12">
+                            <div class="d-flex flex-column">
+                                <p class="text mb-1">Số tiền thanh toán</p>
+                                <p class="mb-3">${getOrderWhenPay.total_price}</p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <a href="/ProductController" class="btn btn-primary mb-3">
+                                <span class="ps-3">Tiếp tục mua hàng</span>
+                                <span class="fas fa-arrow-right"></span>
+                            </a>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Ngân hàng</p>
-                            <p class="mb-3">NCB</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Số tiền thanh toán</p>
-                            <p class="mb-3">10.000.000</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="d-flex flex-column">
-                            <p class="text mb-1">Mã giao dịch</p>
-                            <p class="mb-3">123456</p>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="btn btn-primary mb-3">
-                            <span class="ps-3">Tiếp tục mua hàng</span>
-                            <span class="fas fa-arrow-right"></span>
-                        </div>
-                    </div>
-                </div>
+                </c:if>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
