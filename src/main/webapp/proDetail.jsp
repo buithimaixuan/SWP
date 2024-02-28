@@ -85,7 +85,7 @@
                                         Giao hàng tận tay quý khách
                                     </div>
                                 </button>
-                                <button href="#" class="addCart_btn text-decoration-none">
+                                <button href="submit" name="btnAddCartDetail" class="addCart_btn text-decoration-none">
                                     <div>
                                         <i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng
                                     </div>
