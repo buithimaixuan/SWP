@@ -41,9 +41,6 @@
                             </div>
                         </div>
                         <div class="list_img">
-                            <div>
-                                <img src="/${pro.pro_image}" alt="">
-                            </div>
                             <c:forEach items="${listPI}" var="p">
                                 <div>
                                     <img src="/${p.image_url}" alt="">
