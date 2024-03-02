@@ -66,9 +66,9 @@ public class CategoriesDAO {
         return list;
     }
 
-    public LinkedList<String> get4CatName() {
+    public LinkedList<String> getAllCatName() {
         LinkedList<String> list = new LinkedList<>();
-        String sql = "select distinct top 4 cat_name from categories";
+        String sql = "select distinct cat_name from categories";
         try {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -117,18 +117,18 @@ public class CategoriesDAO {
     }
 
     public static void main(String[] args) {
-        CategoriesDAO dao = new CategoriesDAO();
-        try {
-            LinkedList<Categories> list = dao.getAllCat();
-            LinkedList<String> listname = dao.get4CatName();
-            if (!listname.isEmpty()) {
-                System.out.println(listname.get(1));
-
-            } else {
-                System.out.println("null oi");
-            }
-        } catch (Exception e) {
-        }
+//        CategoriesDAO dao = new CategoriesDAO();
+//        try {
+//            LinkedList<Categories> list = dao.getAllCat();
+//            LinkedList<String> listname = dao.get4CatName();
+//            if (!listname.isEmpty()) {
+//                System.out.println(listname.get(1));
+//
+//            } else {
+//                System.out.println("null oi");
+//            }
+//        } catch (Exception e) {
+//        }
 
     }
 }

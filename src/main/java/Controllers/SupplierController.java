@@ -4,26 +4,23 @@
  */
 package Controllers;
 
-import DAOs.CategoriesDAO;
 import DAOs.ProductDAO;
-import Models.Customer;
+import DAOs.SupplierDAO;
 import Models.Product;
+import Models.Supplier;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 /**
  *
  * @author Dell
  */
-public class HomeController extends HttpServlet {
+public class SupplierController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +39,10 @@ public class HomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeController</title>");
+            out.println("<title>Servlet SupplierController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SupplierController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,25 +61,12 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        HttpSession session = request.getSession();//tao session
-        Customer cus = (Customer) session.getAttribute("account");
-
-        CategoriesDAO catdao = new CategoriesDAO();
-        ProductDAO pdao = new ProductDAO();
-        LinkedList<String> cat = catdao.getAllCatName();
-        Map<String, LinkedList<Product>> map = new HashMap<>();
-        LinkedList<Product> pro = new LinkedList<>();
-
-        for (String c : cat) {
-            pro = pdao.get4ProByCatName(c);
-            map.put(c, pro);
-            pro = new LinkedList<>();
+        if (path.endsWith("/SupplierController/AddSupplier")) {
+            ProductDAO dao = new ProductDAO();
+            LinkedList<Product> list = dao.getAllPro();
+            request.setAttribute("listPro", list);
+            request.getRequestDispatcher("/AddSupplier.jsp").forward(request, response);
         }
-
-        request.setAttribute("cat", map);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
-        
-
     }
 
     /**
@@ -96,7 +80,23 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        if (request.getParameter("AddSupplier") != null) {
+            String name = request.getParameter("proName");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            int pro_id = Integer.valueOf(request.getParameter("pro_id"));
+
+            SupplierDAO dao = new SupplierDAO();
+            int resultAdd = dao.addSupplier(new Supplier(0, pro_id, name, address, phone, email));
+            if (resultAdd != 0) {
+                response.sendRedirect("/AdminController/adminListSupplier");
+            } else {
+                response.sendRedirect("/SupplierController/AddSupplier");
+
+            }
+
+        }
     }
 
     /**

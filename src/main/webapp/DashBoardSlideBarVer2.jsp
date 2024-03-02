@@ -36,6 +36,12 @@
                     <a href="/AdminController/adminImportPro"><i class="fa-solid fa-layer-group"></i>Import product</a>
                 </li>
                 <li>
+                    <a href="/AdminController/adminImportProHis"><i class="fa-solid fa-layer-group"></i>Import product history</a>
+                </li>
+                <li>
+                    <a href="/AdminController/adminListSupplier"><i class="fa-solid fa-layer-group"></i>List supplier</a>
+                </li>
+                <li>
                     <a href="/AdminController/adminListProHistory"><i class="fa-solid fa-layer-group"></i>Product history</a>
                 </li>
                 <li>
