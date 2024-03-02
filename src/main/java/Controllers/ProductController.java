@@ -6,16 +6,20 @@ package Controllers;
 
 import DAOs.CartDAO;
 import DAOs.CategoriesDAO;
+import DAOs.ImportProductDAO;
 import DAOs.ProductDAO;
 import DAOs.ProductHistoryDAO;
 import DAOs.ProductImagesDAO;
+import DAOs.SupplierDAO;
 import Models.Cart;
 import Models.Categories;
 import Models.Customer;
+import Models.ImportProduct;
 import Models.Product;
 import Models.ProductHistory;
 import Models.ProductImages;
 import Models.Staff;
+import Models.Supplier;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -31,11 +35,13 @@ import java.nio.file.Paths;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
  *
  * @author Dell
@@ -130,7 +136,7 @@ public class ProductController extends HttpServlet {
             double mass = product.getMass();
             String pro_description = product.getPro_description();
             int pro_quantity = product.getPro_quantity();
-            
+
             request.setAttribute("pro_id", pro_id);
             request.setAttribute("pro_name", pro_name);
             request.setAttribute("pro_image", pro_image);
@@ -1336,15 +1342,15 @@ public class ProductController extends HttpServlet {
                 }
             }
         }
-        
-        if (path.startsWith("/ProductController/DetailProduct")) {
+
+        if (path.startsWith("/ProductController/DetailProduct")) {//detail in index
             int pro_id = -1;
             try {
                 String[] url = path.trim().split("/");
                 pro_id = Integer.valueOf(url[url.length - 1]);
                 ProductDAO pdao = new ProductDAO();
                 Product pro = pdao.getProById(pro_id);
-                
+
                 CategoriesDAO cdao = new CategoriesDAO();
                 ProductImagesDAO pIdao = new ProductImagesDAO();
                 LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
@@ -1404,7 +1410,7 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/AdminController/listadminListPro");
             }
         }
-        if (path.startsWith("/ProductController/Detail")) {
+        if (path.startsWith("/ProductController/Detail")) {//deatil in admin
             int pro_id = -1;
             try {
                 String[] url = path.trim().split("/");
@@ -1423,7 +1429,24 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/AdminController/listadminListPro");
             }
         }
-        
+        if (path.startsWith("/ProductController/ImportPro")) {
+            int pro_id = -1;
+            try {
+                String[] url = path.trim().split("/");
+                pro_id = Integer.valueOf(url[url.length - 1]);
+                ProductDAO pdao = new ProductDAO();
+                Product pro = pdao.getProById(pro_id);
+                SupplierDAO supdao = new SupplierDAO();
+
+                LinkedList<Supplier> list = supdao.getListSupByproId(pro_id);
+                request.setAttribute("listSup", list);
+                request.setAttribute("pro", pro);
+                request.getRequestDispatcher("/ImportProductAdmin.jsp").forward(request, response);
+            } catch (Exception e) {
+                response.sendRedirect("/AdminController/adminImportPro");
+            }
+        }
+
     }
 
     /**
@@ -1452,7 +1475,6 @@ public class ProductController extends HttpServlet {
             int staff_id = staff.getStaff_id();
             ProductDAO pdao = new ProductDAO();
             ProductImagesDAO pIdao = new ProductImagesDAO();
-
 
             String fileName1 = null;
             try {
@@ -1551,7 +1573,6 @@ public class ProductController extends HttpServlet {
                 response.sendRedirect("/ProductController/AddPro");
             }
         }
-
 
         //edit product o day
         if (request.getParameter("EditProduct") != null) {
@@ -1694,8 +1715,30 @@ public class ProductController extends HttpServlet {
             }
 
         }
-              
-//        NAM CODE
+
+        if (request.getParameter("ImportPro") != null) {
+            int sup_id = Integer.valueOf(request.getParameter("sup_id"));
+            int pro_id = Integer.valueOf(request.getParameter("pro_id"));
+            int quantity = Integer.valueOf(request.getParameter("quantity"));
+            LocalDate date = LocalDate.now();
+            Date create_date = Date.valueOf(date);
+
+            ImportProductDAO dao = new ImportProductDAO();
+            int result = dao.AddImportPro(new ImportProduct(0, sup_id, pro_id, quantity, create_date));
+            ProductDAO pdao = new ProductDAO();
+            Product pro = pdao.getProduct(pro_id);
+            int oldQuan = pro.getPro_quantity();
+            int newQuan = oldQuan + quantity;
+            pro.setPro_quantity(newQuan);
+            int resultEditPro = pdao.editProQuan(pro_id, pro);
+            if (result != 0 && resultEditPro != 0) {
+                response.sendRedirect("/AdminController/adminImportPro");
+            } else {
+                response.sendRedirect("/ProductController/ImportPro");
+            }
+        }
+
+        //        NAM CODE
         if (request.getParameter("btnAddCart") != null) {
             ProductDAO pdao = new ProductDAO();
             Customer cus = (Customer) request.getSession().getAttribute("account");
@@ -1788,8 +1831,7 @@ public class ProductController extends HttpServlet {
                 }        
             }
         }
-        
-        
+
         // KHOA Code's
         // Buy In Shop
         if (request.getParameter("btnBuyNow") != null) {

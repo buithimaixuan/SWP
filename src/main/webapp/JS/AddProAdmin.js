@@ -63,7 +63,7 @@ function validateAddProduct() {
     var errorPrice = document.querySelector(".errorPrice");
 
     var errorRealPrice = document.querySelector(".errorRealPrice");
- 
+
     var errorDescription = document.querySelector(".errorDescription");
 
     var errorMass = document.querySelector(".errorMass");
@@ -74,7 +74,7 @@ function validateAddProduct() {
     errorPrice.innerHTML = '';
     errorRealPrice.innerHTML = '';
 
-    
+
     errorDescription.innerHTML = '';
 
     errorMass.innerHTML = '';
@@ -91,7 +91,7 @@ function validateAddProduct() {
         errorPrice.innerHTML = "Giá gốc sản phẩm không thể bỏ trống!";
         isValid = false;
     }
-    if (price !== '' && price<=0) {
+    if (price !== '' && price <= 0) {
         errorPrice.innerHTML = "Giá gốc sản phẩm không thể nhỏ hơn hoặc bằng 0!";
         isValid = false;
     }
@@ -99,7 +99,7 @@ function validateAddProduct() {
         errorRealPrice.innerHTML = "Giá bán sản phẩm không thể bỏ trống!";
         isValid = false;
     }
-    if (realPrice !== '' && realPrice<=0) {
+    if (realPrice !== '' && realPrice <= 0) {
         errorRealPrice.innerHTML = "Giá bán sản phẩm không thể nhỏ hơn hoặc bằng 0!";
         isValid = false;
     }
@@ -120,7 +120,7 @@ function validateAddProduct() {
         errorMass.innerHTML = "Khối lượng sản phẩm không thể bỏ trống!";
         isValid = false;
     }
-    if (mass !== '' && mass<=0) {
+    if (mass !== '' && mass <= 0) {
         errorMass.innerHTML = "Khối lượng sản phẩm không thể nhỏ hơn hoặc bằng 0!";
         isValid = false;
     }
@@ -133,4 +133,63 @@ function validateAddProduct() {
         isValid = false;
     }
     return isValid;
+}
+function validateAddSupplier() {
+    var proName = document.getElementById('proName').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var address = document.getElementById('address').value.trim();
+
+
+    var errorProName = document.querySelector(".errorProName");
+    var errorEmail = document.querySelector(".errorEmail");
+
+    var errorPhone = document.querySelector(".errorPhone");
+    var errorAddress = document.querySelector(".errorAddress");
+
+    errorProName.innerHTML = '';
+    errorEmail.innerHTML = '';
+    errorPhone.innerHTML = '';
+    errorAddress.innerHTML = '';
+
+    var isValid = true;
+
+    if (proName === '') {
+        errorProName.innerHTML = "Tên nhà cung cap không thể bỏ trống!";
+        isValid = false;
+    }
+    if (email === '') {
+        errorEmail.innerHTML = "Email không thể bỏ trống!";
+        isValid = false;
+    }
+    if (email !== '' && !isValidEmail(email)) {
+        errorEmail.innerHTML = "Email không đúng định dạng!";
+        isValid = false;
+    }
+    if (phone === '') {
+        errorPhone.innerHTML = "Số điện thoại không thể bỏ trống";
+        isValid = false;
+    }
+    if (phone !== '' && !isVietnamesePhoneNumber(phone)) {
+        errorPhone.innerHTML = "Số điện thoại phải là số điện thoại VN!";
+        isValid = false;
+    }
+    if (address === '') {
+        errorAddress.innerHTML = "Dia chi nhà cung cap không thể bỏ trống!";
+        isValid = false;
+    }
+    if (address !== '' && (address.length <20 || address.length>1000)) {
+        errorAddress.innerHTML = "Dia chi nhà cung cap không thể nho hon 20!";
+        isValid = false;
+    }
+    return isValid;
+}
+function isVietnamesePhoneNumber(number) {
+    return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
+}
+
+function isValidEmail(email) {
+    // Sử dụng regular expression để kiểm tra định dạng email
+//    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
