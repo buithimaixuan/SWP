@@ -52,6 +52,10 @@
         <servlet-name>SupplierController</servlet-name>
         <servlet-class>Controllers.SupplierController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChartController</servlet-name>
+        <servlet-class>Controllers.ChartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
@@ -118,6 +122,10 @@
     <servlet-mapping>
         <servlet-name>SupplierController</servlet-name>
         <url-pattern>/SupplierController/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChartController</servlet-name>
+        <url-pattern>/ChartController/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
