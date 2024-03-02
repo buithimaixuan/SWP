@@ -60,6 +60,7 @@
 
 
         <%@include file="headOfCart.jsp" %>
+        
         <section style="background-color: #eee;">
             <div class="container py-5">
                 <div class="row">
@@ -73,6 +74,9 @@
                                 <!--<p class="text-muted mb-4">Can Tho</p>-->
                                 <div class="d-flex justify-content-center mb-2">
                                     <a href="#updateProfile" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Update Profile</a>
+                                </div>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <a href="/ChartController/Chart" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Chart</a>
                                 </div>
                             </div>
                         </div>

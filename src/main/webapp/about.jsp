@@ -99,10 +99,8 @@
         </style>
     </head>
     <body>
-         <%@include file="headOfCart.jsp" %>
-<!--        <header>
-            <h1>Header here</h1>
-        </header>-->
+        <%@include file="headOfHome.jsp" %>
+      
         <main>
             <section>
                 <h2>Introduce</h2>
@@ -153,8 +151,7 @@
             </section>
         </main>
         <footer>
-             <%@include file="footerOfHome.jsp" %>
+            <%@include file="footerOfHome.jsp" %>
         </footer>
-
     </body>
 </html>

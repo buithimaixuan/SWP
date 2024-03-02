@@ -115,6 +115,25 @@ public class StaffDAO {
         return (count == 0) ? null : staff;
     }
 
+    
+     public int countStaffs() throws SQLException {
+        int count = 0;
+        try {
+            String query = "SELECT COUNT(*) AS totalStaffs FROM staff";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("totalStaffs");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+
+    }
+
+    
+    
     public Staff getStaffById(int staff_id) {
         Staff obj = null;
         String sql = "Select * from staff where staff_id = ?";

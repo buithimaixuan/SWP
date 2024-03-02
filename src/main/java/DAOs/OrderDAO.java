@@ -5,22 +5,27 @@
 package DAOs;
 
 import DB.DBConnection;
+import Models.Chart;
 import Models.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author Admin
+ * @author Vu Minh Uyen
  */
 public class OrderDAO {
 
     Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
 
     public OrderDAO() {
         try {
@@ -115,7 +120,7 @@ public class OrderDAO {
         }
         return count;
     }
-    
+
     public int editOrderStatus(int o_id, Order obj) {
         int count = 0;
         try {
@@ -128,7 +133,7 @@ public class OrderDAO {
         }
         return count;
     }
-    
+
     public LinkedList<Order> getAllOrdersByCusId(int cus_id) {
         LinkedList<Order> orderList = new LinkedList<>();
         String sql = "select * from [orders] where cus_id=?";
@@ -147,7 +152,7 @@ public class OrderDAO {
         }
         return orderList;
     }
-    
+
     public Order getOrderWhenPay() {
         Order obj = null;
         try {
@@ -162,5 +167,110 @@ public class OrderDAO {
             Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return obj;
+    }
+
+    public double SumMoney() throws SQLException {
+        double count = 0;
+
+        try {
+            String query = "SELECT SUM(total_price) AS sumMoney FROM orders where status = 'Đã Giao'";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getDouble("sumMoney");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    public double thongke() throws SQLException {
+        double count = 0;
+
+        try {
+            String query = " SELECT status, o_date,total_price FROM orders";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getDouble("sumMoney");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+
+    public List<Chart> getMonthInYear(int year) {
+        List<Chart> chartDataList = new ArrayList<>();
+        String sql = "SELECT MONTH([o_date]) AS Month, SUM(total_price) AS TotalAmount FROM orders WHERE YEAR([o_date]) = ? and status ='ok' GROUP BY MONTH([o_date])";
+        try ( PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, year);
+            try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int month = resultSet.getInt("Month");
+                    double totalAmount = resultSet.getDouble("TotalAmount");
+                    String monthToString = String.format("%04d-%02d", year, month);
+                    chartDataList.add(new Chart(monthToString, totalAmount));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chartDataList;
+    }
+
+    public List<Chart> getMonthInMonth(int year, int month) {
+        List<Chart> chartDataList = new ArrayList<>();
+        String sql = "SELECT DAY([o_date]) AS Day, SUM(total_price) AS TotalAmount FROM orders WHERE YEAR([o_date]) = ? AND MONTH([o_date]) = ? GROUP BY DAY([o_date])";
+        try ( PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            preparedStatement.setInt(1, year);
+            preparedStatement.setInt(2, month);
+            try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int day = resultSet.getInt("Day");
+                    double totalAmount = resultSet.getDouble("TotalAmount");
+                    String date = String.format("%02d", day);
+                    chartDataList.add(new Chart(date, totalAmount));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chartDataList;
+    }
+
+    public List<Chart> getChartData() {
+        List<Chart> chartDataList = new ArrayList<>();
+        String sql = "SELECT [o_date], total_price FROM orders  where status ='ok' ORDER BY [o_date] ASC";
+        try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                String orderDate = resultSet.getString("o_date");
+                double totalAmount = resultSet.getDouble("total_price");
+                chartDataList.add(new Chart(orderDate, totalAmount));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chartDataList;
+    }
+    
+
+      public List<Chart> getCMonth() {
+        List<Chart> chartDataList = new ArrayList<>();
+        String sql = "SELECT YEAR(o_date) AS Year, MONTH(o_date) AS Month, SUM(total_price) AS TotalAmount FROM orders GROUP BY YEAR(o_date), MONTH(o_date) ORDER BY Year ASC, Month ASC";
+        try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                int year = resultSet.getInt("Year");
+                int month = resultSet.getInt("Month");
+                double totalAmount = resultSet.getDouble("TotalAmount");
+                String monthToString = String.format("%04d-%02d", year, month);
+                chartDataList.add(new Chart(monthToString, totalAmount));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return chartDataList;
     }
 }

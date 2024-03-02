@@ -167,6 +167,22 @@ public class CustomerDAO {
         return count;
     }
 
+    public int countCustomers() throws SQLException {
+        int count = 0;
+
+        try {
+            String query = "SELECT COUNT(*) AS totalCustomers FROM customer";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("totalCustomers");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+
+    }
 
     public int deleteCusAdmin(Customer cus) {
         int count = 0;
@@ -189,7 +205,7 @@ public class CustomerDAO {
         }
         return count;
     }
-    
+
     //KHOA's CODE
     // Them tim customer bang cusid
     public Customer getCustomerByCusID(int cus_id) {
