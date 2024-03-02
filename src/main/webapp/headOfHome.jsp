@@ -61,20 +61,20 @@
                     <div
                         class="col-lg-3 col-md-3 col-sm-3 d-flex align-items-center justify-content-between text-white pt-2 ps-5 px-0">
                         <c:if test="${account!=null}">
-                            <div>
+                            <div style="margin-top: 14px;">
                                 <span class="input-group-append ps-2">
                                     <a class="text-white" href="/CartController"><i class="fa fa-cart-plus fs-5 ps-2 px-2"></i></a>
                                 </span>
                                 <p>Giỏ hàng</p>
                             </div>
-                            <div>
+                            <div style="margin-top: 14px;">
                                 <span class="input-group-append ms-4">
                                     <a href="" class="text-white"><i class="fa fa-newspaper-o"></i></a>
                                 </span>
                                 <p>Đơn hàng</p>
                             </div>
 
-                            <div class="user">
+                            <div class="user" style="margin-bottom: 7px;">
                                 <div class="avartar">
                                     <img src="/images/Lovecake.png" alt="">
                                 </div>
@@ -108,7 +108,7 @@
                             </div>
                         </c:if>
                         <c:if test="${account==null}">
-                            <div class="ms-5">
+                            <div style="margin-top: 14px;">
                                 <span class="input-group-append ps-2">
                                     <a class="text-white" href="/LoginController"><i class="fa-solid fa-user fs-5 ps-2 px-2 ms-3"></i></a>
                                 </span>

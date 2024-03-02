@@ -5,6 +5,7 @@
 package Controllers;
 
 import DAOs.CustomerDAO;
+import DAOs.ImportProductDAO;
 import DAOs.OrderStatusHistoryDAO;
 import DAOs.NewsDAO;
 import DAOs.NewsHistoryDAO;
@@ -15,11 +16,15 @@ import Models.Staff;
 
 import DAOs.ProductDAO;
 import DAOs.ProductHistoryDAO;
+import DAOs.SupplierDAO;
 import Models.Customer;
+import Models.ImportProHistory;
+import Models.ImportProduct;
 import Models.Order;
 import Models.OrderStatusHistory;
 import Models.Product;
 import Models.ProductHistory;
+import Models.Supplier;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -100,11 +105,17 @@ public class AdminController extends HttpServlet {
             request.setAttribute("listProHis", listProHis);
             request.getRequestDispatcher("/adminListProHis.jsp").forward(request, response);
 
+        } else if (path.endsWith("/AdminController/adminListSupplier")) {
+            SupplierDAO supDao = new SupplierDAO();
+            LinkedList<Supplier> listSup = supDao.getListSupplier();
+            request.setAttribute("listSup", listSup);
+            request.getRequestDispatcher("/AdminListSupplier.jsp").forward(request, response);
+
         } else if (path.endsWith("/AdminController/adminListOrder")) {
             OrderDAO oDAO = new OrderDAO();
             LinkedList<Order> orderList = oDAO.getAllOrders();
             request.setAttribute("orderList", orderList);
-            
+
             request.getRequestDispatcher("/adminListOrder.jsp").forward(request, response);
         } else if (path.endsWith("/AdminController/adminListOrderHistory")) {
             OrderStatusHistoryDAO ohdao = new OrderStatusHistoryDAO();
@@ -191,7 +202,17 @@ public class AdminController extends HttpServlet {
             LinkedList<Customer> listCus = cdao.getAllCus();
             request.setAttribute("listCus", listCus);
             request.getRequestDispatcher("/adminListCustomer.jsp").forward(request, response);
-        } 
+        } else if (path.endsWith("/AdminController/adminImportPro")) {
+            ProductDAO pdao = new ProductDAO();
+            LinkedList<Product> listPro = pdao.getAllProAdmin();
+            request.setAttribute("listPro", listPro);
+            request.getRequestDispatcher("/ListProToImport.jsp").forward(request, response);
+        }else if (path.endsWith("/AdminController/adminImportProHis")) {
+            ImportProductDAO pdao = new ImportProductDAO();
+            LinkedList<ImportProHistory> listPro = pdao.getImportProHis();
+            request.setAttribute("listImpHis", listPro);
+            request.getRequestDispatcher("/adminListImportProHis.jsp").forward(request, response);
+        }
     }
 
     /**
