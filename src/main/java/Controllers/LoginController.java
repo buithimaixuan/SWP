@@ -115,7 +115,7 @@ public class LoginController extends HttpServlet {
 //                    } else {
 //                        session.setAttribute("product manager", "position");
 //                   }
-                    response.sendRedirect("/AdminController");
+                    response.sendRedirect("/ChartController/Chart");
                 }
             } else {
                 session.setAttribute("fail", "Không tìm thấy tài khoản!");

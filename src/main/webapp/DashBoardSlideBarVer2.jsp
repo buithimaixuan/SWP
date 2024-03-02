@@ -22,7 +22,7 @@
         <div class="sidebar">
             <div class="header_sidebar">
                 <div class="logo">
-                    <a href="#">
+                    <a href="/ChartController/Chart">
                         <img src="/images/Lovecake.png" alt="">
                     </a>
                 </div>

@@ -55,6 +55,23 @@ public class CustomerDAO {
         return cus;
     }
 
+    public int countCustomers() throws SQLException {
+        int count = 0;
+
+        try {
+            String query = "SELECT COUNT(*) AS totalCustomers FROM customer";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt("totalCustomers");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+
+    }
+
     public LinkedList<Customer> getAll() {
         LinkedList<Customer> list = new LinkedList<>();
         String sql = "Select * from customer";
@@ -167,7 +184,6 @@ public class CustomerDAO {
         return count;
     }
 
-
     public int deleteCusAdmin(int cus_id) {
         int count = 0;
         String sql = "UPDATE customer SET isDelete= 1 WHERE cus_id = ?";
@@ -180,10 +196,9 @@ public class CustomerDAO {
         }
         return count;
     }
-    
+
     //KHOA's CODE
     // Them tim customer bang cusid
-
     /**
      *
      * @param cus_id
