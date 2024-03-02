@@ -22,119 +22,130 @@
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
         <title>JSP Page</title>
+        <link rel="stylesheet" href="/CSS/cart.css"/>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <%@include file="headOfCart.jsp" %>
 
-        <div class="container">
+        <div class="container-fluid mt-3">
             <%
                 CartDAO cdao = new CartDAO();
             %>
-            <form class="form-inline container mt-5 row" action="CartController" method="post">
-                <div class="fs-5 title">Giỏ hàng</div> 
-                <div class="col-lg-9">
+            <form class="container-fluid" action="CartController" method="post">
 
-                    <%
+                <div class="cart_title">Gio hang</div>
+
+                <div class="cart_body">
+
+                    <div class="left_cart">
+                        <%
                         ProductDAO pdao = new ProductDAO();
                         LinkedList<Cart> listCart = (LinkedList<Cart>) request.getAttribute("listCart");
                         if (listCart.isEmpty()) {
-                    %>
-                    <h3 style="font-size: 18px; color: #3e3e3e1f; font-style: italic;">Chưa có sản phẩm trong giỏ hàng</h3>
-                    <%
-                    } else {
-                    %>
-                    <table id="example" class="display w-100">
-                        <thead class="bg-body-secondary border-bottom border-top">
-                            <tr style="line-height: 40px;">
-                                <th>Chọn mua</th>
-                                <th>Sản phẩm</th>
-                                <th>Tên sản phẩm</th>
-                                <th>Đơn giá</th>
-                                <th style="text-align: center;">Số lượng</th>
-                                <th>Thành tiền</th>
-                                <th>Cancel</th>
-                            </tr>
-                        </thead>
-                        <tbody class="content_table">
+                        %>
+                        <h3 class="noti_null">Chua co san pham trong gio hang</h3>
+                        <%
+                            } else {
+                        %>
+                        <div class="list_cart">
                             <%
                                 Customer cus = (Customer) request.getSession().getAttribute("account");
                                 for (Cart item : listCart) {
                                     Product pro = pdao.getProductByID(item.getPro_id());
                             %>
-                            <tr class="border border-1">
-                                <td class="mx-2">
-                                    <input value="<%= pro.getPro_id()%>" type="checkbox" name="checkBoxID" class="checkBuy mx-2">
-                                </td>
-                                <td>
-                                    <img class="pt-2" src="/<%= pro.getPro_image()%>" alt="image"
-                                         style="width: 70px; height: 70px;">
-                                </td>
+                            <!-- CART -->
+                            <div class="cart">
+                                <div class="top_cart">
 
-                                <td>
-                                    <%= pro.getPro_name()%>
-                                </td>
-                                <td>
-                                    <span class="unitPrice">
-                                        <%
-                                            if (pro.getDiscount() < pro.getPro_price()) {
-                                        %>
-                                        <%= pro.getDiscount()%>
-                                        <%
-                                        } else {
-                                        %>
-                                        <%= pro.getPro_price()%>
-                                        <%
-                                            }
-                                        %>
-
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="form-group d-flex justify-content-center">
-                                        <button name="decrease_quan" value="<%= pro.getPro_id()%>" class="decrease_quan btn btn-sm btn-decre" onclick="this.parentNode.querySelector('input[type=number]').stepDown(); DecreaseQuan(this);"><i class="fas fa-minus-square fs-3 mt-1 text-black-50"></i></button>
-                                        <input type="number" name="quantity" class="proQuantity form-control text-center" min="1" max="<%= pro.getPro_quantity()%>" value="<%= item.getPro_quantity()%>" style="width: 50px;">
-                                        <button name="increase_quan" value="<%= pro.getPro_id()%>" class="increase_quan btn bnt-sm btn-incre" onclick="this.parentNode.querySelector('input[type=number]').stepUp(); IncreaseQuan(this);"><i class="fas fa-plus-square fs-3 mt-1 text-black-50"></i></button>
+                                    <!-- CHECKBOX GROUP -->
+                                    <div class="checkbox-wrapper-21 group_checkbox">
+                                        <label class="control control--checkbox">
+                                            Chọn
+                                            <input type="checkbox" value="<%= pro.getPro_id()%>" name="checkBoxID"/>
+                                            <div class="control__indicator"></div>
+                                        </label>
                                     </div>
-                                </td>
-                                <td>
-                                    <span class="price_cart"></span>
-                                </td>
-                                <td><a onclick="return confirm('Do you want to delete this cart?')" href="/CartController/delete/<%= item.getPro_id()%>"
-                                       class="btn btn-sm btn-danger">Xóa</a>
-                                </td>
-                            </tr>
+                                    <!-- END CHECKBOX GROUP -->
+
+                                    <div class="mid_top_cart">
+                                        <div class="img_cart">
+                                            <img src="/<%= pro.getPro_image()%>" alt="image">
+                                        </div>
+                                        <div class="infor_cart">
+                                            <p><%= pro.getPro_name()%></p>
+                                            <p class="price_cart">Don gia: 
+                                                <span>
+                                                    <%
+                                                        if (pro.getDiscount() < pro.getPro_price()) {
+                                                    %>
+                                                    <%= pro.getDiscount()%>
+                                                    <%
+                                                    } else {
+                                                    %>
+                                                    <%= pro.getPro_price()%>
+                                                    <%
+                                                        }
+                                                    %>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="right_top_cart">
+                                        <div class="group_quantity">
+                                            <div class="control_quantity">
+                                                <a name="decrease_quan" href="/CartController/decreaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepDown(); DecreaseQuan(this);"><i class="fa-solid fa-minus"></i></a>
+                                            </div>
+                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" min="1" max="<%= pro.getPro_quantity()%>" value="<%= item.getPro_quantity()%>"/>
+                                            <div class="control_quantity">
+                                                <a name="increase_quan" href="/CartController/increaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepUp(); IncreaseQuan(this);"><i class="fa-solid fa-plus"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bot_cart">
+                                    <a class="deleteCart" onclick="return confirm('Do you want to delete this cart?')" href="/CartController/delete/<%= item.getPro_id()%>">Xóa</a>
+                                    <p style="font-weight: 700;">Thành tiền: <span style="font-weight: 500;"><%= item.getCart_price()%></span></p>
+                                </div>
+                            </div>
+                            <!-- END CART -->
+
                             <%
                                 }
                             %>
-
-                        </tbody>
-                    </table>
-                    <%
-                        }
-                    %>
-                    <span class="error mt-2"></span>
-                </div>
-                <div class="col-lg-3">
-                    <span class="fs-5 d-block fw-bold border-bottom" style="line-height: 40px;">Thông tin đơn
-                        hàng</span>
-                    <div style="line-height: 80px;">
-                        <span class="fs-4">Tổng tiền: <span class="total_price text-danger"></span></span>
-
+                        </div>
+                        
+                        <!--END LIST CART-->
+                        <%
+                            }
+                        %>
                     </div>
-                    <%
-                        if (!listCart.isEmpty()) {
-                    %>
-                    <input type="submit" class="btn btn-outline-info text-black fs-5" value="Tiến hành đặt hàng"
-                           name="btnBuyInCart">
-                    <%
-                        }
-                    %>
 
+                    <div class="right_cart">
+                        <h3 class="title_right" style="font-weight: 700">Thông tin đơn hàng</h3>
+                        <div class="total">
+                            <div class="total_price">
+                                <p>Tổng tiền: <span><%= cdao.getTotalPrice(listCart)%></span></p>
+                            </div>
+                            
+                                <%
+                                    if (!listCart.isEmpty()) {
+                                %>
+                                <div class="pay">
+                                    <input type="submit" value="Tiến hành đặt hàng" name="btnBuyInCart"/>
+                                </div>
+                                <%
+                                    }
+                                %>
+                            
+                        </div>
+                    </div>
 
                 </div>
-            </form>
+
+            </form>        
         </div>
+
     </body>
 
 </html>
