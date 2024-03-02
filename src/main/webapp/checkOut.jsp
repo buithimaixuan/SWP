@@ -88,8 +88,6 @@
     </head>
 
     <body>
-
-
         <%@include file="headOfCart.jsp" %>
         <div class="container col-10 my-5 br-2 rounded">
             <h3 style="color: #631bf3;">Group4 Store</h3>
