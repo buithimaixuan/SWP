@@ -1710,11 +1710,8 @@ public class ProductController extends HttpServlet {
                 Product pro = pdao.getProductByID(proId);
                 
                 Cart checkProductCart = null;
-                try {
-                    checkProductCart = cdao.getCartByProId(proId);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                checkProductCart = cdao.getCartByProAndCusID(cus.getCus_id(), pro.getPro_id());
+                
                 if(checkProductCart == null){
                     double current_price = pro.getPro_price();
                     if(pro.getPro_price() > pro.getDiscount()){
@@ -1759,11 +1756,7 @@ public class ProductController extends HttpServlet {
                 Product pro = pdao.getProductByID(proId);
                 
                 Cart checkProductCart = null;
-                try {
-                    checkProductCart = cdao.getCartByProId(proId);
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                checkProductCart = cdao.getCartByProAndCusID(cus.getCus_id(), pro.getPro_id());
                 int proQuantityCart = Integer.parseInt(request.getParameter("quantityBuyInShop"));
                 
                 if(checkProductCart == null){
@@ -1792,15 +1785,6 @@ public class ProductController extends HttpServlet {
                     } else{
                         response.sendRedirect("/HomeController");
                     }
-//                    int addQuantityCart = checkProductCart.getPro_quantity() + proQuantityCart;
-//                    double addPriceCart = addQuantityCart * pro.getPro_price();
-//                    Cart updateCart = new Cart(cus.getCus_id(), proId, addQuantityCart, addPriceCart);
-//                    try {
-//                        int updateStatus = cdao.editCart(proId, updateCart);
-//                        response.sendRedirect("/HomeController");
-//                    } catch (SQLException ex) {
-//                        Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
-//                    }
                 }        
             }
         }
