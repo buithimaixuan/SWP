@@ -164,4 +164,22 @@ public class OrderDAO {
         return obj;
     }
     
+    public LinkedList<Order> getAllOrdersByCusIdFil(int cus_id, String status) {
+        LinkedList<Order> orderList = new LinkedList<>();
+        String sql = "select * from [orders] where cus_id="+cus_id+" and status like N'"+status+"' and isDelete = 0";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Order ord = new Order(rs.getInt("o_id"), rs.getInt("cus_id"),
+                        rs.getString("payment"), rs.getString("address"), rs.getString("status"), rs.getDate("o_date"),
+                        rs.getDouble("total_price"), rs.getInt("isDelete"));
+                orderList.add(ord);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return orderList;
+    }
+    
 }

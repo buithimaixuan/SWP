@@ -44,15 +44,12 @@
                         </div>
                         <div class="infor_aside">
                             <span>${account.fullname}</span>
-                            <a href="#"><i class="fa-solid fa-pen"></i>Sửa hồ sơ</a>
+                            <span href="#"><i class="fa-solid fa-pen"></i>${account.phone_number}</span>
                         </div>
                     </div>
                     <ul>
                         <li>
-                            <a href="#"><i class="fa-solid fa-user"></i> Tài khoản của tôi</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa-solid fa-rectangle-list"></i> Đơn mua</a>
+                            <a href="/OrderController/GetAllOrderList"><i class="fa-solid fa-rectangle-list"></i> Đơn mua</a>
                         </li>
                     </ul>
                 </aside>
@@ -102,7 +99,7 @@
                             <div class="sanpham">
                                 <div class="thongtinsanpham">
                                     <div class="anhsanpham">
-                                        <img src="./Lovecake.png" alt="">
+                                        <img src="/<%= pro.getPro_image()%>" alt="">
                                     </div>
                                     <div class="thongtinconlai">
                                         <h3><%= pro.getPro_name()%></h3>

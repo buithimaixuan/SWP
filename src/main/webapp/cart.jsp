@@ -32,7 +32,7 @@
             <%
                 CartDAO cdao = new CartDAO();
             %>
-            <form class="container-fluid" action="CartController" method="post">
+            <form class="container-fluid" action="CartController" method="post" onsubmit="return validateCheckBox();">
 
                 <div class="cart_title">Gio hang</div>
 
@@ -40,13 +40,13 @@
 
                     <div class="left_cart">
                         <%
-                        ProductDAO pdao = new ProductDAO();
-                        LinkedList<Cart> listCart = (LinkedList<Cart>) request.getAttribute("listCart");
-                        if (listCart.isEmpty()) {
+                            ProductDAO pdao = new ProductDAO();
+                            LinkedList<Cart> listCart = (LinkedList<Cart>) request.getAttribute("listCart");
+                            if (listCart.isEmpty()) {
                         %>
                         <h3 class="noti_null">Chua co san pham trong gio hang</h3>
                         <%
-                            } else {
+                        } else {
                         %>
                         <div class="list_cart">
                             <%
@@ -62,7 +62,8 @@
                                     <div class="checkbox-wrapper-21 group_checkbox">
                                         <label class="control control--checkbox">
                                             Chọn
-                                            <input type="checkbox" value="<%= pro.getPro_id()%>" name="checkBoxID"/>
+                                            <input type="checkbox" value="<%= pro.getPro_id()%>" name="checkBoxID" class="chooseCheckBoxID" onclick="getCheckBox(this)"/>
+                                            <input type="hidden" value="<%= item.getCart_price()%>">
                                             <div class="control__indicator"></div>
                                         </label>
                                     </div>
@@ -114,7 +115,7 @@
                                 }
                             %>
                         </div>
-                        
+
                         <!--END LIST CART-->
                         <%
                             }
@@ -125,27 +126,58 @@
                         <h3 class="title_right" style="font-weight: 700">Thông tin đơn hàng</h3>
                         <div class="total">
                             <div class="total_price">
-                                <p>Tổng tiền: <span><%= cdao.getTotalPrice(listCart)%></span></p>
+                                <p>Tổng tiền: <span id="total-price">0</span></p>
                             </div>
-                            
-                                <%
-                                    if (!listCart.isEmpty()) {
-                                %>
-                                <div class="pay">
-                                    <input type="submit" value="Tiến hành đặt hàng" name="btnBuyInCart"/>
-                                </div>
-                                <%
-                                    }
-                                %>
-                            
+
+                            <%
+                                if (!listCart.isEmpty()) {
+                            %>
+                            <div class="pay">
+                                <input type="submit" value="Tiến hành đặt hàng" name="btnBuyInCart"/>
+                            </div>
+                            <%
+                                }
+                            %>
+
                         </div>
                     </div>
 
                 </div>
 
-            </form>        
+            </form>          
         </div>
 
+                            <script>
+            var toltalPrice = 0;
+            function getCheckBox(obj){
+                console.log(obj.checked);
+                if (obj.checked === true) {
+                    toltalPrice += parseFloat(obj.nextElementSibling.value);
+                } else if (obj.checked === false){
+                    toltalPrice -= parseFloat(obj.nextElementSibling.value);
+                }
+                var displayTotal = document.querySelector("#total-price");
+                displayTotal.innerHTML = toltalPrice;
+            }
+            
+            function validateCheckBox() {
+                var checkboxes = document.querySelectorAll(".chooseCheckBoxID");
+                let atLeastOneChecked = false;
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        atLeastOneChecked = true;
+                        break;
+                    }
+                }
+
+                if (!atLeastOneChecked) {
+                    alert("You must select at least one checkbox.");
+                    atLeastOneChecked = false;
+                }
+
+                return atLeastOneChecked;
+            }
+        </script>
     </body>
 
 </html>

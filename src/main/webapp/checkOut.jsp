@@ -123,7 +123,7 @@
 
                                 %>
                                 <li class="list-group-item d-flex justify-content-between">
-                                    <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
+                                    <img src="/<%= getProInCheckout.getPro_image()%>" style="width: 15%;" alt="">
                                     <div>
                                         <h6><%= getProInCheckout.getPro_name()%></h6>
                                         <span class="text-muted"><%= getProInCheckout.getBrand()%></span>
@@ -150,7 +150,7 @@
                         <c:when test="${finalPro != null}">
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between">
-                                    <img src="https://th.bing.com/th/id/OIP.T38QuPgKeLn42Xu72MF21wHaHa?rs=1&pid=ImgDetMain" style="width: 15%;" alt="">
+                                    <img src="/${finalPro.pro_image}" style="width: 15%;" alt="">
                                     <div>
                                         <input type="hidden" name="proIDBill" value="${finalPro.pro_id}">
                                         <input type="hidden" name="quantityBill" value="${quantityBuyNow}">
@@ -206,54 +206,41 @@
                     <div class="row">
                         <div class="col-6">
                             <h6>Thông tin giao hàng</h6>
-                            <div id="checkoutForm" onsubmit="return false;">
-                                <div>
-                                    <div class="col-12" style="padding-bottom: 15px;">
-                                        <div class="input-group">
-                                            <input name="fullname" class="input" required type="text" id="username"
-                                                   style="width: 100%;">
-                                            <label class="label" for="username">FullName</label>
+                            <c:if test="${account != null}">
+                                <div id="checkoutForm" onsubmit="return false;">
+                                    <div>
+                                        <div class="col-12" style="padding-bottom: 15px;">
+                                            <div class="input-group">
+                                                <input readonly="" name="fullname" class="input" required type="text" id="username" value="${account.fullname}"
+                                                       style="width: 100%;">
+                                                <label class="label" for="username">FullName</label>
+                                            </div>
+                                            <div class="error-message" id="username-error"></div>
                                         </div>
-                                        <div class="error-message" id="username-error"></div>
-                                    </div>
-                                    <div class="col-12" style="padding-bottom: 15px;">
-                                        <div class="input-group">
-                                            <input name="phonenumber" class="input" required type="tel" id="phone" style="width: 100%;">
-                                            <label class="label" for="phone">SĐT</label>
+                                        <div class="col-12" style="padding-bottom: 15px;">
+                                            <div class="input-group">
+                                                <input readonly="" name="phonenumber" class="input" required type="tel" id="phone" value="${account.phone_number}" style="width: 100%;">
+                                                <label class="label" for="phone">SĐT</label>
+                                            </div>
+                                            <div class="error-message" id="phone-error"></div>
                                         </div>
-                                        <div class="error-message" id="phone-error"></div>
-                                    </div>
-                                    <div class="col-12" style="padding-bottom: 15px;">
-                                        <div class="input-group">
-                                            <input name="email" class="input" required type="email" id="email" style="width: 100%;">
-                                            <label class="label" for="email">Email</label>
+                                        <div class="col-12" style="padding-bottom: 15px;">
+                                            <div class="input-group">
+                                                <input readonly="" name="email" class="input" required type="email" id="email" value="${account.email}" style="width: 100%;">
+                                                <label class="label" for="email">Email</label>
+                                            </div>
+                                            <div class="error-message" id="email-error"></div>
                                         </div>
-                                        <div class="error-message" id="email-error"></div>
-                                    </div>
-                                    <div class="col-12" style="padding-bottom: 15px;">
-                                        <div class="input-group">
-                                            <input name="address1" class="input" required type="text" id="address" style="width: 100%;">
-                                            <label class="label" for="address">Address</label>
+                                        <div class="col-12" style="padding-bottom: 15px;">
+                                            <div class="input-group">
+                                                <input name="address1" class="input" required type="text" id="address" style="width: 100%;">
+                                                <label class="label" for="address">Address</label>
+                                            </div>
+                                            <div class="error-message" id="address-error"></div>
                                         </div>
-                                        <div class="error-message" id="address-error"></div>
-                                    </div>
-
-
-                                    <div class="col-12" style="padding-bottom: 15px;margin-right: 10px;">
-                                        <label class="form-label" for="district">Tỉnh <select class="form-select" name="address2"
-                                                                                              id="district">
-                                                <option>Kiên Giang</option>
-                                                <option>Tân Hiệp</option>
-                                            </select></label>
-                                        <label class="form-label" for="district">Huyện <select class="form-select" name="address3"
-                                                                                               id="district">
-                                                <option>Cần Thơ</option>
-                                                <option>Tân Hiệp</option>
-                                            </select></label>
-
                                     </div>
                                 </div>
-                            </div>
+                            </c:if>
                         </div>
 
 
