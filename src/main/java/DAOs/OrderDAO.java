@@ -173,7 +173,7 @@ public class OrderDAO {
         double count = 0;
 
         try {
-            String query = "SELECT SUM(total_price) AS sumMoney FROM orders where status = 'Đã Giao'";
+            String query = "SELECT SUM(total_price) AS sumMoney FROM orders where status = 'ok'";
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -223,7 +223,7 @@ public class OrderDAO {
 
     public List<Chart> getMonthInMonth(int year, int month) {
         List<Chart> chartDataList = new ArrayList<>();
-        String sql = "SELECT DAY([o_date]) AS Day, SUM(total_price) AS TotalAmount FROM orders WHERE YEAR([o_date]) = ? AND MONTH([o_date]) = ? GROUP BY DAY([o_date])";
+        String sql = "SELECT DAY([o_date]) AS Day, SUM(total_price) AS TotalAmount FROM orders WHERE YEAR([o_date]) = ? AND MONTH([o_date]) = ? adn status ='ok'GROUP BY DAY([o_date])";
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, year);
             preparedStatement.setInt(2, month);
@@ -243,7 +243,7 @@ public class OrderDAO {
 
     public List<Chart> getChartData() {
         List<Chart> chartDataList = new ArrayList<>();
-        String sql = "SELECT [o_date], total_price FROM orders  where status ='ok' ORDER BY [o_date] ASC";
+        String sql = "SELECT [o_date], total_price FROM orders where status ='ok' ORDER BY [o_date] ASC";
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 String orderDate = resultSet.getString("o_date");
