@@ -152,7 +152,10 @@
                     <c:forEach items="${cat.entrySet()}" var="c">
                         <div class="mt-5 list_card">
                             <div class="title_list_card">
-                                <p>${c.key}</p>
+                                <a href="#" class="title_content">${c.key}</a>
+                                <div class="right_title">
+                                    <a href="#">More</a>
+                                </div>
                             </div>
                             <div class="list_card_item">
 

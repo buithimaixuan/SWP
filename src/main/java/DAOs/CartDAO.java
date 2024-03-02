@@ -146,6 +146,65 @@ public class CartDAO {
         }
     }
     
+    public int getCurrentQuantity(int cus_id, int pro_id){
+        int quantity = 0;
+        String sql = "select pro_quantity from cart where cus_id = ? and pro_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, cus_id);
+            ps.setInt(2, pro_id);
+            ResultSet rs = ps.executeQuery();
+            if(rs != null){
+                while(rs.next()){
+                    quantity = rs.getInt("pro_quantity");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return quantity;
+    }
+    
+    public int updateQuantityCart(int cus_id, int pro_id, int new_quantity){
+        int count = 0;
+        String sql = "Update cart set pro_quantity = ? where cus_id = ? and pro_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, new_quantity);
+            ps.setInt(2, cus_id);
+            ps.setInt(3, pro_id);
+            
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+    
+    public int updatePriceCart(int cus_id, int pro_id, double new_price){
+        int count = 0;
+        String sql = "Update cart set cart_price = ? where cus_id = ? and pro_id = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setDouble(1, new_price);
+            ps.setInt(2, cus_id);
+            ps.setInt(3, pro_id);
+            
+            count = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CartDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+        
+    }
+    
+    public double getTotalPrice(LinkedList<Cart> list){
+        double total = 0;
+        for (Cart cart : list) {
+            total += cart.getCart_price();
+        }
+        return total;
+    }
     // Khoa's Code
     // Lay Pro ID cua khach hang khac nhau
     public Cart getCartByProAndCusID(int cus_id, int pro_id) {
