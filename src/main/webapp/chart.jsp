@@ -18,8 +18,8 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-   
-        <link rel="stylesheet" href="../CSS/thongke.css"/>
+
+    <link rel="stylesheet" href="../CSS/thongke.css"/>
 
 
 </head>
@@ -38,7 +38,7 @@
             int numberOfStaffs = sdao.countStaffs();
             OrderDAO odao = new OrderDAO();
             double sumMoney = odao.SumMoney();
-           
+
         %>
 
         <div class="container">
@@ -206,31 +206,7 @@
         %>
 
     </div>
-    <!--*******hiện theo lựa chọn********-->
-    <!--    <script>
-            const xValues = [<%= xValues.toString()%>];
-            const yValues = [<%= yValues.toString()%>];
-            const barColors = ["red", "green", "blue", "orange", "brown"]; // Add more colors if needed
-    
-            new Chart("myChart", {
-                type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                },
-                
-                options: {
-                    legend: {display: false},
-                    title: {
-                        display: true,
-                        text: "Biểu đồ thống kê doanh thu theo ngày tháng năm."
-                    }
-                }
-            });
-        </script>-->
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Lấy các phần tử select
@@ -241,7 +217,7 @@
             var selectedYear = sessionStorage.getItem("selectedYear");
             var selectedMonth = sessionStorage.getItem("selectedMonth");
 
-            // Thiết lập lại giá trị cho select năm và tháng
+            // Thiết lập lại giá trị cho select năm và tháng nếu có
             if (selectedYear) {
                 yearSelect.value = selectedYear;
             }
@@ -249,16 +225,18 @@
                 monthSelect.value = selectedMonth;
             }
 
-            // Lưu giá trị khi thay đổi
+            // Lưu giá trị khi thay đổi năm
             yearSelect.addEventListener("change", function () {
                 sessionStorage.setItem("selectedYear", yearSelect.value);
             });
 
+            // Lưu giá trị khi thay đổi tháng
             monthSelect.addEventListener("change", function () {
                 sessionStorage.setItem("selectedMonth", monthSelect.value);
             });
         });
     </script>
+
 
 
     <script>
