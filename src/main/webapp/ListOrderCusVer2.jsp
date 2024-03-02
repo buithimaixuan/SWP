@@ -38,15 +38,27 @@
                         </div>
                         <div class="infor_aside">
                             <span>${account.fullname}</span>
-                            <a href="#"><i class="fa-solid fa-pen"></i>Sửa hồ sơ</a>
+                            <span href="#"><i class="fa-solid fa-pen"></i>${account.phone_number}</span>
                         </div>
                     </div>
                     <ul>
                         <li>
-                            <a href="#"><i class="fa-solid fa-user"></i> Tài khoản của tôi</a>
+                            <a href="/OrderController/GetAllOrderList"><i class="fa-solid fa-rectangle-list"></i> Tất cả</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa-solid fa-rectangle-list"></i> Đơn mua</a>
+                            <a href="/OrderController/GetOrderList/CXN"><i class="fa-solid fa-rectangle-list"></i> Chờ xác nhận</a>
+                        </li>
+                        <li>
+                            <a href="/OrderController/GetOrderList/DXN"><i class="fa-solid fa-rectangle-list"></i> Đã xác nhận</a>
+                        </li>
+                        <li>
+                            <a href="/OrderController/GetOrderList/DGG"><i class="fa-solid fa-rectangle-list"></i> Đang giao</a>
+                        </li>
+                        <li>
+                            <a href="/OrderController/GetOrderList/DG"><i class="fa-solid fa-rectangle-list"></i> Đã giao</a>
+                        </li>
+                        <li>
+                            <a href="/OrderController/GetOrderList/DH"><i class="fa-solid fa-rectangle-list"></i> Đã hủy</a>
                         </li>
                     </ul>
                 </aside>
@@ -62,9 +74,8 @@
                         <div class="danhsachdonhang">
                             <!-- CARD ORDER -->
                             <c:choose>
-                                <c:when test="${orderListCus != null}">
+                                <c:when test="${not empty orderListCus && orderListCus != null}">
                                     <c:forEach items="${orderListCus}" var="ol">
-                                        <c:if test="${ol.isDelete != 1}">
                                             <div class="donhang">
                                                 <div class="top_donhang">
                                                     <div class="left_thongtindonhang">
@@ -92,9 +103,42 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:if>
                                     </c:forEach>
                                 </c:when>
+                                <c:when test="${not empty orderListCusFil && orderListCusFil != null}">
+                                    <c:forEach items="${orderListCusFil}" var="ol">
+                                            <div class="donhang">
+                                                <div class="top_donhang">
+                                                    <div class="left_thongtindonhang">
+                                                        <p>Mã đơn hàng: <span>${ol.o_id}</span></p>
+                                                        <p>Địa chỉ: <span>${ol.address}</span></p>
+                                                        <p>Ngày đặt hàng: <span>${ol.o_date}</span></p>
+                                                    </div>
+                                                    <div class="right_thongtindonhang">
+                                                        <p>Phương thức thanh toán: <span>${ol.payment}</span></p>
+                                                        <p>Trạng thái đơn hàng: <span>${ol.status}</span></p>
+                                                        <p>Tổng tiền: <span>đ${ol.total_price}</span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="bot_donhang">
+                                                    <div class="thaotac">
+                                                        <c:choose>
+                                                            <c:when test="${ol.status == 'Đã hủy'}"></c:when>
+                                                            <c:otherwise>
+                                                                <a class="xemchitiet" href="/OrderController/OrderDetailCustomer/${ol.o_id}">Xem chi tiết</a>
+                                                                <c:if test="${ol.status == 'Chờ xác nhận' || ol.status == 'Đã xác nhận'}">
+                                                                    <a class="huydon" href="/OrderController/OrderDeleteCustomer/${ol.o_id}">Hủy đơn</a>
+                                                                </c:if>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3>Không có đơn hàng</h3>
+                                </c:otherwise>
                             </c:choose>
                             <!-- END CARD ORDER -->
 
