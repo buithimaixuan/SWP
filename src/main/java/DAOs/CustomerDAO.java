@@ -55,6 +55,29 @@ public class CustomerDAO {
         return cus;
     }
 
+//    UYEN CODE
+    public int countCustomers() throws SQLException {
+        int count = 0;
+
+        try {
+            //tạo câu truy vấn SQL để đếm số lượng khách hàng
+            String query = "SELECT COUNT(*) AS totalCustomers FROM customer";
+            // chuẩn bị câu truy vấn
+            ps = conn.prepareStatement(query);
+            // thực thi câu truy vấn
+            rs = ps.executeQuery();
+            // xử lý kết quả trả về
+            if (rs.next()) {
+                count = rs.getInt("totalCustomers");
+            }
+        } catch (SQLException ex) {
+            // Xử lý ngoại lệ
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Trả về số lượng khách hàng
+        return count;
+    }
+
     public LinkedList<Customer> getAll() {
         LinkedList<Customer> list = new LinkedList<>();
         String sql = "Select * from customer";
@@ -167,7 +190,6 @@ public class CustomerDAO {
         return count;
     }
 
-
     public int deleteCusAdmin(int cus_id) {
         int count = 0;
         String sql = "UPDATE customer SET isDelete= 1 WHERE cus_id = ?";
@@ -180,10 +202,9 @@ public class CustomerDAO {
         }
         return count;
     }
-    
+
     //KHOA's CODE
     // Them tim customer bang cusid
-
     /**
      *
      * @param cus_id

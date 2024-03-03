@@ -20,7 +20,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-weight: bolder;
 }
 .categories p {
-  padding-top: 20px;
+  padding-top: 22.5px;
 }
 .slide-bar {
   backdrop-filter: blur(15px);
@@ -108,7 +108,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     background: transparent;
     color: #f8de22;
 }
+/*HEADER OPTION*/
 
+.header_option{
+    display: flex;
+    align-items: center;
+    color: #3e3e3e;
+    justify-content: space-between;
+    font-weight: 600;
+}
+.header_option a{
+    color: #3e3e3e;
+    font-weight: 600;
+}
 /* USER option */
 .user {
   position: relative;
@@ -250,8 +262,11 @@ img {
     font-weight: 700;
     border-bottom: solid 2px #ff6223;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
-.list_card .title_list_card p{
+.list_card .title_list_card .title_content{
     color: #fff;
     width: 27%;
     text-transform: uppercase;
@@ -262,7 +277,7 @@ img {
     padding-left: 20px;
     position: relative;
 }
-.list_card .title_list_card p::after{
+.list_card .title_list_card .title_content::after{
     content: "";
     position: absolute;
     background-color: #fff;
@@ -271,10 +286,22 @@ img {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 38px 0 0 42px;
+    border-width: 39px 0 0 42px;
     border-color: transparent transparent transparent #ff6223;
 }
+.list_card .title_list_card .right_title{
+    padding-right: 30px;
+}
+.list_card .title_list_card .right_title a{
+    color: #ff6223;
+    font-size: 15px;
+    text-decoration: underline;
+}
+.list_card .title_list_card .right_title a:hover{
+    color: #3e3d3e;
+}
 
+/*CARD*/ 
 .list_card .list_card_item{
     --spacing: 20px;
     --columns: 4;

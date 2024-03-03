@@ -69,7 +69,7 @@ public class HomeController extends HttpServlet {
 
         CategoriesDAO catdao = new CategoriesDAO();
         ProductDAO pdao = new ProductDAO();
-        LinkedList<String> cat = catdao.get4CatName();
+        LinkedList<String> cat = catdao.getAllCatName();
         Map<String, LinkedList<Product>> map = new HashMap<>();
         LinkedList<Product> pro = new LinkedList<>();
 

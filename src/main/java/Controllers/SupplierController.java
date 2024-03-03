@@ -4,25 +4,23 @@
  */
 package Controllers;
 
-import DAOs.AccountDAO;
-import DAOs.CustomerDAO;
-import DAOs.StaffDAO;
-import Models.Account;
-import Models.Customer;
-import Models.Staff;
+import DAOs.ProductDAO;
+import DAOs.SupplierDAO;
+import Models.Product;
+import Models.Supplier;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.LinkedList;
 
 /**
  *
  * @author Dell
  */
-public class LoginController extends HttpServlet {
+public class SupplierController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +39,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet SupplierController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SupplierController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,14 +61,12 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.endsWith("/LoginController")) {
-            request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
+        if (path.endsWith("/SupplierController/AddSupplier")) {
+            ProductDAO dao = new ProductDAO();
+            LinkedList<Product> list = dao.getAllPro();
+            request.setAttribute("listPro", list);
+            request.getRequestDispatcher("/AddSupplier.jsp").forward(request, response);
         }
-//        else {
-//            if (path.endsWith("/LoginController/Create")) {
-//                request.getRequestDispatcher("/createAcc.jsp").forward(request, response);
-//            }
-//        }
     }
 
     /**
@@ -84,42 +80,20 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();//tao session
+        if (request.getParameter("AddSupplier") != null) {
+            String name = request.getParameter("proName");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            int pro_id = Integer.valueOf(request.getParameter("pro_id"));
 
-        AccountDAO dao = new AccountDAO();
-        CustomerDAO cusDao = new CustomerDAO();
-        StaffDAO staffDao = new StaffDAO();
-        if (request.getParameter("btnLogin") != null) {//kiem tra xem co bam nut co name = btnSubmit chua
-            // btnSubmit la nut login
-            String us = request.getParameter("txtUS");//lay gia tri cua bien co ten "txtUS",
-            //la username cua form login
-            String pw = request.getParameter("txtPwd");//lay gia tri cua bien co ten "txtPud",
-            //la password cua form login
-            Account acc = dao.getAccount(us, pw);
-            if (acc != null) {
-                Customer cus = cusDao.getCustomer(acc.getAcc_id());
-                if (cus != null) {
-
-                    session.setAttribute("account", cus);
-
-                    response.sendRedirect("HomeController");
-
-                } else {
-                    Staff staff = staffDao.getStaff(acc.getAcc_id());
-
-                    session.setAttribute("staff", staff);
-//                    if (staff.getPosition() =="admin") {
-//                        session.setAttribute("admin", "position");
-//                    } else if (staff.getPosition().equals(acc)) {
-//                        session.setAttribute("order manager", "position");
-//                    } else {
-//                        session.setAttribute("product manager", "position");
-//                   }
-                    response.sendRedirect("/ChartController/Chart");
-                }
+            SupplierDAO dao = new SupplierDAO();
+            int resultAdd = dao.addSupplier(new Supplier(0, pro_id, name, address, phone, email));
+            if (resultAdd != 0) {
+                response.sendRedirect("/AdminController/adminListSupplier");
             } else {
-                session.setAttribute("fail", "Không tìm thấy tài khoản!");
-                response.sendRedirect("/LoginController");
+                response.sendRedirect("/SupplierController/AddSupplier");
+
             }
 
         }

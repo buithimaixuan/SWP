@@ -41,9 +41,6 @@
                             </div>
                         </div>
                         <div class="list_img">
-                            <div>
-                                <img src="/${pro.pro_image}" alt="">
-                            </div>
                             <c:forEach items="${listPI}" var="p">
                                 <div>
                                     <img src="/${p.image_url}" alt="">
@@ -85,7 +82,7 @@
                                         Giao hàng tận tay quý khách
                                     </div>
                                 </button>
-                                <button href="#" class="addCart_btn text-decoration-none">
+                                <button href="submit" name="btnAddCartDetail" class="addCart_btn text-decoration-none">
                                     <div>
                                         <i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng
                                     </div>

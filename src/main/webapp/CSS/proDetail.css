@@ -228,7 +228,7 @@ img{
     gap: 20px;
     text-align: center;
 }
-.infor_product .choose_option .option_product a{
+.infor_product .choose_option .option_product button{
     width: 50%;
     height: 50%;
     display: flex;
@@ -242,8 +242,9 @@ img{
     font-size: 18px;
     font-weight: bold;
     transition: 0.25s;
+    border: none;
 }
-.infor_product .choose_option .option_product a:hover{
+.infor_product .choose_option .option_product .buyNow_btn:hover{
     background-color: #f4bb14;
     color: #3e3d3e;
 }
@@ -256,15 +257,15 @@ img{
     background-color: #ff6223;
     color: #fff;
 }
-.infor_product .choose_option .option_product a i{
+.infor_product .choose_option .option_product button i{
     margin-right: 10px;
 }
-.infor_product .choose_option .option_product a div:last-child{
+.infor_product .choose_option .option_product button div:last-child{
     color: #ffffff5e;
     font-size: 13px;
     transition: 0.25s;
 }
-.infor_product .choose_option .option_product a:hover div:last-child{
+.infor_product .choose_option .option_product button:hover div:last-child{
     color: #3e3d3e;
 }
 .infor_product .choose_option .option_product .addCart_btn div:last-child{

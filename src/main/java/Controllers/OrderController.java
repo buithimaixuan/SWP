@@ -256,6 +256,73 @@ public class OrderController extends HttpServlet {
 
             request.setAttribute("getOrderWhenPay", getOrderWhenPay);
             request.getRequestDispatcher("/paySuccess.jsp").forward(request, response);
+        } else if (path.startsWith("/OrderController/GetOrderList/")) {
+            System.out.println("Lay list loc");
+            String s[] = path.split("/");
+            String status = s[s.length - 1];
+            String addStatus = "";
+            System.out.println(status);
+            if (status.equals("CXN")) {
+                addStatus = "Chờ xác nhận";
+            } else if (status.equals("DXN")) {
+                addStatus = "Đã xác nhận";
+            } else if (status.equals("DGG")) {
+                addStatus = "Đang giao";
+            } else if (status.equals("DG")) {
+                addStatus = "Đã giao";
+            } else if (status.equals("DH")) {
+                addStatus = "Đã hủy";
+            } 
+            System.out.println(addStatus);
+            OrderDAO oDAO = new OrderDAO();
+            Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
+            
+            LinkedList<Order> orderListCusFil = oDAO.getAllOrdersByCusIdFil(getCusWhenPay.getCus_id(), addStatus);
+            
+            request.getSession().setAttribute("orderListCus", null);
+            request.getSession().setAttribute("orderListCusFil", orderListCusFil);
+            
+            response.sendRedirect("/OrderController/OrderList");
+        } else if (path.endsWith("/OrderController/GetAllOrderList")) {
+            System.out.println("Lay het list");
+            OrderDAO oDAO = new OrderDAO();
+            Customer cusSession = (Customer) request.getSession().getAttribute("account");
+            int cusID = cusSession.getCus_id();
+
+            LinkedList<Order> orderListCus = oDAO.getAllOrdersByCusId(cusID);
+            
+            request.getSession().setAttribute("orderListCus", orderListCus);
+            request.getSession().setAttribute("orderListCusFil", null);
+            
+            response.sendRedirect("/OrderController/OrderList");
+        } else if (path.endsWith("/OrderController/OrderList")) {
+            request.getRequestDispatcher("/ListOrderCusVer2.jsp").forward(request, response);
+        } else if (path.startsWith("/OrderController/OrderDetailCustomer/")) {
+            String s[] = path.split("/");
+            int orderID = Integer.parseInt(s[s.length - 1]);
+            OrderDAO oDAO = new OrderDAO();
+            OrderDetailDAO odDAO = new OrderDetailDAO();
+            CustomerDAO cuDAO = new CustomerDAO();
+            
+            System.out.println("OrderID");
+            System.out.println(orderID);
+
+            Order getOrderByID = oDAO.getOrderByID(orderID);
+            LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+
+            request.setAttribute("getOrderByID", getOrderByID);
+            request.setAttribute("odList", odList);
+            request.setAttribute("quantityOrderDetail", odList.size());
+            request.getRequestDispatcher("/OrderDetailCusVer2.jsp").forward(request, response);
+        } else if (path.startsWith("/OrderController/OrderDeleteCustomer/")) {
+            String s[] = path.split("/");
+            int orderID = Integer.parseInt(s[s.length - 1]);
+            OrderDAO oDAO = new OrderDAO();
+
+            Order orderEdit = new Order(0, 0, "", "", "Đã hủy", null, 0, 0);
+            int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+
+            response.sendRedirect("/OrderController/OrderList");
         }
     } 
 
@@ -335,10 +402,7 @@ public class OrderController extends HttpServlet {
             request.getSession().setAttribute("phonenumber", phonenumber);
             String email = request.getParameter("email");
             request.getSession().setAttribute("email", email);
-            String address1 = request.getParameter("address1");
-            String address2 = request.getParameter("address2");
-            String address3 = request.getParameter("address3");
-            String fullAddress = address1 + ", " + address2 + ", " + address3;
+            String fullAddress = request.getParameter("address1");
             request.getSession().setAttribute("fullAddress", fullAddress);
             String paymentMethod = request.getParameter("paymentMethod");
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");

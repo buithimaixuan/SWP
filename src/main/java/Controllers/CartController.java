@@ -65,7 +65,9 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CartDAO cdao = new CartDAO();
+        ProductDAO  pdao = new ProductDAO();
         String path = request.getRequestURI();
+        
         if (path.endsWith("/CartController")) {
             Customer cus = (Customer) request.getSession().getAttribute("account");
             System.out.println(cus.getCus_id());
@@ -87,6 +89,50 @@ public class CartController extends HttpServlet {
             if (isDelete != 0) {
                 response.sendRedirect("/CartController");
             } else {
+                response.sendRedirect("/CartController");
+            }
+        } else if(path.startsWith("/CartController/decreaseQuantity/")){
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            String[] s = path.split("/");
+            
+            int proId = Integer.parseInt(s[s.length - 1]);
+            int current_quantity = cdao.getCurrentQuantity(cus.getCus_id(), proId);
+            int isUpdateDecrease = cdao.updateQuantityCart(cus.getCus_id(), proId, current_quantity - 1);
+            Cart cart = cdao.getCartByProAndCusID(cus.getCus_id(), proId);
+            Product product = pdao.getProById(proId);
+            if(isUpdateDecrease != 0){
+                double new_price = 0;
+                if(product.getPro_price() > product.getDiscount()){
+                    new_price = product.getDiscount() * cart.getPro_quantity();
+                } else{
+                    new_price = product.getPro_price() * cart.getPro_quantity();
+                }
+                int isUpdatePrice = cdao.updatePriceCart(cus.getCus_id(), proId, new_price);
+                response.sendRedirect("/CartController");
+            } else{
+                response.sendRedirect("/CartController");
+            }
+        } else if(path.startsWith("/CartController/increaseQuantity/")){
+            Customer cus = (Customer) request.getSession().getAttribute("account");
+            String[] s = path.split("/");
+            
+            int proId = Integer.parseInt(s[s.length - 1]);
+            int current_quantity = cdao.getCurrentQuantity(cus.getCus_id(), proId);
+            int isUpdateDecrease = cdao.updateQuantityCart(cus.getCus_id(), proId, current_quantity + 1);
+            Cart cart = cdao.getCartByProAndCusID(cus.getCus_id(), proId);
+            Product product = pdao.getProById(proId);
+            if(isUpdateDecrease != 0){
+                double new_price = 0;
+                if(product.getPro_price() > product.getDiscount()){
+                    new_price = product.getDiscount() * cart.getPro_quantity();
+                } else{
+                    new_price = product.getPro_price() * cart.getPro_quantity();
+                }
+                
+                int isUpdatePrice = cdao.updatePriceCart(cus.getCus_id(), proId, new_price);
+                System.out.println(cart.getCart_price());
+                response.sendRedirect("/CartController");
+            } else{
                 response.sendRedirect("/CartController");
             }
         }

@@ -66,9 +66,9 @@ public class CategoriesDAO {
         return list;
     }
 
-    public LinkedList<String> get4CatName() {
+    public LinkedList<String> getAllCatName() {
         LinkedList<String> list = new LinkedList<>();
-        String sql = "select distinct top 4 cat_name from categories";
+        String sql = "select distinct cat_name from categories";
         try {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -99,20 +99,36 @@ public class CategoriesDAO {
         }
         return list;
     }
+    
+    public Categories getCatByCatID(int cat_id) {
+        Categories obj = null;
+        try {
+            PreparedStatement ps = conn.prepareStatement("select * from [categories] where cat_id=?");
+            ps.setInt(1, cat_id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                obj = new Categories(rs.getInt("cat_id"), rs.getNString("cat_name"),
+                        rs.getNString("typeCategories"), rs.getNString("cat_description"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return obj;
+    }
 
     public static void main(String[] args) {
-        CategoriesDAO dao = new CategoriesDAO();
-        try {
-            LinkedList<Categories> list = dao.getAllCat();
-            LinkedList<String> listname = dao.get4CatName();
-            if (!listname.isEmpty()) {
-                System.out.println(listname.get(1));
-
-            } else {
-                System.out.println("null oi");
-            }
-        } catch (Exception e) {
-        }
+//        CategoriesDAO dao = new CategoriesDAO();
+//        try {
+//            LinkedList<Categories> list = dao.getAllCat();
+//            LinkedList<String> listname = dao.get4CatName();
+//            if (!listname.isEmpty()) {
+//                System.out.println(listname.get(1));
+//
+//            } else {
+//                System.out.println("null oi");
+//            }
+//        } catch (Exception e) {
+//        }
 
     }
 }
