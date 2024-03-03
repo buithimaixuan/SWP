@@ -187,7 +187,7 @@
                                 </div>
                                 <div>
                                     <span class="input-group-append ms-4">
-                                        <a href="//OrderController/GetAllOrderList"><i class="fa fa-newspaper-o"></i></a>
+                                        <a href="/OrderController/GetAllOrderList"><i class="fa fa-newspaper-o"></i></a>
                                     </span>
                                     <p>Đơn hàng</p>
                                 </div>
