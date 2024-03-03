@@ -99,13 +99,16 @@
         </style>
     </head>
     <body>
-         <%@include file="headOfCart.jsp" %>
-<!--        <header>
-            <h1>Header here</h1>
-        </header>-->
+        <%@include file="headOfCart.jsp" %>
+        <!--        <header>
+                    <h1>Header here</h1>
+                </header>-->
         <main>
             <section>
-                <h2>Introduce</h2>
+                <div style="margin-left: 740px">
+                    <marquee height="70" scrollamount="25" width="40%" style="font-size: 60px;color: rgb(247, 187, 9)">Love Cake Store</marquee>
+                </div>
+                <!--<h2>Introduce</h2>-->
                 <p>Chúng tôi tự hào là điểm đến hàng đầu cho những ai đam mê nghệ thuật làm bánh và muốn trang bị cho mình những công cụ chất lượng và nguyên liệu tươi ngon nhất để thực hiện những ý tưởng sáng tạo nhất.</p>
             </section>
             <section>
@@ -153,7 +156,7 @@
             </section>
         </main>
         <footer>
-             <%@include file="footerOfHome.jsp" %>
+            <%@include file="footerOfHome.jsp" %>
         </footer>
 
     </body>
