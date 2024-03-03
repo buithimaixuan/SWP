@@ -187,19 +187,30 @@ public class OrderDAO {
         return orderList;
     }
 
+
     public double SumMoney() throws SQLException {
         double count = 0;
 
         try {
+            // Tạo câu truy vấn SQL
             String query = "SELECT SUM(total_price) AS sumMoney FROM orders where status = N'Đã giao'";
+
+            // Chuẩn bị câu truy vấn
             ps = conn.prepareStatement(query);
+
+            // Thực thi câu truy vấn
             rs = ps.executeQuery();
+
+            // Xử lý kết quả trả về
             if (rs.next()) {
                 count = rs.getDouble("sumMoney");
             }
         } catch (SQLException ex) {
+            // Xử lý ngoại lệ
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        // Trả về tổng số tiền
         return count;
     }
 
@@ -219,78 +230,151 @@ public class OrderDAO {
         return count;
     }
 
+
     public List<Chart> getMonthInYear(int year) {
         List<Chart> chartDataList = new ArrayList<>();
-        String sql = "SELECT MONTH([o_date]) AS Month, SUM(total_price) AS TotalAmount FROM orders WHERE YEAR([o_date]) = ?  and status =N'Đã giao' GROUP BY MONTH([o_date])";
+
+        // Tạo câu truy vấn SQL
+        String sql = "SELECT "
+                + "MONTH([o_date]) AS Month, "
+                + "SUM(total_price) AS TotalAmount "
+                + "FROM orders "
+                + "WHERE YEAR([o_date]) = ? AND "
+                + "status = N'Đã giao' "
+                + "GROUP BY MONTH([o_date])";
+
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            // Thiết lập tham số cho năm
             preparedStatement.setInt(1, year);
+
             try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Duyệt qua các dòng kết quả
                 while (resultSet.next()) {
+                    // Lấy dữ liệu từ kết quả
                     int month = resultSet.getInt("Month");
                     double totalAmount = resultSet.getDouble("TotalAmount");
+
+                    // Chuyển đổi thành chuỗi tháng và năm
                     String monthToString = String.format("%04d-%02d", year, month);
+
+                    // Tạo đối tượng Chart và thêm vào danh sách
                     chartDataList.add(new Chart(monthToString, totalAmount));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Trả về danh sách dữ liệu của biểu đồ
         return chartDataList;
     }
 
+
     public List<Chart> getMonthInMonth(int year, int month) {
         List<Chart> chartDataList = new ArrayList<>();
-        String sql = "SELECT DAY([o_date]) AS Day, SUM(total_price) AS TotalAmount FROM orders WHERE YEAR([o_date]) = ? AND MONTH([o_date]) = ?  and status =N'Đã giao' GROUP BY DAY([o_date])";
+
+        // Tạo câu truy vấn SQL
+        String sql = "SELECT "
+                + "DAY([o_date]) AS Day, "
+                + "SUM(total_price) AS TotalAmount "
+                + "FROM orders "
+                + "WHERE YEAR([o_date]) = ? AND "
+                + "MONTH([o_date]) = ? AND "
+                + "status = N'Đã giao' "
+                + "GROUP BY DAY([o_date])";
+
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+            // Thiết lập tham số cho năm và tháng
             preparedStatement.setInt(1, year);
             preparedStatement.setInt(2, month);
+
             try ( ResultSet resultSet = preparedStatement.executeQuery()) {
+                // Duyệt qua các dòng kết quả
                 while (resultSet.next()) {
+                    // Lấy dữ liệu từ kết quả
                     int day = resultSet.getInt("Day");
                     double totalAmount = resultSet.getDouble("TotalAmount");
+
+                    // Chuyển đổi thành chuỗi ngày
                     String date = String.format("%02d", day);
+
+                    // Tạo đối tượng Chart và thêm vào danh sách
                     chartDataList.add(new Chart(date, totalAmount));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Trả về danh sách dữ liệu của biểu đồ
         return chartDataList;
     }
 
     public List<Chart> getChartData() {
         List<Chart> chartDataList = new ArrayList<>();
+
+        // Tạo câu truy vấn SQL
         String sql = "  SELECT [o_date], SUM(total_price) AS total_price \n"
                 + "FROM orders  \n"
                 + "WHERE status = N'Đã giao' \n"
                 + "GROUP BY [o_date] \n"
                 + "ORDER BY [o_date] ASC;";
+
+        // Thực thi câu truy vấn và xử lý kết quả
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Duyệt qua các dòng kết quả
             while (resultSet.next()) {
+                // Lấy dữ liệu từ kết quả
                 String orderDate = resultSet.getString("o_date");
                 double totalAmount = resultSet.getDouble("total_price");
+
+                // Tạo đối tượng Chart và thêm vào danh sách
                 chartDataList.add(new Chart(orderDate, totalAmount));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Trả về danh sách dữ liệu của biểu đồ
         return chartDataList;
     }
 
+
     public List<Chart> getCMonth() {
         List<Chart> chartDataList = new ArrayList<>();
-        String sql = "SELECT YEAR(o_date) AS Year, MONTH(o_date) AS Month, SUM(total_price) AS TotalAmount FROM orders GROUP BY YEAR(o_date), MONTH(o_date) ORDER BY Year ASC, Month ASC";
+
+        // Tạo câu truy vấn SQL
+        String sql = "SELECT "
+                + "YEAR(o_date) AS Year, "
+                + "MONTH(o_date) AS Month, "
+                + "SUM(total_price) AS TotalAmount "
+                + "FROM orders "
+                + "WHERE status = N'Đã giao' "
+                + "GROUP BY YEAR(o_date), MONTH(o_date) "
+                + "ORDER BY Year ASC, Month ASC";
+
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Duyệt qua các dòng kết quả
             while (resultSet.next()) {
+                // Lấy dữ liệu từ kết quả
                 int year = resultSet.getInt("Year");
                 int month = resultSet.getInt("Month");
                 double totalAmount = resultSet.getDouble("TotalAmount");
+
+                // Chuyển đổi thành chuỗi tháng và năm
                 String monthToString = String.format("%04d-%02d", year, month);
+
+                // Tạo đối tượng Chart và thêm vào danh sách
                 chartDataList.add(new Chart(monthToString, totalAmount));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Trả về danh sách dữ liệu của biểu đồ
         return chartDataList;
     }
+
 }

@@ -55,21 +55,27 @@ public class CustomerDAO {
         return cus;
     }
 
+//    UYEN CODE
     public int countCustomers() throws SQLException {
         int count = 0;
 
         try {
+            //tạo câu truy vấn SQL để đếm số lượng khách hàng
             String query = "SELECT COUNT(*) AS totalCustomers FROM customer";
+            // chuẩn bị câu truy vấn
             ps = conn.prepareStatement(query);
+            // thực thi câu truy vấn
             rs = ps.executeQuery();
+            // xử lý kết quả trả về
             if (rs.next()) {
                 count = rs.getInt("totalCustomers");
             }
         } catch (SQLException ex) {
+            // Xử lý ngoại lệ
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        // Trả về số lượng khách hàng
         return count;
-
     }
 
     public LinkedList<Customer> getAll() {

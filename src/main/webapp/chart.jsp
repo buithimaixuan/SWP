@@ -18,8 +18,8 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-   
-        <link rel="stylesheet" href="../CSS/thongke.css"/>
+
+    <link rel="stylesheet" href="../CSS/thongke.css"/>
 
 
 </head>
@@ -38,7 +38,7 @@
             int numberOfStaffs = sdao.countStaffs();
             OrderDAO odao = new OrderDAO();
             double sumMoney = odao.SumMoney();
-           
+
         %>
 
         <div class="container">
@@ -98,7 +98,7 @@
                                     <i class="fa fa-university fa-5x"></i>
                                 </div>
                                 <div class="col-9 text-right" >
-                                    <h1> <%= sumMoney%> </h1>
+                                    <h1 id="customer-count"> <%= sumMoney%> </h1>
                                     <h4>Sales</h4>
                                 </div>
                             </div>
@@ -136,6 +136,9 @@
             </div>
             <div class="col-4" style="margin-top: 130px;">
                 <form id="chartForm" action="ChartController" method="post">
+                    <div style="margin-left: 85px">
+                        <marquee width="80%">Nhập thời gian bạn muốn xem thống kê.</marquee>
+                    </div>
                     <div class="col-14 mb-4"  style="margin-left: 90px">
                         <label for="year" style="color: #3333ff">Năm:</label>
                         <select id="year" name="year" style="color: #3333ff" required>
@@ -162,10 +165,10 @@
                     </div>
                     <div class="col-12" >
 
-                        <button style="margin-left: 80px" name="xemBieuDo" type="submit" class="custom-btn btn-5"><span>Biểu đồ Năm</span></button>
-                        <button name="xemBieuDoThang" type="submit" class="custom-btn btn-5"><span>Biểu đồ Tháng</span></button>
+                        <button style="margin-left: 80px;font-weight: bold" name="xemBieuDo" type="submit" class="custom-btn btn-5"><span>Biểu đồ Năm</span></button>
+                        <button  style="font-weight: bold" name="xemBieuDoThang" type="submit" class="custom-btn btn-5"><span>Biểu đồ Tháng</span></button>
                         <hr>
-                        <button style="margin-left: 170px" class="custom-btn btn-5"<span><a type="button" href="/ChartController/Chart" style="text-decoration: none; color: black">Biểu đồ Chung</span></button>
+                        <button style="margin-left: 170px;font-weight: bold" class="custom-btn btn-5"<span><a type="button" href="/ChartController/Chart" style="text-decoration: none; color: black">Biểu đồ Chung</span></button>
 
                     </div>
 
@@ -206,31 +209,7 @@
         %>
 
     </div>
-    <!--*******hiện theo lựa chọn********-->
-    <!--    <script>
-            const xValues = [<%= xValues.toString()%>];
-            const yValues = [<%= yValues.toString()%>];
-            const barColors = ["red", "green", "blue", "orange", "brown"]; // Add more colors if needed
-    
-            new Chart("myChart", {
-                type: "line",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                },
-                
-                options: {
-                    legend: {display: false},
-                    title: {
-                        display: true,
-                        text: "Biểu đồ thống kê doanh thu theo ngày tháng năm."
-                    }
-                }
-            });
-        </script>-->
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             // Lấy các phần tử select
@@ -241,7 +220,7 @@
             var selectedYear = sessionStorage.getItem("selectedYear");
             var selectedMonth = sessionStorage.getItem("selectedMonth");
 
-            // Thiết lập lại giá trị cho select năm và tháng
+            // Thiết lập lại giá trị cho select năm và tháng nếu có
             if (selectedYear) {
                 yearSelect.value = selectedYear;
             }
@@ -249,16 +228,44 @@
                 monthSelect.value = selectedMonth;
             }
 
-            // Lưu giá trị khi thay đổi
+            // Lưu giá trị khi thay đổi năm
             yearSelect.addEventListener("change", function () {
                 sessionStorage.setItem("selectedYear", yearSelect.value);
             });
 
+            // Lưu giá trị khi thay đổi tháng
             monthSelect.addEventListener("change", function () {
                 sessionStorage.setItem("selectedMonth", monthSelect.value);
             });
         });
     </script>
+  <script>
+            function animateNumber(finalNumber, duration = 5000, startNumber = 0, callback) {
+                let currentNumber = startNumber
+                const interval = window.setInterval(updateNumber, 17)
+                function updateNumber() {
+                    if (currentNumber >= finalNumber) {
+                        clearInterval(interval)
+                    } else {
+                        let inc = Math.ceil(finalNumber / (duration / 17))
+                        if (currentNumber + inc > finalNumber) {
+                            currentNumber = finalNumber
+                            clearInterval(interval)
+                        } else {
+                            currentNumber += inc
+                        }
+                        callback(currentNumber)
+                    }
+            }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+             
+                animateNumber( <%= sumMoney%>, 3000, 0, function (number) {
+                    const formattedNumber = number.toLocaleString()
+                    document.getElementById('customer-count').innerText = formattedNumber
+                })
+            })</script>
 
 
     <script>
