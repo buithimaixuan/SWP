@@ -152,9 +152,288 @@
                     <c:forEach items="${cat.entrySet()}" var="c">
                         <div class="mt-5 list_card">
                             <div class="title_list_card">
-                                <a href="#" class="title_content">${c.key}</a>
+                                <a 
+                                    <c:if test="${c.key == 'Set nguyên liệu'}">
+                                        href="/ProductController/setNguyenLieu" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Set nguyên liệu bánh sinh nhật'}">
+                                        href="/ProductController/setNguyenLieu/sinhNhat" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Set nguyên liệu bánh cookie'}">
+                                        href="/ProductController/setNguyenLieu/cookie" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Set nguyên liệu bánh mì'}">
+                                        href="/ProductController/setNguyenLieu/banhMi" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Set nguyên liệu bánh ăn vặt'}">
+                                        href="/ProductController/setNguyenLieu/anVat" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Set nguyên liệu làm socola'}">
+                                        href="/ProductController/setNguyenLieu/socola" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Kem, Bơ, Sữa, Phô mai'}">
+                                        href="/ProductController/kemBoSuaPhomai" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Bơ'}">
+                                        href="/ProductController/kemBoSuaPhomai/bo" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Whipping(Cream)'}">
+                                        href="/ProductController/kemBoSuaPhomai/Whipping" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Phô mai(cheese)'}">
+                                        href="/ProductController/kemBoSuaPhomai/PhoMai" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Sữa và sản phẩm làm từ sữa'}">
+                                        href="/ProductController/kemBoSuaPhomai/Sua" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Bột làm bánh'}">
+                                        href="/ProductController/botLamBanh" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Bột mì làm bánh'}">
+                                        href="/ProductController/botLamBanh/BotMi" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Bột mì nguyên cám'}">
+                                        href="/ProductController/botLamBanh/BotMiNguyenCam" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Bột trộn sẵn'}">
+                                        href="/ProductController/botLamBanh/BotTronSan" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Bột làm bánh khác'}">
+                                        href="/ProductController/botLamBanh/BotKhac" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Phụ gia'}">
+                                        href="/ProductController/phuGia" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Men nở và phụ gia nhỏ'}">
+                                        href="/ProductController/phuGia/MenNo" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Đường các loại'}">
+                                        href="/ProductController/phuGia/Duong" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Hương liệu và tinh dầu'}">
+                                        href="/ProductController/phuGia/HuongLieu" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Màu thực phẩm'}">
+                                        href="/ProductController/phuGia/Mau" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Nguyên liệu làm socola'}">
+                                        href="/ProductController/nguyeLieuLamSocola" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Socola hạt'}">
+                                        href="/ProductController/nguyeLieuLamSocola/Hat" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Socola thanh'}">
+                                        href="/ProductController/nguyeLieuLamSocola/Thanh" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Nguyên liệu trang trí socola'}">
+                                        href="/ProductController/nguyeLieuLamSocola/TrangTri" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Dụng cụ làm bánh'}">
+                                        href="/ProductController/dungCuLamBanh" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Dụng cụ đo lường'}">
+                                        href="/ProductController/dungCuLamBanh/DoLuong" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Dụng cụ đảo, khuấy, trộn'}">
+                                        href="/ProductController/dungCuLamBanh/DaoTron" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Dụng cụ cán, cắt'}">
+                                        href="/ProductController/dungCuLamBanh/CanCat" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Dụng cụ nhồi bột, nướng bánh'}">
+                                        href="/ProductController/dungCuLamBanh/NhoiNuong" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Khuôn, khay'}">
+                                        href="/ProductController/khuonKhay" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Khuôn bánh mì'}">
+                                        href="/ProductController/khuonKhay/KhuonBanhMi" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Khuôn bánh cookie'}">
+                                        href="/ProductController/khuonKhay/KhuonCookie" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Khuôn thạch, socola'}">
+                                        href="//ProductController/khuonKhay/KhuonSocola" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Khay nướng bánh'}">
+                                        href="/ProductController/khuonKhay/KhayNuong" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Túi, hộp bánh'}">
+                                        href="/ProductController/tuiHopBanh" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Hộp bánh gato'}">
+                                        href="/ProductController/tuiHopBanh/HopGato" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Hộp bánh cupcake'}">
+                                        href="/ProductController/tuiHopBanh/HopCupcake" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Hộp bánh cookie'}">
+                                        href="/ProductController/tuiHopBanh/HopCookie" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Túi bánh cookie'}">
+                                        href="/ProductController/tuiHopBanh/TuiCookie" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Túi bánh mì'}">
+                                        href="/ProductController/tuiHopBanh/TuiBanhMi" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Lò nướng bánh'}">
+                                        href="/ProductController/mayLamBanh/LoNuong" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Máy đánh trứng'}">
+                                        href="/ProductController/mayLamBanh/DanhTrung" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Cân điện tử'}">
+                                        href="/ProductController/mayLamBanh/CanDienTu" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Các loại máy & vật dụng khác'}">
+                                        href="/ProductController/mayLamBanh/MayKhac" 
+                                    </c:if>
+                                    <c:if test="${c.key == 'Máy làm bánh'}">
+                                        href="/ProductController/mayLamBanh" 
+                                    </c:if>
+
+                                    class="title_content">${c.key}</a>
                                 <div class="right_title">
-                                    <a href="#">More</a>
+                                    <a class="text-decoration-none"
+                                       <c:if test="${c.key == 'Set nguyên liệu'}">
+                                           href="/ProductController/setNguyenLieu" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Set nguyên liệu bánh sinh nhật'}">
+                                           href="/ProductController/setNguyenLieu/sinhNhat" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Set nguyên liệu bánh cookie'}">
+                                           href="/ProductController/setNguyenLieu/cookie" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Set nguyên liệu bánh mì'}">
+                                           href="/ProductController/setNguyenLieu/banhMi" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Set nguyên liệu bánh ăn vặt'}">
+                                           href="/ProductController/setNguyenLieu/anVat" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Set nguyên liệu làm socola'}">
+                                           href="/ProductController/setNguyenLieu/socola" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Kem, Bơ, Sữa, Phô mai'}">
+                                           href="/ProductController/kemBoSuaPhomai" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Bơ'}">
+                                           href="/ProductController/kemBoSuaPhomai/bo" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Whipping(Cream)'}">
+                                           href="/ProductController/kemBoSuaPhomai/Whipping" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Phô mai(cheese)'}">
+                                           href="/ProductController/kemBoSuaPhomai/PhoMai" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Sữa và sản phẩm làm từ sữa'}">
+                                           href="/ProductController/kemBoSuaPhomai/Sua" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Bột làm bánh'}">
+                                           href="/ProductController/botLamBanh" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Bột mì làm bánh'}">
+                                           href="/ProductController/botLamBanh/BotMi" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Bột mì nguyên cám'}">
+                                           href="/ProductController/botLamBanh/BotMiNguyenCam" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Bột trộn sẵn'}">
+                                           href="/ProductController/botLamBanh/BotTronSan" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Bột làm bánh khác'}">
+                                           href="/ProductController/botLamBanh/BotKhac" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Phụ gia'}">
+                                           href="/ProductController/phuGia" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Men nở và phụ gia nhỏ'}">
+                                           href="/ProductController/phuGia/MenNo" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Đường các loại'}">
+                                           href="/ProductController/phuGia/Duong" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Hương liệu và tinh dầu'}">
+                                           href="/ProductController/phuGia/HuongLieu" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Màu thực phẩm'}">
+                                           href="/ProductController/phuGia/Mau" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Nguyên liệu làm socola'}">
+                                           href="/ProductController/nguyeLieuLamSocola" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Socola hạt'}">
+                                           href="/ProductController/nguyeLieuLamSocola/Hat" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Socola thanh'}">
+                                           href="/ProductController/nguyeLieuLamSocola/Thanh" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Nguyên liệu trang trí socola'}">
+                                           href="/ProductController/nguyeLieuLamSocola/TrangTri" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Dụng cụ làm bánh'}">
+                                           href="/ProductController/dungCuLamBanh" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Dụng cụ đo lường'}">
+                                           href="/ProductController/dungCuLamBanh/DoLuong" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Dụng cụ đảo, khuấy, trộn'}">
+                                           href="/ProductController/dungCuLamBanh/DaoTron" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Dụng cụ cán, cắt'}">
+                                           href="/ProductController/dungCuLamBanh/CanCat" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Dụng cụ nhồi bột, nướng bánh'}">
+                                           href="/ProductController/dungCuLamBanh/NhoiNuong" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Khuôn, khay'}">
+                                           href="/ProductController/khuonKhay" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Khuôn bánh mì'}">
+                                           href="/ProductController/khuonKhay/KhuonBanhMi" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Khuôn bánh cookie'}">
+                                           href="/ProductController/khuonKhay/KhuonCookie" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Khuôn thạch, socola'}">
+                                           href="//ProductController/khuonKhay/KhuonSocola" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Khay nướng bánh'}">
+                                           href="/ProductController/khuonKhay/KhayNuong" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Túi, hộp bánh'}">
+                                           href="/ProductController/tuiHopBanh" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Hộp bánh gato'}">
+                                           href="/ProductController/tuiHopBanh/HopGato" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Hộp bánh cupcake'}">
+                                           href="/ProductController/tuiHopBanh/HopCupcake" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Hộp bánh cookie'}">
+                                           href="/ProductController/tuiHopBanh/HopCookie" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Túi bánh cookie'}">
+                                           href="/ProductController/tuiHopBanh/TuiCookie" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Túi bánh mì'}">
+                                           href="/ProductController/tuiHopBanh/TuiBanhMi" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Máy làm bánh'}">
+                                           href="/ProductController/mayLamBanh" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Lò nướng bánh'}">
+                                           href="/ProductController/mayLamBanh/LoNuong" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Máy đánh trứng'}">
+                                           href="/ProductController/mayLamBanh/DanhTrung" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Cân điện tử'}">
+                                           href="/ProductController/mayLamBanh/CanDienTu" 
+                                       </c:if>
+                                       <c:if test="${c.key == 'Các loại máy & vật dụng khác'}">
+                                           href="/ProductController/mayLamBanh/MayKhac" 
+                                       </c:if>
+                                       >More</a>
                                 </div>
                             </div>
                             <div class="list_card_item">

@@ -10,67 +10,67 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 .categories {
-  background-color: rgb(247, 187, 9);
-  margin-top: 20px;
-  font-weight: bolder;
+    background-color: rgb(247, 187, 9);
+    margin-top: 20px;
+    font-weight: bolder;
 }
 .categories p {
-  padding-top: 22.5px;
+    padding-top: 22.5px;
 }
 .slide-bar {
-  backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
 }
 .slide-bar .menu {
-  width: 100%;
-  padding: 0;
-  list-style: none;
+    width: 100%;
+    padding: 0;
+    list-style: none;
 }
 .slide-bar .menu .item {
-  position: relative;
-  cursor: pointer;
+    position: relative;
+    cursor: pointer;
 }
 .slide-bar .menu .item p {
-  color: #fff;
-  font-size: 15px;
-  text-decoration: none;
-  display: block;
-  line-height: 30px;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    display: block;
+    line-height: 30px;
 }
 
 .slide-bar .menu .item p:hover {
-  transition: 0.3s ease;
+    transition: 0.3s ease;
 }
 /* .slide-bar .menu .item i{
   margin-right: 0px;
 } */
 
 .slide-bar .menu .item p .dropdown {
-  position: absolute;
-  right: 0;
-  margin-top: 5px;
-  transition: 0.3s ease;
-  color: black;
+    position: absolute;
+    right: 0;
+    margin-top: 5px;
+    transition: 0.3s ease;
+    color: black;
 }
 .slide-bar .menu .item .sub-menu {
-  display: none;
+    display: none;
 }
 .slide-bar .menu .item .sub-menu p {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 /* hover danh muc san pham */
 
 .slidebar {
-  display: none;
+    display: none;
 }
 
 .categories:hover .slidebar {
-  display: block;
+    display: block;
 }
 /*SEARCH GROUP*/
 .search-box{
@@ -125,20 +125,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 }
 /* USER option */
 .user {
-  position: relative;
+    position: relative;
 }
 .user div {
-  width: 3em;
-  height: 3em;
-  border-radius: 50%;
-  cursor: pointer;
-  overflow: hidden;
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
 }
 img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 .user_option {
   position: absolute;
@@ -157,83 +157,83 @@ img {
   display: none;
 }
 .user_option .top_user_option {
-  height: 10%;
-  color: black;
-  position: relative;
-  color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    height: 10%;
+    color: black;
+    position: relative;
+    color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .user_option .top_user_option i {
-  font-size: 30px;
-  color: black;
-  z-index: 2;
-  position: absolute;
-  top: -5px;
-  right: 0px;
-  font-size: 25px;
-  cursor: pointer;
-  padding: 8px 10px;
-  transition: 0.25s;
+    font-size: 30px;
+    color: black;
+    z-index: 2;
+    position: absolute;
+    top: -5px;
+    right: 0px;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 8px 10px;
+    transition: 0.25s;
 }
 .user_option .top_user_option i:hover {
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
 }
 .user_option .mid_user_option {
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  color: #454445;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #454445;
 }
 .user_option .mid_user_option .avatar_display {
-  background: white;
-  width: 40%;
-  height: 80%;
-  border-radius: 50%;
-  overflow: hidden;
+    background: white;
+    width: 40%;
+    height: 80%;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .user_option .bot_user_option {
-  width: 100%;
-  height: 20%;
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  border-radius: 50px;
-  flex-wrap: wrap;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    border-radius: 50px;
+    flex-wrap: wrap;
 }
 .user_option .bot_user_option .signout_btn {
-  background: rgba(255, 255, 255, 0.8);
-  width: 50%;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  text-decoration: none;
-  transition: 0.25s;
+    background: rgba(255, 255, 255, 0.8);
+    width: 50%;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    transition: 0.25s;
 }
 .user_option .bot_user_option .signout_btn span,
 .user_option .bot_user_option .view_profile span {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .user_option .bot_user_option .view_profile {
-  background: rgba(255, 255, 255, 0.8);
-  flex: 1;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: black;
-  text-decoration: none;
-  transition: 0.25s;
+    background: rgba(255, 255, 255, 0.8);
+    flex: 1;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    text-decoration: none;
+    transition: 0.25s;
 }
 
 .user_option .bot_user_option .signout_btn:hover,
@@ -243,7 +243,7 @@ img {
 }
 
 .user_option.show_user_option {
-  display: flex;
+    display: flex;
 }
 
 /*LIST CARD*/
@@ -303,7 +303,7 @@ img {
     color: #3e3d3e;
 }
 
-/*CARD*/ 
+/*CARD*/
 .list_card .list_card_item{
     --spacing: 20px;
     --columns: 4;
@@ -350,8 +350,8 @@ img {
     font-weight: 600;
     font-size: 14px;
     color: #3e3d3e;
-    transition: 0.2s; 
-    flex: 1; 
+    transition: 0.2s;
+    flex: 1;
     word-break: break-all;
     display: -webkit-box;
     -webkit-line-clamp: 3;

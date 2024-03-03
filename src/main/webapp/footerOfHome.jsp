@@ -46,10 +46,10 @@
                             <hr class="mb-4 mt-0 d-inline-block mx-auto"
                                 style="width: 60px; background-color: #3f1b1b; height: 2px" />
                             <p>
-                                <a href="#!" class="text-secondary text-decoration-none">Trang chủ</a>
+                                <a href="/HomeController" class="text-secondary text-decoration-none">Trang chủ</a>
                             </p>
                             <p>
-                                <a href="about.jsp" class="text-secondary text-decoration-none">Giới thiệu</a>
+                                <a href="/CustomerController/aboutUs" class="text-secondary text-decoration-none">Giới thiệu</a>
                             </p>
                             <p>
                                 <a href="/CustomerController/listNews" class="text-secondary text-decoration-none">Tin tức</a>

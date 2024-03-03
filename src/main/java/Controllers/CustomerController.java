@@ -106,13 +106,15 @@ public class CustomerController extends HttpServlet {
 
             request.getRequestDispatcher("/listAllNews.jsp").forward(request, response);
         } else if (path.endsWith("CustomerController/newsDetail")) {
-            
+
             int news_id = Integer.parseInt(request.getParameter("news_id"));
             NewsDAO newsDAO = new NewsDAO();
             News news = newsDAO.getNews(news_id);
             request.setAttribute("news", news);
             request.getRequestDispatcher("/newsDetail.jsp").forward(request, response);
 
+        } else if (path.endsWith("CustomerController/aboutUs")) {
+            request.getRequestDispatcher("/about.jsp").forward(request, response);
         }
     }
 
@@ -243,7 +245,7 @@ public class CustomerController extends HttpServlet {
 
             int accId = Integer.valueOf(request.getParameter("acc_id"));
             int cusId = Integer.valueOf(request.getParameter("cus_id"));
-            
+
             Customer cus = cdao.getCustomer(accId);
 
             System.out.println("account id : " + accId);
@@ -262,7 +264,7 @@ public class CustomerController extends HttpServlet {
                 response.sendRedirect("/AdminController/adminListCustomer");
             }
         }
-        }
+    }
 
     /**
      * Returns a short description of the servlet.
