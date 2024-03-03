@@ -27,7 +27,7 @@
 
         <!--  -->
         <div style="background-color: #f5f6fa;">
-            <div class="container">
+            <div class="container" >
                 <div class="row">
                     <div class="col-lg-2 col-md-3 col-sm-3 categories border rounded-top border-dark" style="margin-top: 20px;">
                         <a href="/ProductController" class="text-decoration-none text-black">
