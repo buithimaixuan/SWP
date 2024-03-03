@@ -315,14 +315,40 @@ public class OrderController extends HttpServlet {
             request.setAttribute("quantityOrderDetail", odList.size());
             request.getRequestDispatcher("/OrderDetailCusVer2.jsp").forward(request, response);
         } else if (path.startsWith("/OrderController/OrderDeleteCustomer/")) {
+            System.out.println("Huy don hang");
             String s[] = path.split("/");
             int orderID = Integer.parseInt(s[s.length - 1]);
             OrderDAO oDAO = new OrderDAO();
+            Customer cusSession = (Customer) request.getSession().getAttribute("account");
 
             Order orderEdit = new Order(0, 0, "", "", "Đã hủy", null, 0, 0);
             int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
 
-            response.sendRedirect("/OrderController/OrderList");
+            LinkedList<Order> orderListCus = (LinkedList<Order>) request.getSession().getAttribute("orderListCus");
+
+            LinkedList<Order> orderListCusFil = (LinkedList<Order>) request.getSession().getAttribute("orderListCusFil");
+
+            if (orderListCus != null) {
+                LinkedList<Order> orderListCus1 = oDAO.getAllOrdersByCusId(cusSession.getCus_id());
+                request.getSession().setAttribute("orderListCus", orderListCus1);
+                request.getSession().setAttribute("orderListCusFil", null);
+
+                response.sendRedirect("/OrderController/OrderList");
+            } else if (orderListCusFil != null) {
+                String addStatus = "";
+                for (Order ord : orderListCusFil) {
+                    addStatus = ord.getStatus();
+                    break;
+                }
+                System.out.println("Trang thai");
+                System.out.println(addStatus);
+
+                LinkedList<Order> orderListCusFil1 = oDAO.getAllOrdersByCusIdFil(cusSession.getCus_id(), addStatus);
+                request.getSession().setAttribute("orderListCus", null);
+                request.getSession().setAttribute("orderListCusFil", orderListCusFil1);
+
+                response.sendRedirect("/OrderController/OrderList");
+            }
         }
     } 
 
