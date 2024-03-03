@@ -97,10 +97,10 @@
     font-weight: 600;
 }
 /* USER option */
-header .user {
+.user {
     position: relative;
 }
-header .user div {
+.user div {
     width: 3em;
     height: 3em;
     border-radius: 50%;
@@ -113,11 +113,11 @@ img {
     object-fit: cover;
     object-position: center;
 }
-header .user_option {
+.user_option {
     position: absolute;
     width: 400px;
     height: 360px;
-    background: white;
+    background: #B9C0C6;
     top: 15%;
     right: 2%;
     border-radius: 5px;
@@ -128,9 +128,8 @@ header .user_option {
     gap: 20px;
     transition: 0.25s;
     display: none;
-    box-shadow: -1px -1px 3px black;
 }
-header .user_option .top_user_option {
+.user_option .top_user_option {
     height: 10%;
     color: black;
     position: relative;
@@ -139,7 +138,7 @@ header .user_option .top_user_option {
     align-items: center;
     justify-content: center;
 }
-header .user_option .top_user_option i {
+.user_option .top_user_option i {
     font-size: 30px;
     color: black;
     z-index: 2;
@@ -151,11 +150,11 @@ header .user_option .top_user_option i {
     padding: 8px 10px;
     transition: 0.25s;
 }
-header .user_option .top_user_option i:hover {
+.user_option .top_user_option i:hover {
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.1);
 }
-header .user_option .mid_user_option {
+.user_option .mid_user_option {
     height: 60%;
     display: flex;
     flex-direction: column;
@@ -164,14 +163,14 @@ header .user_option .mid_user_option {
     gap: 10px;
     color: #454445;
 }
-header .user_option .mid_user_option .avatar_display {
+.user_option .mid_user_option .avatar_display {
     background: white;
     width: 40%;
     height: 80%;
     border-radius: 50%;
     overflow: hidden;
 }
-header .user_option .bot_user_option {
+.user_option .bot_user_option {
     width: 100%;
     height: 20%;
     display: flex;
@@ -180,7 +179,7 @@ header .user_option .bot_user_option {
     border-radius: 50px;
     flex-wrap: wrap;
 }
-header .user_option .bot_user_option .signout_btn {
+.user_option .bot_user_option .signout_btn {
     background: rgba(255, 255, 255, 0.8);
     width: 50%;
     border-top-left-radius: 30px;
@@ -192,12 +191,12 @@ header .user_option .bot_user_option .signout_btn {
     text-decoration: none;
     transition: 0.25s;
 }
-header .user_option .bot_user_option .signout_btn span,
-header .user_option .bot_user_option .view_profile span {
+.user_option .bot_user_option .signout_btn span,
+.user_option .bot_user_option .view_profile span {
     margin-left: 10px;
 }
 
-header .user_option .bot_user_option .view_profile {
+.user_option .bot_user_option .view_profile {
     background: rgba(255, 255, 255, 0.8);
     flex: 1;
     border-top-right-radius: 30px;
@@ -210,10 +209,10 @@ header .user_option .bot_user_option .view_profile {
     transition: 0.25s;
 }
 
-header .user_option .bot_user_option .signout_btn:hover,
-header .user_option .bot_user_option .view_profile:hover {
-    background: black;
-    color: white;
+.user_option .bot_user_option .signout_btn:hover,
+.user_option .bot_user_option .view_profile:hover {
+    background: rgba(0,0,0,0.3);
+    color: black;
 }
 
 .user_option.show_user_option {

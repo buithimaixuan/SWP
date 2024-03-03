@@ -26,7 +26,7 @@
     <body>
 
         <!--  -->
-        <div style="background-color: #f5f6fa;">
+        <div style="background-color: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1)">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 col-md-3 col-sm-3 categories border rounded-top border-dark" style="margin-top: 20px;">

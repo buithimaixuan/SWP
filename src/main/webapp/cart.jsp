@@ -95,11 +95,11 @@
                                     <div class="right_top_cart">
                                         <div class="group_quantity">
                                             <div class="control_quantity">
-                                                <a name="decrease_quan" href="/CartController/decreaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepDown(); DecreaseQuan(this);"><i class="fa-solid fa-minus"></i></a>
+                                                <a name="decrease_quan" href="/CartController/decreaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepDown();"><i class="fa-solid fa-minus"></i></a>
                                             </div>
-                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" min="1" max="<%= pro.getPro_quantity()%>" value="<%= item.getPro_quantity()%>"/>
+                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" value="<%= item.getPro_quantity()%>" min="1" max="<%= pro.getPro_quantity()%>"/>
                                             <div class="control_quantity">
-                                                <a name="increase_quan" href="/CartController/increaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepUp(); IncreaseQuan(this);"><i class="fa-solid fa-plus"></i></a>
+                                                <a name="increase_quan" href="/CartController/increaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepUp();"><i class="fa-solid fa-plus"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -147,19 +147,19 @@
             </form>          
         </div>
 
-                            <script>
+        <script>
             var toltalPrice = 0;
-            function getCheckBox(obj){
+            function getCheckBox(obj) {
                 console.log(obj.checked);
                 if (obj.checked === true) {
                     toltalPrice += parseFloat(obj.nextElementSibling.value);
-                } else if (obj.checked === false){
+                } else if (obj.checked === false) {
                     toltalPrice -= parseFloat(obj.nextElementSibling.value);
                 }
                 var displayTotal = document.querySelector("#total-price");
                 displayTotal.innerHTML = toltalPrice;
             }
-            
+
             function validateCheckBox() {
                 var checkboxes = document.querySelectorAll(".chooseCheckBoxID");
                 let atLeastOneChecked = false;

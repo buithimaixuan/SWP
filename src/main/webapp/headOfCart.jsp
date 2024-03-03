@@ -24,7 +24,7 @@
 
     <body>
         <!--  -->
-        <header style="background-color: #f5f6fa;">
+        <header style="background-color: #fff; border-bottom: 1px solid rgba(0, 0, 0, 0.1); box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1)">
             <div class="container">
                 <div class="row">
 
@@ -187,7 +187,7 @@
                                 </div>
                                 <div>
                                     <span class="input-group-append ms-4">
-                                        <a href="//OrderController/GetAllOrderList"><i class="fa fa-newspaper-o"></i></a>
+                                        <a href="/OrderController/GetAllOrderList"><i class="fa fa-newspaper-o"></i></a>
                                     </span>
                                     <p>Đơn hàng</p>
                                 </div>

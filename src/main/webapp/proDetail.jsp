@@ -66,7 +66,7 @@
                                           onclick="this.parentNode.querySelector('input[type=number]').stepDown();">
                                         <i class="fa-solid fa-minus"></i>
                                     </span>
-                                    <input type="number" name="quantityBuyInShop" value="1" min="1" max="10">
+                                    <input type="number" name="quantityBuyInShop" value="1" min="1" max="${pro.pro_quantity}">
                                     <span class="increase"
                                           onclick="this.parentNode.querySelector('input[type=number]').stepUp();">
                                         <i class="fa-solid fa-plus"></i>

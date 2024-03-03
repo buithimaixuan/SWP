@@ -87,10 +87,10 @@
         </style>
     </head>
 
-    <body>
+    <body style="font-family: Arial, Helvetica, sans-serif;">
         <%@include file="headOfCart.jsp" %>
         <div class="container col-10 my-5 br-2 rounded">
-            <h3 style="color: #631bf3;">Group4 Store</h3>
+            <h3 style="color: #3e3e3e; font-family: Arial, Helvetica, sans-serif; font-size: 27px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px">Group4 Store</h3>
             <form class="row g-3" action="OrderController" method="post">
                 <%
                     String[] listCartBuy = (String[]) request.getSession().getAttribute("finalCart");
@@ -177,27 +177,27 @@
                         </div>
                         <c:choose>
                             <c:when test="${finalCart != null}">
-                                <h4 style="color: #00ffa2;"><%= amount%>đ </h4>
+                                <h4 style="color: #ee4d2d;"><%= amount%>đ </h4>
                             </c:when>
                             <c:when test="${finalCart != null}">
                                 <c:choose>
                                     <c:when test="${finalPro.discount < finalPro.pro_price}">
-                                        <h4 style="color: #00ffa2;">${finalPro.discount*quantityBuyNow}đ </h4>
+                                        <h4 style="color: #ee4d2d;">${finalPro.discount*quantityBuyNow}đ </h4>
                                     </c:when>
                                     <c:otherwise>
-                                        <h4 style="color: #00ffa2;">${finalPro.pro_price*quantityBuyNow}đ </h4>
+                                        <h4 style="color: #ee4d2d;">${finalPro.pro_price*quantityBuyNow}đ </h4>
                                     </c:otherwise>
                                 </c:choose>
                             </c:when>
                         </c:choose>
                     </li>
                     <br>
-                    <div style="display: flex;">
-                        <a style="margin-right: auto; text-decoration: none;" href="">
-                            < Quay về giỏ hàng</a>
+                    <div style="display: flex; align-items: center; justify-content: space-evenly">
+                        <a style="text-decoration: none;" href="/HomeController">
+                            < Quay về trang chủ</a>
 
-                        <button name="payBtn" type="submit" class="dathangButon btn mb-4"
-                                style="width: 50%;background-color: rgb(104, 39, 255);"
+                        <button name="payBtn" type="submit" class="dathangButon mb-4"
+                                style="width: 50%; height: 40px;background-color: #ee4d2d; color: #fff; outline: none; border: none"
                                 onclick="validateForm()">ĐẶT HÀNG</button>
                     </div>
                 </div>
@@ -213,21 +213,18 @@
                                             <div class="input-group">
                                                 <input readonly="" name="fullname" class="input" required type="text" id="username" value="${account.fullname}"
                                                        style="width: 100%;">
-                                                <label class="label" for="username">FullName</label>
                                             </div>
                                             <div class="error-message" id="username-error"></div>
                                         </div>
                                         <div class="col-12" style="padding-bottom: 15px;">
                                             <div class="input-group">
                                                 <input readonly="" name="phonenumber" class="input" required type="tel" id="phone" value="${account.phone_number}" style="width: 100%;">
-                                                <label class="label" for="phone">SĐT</label>
                                             </div>
                                             <div class="error-message" id="phone-error"></div>
                                         </div>
                                         <div class="col-12" style="padding-bottom: 15px;">
                                             <div class="input-group">
                                                 <input readonly="" name="email" class="input" required type="email" id="email" value="${account.email}" style="width: 100%;">
-                                                <label class="label" for="email">Email</label>
                                             </div>
                                             <div class="error-message" id="email-error"></div>
                                         </div>
@@ -252,7 +249,6 @@
                                         <!-- <input type="checkbox" class="form-check-input cod" name="paymentMethod"> -->
                                         <h6 class="text-success">Giao hàng tận nhà</h6>
                                     </div>
-                                    <span class="text-muted">Miễn phí</span>
                                 </li>
                             </div>
 

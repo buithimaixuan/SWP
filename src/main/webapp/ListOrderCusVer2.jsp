@@ -27,7 +27,7 @@
 
         </style>
         <!--NAM CODE-->
-        <main>
+        <main class="mt-3">
             <section class="content">
                 <aside>
                     <div class="top_aside">
