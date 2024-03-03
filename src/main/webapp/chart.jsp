@@ -98,7 +98,7 @@
                                     <i class="fa fa-university fa-5x"></i>
                                 </div>
                                 <div class="col-9 text-right" >
-                                    <h1> <%= sumMoney%> </h1>
+                                    <h1 id="customer-count"> <%= sumMoney%> </h1>
                                     <h4>Sales</h4>
                                 </div>
                             </div>
@@ -136,6 +136,9 @@
             </div>
             <div class="col-4" style="margin-top: 130px;">
                 <form id="chartForm" action="ChartController" method="post">
+                    <div style="margin-left: 85px">
+                        <marquee width="80%">Nhập thời gian bạn muốn xem thống kê.</marquee>
+                    </div>
                     <div class="col-14 mb-4"  style="margin-left: 90px">
                         <label for="year" style="color: #3333ff">Năm:</label>
                         <select id="year" name="year" style="color: #3333ff" required>
@@ -162,10 +165,10 @@
                     </div>
                     <div class="col-12" >
 
-                        <button style="margin-left: 80px" name="xemBieuDo" type="submit" class="custom-btn btn-5"><span>Biểu đồ Năm</span></button>
-                        <button name="xemBieuDoThang" type="submit" class="custom-btn btn-5"><span>Biểu đồ Tháng</span></button>
+                        <button style="margin-left: 80px;font-weight: bold" name="xemBieuDo" type="submit" class="custom-btn btn-5"><span>Biểu đồ Năm</span></button>
+                        <button  style="font-weight: bold" name="xemBieuDoThang" type="submit" class="custom-btn btn-5"><span>Biểu đồ Tháng</span></button>
                         <hr>
-                        <button style="margin-left: 170px" class="custom-btn btn-5"<span><a type="button" href="/ChartController/Chart" style="text-decoration: none; color: black">Biểu đồ Chung</span></button>
+                        <button style="margin-left: 170px;font-weight: bold" class="custom-btn btn-5"<span><a type="button" href="/ChartController/Chart" style="text-decoration: none; color: black">Biểu đồ Chung</span></button>
 
                     </div>
 
@@ -236,7 +239,33 @@
             });
         });
     </script>
+  <script>
+            function animateNumber(finalNumber, duration = 5000, startNumber = 0, callback) {
+                let currentNumber = startNumber
+                const interval = window.setInterval(updateNumber, 17)
+                function updateNumber() {
+                    if (currentNumber >= finalNumber) {
+                        clearInterval(interval)
+                    } else {
+                        let inc = Math.ceil(finalNumber / (duration / 17))
+                        if (currentNumber + inc > finalNumber) {
+                            currentNumber = finalNumber
+                            clearInterval(interval)
+                        } else {
+                            currentNumber += inc
+                        }
+                        callback(currentNumber)
+                    }
+            }
+            }
 
+            document.addEventListener('DOMContentLoaded', function () {
+             
+                animateNumber( <%= sumMoney%>, 3000, 0, function (number) {
+                    const formattedNumber = number.toLocaleString()
+                    document.getElementById('customer-count').innerText = formattedNumber
+                })
+            })</script>
 
 
     <script>
