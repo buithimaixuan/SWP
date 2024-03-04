@@ -385,7 +385,7 @@
                     if (!addressInput.value.trim()) {
                         showError(addressInput, "Address is required.", "addressError");
                         isValid = false;
-                    } else if (!/^[a-zA-Z\s]+$/.test(addressInput.value)) {
+                    } else if (!/^[a-zA-Z0-9\s]+$/.test(addressInput.value)) {
                         showError(addressInput, "Address should only contain letters and spaces.", "addressError");
                         isValid = false;
                     }

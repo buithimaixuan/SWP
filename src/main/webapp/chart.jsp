@@ -1,4 +1,5 @@
 
+<%@page import="Models.chartPro"%>
 <%-- 
     Document   : chart
     Created on : Feb 29, 2024, 10:05:18 AM
@@ -72,7 +73,7 @@
                     <div class="card border-secondary">
                         <div class="card-body text-white" style="background-color: #ffffff">
                             <div class="row">
-                              <div class="col-3">
+                                <div class="col-3">
                                     <i class="fa fa-user-tie fa-5x"></i>
                                 </div>
                                 <div class="col-9 text-right">
@@ -120,12 +121,32 @@
 
 
 
+        <%        //       *******hiện theo lựa chọn********
+            List<Chart> chartDataList = (List<Chart>) request.getAttribute("chartData");
+            StringBuilder xValues = new StringBuilder();
+            StringBuilder yValues = new StringBuilder();
 
+            for (Chart chartData : chartDataList) {
+                xValues.append("'" + chartData.getOrderDate() + "',");
+                yValues.append(chartData.getTotalAmount() + ",");
+            }
 
+            if (xValues.length() > 0) {
+                xValues.deleteCharAt(xValues.length() - 1);
+                yValues.deleteCharAt(yValues.length() - 1);
+            }
 
-        <%
-
-
+            //       *******hiện nguyên bảng)********
+            //        chartDAO chartDAO = new chartDAO();
+            List<Chart> chartDataListYear = odao.getCMonth();
+            StringBuilder mValues = new StringBuilder();
+            StringBuilder nValues = new StringBuilder();
+            for (Chart chartData : chartDataListYear) {
+                mValues.append("'" + chartData.getOrderDate() + "',");
+                nValues.append(chartData.getTotalAmount() + ",");
+            }
+            mValues.deleteCharAt(mValues.length() - 1);
+            nValues.deleteCharAt(nValues.length() - 1);
         %>
 
 
@@ -180,36 +201,176 @@
 
 
 
+        <!--******//////**********++++*********////*********BIEU DO NGAY************++++**************//////************-->
 
-        <%        //       *******hiện theo lựa chọn********
-            List<Chart> chartDataList = (List<Chart>) request.getAttribute("chartData");
-            StringBuilder xValues = new StringBuilder();
-            StringBuilder yValues = new StringBuilder();
+        <div class="row">
+            <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm</h1>
+            <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
 
-            for (Chart chartData : chartDataList) {
-                xValues.append("'" + chartData.getOrderDate() + "',");
-                yValues.append(chartData.getTotalAmount() + ",");
+                <canvas id="myChartProduct" style="width:100%;max-width:1300px;color: #99ccff"></canvas> 
+            </div>
+
+        </div>
+
+        <%
+            List<chartPro> chartDataListProduct = (List<chartPro>) request.getAttribute("ChartDataProduct");
+            StringBuilder oValues = new StringBuilder();
+            StringBuilder pValues = new StringBuilder();
+            System.out.println("oValue:" + oValues);
+            System.out.println("pValue:" + pValues);
+
+            for (chartPro ChartDataProduct : chartDataListProduct) {
+                oValues.append("'" + ChartDataProduct.getNameOrDate() + "',");
+                pValues.append(ChartDataProduct.getQuantity() + ",");
             }
 
-            if (xValues.length() > 0) {
-                xValues.deleteCharAt(xValues.length() - 1);
-                yValues.deleteCharAt(yValues.length() - 1);
+            if (oValues.length() > 0) {
+                oValues.deleteCharAt(oValues.length() - 1);
+                pValues.deleteCharAt(pValues.length() - 1);
             }
-
-            //       *******hiện nguyên bảng)********
-            //        chartDAO chartDAO = new chartDAO();
-            List<Chart> chartDataListYear = odao.getCMonth();
-            StringBuilder mValues = new StringBuilder();
-            StringBuilder nValues = new StringBuilder();
-            for (Chart chartData : chartDataListYear) {
-                mValues.append("'" + chartData.getOrderDate() + "',");
-                nValues.append(chartData.getTotalAmount() + ",");
-            }
-            mValues.deleteCharAt(mValues.length() - 1);
-            nValues.deleteCharAt(nValues.length() - 1);
         %>
 
+        <div class="row">
+            <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm theo ngày</h1>
+            <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
+
+                <canvas id="myChartProductDay" style="width:100%;max-width:1300px;color: #99ccff"></canvas> 
+            </div>
+
+        </div>
+
+        <%
+            List<chartPro> chartDataListDay = (List<chartPro>) request.getAttribute("ChartDataProductDay");
+
+            StringBuilder aValues = new StringBuilder();
+            StringBuilder bValues = new StringBuilder();
+
+            for (chartPro ChartDataProductDay : chartDataListDay) {
+                aValues.append("'" + ChartDataProductDay.getNameOrDate() + "',");
+                bValues.append(ChartDataProductDay.getQuantity() + ",");
+            }
+
+            if (aValues.length() > 0) {
+                aValues.deleteCharAt(aValues.length() - 1);
+                bValues.deleteCharAt(bValues.length() - 1);
+            }
+        %>
+
+        <script>
+            const oValues = [<%= oValues.toString()%>];
+            const pValues = [<%= pValues.toString()%>];
+            const areaColorsProName = ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"]; // Add more colors if needed
+
+            new Chart("myChartProduct", {
+                type: "bar",
+                data: {
+                    labels: oValues,
+                    datasets: [{
+                            borderColor: "red", // Màu của đường
+                            backgroundColor: areaColorsProName, // Màu của vùng dưới đường
+                            data: pValues
+                        }]
+                },
+
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Biểu đồ thống kê sản phẩm."
+                    }
+                }
+            });
+        </script>
+        <script>
+            const aValues = [<%= aValues.toString()%>];
+            const bValues = [<%= bValues.toString()%>];
+            const areaColorsProInDay = ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"]; // Add more colors if needed
+
+            new Chart("myChartProductDay", {
+                type: "bar",
+                data: {
+                    labels: aValues,
+                    datasets: [{
+                            borderColor: "red", // Màu của đường
+                            backgroundColor: areaColorsProInDay, // Màu của vùng dưới đường
+                            data: bValues
+                        }]
+                },
+
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: "Biểu đồ thống kê số lượng sản phẩm các ngày trong năm."
+                    }
+                }
+            });
+        </script>
+
+
+        <!--******//////**********++++*********////*********BIEU DO NGAY************++++**************//////************-->
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        const xValues = [<%= xValues.toString()%>];
+        const yValues = [<%= yValues.toString()%>];
+        const areaColors = ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"]; // Add more colors if needed
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                        borderColor: "red", // Màu của đường
+                        backgroundColor: areaColors, // Màu của vùng dưới đường
+                        data: yValues
+                    }]
+            },
+
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Biểu đồ thống kê doanh thu theo ngày tháng năm."
+                }
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -269,31 +430,7 @@
         })</script>
 
 
-    <script>
-        const xValues = [<%= xValues.toString()%>];
-        const yValues = [<%= yValues.toString()%>];
-        const areaColors = ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"]; // Add more colors if needed
 
-        new Chart("myChart", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                        borderColor: "red", // Màu của đường
-                        backgroundColor: areaColors, // Màu của vùng dưới đường
-                        data: yValues
-                    }]
-            },
-
-            options: {
-                legend: {display: false},
-                title: {
-                    display: true,
-                    text: "Biểu đồ thống kê doanh thu theo ngày tháng năm."
-                }
-            }
-        });
-    </script>
 
 
 </body>

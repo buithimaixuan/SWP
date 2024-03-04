@@ -6,12 +6,16 @@ package DAOs;
 
 
 import DB.DBConnection;
+import Models.Chart;
 import Models.OrderDetail;
+import Models.chartPro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -117,5 +121,72 @@ public class OrderDetailDAO {
             Logger.getLogger(OrderDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return orderDetailList;
+    }
+    
+    
+    
+       public List<chartPro> getChartDataProduct() {
+        List<chartPro> chartDataListProduct = new ArrayList<>();
+
+        // Tạo câu truy vấn SQL
+        String sql = "SELECT p.pro_name, SUM(od.quantity) AS quantity\n"
+                + "FROM order_detail od\n"
+                + "INNER JOIN orders o ON od.o_id = o.o_id\n"
+                + "INNER JOIN product p ON od.pro_id = p.pro_id\n"
+                + "GROUP BY o.o_date, p.pro_name\n"
+                + "ORDER BY o.o_date ASC;";
+
+        // Thực thi câu truy vấn và xử lý kết quả
+        try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Duyệt qua các dòng kết quả
+            while (resultSet.next()) {
+                // Lấy dữ liệu từ kết quả
+//                String date = resultSet.getString("o_date");
+                String name = resultSet.getString("pro_name");
+                int quantity = resultSet.getInt("quantity");
+//                System.out.println("......" + date);
+                System.out.println("......" + quantity);
+
+                // Tạo đối tượng Chart và thêm vào danh sách
+                chartDataListProduct.add(new chartPro( name, quantity));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Trả về danh sách dữ liệu của biểu đồ
+        return chartDataListProduct;
+    }
+       
+       
+        public List<chartPro> getChartDataDay() {
+        List<chartPro> chartDataListDay = new ArrayList<>();
+
+        // Tạo câu truy vấn SQL
+        String sql = "SELECT o.o_date, SUM(od.quantity) AS quantity\n" +
+"         FROM order_detail od\n" +
+"           INNER JOIN orders o ON od.o_id = o.o_id \n" +
+"           GROUP BY o.o_date \n" +
+"           ORDER BY o.o_date ASC;";
+
+        // Thực thi câu truy vấn và xử lý kết quả
+        try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            // Duyệt qua các dòng kết quả
+            while (resultSet.next()) {
+                // Lấy dữ liệu từ kết quả
+                String o_date = resultSet.getString("o_date");
+                int quantity = resultSet.getInt("quantity");
+
+                // Tạo đối tượng Chart và thêm vào danh sách
+                chartDataListDay.add(new chartPro(o_date, quantity));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Trả về danh sách dữ liệu của biểu đồ
+        return chartDataListDay;
     }
 }

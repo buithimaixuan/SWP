@@ -5,7 +5,9 @@
 package Controllers;
 
 import DAOs.OrderDAO;
+import DAOs.OrderDetailDAO;
 import Models.Chart;
+import Models.chartPro;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,9 +73,15 @@ public class ChartController extends HttpServlet {
         HttpSession session = request.getSession();
         OrderDAO chartDAO = new OrderDAO();
         String path = request.getRequestURI();
+        OrderDetailDAO chartOrderDetailDAO = new OrderDetailDAO();
+        List<chartPro> chartDataListProduct = chartOrderDetailDAO.getChartDataProduct();
+        List<chartPro> chartDataListDay = chartOrderDetailDAO.getChartDataDay();
+        request.setAttribute("ChartDataProduct", chartDataListProduct);
+        request.setAttribute("ChartDataProductDay", chartDataListDay);
         if (path.endsWith("/ChartController/Chart")) {
             List<Chart> chartDataList = chartDAO.getChartData();
             request.setAttribute("chartData", chartDataList);
+
             request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
         } else if (path.endsWith("/ChartController/ChartYear")) {
@@ -88,8 +96,8 @@ public class ChartController extends HttpServlet {
             request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
         } else if (path.endsWith("/ChartController/ChartMonth")) {
-              int yearM = Integer.parseInt(session.getAttribute("yearM").toString());
-              int month = Integer.parseInt(session.getAttribute("month").toString());
+            int yearM = Integer.parseInt(session.getAttribute("yearM").toString());
+            int month = Integer.parseInt(session.getAttribute("month").toString());
 //            List<Chart> chartDataList = chartDAO.getChartData();
             List<Chart> chartDataListM = chartDAO.getMonthInMonth(yearM, month);
             request.setAttribute("chartData", chartDataListM);
