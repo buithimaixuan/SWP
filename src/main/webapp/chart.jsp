@@ -48,8 +48,8 @@
                         <div class="card-body text-white" style="background-color: #ffffff">
                             <div class="row">
                                 <div class="col-3">
-                                    <div class="continuous-circle">
-                                        <i class="fa fa-user-tie fa-5x" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                                    <div>
+                                        <i class="fa fa-user-tie fa-5x"></i>
                                     </div>
                                 </div>
                                 <div class="col-9 text-right">
@@ -72,7 +72,7 @@
                     <div class="card border-secondary">
                         <div class="card-body text-white" style="background-color: #ffffff">
                             <div class="row">
-                                <div class="continuous-circle">
+                              <div class="col-3">
                                     <i class="fa fa-user-tie fa-5x"></i>
                                 </div>
                                 <div class="col-9 text-right">
@@ -94,14 +94,15 @@
                     <div class="card border-success">
                         <div class="card-body text-white" style="background-color: #ffffff">
                             <div class="row">
-                                <div class="continuous-circle">
+                                <div class="col-3">
                                     <i class="fa fa-university fa-5x"></i>
                                 </div>
-                                <div class="col-9 text-right" >
-                                    <h1 id="customer-count"> <%= sumMoney%> </h1>
+                                <div class="col-9 text-right">
+                                    <h1 id="customer-count"><%= sumMoney%></h1>
                                     <h4>Sales</h4>
                                 </div>
                             </div>
+
                         </div>
                         <a href="/AdminController/adminListOrderHistory">
                             <div class="card-footer" style="background-color: #f4bb14">
@@ -239,33 +240,33 @@
             });
         });
     </script>
-  <script>
-            function animateNumber(finalNumber, duration = 5000, startNumber = 0, callback) {
-                let currentNumber = startNumber
-                const interval = window.setInterval(updateNumber, 17)
-                function updateNumber() {
-                    if (currentNumber >= finalNumber) {
+    <script>
+        function animateNumber(finalNumber, duration = 5000, startNumber = 0, callback) {
+            let currentNumber = startNumber
+            const interval = window.setInterval(updateNumber, 17)
+            function updateNumber() {
+                if (currentNumber >= finalNumber) {
+                    clearInterval(interval)
+                } else {
+                    let inc = Math.ceil(finalNumber / (duration / 17))
+                    if (currentNumber + inc > finalNumber) {
+                        currentNumber = finalNumber
                         clearInterval(interval)
                     } else {
-                        let inc = Math.ceil(finalNumber / (duration / 17))
-                        if (currentNumber + inc > finalNumber) {
-                            currentNumber = finalNumber
-                            clearInterval(interval)
-                        } else {
-                            currentNumber += inc
-                        }
-                        callback(currentNumber)
+                        currentNumber += inc
                     }
-            }
-            }
+                    callback(currentNumber)
+                }
+        }
+        }
 
-            document.addEventListener('DOMContentLoaded', function () {
-             
-                animateNumber( <%= sumMoney%>, 3000, 0, function (number) {
-                    const formattedNumber = number.toLocaleString()
-                    document.getElementById('customer-count').innerText = formattedNumber
-                })
-            })</script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            animateNumber(<%= sumMoney%>, 3000, 0, function (number) {
+                const formattedNumber = number.toLocaleString()
+                document.getElementById('customer-count').innerText = formattedNumber
+            })
+        })</script>
 
 
     <script>

@@ -91,23 +91,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
             width: 100%;
         }
 
-        .continuous-circle {
+/*        .continuous-circle {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background-color: #ffffff; /* Màu của khung */
-            position: relative;
-            animation: spin 2s linear infinite; /* Sử dụng animation và chỉ định tên và thời gian */
-        }
+            background-color: #ffffff;  Màu của khung 
+            position: relative;*/
+            /*animation: spin 2s linear infinite;  Sử dụng animation và chỉ định tên và thời gian */
+        /*}*/
 
-        @keyframes spin {
+/*        @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
             100% {
                 transform: rotate(360deg);
             }
-        }
+        }*/
 
 
         .txtretroshadow {
