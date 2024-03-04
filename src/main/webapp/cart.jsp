@@ -60,12 +60,22 @@
 
                                     <!-- CHECKBOX GROUP -->
                                     <div class="checkbox-wrapper-21 group_checkbox">
+                                        <%
+                                            if (item.getPro_quantity() <= pro.getPro_quantity()) {
+                                        %>
                                         <label class="control control--checkbox">
                                             Chọn
                                             <input type="checkbox" value="<%= pro.getPro_id()%>" name="checkBoxID" class="chooseCheckBoxID" onclick="getCheckBox(this)"/>
                                             <input type="hidden" value="<%= item.getCart_price()%>">
                                             <div class="control__indicator"></div>
                                         </label>
+                                        <%
+                                            } else {
+                                        %>
+                                        <p>Không đủ hàng tồn kho</p>
+                                        <%
+                                            }
+                                        %>
                                     </div>
                                     <!-- END CHECKBOX GROUP -->
 
