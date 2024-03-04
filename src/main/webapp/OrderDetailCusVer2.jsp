@@ -39,7 +39,7 @@
                     <div class="top_aside">
                         <div class="avatar_aside">
                             <a href="#">
-                                <img src="./Lovecake.png" alt="">
+                                <img src="/${account.avatar}" alt="">
                             </a>
                         </div>
                         <div class="infor_aside">
