@@ -178,7 +178,7 @@ function validateAddSupplier() {
         errorAddress.innerHTML = "Dia chi nhà cung cap không thể bỏ trống!";
         isValid = false;
     }
-    if (address !== '' && (address.length <20 || address.length>1000)) {
+    if (address !== '' && (address.length < 20 || address.length > 1000)) {
         errorAddress.innerHTML = "Dia chi nhà cung cap không thể nho hon 20!";
         isValid = false;
     }
@@ -192,4 +192,66 @@ function isValidEmail(email) {
     // Sử dụng regular expression để kiểm tra định dạng email
 //    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validateAddNews() {
+    var title = document.getElementById('title').value.trim();
+    var contentMain = document.getElementById('contentMain').value.trim();
+    var dayWriteNews = document.getElementById('dayWriteNews').value.trim();
+    var content1 = document.getElementById('content1').value.trim();
+    var content2 = document.getElementById('content2').value.trim();
+    var content3 = document.getElementById('content3').value.trim();
+
+    var errorTitle = document.querySelector('.errorTitle');
+    var errorContentMain = document.querySelector('.errorContentMain');
+    var dateError = document.getElementById('dateError');
+    var errorContent1 = document.querySelector(".errorContent1");
+    var errorContent2 = document.querySelector(".errorContent2");
+    var errorContent3 = document.querySelector(".errorContent3");
+
+    var isValid = true;
+
+    if (title === "") {
+        errorTitle.innerText = "Vui lòng nhập tiêu đề.";
+        isValid = false;
+    } else {
+        errorTitle.innerText = "";
+    }
+
+    if (contentMain === "") {
+        errorContentMain.innerText = "Vui lòng nhập nội dung chính.";
+        isValid = false;
+    } else {
+        errorContentMain.innerText = "";
+    }
+
+    if (dayWriteNews === "") {
+        dateError.innerText = "Vui lòng chọn ngày viết.";
+        isValid = false;
+    } else {
+        dateError.innerText = "";
+    }
+
+    if (content1 === '') {
+        errorContent1.innerHTML = "Nội dung 1 không thể bỏ trống";
+        isValid = false;
+    }else {
+        errorContent1.innerText = "";
+    }
+    
+    if (content2 === '') {
+        errorContent2.innerHTML = "Nội dung 2 không thể bỏ trống";
+        isValid = false;
+    }else {
+        errorContent2.innerText = "";
+    }
+    
+    if (content3 === '') {
+        errorContent3.innerHTML = "Nội dung 3 không thể bỏ trống";
+        return false;
+    }else {
+        errorContent3.innerText = "";
+    }
+    
+    return isValid;
 }
