@@ -54,229 +54,211 @@
     <body>
 
 
-        <%@include file="headOfHome.jsp" %>
-        <section style="background-color: #eee;">
-            <div class="container py-5">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card mb-4">
-                            <div class="card-body text-center avatar">
+        <%@include file="DashBoardSlideBarVer2.jsp" %>
+        <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 mt-3" style="position: absolute;
+             left: 265px;
+             top: 0;
+             width: 80%;">
+            <section style="background-color: #eee;">
+                <div class="container py-5">
+                    <div class="row">
+                    
 
-                                <!--                                <img src=""
-                                                                     alt="avatar" class="normal-avatar rounded-circle img-fluid" style="width: 150px;">-->
-                                <h5 class="my-3">${staff.fullname}</h5>
-                                <!--<p class="text-muted mb-4">Can Tho</p>-->
-                                <div class="d-flex justify-content-center mb-2">
-                                    <!--                                    <button type="submit" class="btn" style="background-color: rgb(247, 187, 9);"
-                                                                                data-bs-toggle="modal"  >Update
-                                                                            Profile</button>-->
-
-
-                                    <a href="#updateProfile" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Update Profile</a>
-
-
-                                    <!--<a  style="background-color: rgb(247, 187, 9);">Update Profile</a>-->
+                        </div>
+                        <div class="col-lg-12">
+                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Information</h3>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">FullName</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${staff.fullname}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Email</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${staff.email}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Phone</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${staff.phone_number}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">UserName</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${staff.username}</p>
+                                        </div>
+                                    </div>
 
                                 </div>
                             </div>
-                        </div>
 
 
-                    </div>
-                    <div class="col-lg-8">
-                        <h3 style="color: rgb(247, 187, 9);" class="my-3">Information</h3>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">FullName</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${staff.fullname}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Email</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${staff.email}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">Phone</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${staff.phone_number}</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p class="mb-0">UserName</p>
-                                    </div>
-                                    <div class="col-sm-9">
-                                        <p class="text-muted mb-0">${staff.username}</p>
-                                    </div>
-                                </div>
+                            <!-- CHANGE PASSWORD - CODE UYEN -->
 
-                            </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card mb-4 mb-md-0">
+                                        <div class="card-body" style="text-align: center;">
+                                            <p class="mb-4"><span class="font-italic me-1" style="color: rgb(247, 187, 9);">Change
+                                                    Pasword</span>
+                                            </p>
+                                            <p class="mb-1" style="font-size: .77rem;">Ấn dô đây để đổi Mật khẩu</p>
+                                            <p class="mb-1" style="font-size: .77rem;">Mật khẩu gồm chữ ,số và ...</p>
+                                        </div>
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <a href="#changePass" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Change Password</a>
 
 
-                        <!-- CHANGE PASSWORD - CODE UYEN -->
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body" style="text-align: center;">
-                                        <p class="mb-4"><span class="font-italic me-1" style="color: rgb(247, 187, 9);">Change
-                                                Pasword</span>
-                                        </p>
-                                        <p class="mb-1" style="font-size: .77rem;">Ấn dô đây để đổi Mật khẩu</p>
-                                        <p class="mb-1" style="font-size: .77rem;">Mật khẩu gồm chữ ,số và ...</p>
-                                    </div>
-                                    <div class="d-flex justify-content-center mb-2">
-                                        <a href="#changePass" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Change Password</a>
-
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <!--//        public Staff(int staff_id, int acc_id, String username, String password, String fullnameRR,
-                        //            String phone_numberRR, String emailRR, Date birthdayR, String genderRS, String addressR,
-                        //            String positionRR, Date begin_workRS, Date end_workRS, int code_reset, int isDelete)-->
+                            <!--//        public Staff(int staff_id, int acc_id, String username, String password, String fullnameRR,
+                            //            String phone_numberRR, String emailRR, Date birthdayR, String genderRS, String addressR,
+                            //            String positionRR, Date begin_workRS, Date end_workRS, int code_reset, int isDelete)-->
 
-                        <div class="col-lg-8" id="updateProfile">
-                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Update Information</h3>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <form id="updateForm" action="StaffController" method="post" enctype="multipart/form-data">
-                                    <span class="text-danger" id="duplicateEmailPhoneUsernameError"></span>
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">FullName</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" value="${staff.fullname}" required=""/>
-                                            <span class="error"></span>
-                                            <span class="text-danger" id="fullnameError"></span> <!-- Error message for FullName -->
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3" type="hidden">
-                                        <div class="col-sm-10">
-                                            <input type="hidden" id="username" name="username" class="form-control form-control-lg" value="${staff.username}" />
-                                            <span class="error"></span>
-                                            <span class="text-danger" id="duplicateUserError"></span>
-                                            <span class="text-danger" id="duplicateEmailPhoneError"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <input type="email" id="email" name="email" class="form-control form-control-lg" value="${staff.email}" required=""/>
-                                            <span class="error"></span>
-                                            <span class="text-danger" id="emailError"></span> <!-- Error message for Email -->
-                                            <span class="text-danger" id="duplicateEmailError"></span>
-                                            <span class="text-danger" id="duplicateEmailPhoneError"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="phone" name="phone" class="form-control form-control-lg" value="${staff.phone_number}" required="" />
-                                            <span class="error"></span>
-                                            <span class="text-danger" id="phoneError"></span> <!-- Error message for Phone -->
-                                            <span class="text-danger" id="duplicatePhoneError"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">Birthday</label>
-                                        <div class="col-sm-10">
-                                            <input type="date" id="birthday" name="birthday" class="form-control form-control-lg" value="${staff.birthday}"/>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">Address</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" id="address" name="address" class="form-control form-control-lg" value="${staff.address}" required="" />
-                                            <span class="error"></span>
-                                            <span class="text-danger" id="addressError"></span> <!-- Error message for Address -->
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">Position</label>
-                                        <div class="col-sm-10">
-                                            <input readonly="" type="text" id="position" name="position" class="form-control form-control-lg" value="${staff.position}" />
-                                        </div>
-                                    </div>
-                                    <div class="row mb-6">
-                                        <div class="col-md-12 d-flex justify-content-end">
-                                            <button name="btnUpdatefStaff" type="submit" style="background-color: rgb(247, 187, 9);" class="btn">Update</button>
-                                        </div>
-                                    </div>
-                                </form>
-
+                            <div class="col-lg-8" id="updateProfile">
+                                <h3 style="color: rgb(247, 187, 9);" class="my-3">Update Information</h3>
                             </div>
-                        </div>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <form id="updateForm" action="StaffController" method="post" enctype="multipart/form-data">
+                                        <span class="text-danger" id="duplicateEmailPhoneUsernameError"></span>
+                                        <div class="row mb-3">
+                                            <label for="fullName" class="col-sm-2 col-form-label">FullName</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" value="${staff.fullname}" required=""/>
+                                                <span class="error"></span>
+                                                <span class="text-danger" id="fullnameError"></span> <!-- Error message for FullName -->
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3" type="hidden">
+                                            <div class="col-sm-10">
+                                                <input type="hidden" id="username" name="username" class="form-control form-control-lg" value="${staff.username}" />
+                                                <span class="error"></span>
+                                                <span class="text-danger" id="duplicateUserError"></span>
+                                                <span class="text-danger" id="duplicateEmailPhoneError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" id="email" name="email" class="form-control form-control-lg" value="${staff.email}" required=""/>
+                                                <span class="error"></span>
+                                                <span class="text-danger" id="emailError"></span> <!-- Error message for Email -->
+                                                <span class="text-danger" id="duplicateEmailError"></span>
+                                                <span class="text-danger" id="duplicateEmailPhoneError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="phone" name="phone" class="form-control form-control-lg" value="${staff.phone_number}" required="" />
+                                                <span class="error"></span>
+                                                <span class="text-danger" id="phoneError"></span> <!-- Error message for Phone -->
+                                                <span class="text-danger" id="duplicatePhoneError"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="fullName" class="col-sm-2 col-form-label">Birthday</label>
+                                            <div class="col-sm-10">
+                                                <input type="date" id="birthday" name="birthday" class="form-control form-control-lg" value="${staff.birthday}"/>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="fullName" class="col-sm-2 col-form-label">Address</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="address" name="address" class="form-control form-control-lg" value="${staff.address}" required="" />
+                                                <span class="error"></span>
+                                                <span class="text-danger" id="addressError"></span> <!-- Error message for Address -->
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <label for="fullName" class="col-sm-2 col-form-label">Position</label>
+                                            <div class="col-sm-10">
+                                                <input readonly="" type="text" id="position" name="position" class="form-control form-control-lg" value="${staff.position}" />
+                                            </div>
+                                        </div>
+                                        <div class="row mb-6">
+                                            <div class="col-md-12 d-flex justify-content-end">
+                                                <button name="btnUpdatefStaff" type="submit" style="background-color: rgb(247, 187, 9);" class="btn">Update</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
 
 
 
-                        <div class="col-lg-8" id="changePass">
-                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Change Password</h3>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <form action="StaffController" method="post" enctype="multipart/form-data" >
-                                    <div class="row mb-3">
-                                        <label for="old" class="col-sm-2 col-form-label">Old Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="oldPass" 
-                                                   name="oldPass" required="">
-                                            <div id="oldError" class="text-danger"></div>     
-                                            <span class="text-danger" id="duplicatePassError"></span>
+                            <div class="col-lg-8" id="changePass">
+                                <h3 style="color: rgb(247, 187, 9);" class="my-3">Change Password</h3>
+                            </div>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <form action="StaffController" method="post" enctype="multipart/form-data" >
+                                        <div class="row mb-3">
+                                            <label for="old" class="col-sm-2 col-form-label">Old Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="oldPass" 
+                                                       name="oldPass" required="">
+                                                <div id="oldError" class="text-danger"></div>     
+                                                <span class="text-danger" id="duplicatePassError"></span>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="row mb-3">
-                                        <label for="newP" class="col-sm-2 col-form-label">New Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="newP" name="newP"
-                                                   placeholder="Enter your new password" required="">
-                                            <div id="errorDiv"></div>
+                                        <div class="row mb-3">
+                                            <label for="newP" class="col-sm-2 col-form-label">New Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="newP" name="newP"
+                                                       placeholder="Enter your new password" required="">
+                                                <div id="errorDiv"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <label for="confirm" class="col-sm-2 col-form-label">Confirm Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="confirm" name="confirm"
-                                                   placeholder="Enter new password again" required="">
-                                            <div id="errorDiv"></div>
+                                        <div class="row mb-3">
+                                            <label for="confirm" class="col-sm-2 col-form-label">Confirm Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="confirm" name="confirm"
+                                                       placeholder="Enter new password again" required="">
+                                                <div id="errorDiv"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row mb-6">
-                                        <div class="col-md-12 d-flex justify-content-end">
-                                            <button type="submit" style="background-color: rgb(247, 187, 9);" class="btn" name="btnChangePassStaff">Change</button>
+                                        <div class="row mb-6">
+                                            <div class="col-md-12 d-flex justify-content-end">
+                                                <button type="submit" style="background-color: rgb(247, 187, 9);" class="btn" name="btnChangePassStaff">Change</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <a href="#" id="back-to-top" title="Go to top">↑</a>
+            </section>
+
+            <a href="#" id="back-to-top" title="Go to top">↑</a>
 
 
-        <footer>
-            <%@include file="footerOfHome.jsp" %>
-        </footer>
+          
+        </div>
         <!-- ===END FORM== -->
         <script>
             // Kiểm tra biến session để xác định xem có hiển thị popup hay không
