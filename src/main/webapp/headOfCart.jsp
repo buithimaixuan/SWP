@@ -169,7 +169,7 @@
                             </a>
                         </div>
                         <div class="col-lg-5 col-md-5 col-sm-7 d-flex align-items-center p-0">
-                            <form class="search-box" method="post" action="ProductController">
+                            <form class="search-box" method="post" action="/ProductController">
                                 <!--NAM CODE HERE-->
                                 <input name="value-search" type="text" value="${getSearch}"  placeholder="Search...">
                                 <button id="searchBtn" name="search-btn" type="submit" class="search-box-btn">
@@ -194,7 +194,7 @@
 
                                 <div class="user">
                                     <div class="avartar">
-                                        <img src="/images/Lovecake.png" alt="">
+                                        <img src="/${account.avatar}" alt="">
                                     </div>
                                 </div>
 
@@ -252,7 +252,7 @@
                 });
             });
         </script>
-        <script src="JS/profile.js"></script>
+        <script src="/JS/profile.js"></script>
 
     </body>
 
