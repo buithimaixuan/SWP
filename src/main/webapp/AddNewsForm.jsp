@@ -29,19 +29,19 @@
     <body>
         <div class="row">
             <%@include file="DashBoardSlideBarVer2.jsp" %>
-            
+
             <div class="col-lg-10 col-md-9 col-sm-9 min-vh-100 mt-3" style="position: absolute;
                  left: 265px;
                  top: 0;
                  width: 80%;">
-                <form method="post" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateForm()">
+                <form method="post" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddNews()">
                     <div class="text-center mb-3">
                         <span class="h3 fw-bold">Thêm mới tin tức</span>
                     </div>
 
                     <div class="form-group w-100">
                         <div class="form-hover">
-                            <input type="text" id="title" name="title" placeholder="Tiêu đề" class="form-control form-control-lg" required/>
+                            <input type="text" id="title" name="title" placeholder="Tiêu đề" class="form-control form-control-lg"/>
                             <label for="title" class="form-label">Tiêu đề</label>
                         </div>
                         <span class="errorTitle text-danger fw-bold font-italic"></span>
@@ -63,7 +63,7 @@
 
                     <div class="form-outline form-group mt-4 w-100">
                         <div class="form-hover">
-                            <textarea type="text" id="contentMain" name="contentMain" placeholder="Nội dung chính" required
+                            <textarea type="text" id="contentMain" name="contentMain" placeholder="Nội dung chính"
                                       class="form-control form-control-lg" rows="8" cols="10" style="max-height: 150px;"></textarea>
                             <label class="form-label" for="contentMain">Nội dung chính</label>
                         </div>
@@ -72,7 +72,7 @@
 
                     <div class="form-outline form-group mt-4 w-100">
                         <div class="form-hover">
-                            <textarea type="text" id="content1" name="content1" placeholder="Nội dung 1" required
+                            <textarea type="text" id="content1" name="content1" placeholder="Nội dung 1"
                                       class="form-control form-control-lg" rows="8" cols="10" style="max-height: 100px;"></textarea>
                             <label class="form-label" for="content1">Nội dung 1</label>
                         </div>
@@ -81,7 +81,7 @@
 
                     <div class="form-outline form-group w-100 mt-4">
                         <div class="form-hover">
-                            <textarea type="text" id="content2" name="content2" placeholder="Nội dung 2" required
+                            <textarea type="text" id="content2" name="content2" placeholder="Nội dung 2"
                                       class="form-control form-control-lg" rows="8" cols="10" style="max-height: 100px;"></textarea>
                             <label class="form-label" for="content2">Nội dung 2</label>
                         </div>
@@ -90,7 +90,7 @@
 
                     <div class="form-outline form-group mt-4 w-100">
                         <div class="form-hover">
-                            <textarea type="text" id="content3" name="content3" placeholder="Nội dung 3" required
+                            <textarea type="text" id="content3" name="content3" placeholder="Nội dung 3"
                                       class="form-control form-control-lg" rows="8" cols="10" style="max-height: 100px;"></textarea>
                             <label class="form-label" for="content3">Nội dung 3</label>
                         </div>
@@ -100,7 +100,7 @@
                     <div class="form-outline mt-4">
                         <label class="form-label h5">Ngày viết</label>
                         <div class="form-hover">
-                            <input type="date" id="dayWriteNews" name="dayWriteNews" class="form-control form-control-lg" required/>
+                            <input type="date" id="dayWriteNews" name="dayWriteNews" class="form-control form-control-lg"/>
                         </div>
                         <span id="dateError" class="text-danger fw-bold font-italic"></span>
                     </div>
@@ -118,8 +118,7 @@
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-        <script src="../JS/AddNewsForm.js"></script>
-        <script >
-        </script>
+        <!--<script src="/JS/AddNewsForm.js"></script>-->
+        <script src="/JS/AddProAdmin.js"></script>
     </body>
 </html>
