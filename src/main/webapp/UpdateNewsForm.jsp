@@ -36,7 +36,7 @@
                  width: 80%;">
                 <form method="post" enctype="multipart/form-data" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddNews()">
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Thêm mới tin tức</span>
+                        <span class="h3 fw-bold">Chỉnh sửa tin tức</span>
                     </div>
 
                     <div class="form-group w-100">
