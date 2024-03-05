@@ -98,6 +98,10 @@ public class StaffController extends HttpServlet {
 
             session.setAttribute("getStaff", staff);
             request.getRequestDispatcher("/DeleteStaff.jsp").forward(request, response);
+
+        } else if (url.endsWith("/StaffController/create")) {
+            request.getRequestDispatcher("/AddnewStaff.jsp").forward(request, response);
+
         }
     }
 
@@ -208,7 +212,7 @@ public class StaffController extends HttpServlet {
             String confirmPassword = request.getParameter("confirm");
 
             if (!adao.checkPassword(oldPassword)) {
-                 session.setAttribute("duplicateError", "PassError");
+                session.setAttribute("duplicateError", "PassError");
                 response.sendRedirect("/StaffController");
                 return;
             }
@@ -241,7 +245,7 @@ public class StaffController extends HttpServlet {
                 response.sendRedirect("/StaffController");
 
             } else {
-             
+
                 //thất bại
                 session.setAttribute("failll", "That bai");
                 response.sendRedirect("/StaffController");

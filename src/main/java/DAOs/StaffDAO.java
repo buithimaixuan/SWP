@@ -36,7 +36,7 @@ public class StaffDAO {
 
     public Staff getStaff(int acc_id) {
         Staff Staff = null;
-        String sql = "select * from staff where acc_id=?";
+        String sql = "select * from staff where acc_id=? and isdelete=0";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, acc_id);
