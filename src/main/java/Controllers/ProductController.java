@@ -1354,10 +1354,12 @@ public class ProductController extends HttpServlet {
                 CategoriesDAO cdao = new CategoriesDAO();
                 ProductImagesDAO pIdao = new ProductImagesDAO();
                 LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
+                LinkedList<Product> listProHot = pdao.getProductHot();
                 Categories cat = cdao.getCatById(pro.getCat_id());
                 request.setAttribute("listPI", listPI);
                 request.setAttribute("cat", cat);
                 request.getSession().setAttribute("pro", pro);
+                request.setAttribute("listProHot", listProHot);
                 request.getRequestDispatcher("/proDetail.jsp").forward(request, response);
             } catch (Exception e) {
                 response.sendRedirect("/HomeController");
