@@ -72,7 +72,7 @@
                                 <h5 class="my-3">${account.fullname}</h5>
                                 <!--<p class="text-muted mb-4">Can Tho</p>-->
                                 <div class="d-flex justify-content-center mb-2">
-                                    <a href="#updateProfile" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Update Profile</a>
+                                    <a href="#updateProfile" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Cập nhật hồ sơ</a>
                                 </div>
                             </div>
                         </div>

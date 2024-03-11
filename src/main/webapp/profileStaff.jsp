@@ -328,7 +328,7 @@
 
                 function validatePassword() {
                     if (newPInput.value !== confirmInput.value) {
-                        errorDiv.innerHTML = "Mật khẩu không khớp";
+                        errorDiv.innerHTML = "Password incorrect ";
                     } else {
                         errorDiv.innerHTML = "";
                     }

@@ -210,17 +210,17 @@
                                             <img src="/${account.avatar}" alt="">
                                         </div>
                                         <div class="hello_user text-black">
-                                            <span>Hello ${account.fullname}</span>
+                                            <span>Xin chào ${account.fullname}</span>
                                         </div>
                                     </div>
                                     <div class="bot_user_option">
                                         <a href="/LogoutController" class="signout_btn">
                                             <i class="fa-solid fa-right-from-bracket"></i>
-                                            <span>Sign out</span>
+                                            <span>Đăng xuất</span>
                                         </a>
                                         <a href="/UpdateCustomerController" class="view_profile">
                                             <i class="fa-solid fa-user"></i>
-                                            <span>View profile</span>
+                                            <span>Xem hồ sơ</span>
                                         </a>
                                     </div>
                                 </div>
