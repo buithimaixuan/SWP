@@ -103,8 +103,8 @@
                                     </div>
                                     <div class="thongtinconlai">
                                         <h3><%= pro.getPro_name()%></h3>
-                                        <p>The loai: <span><%= getCat.getCat_name()%></span></p>
-                                        <p>So luong: <span><%= elem.getQuantity()%></span></p>
+                                        <p>Thể loại: <span><%= getCat.getCat_name()%></span></p>
+                                        <p>Số lượng: <span><%= elem.getQuantity()%></span></p>
                                     </div>
                                 </div>
                                 <div class="giasanpham">

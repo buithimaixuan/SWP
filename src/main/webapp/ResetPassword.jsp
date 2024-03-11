@@ -44,7 +44,7 @@
                             <!-- Main Heading -->
                             <div class="row justify-content-center align-items-center pt-3">
                                 <h1>
-                                    <strong>Reset Password</strong>
+                                    <strong>Quên mật khẩu</strong>
                                 </h1>
                             </div>
                             <div class="pt-3 pb-3">
@@ -88,8 +88,8 @@
                                 <div class="pt-2">
                                     <div class="row justify-content-center">
                                         <h5>
-                                            Don't have an Account?<span><a href="/RegisterController"
-                                                                           class="text-danger"> Register Now!</a></span>
+                                            Bạn chưa có tài khoản?<span><a href="/RegisterController"
+                                                                           class="text-danger">Đăng kí ngay!</a></span>
                                         </h5>
                                     </div>
                                     <div

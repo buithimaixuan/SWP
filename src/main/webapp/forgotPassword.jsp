@@ -21,14 +21,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
                     <div class="forgot">
-                        <h2>Forgot your password?</h2>
-                        <p>Change your password in three easy steps. This will help you
-                            to secure your password!</p>
+                        <h2>Bạn quên mật khẩu ?</h2>
+                        <p>Thay đổi mật khẩu của bạn qua 3 bước. Nó sẽ giúp bạn bảo vệ mật khẩu của bạn.!</p>
                         <ol class="list-unstyled">
-                            <li><span class="text-primary text-medium">1. </span>Enter
-                                your email address below.</li>
-                            <li><span class="text-primary text-medium">2. </span>Our
-                                system will send you an OTP to your email</li>
+                            <li><span class="text-primary text-medium">1. </span>Nhập Email của bạn.</li>
+                            <li><span class="text-primary text-medium">2. </span>Hệ thống sẽ gửi mã OTP đến Email của bạn.s</li>
                             <li><span class="text-primary text-medium">3. </span>Enter the OTP on the 
                                 next page</li>
                         </ol>

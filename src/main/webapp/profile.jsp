@@ -80,12 +80,12 @@
 
                     </div>
                     <div class="col-lg-8">
-                        <h3 style="color:rgb(247, 187, 9);" class="my-3">Information</h3>
+                        <h3 style="color:rgb(247, 187, 9);" class="my-3">Thông tin</h3>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p class="mb-0">FullName</p>
+                                        <p class="mb-0">Họ Tên</p>
                                     </div>
                                     <div class="col-sm-9">
                                         <p class="text-muted mb-0">${account.fullname}</p>
@@ -103,7 +103,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p class="mb-0">Phone</p>
+                                        <p class="mb-0">SĐT</p>
                                     </div>
                                     <div class="col-sm-9">
                                         <p class="text-muted mb-0">${account.phone_number}</p>
@@ -112,7 +112,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <p class="mb-0">UserName</p>
+                                        <p class="mb-0">Tên đăng nhập</p>
                                     </div>
                                     <div class="col-sm-9">
                                         <p class="text-muted mb-0">${account.username}</p>
@@ -133,7 +133,7 @@
                                                 Pasword</span>
                                         </p>
                                         <p class="mb-1" style="font-size: .77rem;">Ấn dô đây để đổi Mật khẩu</p>
-                                        <p class="mb-1" style="font-size: .77rem;">Mật khẩu gồm chữ ,số và ...</p>
+                                        <p class="mb-1" style="font-size: .77rem;">Mật khẩu gồm chữ ,số.</p>
                                     </div>
                                     <div class="d-flex justify-content-center mb-2">
                                         <a href="#changePass" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Change Password</a>
@@ -151,7 +151,7 @@
                             <div class="card-body">
                                 <form id="updateForm" action="UpdateCustomerController" method="post" enctype="multipart/form-data">
                                     <div class="row mb-3">
-                                        <label for="fullname" class="col-sm-2 col-form-label">FullName</label>
+                                        <label for="fullname" class="col-sm-2 col-form-label">Họ Tên</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" value="${account.fullname}" required=""/>
                                             <span id="fullnameError" class="error"></span>
@@ -176,7 +176,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="phone" class="col-sm-2 col-form-label">Phone</label>
+                                        <label for="phone" class="col-sm-2 col-form-label">SĐT</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="phone" name="phone" class="form-control form-control-lg" value="${account.phone_number}" required=""/>
                                             <span id="phoneError" class="error"></span>
@@ -204,7 +204,7 @@
 
                                     <div class="row mb-6">
                                         <div class="col-md-12 d-flex justify-content-end">
-                                            <button name="btnUpdatefProfile" type="submit" style="background-color: rgb(247, 187, 9);" class="btn">Update</button>
+                                            <button name="btnUpdatefProfile" type="submit" style="background-color: rgb(247, 187, 9);" class="btn">Cập nhật</button>
                                         </div>
                                     </div>
                                 </form>
@@ -214,13 +214,13 @@
 
 
                         <div class="col-lg-8" id="changePass">
-                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Change Password</h3>
+                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Đổi mật khẩu</h3>
                         </div>
                         <div class="card mb-4">
                             <div class="card-body">
                                 <form action="UpdateCustomerController" method="post" enctype="multipart/form-data" >
                                     <div class="row mb-3">
-                                        <label for="old" class="col-sm-2 col-form-label">Old Password</label>
+                                        <label for="old" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="old" value=""
                                                    name="oldPass">
@@ -230,7 +230,7 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <label for="newP" class="col-sm-2 col-form-label">New Password</label>
+                                        <label for="newP" class="col-sm-2 col-form-label">Mật khẩu mới</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="newP" name="newP"
                                                    placeholder="Enter your new password">
@@ -238,7 +238,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="confirm" class="col-sm-2 col-form-label">Confirm Password</label>
+                                        <label for="confirm" class="col-sm-2 col-form-label">Xác nhận Mật khẩu</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="confirm" name="confirm"
                                                    placeholder="Enter new password again">
@@ -247,7 +247,7 @@
                                     </div>
                                     <div class="row mb-6">
                                         <div class="col-md-12 d-flex justify-content-end">
-                                            <button type="submit" style="background-color: rgb(247, 187, 9);" class="btn" name="btnChangePass">Change</button>
+                                            <button type="submit" style="background-color: rgb(247, 187, 9);" class="btn" name="btnChangePass">Thay đổi</button>
                                         </div>
                                     </div>
                                 </form>

@@ -39,7 +39,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="proId" name="proId" placeholder="Ma SP" value="${pEdit.pro_id}"
                                            class="form-control form-control-lg" readonly />
-                                    <label for="proName" class="form-label">Ma sp</label>
+                                    <label for="proName" class="form-label">Mã sản phẩm</label>
                                 </div>
                                 <span class="error errorProName text-danger fw-bold font-italic"></span>
                             </div>

@@ -144,13 +144,13 @@
             </section>
 
             <section>
-                <h2>Our Story</h2>
+                <h2>Lịch sử hình thành</h2>
                 <p>Thành lập vào năm 2023, cửa hàng chúng tôi bắt nguồn từ niềm đam mê sâu sắc đối với nghệ thuật làm bánh và mong muốn chia sẻ niềm đam mê đó với cộng đồng. Bắt đầu từ một xưởng nhỏ, chúng tôi đã dần dần phát triển và trở thành điểm đến đáng tin cậy cho những ai yêu thích nghệ thuật làm bánh.
                     Suốt hành trình phát triển, chúng tôi không ngừng nỗ lực để cung cấp cho khách hàng những sản phẩm chất lượng và dịch vụ tốt nhất có thể. Chúng tôi luôn đặt sự hài lòng của khách hàng lên hàng đầu và luôn luôn lắng nghe và phản hồi ý kiến của họ để không ngừng cải thiện.</p>
             </section>
             <section id="location">
                 <div class="container">
-                    <h2>Our Location</h2>
+                    <h2>Vị trí cửa hàng</h2>
                     <div id="map" style="text-align: center;" ><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.0533542569997!2d105.72985667464388!3d10.01245179009357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0882139720a77%3A0x3916a227d0b95a64!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgQ-G6p24gVGjGoQ!5e0!3m2!1sen!2s!4v1708303432314!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div> <!-- Your map goes here -->
                 </div>
             </section>

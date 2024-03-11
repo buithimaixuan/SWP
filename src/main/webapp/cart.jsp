@@ -34,7 +34,7 @@
             %>
             <form class="container-fluid" action="CartController" method="post" onsubmit="return validateCheckBox();">
 
-                <div class="cart_title">Gio hang</div>
+                <div class="cart_title">Giỏ hàng</div>
 
                 <div class="cart_body">
 
@@ -44,7 +44,7 @@
                             LinkedList<Cart> listCart = (LinkedList<Cart>) request.getAttribute("listCart");
                             if (listCart.isEmpty()) {
                         %>
-                        <h3 class="noti_null">Chua co san pham trong gio hang</h3>
+                        <h3 class="noti_null">Chưa có sản phẩm trong giỏ hàng</h3>
                         <%
                         } else {
                         %>
