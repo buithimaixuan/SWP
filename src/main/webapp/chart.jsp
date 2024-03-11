@@ -55,13 +55,13 @@
                                 </div>
                                 <div class="col-9 text-right">
                                     <h1><%= numberOfCustomers%></h1>
-                                    <h4>Customers</h4>
+                                    <h4>Khách hàng</h4>
                                 </div>
                             </div>
                         </div>
                         <a href="/AdminController/adminListCustomer">
                             <div class="card-footer" style="background-color: #f4bb14;">
-                                <span class="float-left" style="text-decoration: none">Details</span>
+                                <span class="float-left" style="text-decoration: none">Chi tiết</span>
                                 <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -78,13 +78,13 @@
                                 </div>
                                 <div class="col-9 text-right">
                                     <h1><%= numberOfStaffs%></h1>
-                                    <h4>Staffs</h4>
+                                    <h4>Nhân viên</h4>
                                 </div>
                             </div>
                         </div>
                         <a href="/AdminController/adminListStaff">
                             <div class="card-footer" style="background-color: #f4bb14">
-                                <span class="float-left">Details</span>
+                                <span class="float-left">Chi tiết</span>
                                 <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>
@@ -100,14 +100,14 @@
                                 </div>
                                 <div class="col-9 text-right">
                                     <h1 id="customer-count"><%= sumMoney%></h1>
-                                    <h4>Sales</h4>
+                                    <h4>Doanh thu</h4>
                                 </div>
                             </div>
 
                         </div>
                         <a href="/AdminController/adminListOrderHistory">
                             <div class="card-footer" style="background-color: #f4bb14">
-                                <span class="float-left">Details</span>
+                                <span class="float-left">Chi tiết</span>
                                 <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
                                 <div class="clearfix"></div>
                             </div>

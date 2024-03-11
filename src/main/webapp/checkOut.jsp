@@ -22,7 +22,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Checkout page</title>
+        <title>Trang thanh toán</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
               type="text/css">
 
@@ -301,13 +301,13 @@
                     var errorMessage = '';
 
                     if (!input.value.trim()) {
-                        errorMessage = 'Vui lòng nhập thông tin.';
+                        errorMessage = 'Please enter information.';
                         isValid = false;
                     } else if (input.id === 'phone' && !phoneRegex.test(input.value)) {
-                        errorMessage = 'Số điện thoại không hợp lệ.';
+                        errorMessage = 'Phone is invalid.';
                         isValid = false;
                     } else if (input.id === 'email' && !emailRegex.test(input.value)) {
-                        errorMessage = 'Email không hợp lệ.';
+                        errorMessage = 'Email is invalid.';
                         isValid = false;
                     }
 

@@ -139,9 +139,9 @@
 
                                     <select id="position" name="position" class="w-100 form-control form-control-lg" >
                                         <option><%=  getStaff.getPosition()%></option>
-                                        <option value="product manager" >product manager</option>
-                                        <option value="order manager">order manager</option>
-                                        <option value="news manager">news manager</option>
+                                        <option value="product manager" >Quản lí sản phẩm</option>
+                                        <option value="order manager">Quản lí đơn hàng</option>
+                                        <option value="news manager">Quản lí tin tức</option>
                                     </select>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>

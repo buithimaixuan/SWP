@@ -56,7 +56,7 @@
         <div>
             <%@include file="DashBoardSlideBarVer2.jsp" %>
             <div style="flex: 1; position: absolute; width: 80%;top: 0; left: 265px;">
-                <h1 class="m-2">Quản lý hàng khách</h1>
+                <h1 class="m-2">Quản lí khách hàng</h1>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
                         <a href="/CustomerController/Create" class="text-decoration-none text-dark">Thêm mới khách hàng</a>
@@ -64,7 +64,7 @@
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start kh-tab">Mã KH</th>
+                                <th class="text-start kh-tab">Mã khách hàng</th>
                                 <th class="text-start username-tab">Tên đăng nhập</th>
                                 <th class="text-start">Họ và tên</th>
                                 <th class="text-start">SĐT</th>
@@ -86,7 +86,7 @@
                                     <% if (element.getIsDelete() != 1) {%>
                                     <a href="/CustomerController/DeleteCusAdmin?cus_id=<%= element.getAcc_id()%>" class="btn btn-danger"><i class="fa fa-trash text-white"></i></a>
                                         <% } else { %>
-                                    <p style="color: #999999">Tài khoản đã xóa</p>
+                                    <p style="color: #999999">Tài khoản đã xóa.</p>
                                     <% } %>
                             </tr>
 

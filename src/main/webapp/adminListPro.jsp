@@ -50,12 +50,12 @@
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start">Mã SP</th>
-                                <th class="text-start">Tên SP</th>
-                                <th class="text-start">anh</th>
-                                <th class="text-start">SL</th>
-                                <th class="text-start">Gia goc</th>
-                                <th class="text-start">Gia ban</th>
+                                <th class="text-start">Mã sản phẩm</th>
+                                <th class="text-start">Tên sản phẩm</th>
+                                <th class="text-start">Ảnh</th>
+                                <th class="text-start">Số lượng</th>
+                                <th class="text-start">Giá gốc  </th>
+                                <th class="text-start">Giá bán</th>
 
                                 <th class="text-start">Thao tác</th>
                             </tr>
@@ -75,7 +75,7 @@
                                     <!--                                    <td class="text-start align-middle"></td>-->
                                     <td class="text-start">
                                         <c:if test="${ph.isDelete==0}" >
-                                            <a href="/ProductController/Detail/${ph.pro_id}" class="btn btn-primary mt-3">Xem chi tiêt</i></a>
+                                            <a href="/ProductController/Detail/${ph.pro_id}" class="btn btn-primary mt-3">Xem chi tiết</i></a>
 
                                             <a href="/ProductController/Edit/${ph.pro_id}" class="btn btn-success mt-3">Câp nhât</a>
                                             <a href="/ProductController/Delete/${ph.pro_id}" class="btn btn-danger mt-3">Xóa</a>
