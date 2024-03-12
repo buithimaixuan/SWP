@@ -60,8 +60,8 @@
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start news-tab">Mã LSTT</th>
-                                <th class="text-start">Mã TT</th>
+                                <th class="text-start news-tab">Mã Lịch sử tin tức</th>
+                                <th class="text-start">Mã tin tức</th>
                                 <th class="text-start">Tiêu đề</th>
                                 <th class="text-start">Tên tác giả</th>
                                 <th class="text-start">Thao tác</th>

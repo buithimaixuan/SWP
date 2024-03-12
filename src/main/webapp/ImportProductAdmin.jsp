@@ -35,7 +35,7 @@
                 <form method="post" action="ProductController" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px;" 
                       onsubmit="return validateImportPro()" >
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Nhap sản phẩm</span>
+                        <span class="h3 fw-bold">Nhập sản phẩm</span>
                     </div>
                     <div style="gap: 20px;">
 
@@ -44,7 +44,7 @@
                             <div class="form-hover">
                                 <input type="text"  name="pro_id" placeholder="Ma sản phẩm"
                                        class="form-control form-control-lg" readonly value="${pro.pro_id}" />
-                                <label class="form-label"> Ma sản phẩm</label>
+                                <label class="form-label"> Mã sản phẩm</label>
                             </div>
                             <span class="error errorBrand text-danger fw-bold font-italic"></span>
                         </div>
@@ -57,7 +57,7 @@
                             <span class="error errorProName text-danger fw-bold font-italic"></span>
                         </div>
                         <div class="form-outline mt-3 w-100 mb-0">
-                            <label class="form-label h5">Nha cung cap sản phẩm</label>
+                            <label class="form-label h5">Nhà cung cấp sản phẩm</label>
                             <div class="form-hover">
                                 <select class="w-100 form-control form-control-lg" name="sup_id">
                                     <c:forEach items="${listSup}" var="s">

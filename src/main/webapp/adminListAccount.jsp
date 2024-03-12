@@ -48,7 +48,7 @@
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start">Mã TK</th>
+                                <th class="text-start">Mã Tài khoản</th>
                                 <th class="text-start">Tên đăng nhập</th>
                                 <th class="text-start">Họ và tên</th>
                                 <th class="text-start">Thao tác</th>

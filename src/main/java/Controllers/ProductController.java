@@ -1373,6 +1373,7 @@ public class ProductController extends HttpServlet {
                 request.setAttribute("listPI", listPI);
                 request.setAttribute("cat", cat);
                 request.getSession().setAttribute("pro", pro);
+                request.setAttribute("listProHot", listProHot);
                 request.getRequestDispatcher("/proDetail.jsp").forward(request, response);
             } catch (Exception e) {
                 response.sendRedirect("/HomeController");

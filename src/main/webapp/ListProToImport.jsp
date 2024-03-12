@@ -48,9 +48,9 @@
                         <thead>
                             <tr>
                                 <th class="text-start">Mã SP</th>
-                                <th class="text-start">anh</th>
+                                <th class="text-start">Ảnh</th>
                                 <th class="text-start">Tên SP</th>
-                                <th class="text-start">SL</th>
+                                <th class="text-start">Số lượng</th>
 
                                 <th class="text-start">Thao tác</th>
                             </tr>
@@ -68,7 +68,7 @@
                                     <td class="text-start align-middle">${ph.pro_quantity}</td>
                                     <td class="text-start">
                                         <c:if test="${ph.isDelete==0}" >
-                                            <a href="/ProductController/ImportPro/${ph.pro_id}" class="btn btn-primary mt-3">Nhap hang</i></a>
+                                            <a href="/ProductController/ImportPro/${ph.pro_id}" class="btn btn-primary mt-3">Nhập hàng</i></a>
                                         </c:if>
                                     </td>
                                 </tr>

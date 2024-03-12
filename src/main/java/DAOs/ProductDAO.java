@@ -127,6 +127,31 @@ public class ProductDAO {
 
         return list;
     }
+//     public LinkedList<Product> getTop4Pro() {
+//         LinkedList<Product> list = new LinkedList<>();
+//         String sql = "select top 4 * from product where isDelete = 0 order by create_date DESC";
+//         try {
+
+//             ps = conn.prepareStatement(sql);
+//             rs = ps.executeQuery();
+//             while (rs.next()) {
+//                 Product pro = new Product(rs.getInt("pro_id"),
+//                         rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+//                         rs.getString("origin"), rs.getString("brand"),
+//                         rs.getDouble("mass"), rs.getString("ingredient"),
+//                         rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+//                         rs.getDouble("discount"),
+//                         rs.getNString("pro_description"), rs.getDate("create_date"),
+//                         rs.getInt("isDelete"));
+//                 list.add(pro);
+//             }
+//         } catch (SQLException ex) {
+//             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+
+//         return list;
+//     }
+
 
     /**
      * show all product at link 'danh muc san pham'
@@ -560,6 +585,7 @@ public class ProductDAO {
         return list;
     }
     
+  //Nam CODE
     public ResultSet getIdProHot(){
         ResultSet rs = null;
         String sql = "Select TOP 5 pro_id from [order_detail] group by pro_id";

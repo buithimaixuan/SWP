@@ -128,6 +128,8 @@ public class AdminController extends HttpServlet {
         } else if (path.endsWith("/AdminController/adminListNews")) {
             NewsDAO newsDAO = new NewsDAO();
             LinkedList<News> listNews = newsDAO.getAll();
+            
+            
             request.setAttribute("listNews", listNews);
             request.getRequestDispatcher("/adminListNews.jsp").forward(request, response);
 

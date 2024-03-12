@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +15,7 @@
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <style>
             ul,ol{
-                padding-left: 0; 
+                padding-left: 0;
             }
         </style>
     </head>
@@ -29,43 +30,77 @@
                 <span>Dashboard</span>
             </div>
             <ul>
-                <li>
-                    <a href="/AdminController/adminListPro"><i class="fa-brands fa-product-hunt"></i>Product manage</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminImportPro"><i class="fa-solid fa-layer-group"></i>Import product</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminImportProHis"><i class="fa-solid fa-layer-group"></i>Import product history</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListSupplier"><i class="fa-solid fa-layer-group"></i>List supplier</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListProHistory"><i class="fa-solid fa-layer-group"></i>Product history</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListOrder"><i class="fa-solid fa-cart-shopping"></i>Order manage</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListOrderHistory"><i class="fa-solid fa-cart-shopping"></i>Order history</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListNews"><i class="fa-solid fa-newspaper"></i>News manage</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListNewsHistory"><i class="fa-solid fa-newspaper"></i>News history</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListStaff"><i class="fa-solid fa-clipboard-user"></i>Staff manage</a>
-                </li>
-                <li>
-                    <a href="/AdminController/adminListCustomer"><i class="fa-solid fa-clipboard-user"></i>Customer manage</a>
-                </li>
+                <c:if test="${staff.position == 'product manager'}">
+                    <li>
+                        <a href="/AdminController/adminListPro"><i class="fa-brands fa-product-hunt"></i>Quản lí sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListProHistory"><i class="fa-solid fa-layer-group"></i>Lịch sử sản phẩm</a>
+                    </li>
+                </c:if>
+
+                <c:if test="${staff.position=='order manager'}">
+                    <li>
+                        <a href="/AdminController/adminListOrder"><i class="fa-solid fa-cart-shopping"></i>Quản lí sản phẩm</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListOrderHistory"><i class="fa-solid fa-cart-shopping"></i>Quản lí đơn hàng</a>
+                    </li>
+                </c:if>
+                <c:if test="${staff.position=='news manager'}">
+                    <li>
+                        <a href="/AdminController/adminListNews"><i class="fa-solid fa-newspaper"></i>Quản lí tin tức</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListNewsHistory"><i class="fa-solid fa-newspaper"></i>Lịch sử tin tức</a>
+                    </li>
+                </c:if>
+
+                <c:if test="${staff.position=='admin'}">
+
+
+                    <li>
+                        <a href="/AdminController/adminListPro"><i class="fa-brands fa-product-hunt"></i>Quản lí sản phẩm</a>
+                    </li>
+
+                    <li>
+                        <a href="/AdminController/adminImportPro"><i class="fa-solid fa-layer-group"></i>Nhập hàng</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminImportProHis"><i class="fa-solid fa-layer-group"></i>Lịch sử nhập hàng</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListSupplier"><i class="fa-solid fa-layer-group"></i>Danh sách nhà cung cấp</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListProHistory"><i class="fa-solid fa-layer-group"></i>Lịch sử sản phẩm</a>
+                    </li>
+
+                    <li>
+                        <a href="/AdminController/adminListOrder"><i class="fa-solid fa-cart-shopping"></i>Quản lí đơn hàng</a>
+                    </li>
+
+                    <li>
+                        <a href="/AdminController/adminListOrderHistory"><i class="fa-solid fa-cart-shopping"></i>Lịch sử đơn hàng</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListNews"><i class="fa-solid fa-newspaper"></i>Quản lí tin tức</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListNewsHistory"><i class="fa-solid fa-newspaper"></i>Lịch sử tin tức</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListStaff"><i class="fa-solid fa-clipboard-user"></i>Quản lí nhân viên</a>
+                    </li>
+                    <li>
+                        <a href="/AdminController/adminListCustomer"><i class="fa-solid fa-clipboard-user"></i>Quản lí khách hàng</a>
+                    </li>
+
+                </c:if>
             </ul>
             <div class="bot_sidebar">
-                <a class="btn_logout" href="/StaffController"><i class="fa-solid fa-right-from-bracket"></i>Profile</a>
-                <a class="btn_logout" href="/LogoutController"><i class="fa-solid fa-right-from-bracket"></i>Log out</a>
+                <a class="btn_logout" href="/StaffController"><i class="fa-solid fa-right-from-bracket"></i>Hồ sơ</a>
+                <a class="btn_logout" href="/LogoutController"><i class="fa-solid fa-right-from-bracket"></i>Đăng xuất</a>
             </div>
         </div>
     </body>

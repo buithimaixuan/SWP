@@ -53,7 +53,7 @@
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start nv-tab">Mã NV</th>
+                                <th class="text-start nv-tab">Mã nhân viên</th>
                                 <th class="text-start">Mã đơn hàng</th>
                                 <th class="text-start">Trạng thái</th>
                                 <th class="text-start">Thao tác</th>

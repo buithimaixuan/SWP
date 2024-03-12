@@ -42,17 +42,17 @@
         <div>
             <%@include file="DashBoardSlideBarVer2.jsp" %>
             <div style="flex: 1; position: absolute; width: 80%;top: 0; left: 265px;">
-                <h1 class="m-2">Lich su nhap hang</h1>  </p>
+                <h1 class="m-2">Lịch sử nhập hàng</h1>  </p>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start">Mã san pham</th>
-                                <th class="text-start">Ten san pham</th>
-                                <th class="text-start">Ma nha cung cap</th>
-                                <th class="text-start">Ten nha cung cap</th>
-                                <th class="text-start">So luong</th>
-                                <th class="text-start">Ngay nhap hang</th>
+                                <th class="text-start">Mã sản phẩm</th>
+                                <th class="text-start">Tên sản phẩm</th>
+                                <th class="text-start">Mã nhà cung cấp</th>
+                                <th class="text-start">Tên nhà cung cấp</th>
+                                <th class="text-start">Số lượng</th>
+                                <th class="text-start">Ngày nhập hàng</th>
                             </tr>
                         </thead>
                         <tbody>

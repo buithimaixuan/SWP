@@ -35,7 +35,7 @@
                 <form method="post" action="SupplierController" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px;" 
                       onsubmit="return validateAddSupplier()" >
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Thêm mới nha cung cap</span>
+                        <span class="h3 fw-bold">Thêm mới nha cung cấp</span>
                     </div>
                     <div style="gap: 20px;">
                         <div class="w-100">
@@ -43,7 +43,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="proName" name="proName" placeholder="Tên nha cung cap"
                                            class="form-control form-control-lg" />
-                                    <label for="proName" class="form-label">Tên nha cung cap</label>
+                                    <label for="proName" class="form-label">Tên nha cung cấp</label>
                                 </div>
                                 <span class="error errorProName text-danger fw-bold font-italic"></span>
                             </div>
@@ -64,12 +64,12 @@
                             <div class="form-group w-100 mt-4">
                                 <div class="form-hover">
                                     <input type="text" id="address" name="address" placeholder="Dia chi" class="form-control form-control-lg"/>
-                                    <label for="address" class="form-label">Dia chi</label>
+                                    <label for="address" class="form-label">Địa chỉ</label>
                                 </div>
                                 <span class="errorAddress text-danger fw-bold font-italic"></span>
                             </div>
                             <div class="form-outline mt-3 w-100 mb-0">
-                                <label class="form-label h5">Ten sản phẩm cung cap</label>
+                                <label class="form-label h5">Tên sản phẩm cung cap</label>
                                 <div class="form-hover">
                                     <select class="w-100 form-control form-control-lg" name="pro_id">
                                         <c:forEach items="${listPro}" var="c">

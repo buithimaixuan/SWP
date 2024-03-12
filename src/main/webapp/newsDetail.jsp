@@ -4,6 +4,8 @@
     Author     : HP
 --%>
 
+<%@page import="Models.Product"%>
+<%@page import="DAOs.ProductDAO"%>
 <%@page import="Models.News"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="DAOs.NewsDAO"%>
@@ -14,10 +16,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>News</title>
+        <title>Tin tức</title>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <%@include file="headOfHome.jsp" %>
         <link rel="stylesheet" href="../CSS/newsDetail.css"/>
+        <link rel="stylesheet" href="/CSS/style.css">
+
     </head>
     <body>
 
@@ -95,13 +99,11 @@
                                 </div>
                             </div>
                         </div>
-                        <%                            }
+                        <%                            
+                            }
                         %>
-
-
                     </div>
                 </aside>
-
             </div>
         </section>
     </body>
@@ -112,5 +114,6 @@
             text-decoration: none;
             transition: 0.15s;
         }
+
     </style>
 </html>

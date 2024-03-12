@@ -50,10 +50,10 @@
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start">Mã nhà cung cap</th>
-                                <th class="text-start">Mã sp cung cap</th>
-                                <th class="text-start">Tên nhà cung cap</th>
-                                <th class="text-start">Ðia chi</th>
+                                <th class="text-start">Mã nhà cung cấp</th>
+                                <th class="text-start">Mã sp cung cấp</th>
+                                <th class="text-start">Tên nhà cung cấp</th>
+                                <th class="text-start">Địa chỉ</th>
                                 <th class="text-start">SÐT</th>
                                 <th class="text-start">Email</th>
                             </tr>

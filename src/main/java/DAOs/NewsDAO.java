@@ -38,7 +38,7 @@ public class NewsDAO {
 
     public LinkedList<News> getAll() {
         LinkedList<News> list = new LinkedList<>();
-        String sql = "Select * from news";
+        String sql = "Select * from news where isDelete = 0";
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
@@ -208,15 +208,30 @@ public class NewsDAO {
         return count;
     }
 
-    public void DeleteNews(int news_id) {
+//    public void DeleteNews(int news_id) {
+//        try {
+//            String sql = "DELETE FROM news WHERE news_id = ?";
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ps.setInt(1, news_id);
+//            ps.executeUpdate();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+    
+    public boolean DeleteNews(int news_id) {
+        int count = 0;
+        String sql = "Update News set isDelete = 1 where news_id = ?";
         try {
-            String sql = "DELETE FROM news WHERE news_id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, news_id);
-            ps.executeUpdate();
+
+            count = ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(NewsDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StaffDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return (count != 0);
+
     }
 
     public int getLatestNewsId() {

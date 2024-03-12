@@ -106,16 +106,14 @@ public class LoginController extends HttpServlet {
 
                 } else {
                     Staff staff = staffDao.getStaff(acc.getAcc_id());
+                    if (staff != null) {
+                        session.setAttribute("staff", staff);
 
-                    session.setAttribute("staff", staff);
-//                    if (staff.getPosition() =="admin") {
-//                        session.setAttribute("admin", "position");
-//                    } else if (staff.getPosition().equals(acc)) {
-//                        session.setAttribute("order manager", "position");
-//                    } else {
-//                        session.setAttribute("product manager", "position");
-//                   }
-                    response.sendRedirect("/ChartController/Chart");
+                        response.sendRedirect("/ChartController/Chart");
+                    } else {
+                        session.setAttribute("fail", "Không tìm thấy tài khoản!");
+                        response.sendRedirect("/LoginController");
+                    }
                 }
             } else {
                 session.setAttribute("fail", "Không tìm thấy tài khoản!");

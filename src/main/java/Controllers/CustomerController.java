@@ -7,9 +7,11 @@ package Controllers;
 import DAOs.AccountDAO;
 import DAOs.CustomerDAO;
 import DAOs.NewsDAO;
+import DAOs.ProductDAO;
 import Models.Account;
 import Models.Customer;
 import Models.News;
+import Models.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -106,7 +108,9 @@ public class CustomerController extends HttpServlet {
 
             request.getRequestDispatcher("/listAllNews.jsp").forward(request, response);
         } else if (path.endsWith("CustomerController/newsDetail")) {
-
+            ProductDAO proDAO = new ProductDAO();
+            LinkedList<Product> product = proDAO.getTop4Pro();
+            
             int news_id = Integer.parseInt(request.getParameter("news_id"));
             NewsDAO newsDAO = new NewsDAO();
             News news = newsDAO.getNews(news_id);

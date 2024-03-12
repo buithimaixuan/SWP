@@ -42,7 +42,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="proId" name="proId" placeholder="Ma SP" value="${pEdit.pro_id}"
                                            class="form-control form-control-lg" readonly />
-                                    <label for="proName" class="form-label">Ma sp</label>
+                                    <label for="proName" class="form-label">Mã sản phẩm</label>
                                 </div>
                                 <span class="error errorProName text-danger fw-bold font-italic"></span>
                             </div>
@@ -86,7 +86,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="brand" name="brand" placeholder="Thương hiệu" 
                                            class="form-control form-control-lg" value="${pEdit.brand}"/>
-                                    <label class="form-label">Thương hiệu (option)</label>
+                                    <label class="form-label">Thương hiệu</label>
                                 </div>
                                  <span class="error errorBrand text-danger fw-bold font-italic"></span>
                             </div>
@@ -95,7 +95,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="mass" name="mass" placeholder="Khối lượng"
                                            class="form-control form-control-lg" value="${pEdit.mass}"/>
-                                    <label class="form-label">Khối lượng (option)</label>
+                                    <label class="form-label">Khối lượng</label>
                                 </div>
                                 <span class="error errorMass text-danger fw-bold font-italic"></span>
                             </div>
@@ -106,7 +106,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="ingredient" name="ingredient" placeholder="Thành phần"
                                            class="form-control form-control-lg" value="${pEdit.ingredient}"/>
-                                    <label class="form-label">Thành phần (option)</label>
+                                    <label class="form-label">Thành phần</label>
                                 </div>
                                <span class="error errorIngredient text-danger fw-bold font-italic"></span>
                             </div>

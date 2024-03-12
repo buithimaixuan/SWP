@@ -79,7 +79,7 @@
                     <table id="listStaff" class="table table-responsive" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-start nv-tab">Mã NV</th>
+                                <th class="text-start nv-tab">Mã nhân viên</th>
                                 <th class="text-start username-tab">Tên đăng nhập</th>
                                 <th class="text-start">Họ và tên</th>
                                 <th class="text-start gender-tab">Giới tính</th>

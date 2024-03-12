@@ -57,7 +57,7 @@ public class LogoutController extends HttpServlet {
        HttpSession session = request.getSession();//tao session
         String path = request.getRequestURI();
         if (path.endsWith("/LogoutController")) {
-            session.setAttribute("account", null);
+            session.invalidate();
             response.sendRedirect("HomeController");
         }
     } 
