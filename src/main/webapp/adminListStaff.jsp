@@ -74,7 +74,7 @@
                 <h1 class="m-2">Quản lý nhân viên</h1>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
-                        <a href="/StaffController" class="text-decoration-none text-dark">Tạo tài khoản</a>
+                        <a href="/StaffController/Create" class="text-decoration-none text-dark">Tạo tài khoản</a>
                     </p>
                     <table id="listStaff" class="table table-responsive" style="width:100%">
                         <thead>
