@@ -39,56 +39,6 @@ public class ProductDAO {
         }
     }
 
-    public LinkedList<Product> getProductHot() {
-        LinkedList<Product> list = new LinkedList<>();
-        String sql = "SELECT TOP 5\n"
-                + "    p.pro_id,\n"
-                + "    p.cat_id,\n"
-                + "    p.pro_name,\n"
-                + "    p.pro_image,\n"
-                + "    p.origin,\n"
-                + "    p.brand,\n"
-                + "    p.mass,\n"
-                + "    p.ingredient,\n"
-                + "    p.pro_quantity,\n"
-                + "    p.pro_price,\n"
-                + "    p.discount,\n"
-                + "    p.pro_description,\n"
-                + "    p.create_date,\n"
-                + "    p.isDelete,\n"
-                + "    SUM(od.quantity) AS total_quantity_sold\n"
-                + "FROM \n"
-                + "    [swp].[dbo].[order_detail] od\n"
-                + "INNER JOIN \n"
-                + "    [swp].[dbo].[product] p ON od.pro_id = p.pro_id\n"
-                + "GROUP BY \n"
-                + "    p.pro_id, p.cat_id, p.pro_name, p.pro_image, p.origin, p.brand, \n"
-                + "    p.mass, p.ingredient, p.pro_quantity, p.pro_price, p.discount, \n"
-                + "    p.pro_description, p.create_date, p.isDelete\n"
-                + "ORDER BY \n"
-                + "    total_quantity_sold DESC;";
-        try {
-
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Product pro = new Product(rs.getInt("pro_id"),
-                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
-                        rs.getString("origin"), rs.getString("brand"),
-                        rs.getDouble("mass"), rs.getString("ingredient"),
-                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
-                        rs.getDouble("discount"),
-                        rs.getNString("pro_description"), rs.getDate("create_date"),
-                        rs.getInt("isDelete"));
-                list.add(pro);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return list;
-    }
-
     public Product getProById(int id) {
 
         String sql = "select * from product where pro_id=?";
@@ -177,30 +127,31 @@ public class ProductDAO {
 
         return list;
     }
-    public LinkedList<Product> getTop4Pro() {
-        LinkedList<Product> list = new LinkedList<>();
-        String sql = "select top 4 * from product where isDelete = 0 order by create_date DESC";
-        try {
+//     public LinkedList<Product> getTop4Pro() {
+//         LinkedList<Product> list = new LinkedList<>();
+//         String sql = "select top 4 * from product where isDelete = 0 order by create_date DESC";
+//         try {
 
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                Product pro = new Product(rs.getInt("pro_id"),
-                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
-                        rs.getString("origin"), rs.getString("brand"),
-                        rs.getDouble("mass"), rs.getString("ingredient"),
-                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
-                        rs.getDouble("discount"),
-                        rs.getNString("pro_description"), rs.getDate("create_date"),
-                        rs.getInt("isDelete"));
-                list.add(pro);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//             ps = conn.prepareStatement(sql);
+//             rs = ps.executeQuery();
+//             while (rs.next()) {
+//                 Product pro = new Product(rs.getInt("pro_id"),
+//                         rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+//                         rs.getString("origin"), rs.getString("brand"),
+//                         rs.getDouble("mass"), rs.getString("ingredient"),
+//                         rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+//                         rs.getDouble("discount"),
+//                         rs.getNString("pro_description"), rs.getDate("create_date"),
+//                         rs.getInt("isDelete"));
+//                 list.add(pro);
+//             }
+//         } catch (SQLException ex) {
+//             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+//         }
 
-        return list;
-    }
+//         return list;
+//     }
+
 
     /**
      * show all product at link 'danh muc san pham'
@@ -582,6 +533,69 @@ public class ProductDAO {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return count;
+    }
+
+    public LinkedList<Product> getProductHot() {
+        LinkedList<Product> list = new LinkedList<>();
+        String sql = "SELECT TOP 5\n"
+                + "               p.pro_id,\n"
+                + "              p.cat_id,\n"
+                + "               p.pro_name,\n"
+                + "               p.pro_image,\n"
+                + "                p.origin,\n"
+                + "                p.brand,\n"
+                + "                p.mass,\n"
+                + "              p.ingredient,\n"
+                + "               p.pro_quantity,\n"
+                + "                p.pro_price,\n"
+                + "               p.discount,\n"
+                + "               p.pro_description,\n"
+                + "              p.create_date,\n"
+                + "              p.isDelete,\n"
+                + "                SUM(od.quantity) AS total_quantity_sold\n"
+                + "                FROM \n"
+                + "                   [swp].[dbo].[order_detail] od\n"
+                + "               INNER JOIN \n"
+                + "                   [swp].[dbo].[product] p ON od.pro_id = p.pro_id\n"
+                + "              GROUP BY \n"
+                + "               p.pro_id, p.cat_id, p.pro_name, p.pro_image, p.origin, p.brand, \n"
+                + "               p.mass, p.ingredient, p.pro_quantity, p.pro_price, p.discount, \n"
+                + "                p.pro_description, p.create_date, p.isDelete\n"
+                + "               ORDER BY \n"
+                + "                total_quantity_sold DESC;";
+        try {
+
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product pro = new Product(rs.getInt("pro_id"),
+                        rs.getInt("cat_id"), rs.getString("pro_name"), rs.getString("pro_image"),
+                        rs.getString("origin"), rs.getString("brand"),
+                        rs.getDouble("mass"), rs.getString("ingredient"),
+                        rs.getInt("pro_quantity"), rs.getDouble("pro_price"),
+                        rs.getDouble("discount"),
+                        rs.getNString("pro_description"), rs.getDate("create_date"),
+                        rs.getInt("isDelete"));
+                list.add(pro);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return list;
+    }
+    
+  //Nam CODE
+    public ResultSet getIdProHot(){
+        ResultSet rs = null;
+        String sql = "Select TOP 5 pro_id from [order_detail] group by pro_id";
+        try {
+            Statement st = conn.createStatement();
+            rs = st.executeQuery(sql);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
     }
 
     /**

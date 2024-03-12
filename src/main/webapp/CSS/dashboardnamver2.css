@@ -63,8 +63,9 @@ img{
     flex-direction: column;
     gap: 23px;
     margin-bottom: 50px;
-    height: 400px;
-    overflow: scroll;
+    height: 450px;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    overflow-y: scroll; /* Add vertical scrollbar */
     padding-left: 0;
 }
 .sidebar ul li a{

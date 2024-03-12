@@ -98,10 +98,8 @@ public class StaffController extends HttpServlet {
 
             session.setAttribute("getStaff", staff);
             request.getRequestDispatcher("/DeleteStaff.jsp").forward(request, response);
-
-        } else if (url.endsWith("/StaffController/create")) {
+        } else if(url.endsWith("/StaffController/Create")){
             request.getRequestDispatcher("/AddnewStaff.jsp").forward(request, response);
-
         }
     }
 
@@ -144,7 +142,7 @@ public class StaffController extends HttpServlet {
                 if (new_staff != null) {
                     response.sendRedirect("/AdminController/adminListStaff");
                 } else {
-                    response.sendRedirect("/StaffController");
+                    response.sendRedirect("/StaffController/Create");
                 }
             }
         }

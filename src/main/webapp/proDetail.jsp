@@ -4,6 +4,8 @@
     Author     : Dell
 --%>
 
+<%@page import="Models.Product"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -129,13 +131,45 @@
                     <div class="hot_product_title">
                         SẢN PHẨM HOT NHẤT
                     </div>
+                    
+                    <!--NAM CODE HOT PRODUCT-->
+                    <div class="list_card_item">
+                        <c:forEach items="${listProHot}" var="proHot">
+ 
+                            <!--NAM CODE-->
+                            <form action="ProductController" method="post" class="card_product">
+                                <input type="hidden" name="product-id" value="${proHot.pro_id}"/>
+                                <a href="/ProductController/DetailProduct/${proHot.pro_id}" class="card_img">
+                                    <img src="/${proHot.pro_image}" alt="">
+                                </a>
 
-                    <div class="list_card_product">
-                        <div class="card_product">
-                            <div class="top_card"></div>
-                            <div class="bot_card"></div>
-                        </div>
+                                <div class="card_content">
+                                    <div class="card_top">
+                                        <a href="/ProductController/DetailProduct/${proHot.pro_id}" class="card_title">${proHot.pro_name}</a>
+                                    </div>
+
+                                    <div class="card_infor">
+                                        <div class="card_price">
+                                            <c:if test="${proHot.discount == 0}">
+                                                ${proHot.pro_price}đ
+                                            </c:if>
+                                            <c:if test="${proHot.discount > 0}">
+                                                <span class="discount">${proHot.discount}đ</span>
+                                                <span class="real_price" style=" text-decoration: line-through;">${proHot.pro_price}đ</span>    
+                                            </c:if>
+
+                                        </div>
+                                        <button class="card_buy" name="btnAddCart" type="submit">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                            <span>Thêm</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>    
+                            <!--END NAM CODE-->
+                        </c:forEach>
                     </div>
+                    <!--END NAM CODE HOT PRODUCT-->
                 </div>
             </div>
         </main>

@@ -105,52 +105,6 @@
                     </div>
                 </aside>
             </div>
-
-            <div class="hot_product">
-                <div class="hot_product_title">
-                    SẢN PHẨM HOT NHẤT
-                </div>
-                <div class="row">
-                    <%
-                        ProductDAO proDAO = new ProductDAO();
-                        LinkedList<Product> listPro = proDAO.getTop4Pro();
-                        for (Product element : listPro) {
-                    %>
-                    <div class="card_product col-lg-3">
-                        <input type="hidden" name="product-id" value="<%= element.getPro_id()%>"/>
-                        <a href="/ProductController/DetailProduct/<%= element.getPro_id()%>" class="card_img">
-                            <img class="h-75" src="/<%= element.getPro_image()%>" alt="">
-                        </a>
-
-                        <div class="card_content">
-                            <div class="card_top">
-                                <a href="#" class="card_title">${p.pro_name}</a>
-                            </div>
-
-                            <div class="card_infor">
-                                <div class="card_price">
-                                    <c:if test="<%= element.getDiscount() == 0%>">
-                                        <%= element.getPro_price()%>đ
-                                    </c:if>
-                                    <c:if test="<%= element.getDiscount() > 0%>">
-                                        <span class="discount"><%= element.getDiscount()%>đ</span>
-                                        <span class="real_price" style=" text-decoration: line-through;"><%= element.getPro_price()%>đ</span>    
-                                    </c:if>
-
-                                </div>
-                                <button class="card_buy" type="submit" name="btnAddCart">
-                                    <i class="fa-solid fa-cart-shopping"></i>
-                                    <span>Thêm</span>
-                                </button>
-                            </div>
-                        </div>
-                        </form>   
-                    </div>
-                    <%
-                        }
-                    %>
-                </div>
-            </div>
         </section>
     </body>
     <%@include file="footerOfHome.jsp" %>

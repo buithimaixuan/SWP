@@ -44,13 +44,13 @@
                         LinkedList<String> listUsername = adao.getAllUserName();
                         for (String item : listUsername) {
                     %>
-                    <input type="hidden" class="listUsername" value="<%= item %>"/>
+                    <input type="hidden" class="listUsername" value="<%= item%>"/>
                     <%
-                            }
+                        }
                     %>
                     <div class="d-flex" style="gap: 20px">
                         <div class="w-100">
-                            
+
                             <div class="form-outline w-100 form-group">
                                 <div class="form-hover">
                                     <input type="text" id="username" name="username" placeholder="Tên đăng nhập" class="form-control form-control-lg" />
@@ -111,7 +111,7 @@
                                 <label class="form-label h5">Giới tính</label>
                                 <div class="form-hover">
                                     <select id="gender" name="gender" class="w-100 form-control form-control-lg">
-                                        <option value="" disabled>-- Chọn giới tính --</option>
+                                        <!--<option value="" disabled>-- Chọn giới tính --</option>-->
                                         <option value="Nam">Nam</option>
                                         <option value="Nữ">Nữ</option>
                                         <option value="Khac">Khác</option>
@@ -130,9 +130,11 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="text" id="position" name="position" placeholder="Vị trí"
-                                           class="form-control form-control-lg" />
-                                    <label for="position" class="form-label">Vị trí</label>
+                                    <select id="position" name="position" class="w-100 form-control form-control-lg" >
+                                        <option value="product manager">product manager</option>
+                                        <option value="order manager">order manager</option>
+                                        <option value="news manager">news manager</option>
+                                    </select>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>
                             </div>
@@ -160,6 +162,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-        <script src="/JS/ValidateStaffForm.js"></script>
+
+        <!--<script src="/JS/ValidateStaffForm.js"></script>-->
+
     </body>
 </html>

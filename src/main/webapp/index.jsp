@@ -493,7 +493,7 @@
 
                                         <div class="card_content">
                                             <div class="card_top">
-                                                <a href="#" class="card_title">${p.pro_name}</a>
+                                                <a href="/ProductController/DetailProduct/${p.pro_id}" class="card_title">${p.pro_name}</a>
                                             </div>
 
                                             <div class="card_infor">

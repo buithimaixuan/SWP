@@ -33,6 +33,7 @@ import jakarta.servlet.http.Part;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -1354,8 +1355,21 @@ public class ProductController extends HttpServlet {
                 CategoriesDAO cdao = new CategoriesDAO();
                 ProductImagesDAO pIdao = new ProductImagesDAO();
                 LinkedList<ProductImages> listPI = pIdao.getProductImagesByProductId(pro_id);
-                LinkedList<Product> listProHot = pdao.getProductHot();
+                //LIST PRODUCT ID HOT
+                ResultSet listIdHotPro = pdao.getIdProHot();
+                LinkedList<Product> listProHot = new LinkedList<>();
+                if(listIdHotPro != null){
+                    while(listIdHotPro.next()){
+                        Product proHot = pdao.getProductByID(listIdHotPro.getInt("pro_id"));
+                        if(proHot != null){
+                            listProHot.add(proHot);
+                        }
+                    }
+                }
+                
                 Categories cat = cdao.getCatById(pro.getCat_id());
+                request.setAttribute("listProHot", listProHot);
+                
                 request.setAttribute("listPI", listPI);
                 request.setAttribute("cat", cat);
                 request.getSession().setAttribute("pro", pro);
