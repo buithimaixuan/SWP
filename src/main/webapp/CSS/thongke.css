@@ -7,6 +7,74 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Author     : Vu Minh Uyen
 */
 
+
+/*NAM CODE*/
+
+.statistic{
+    --spacing: 20px;
+    --column: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: calc(-1 * var(--spacing));
+}
+.statistic .sta-item{
+    width: calc(calc(100% / var(--column)) - var(--spacing));
+    margin-left: var(--spacing);
+    height: 130px;
+    border-radius: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+.sta-item .top-statistic{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70%;
+}
+.sta-item .top-statistic .statistic-icon{
+    background: linear-gradient(to bottom right, var(--secondcolor), #f01919);
+    padding: 30px 32px;
+    border-radius: 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    color: #fff;
+    font-size: 18px;
+}
+.sta-item .top-statistic .statistic-infor{
+    padding-right: 20px;
+    padding-top: 5px;
+}
+.sta-item .top-statistic .statistic-infor h4{
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    color: #3e3e3e84;
+}
+.sta-item .top-statistic .statistic-infor span{
+    font-size: 20px;
+    font-weight: 700;
+    color: #3e3e3e;
+}
+.sta-item .bot-statistic{
+    height: calc(30% - 10px);
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.sta-item .bot-statistic a{
+    color: #f4bb14;
+}
+.sta-item .bot-statistic a i{
+    color: #f01919;
+}
+
+/*END NAM CODE*/
 .frame {
             width: 90%;
             margin: 40px auto;

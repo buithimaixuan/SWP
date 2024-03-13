@@ -44,76 +44,56 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="khung card border-secondary">
-                        <div class="card-body text-white" style="background-color: #ffffff">
-                            <div class="row">
-                                <div class="col-3">
-                                    <div>
-                                        <i class="fa fa-user-tie fa-5x"></i>
-                                    </div>
-                                </div>
-                                <div class="col-9 text-right">
-                                    <h1><%= numberOfCustomers%></h1>
-                                    <h4>Khách hàng</h4>
-                                </div>
+
+                <!--NAM CODE VIEW STATISTIC-->
+                <style>
+                    .statistic a{
+                        text-decoration: none;
+                    }
+                </style>
+                <div class="statistic">
+
+                    <div class="sta-item sta-cus">
+                        <div class="top-statistic">
+                            <i class="fa-solid fa-user statistic-icon"></i>
+                            <div class="statistic-infor">
+                                <h4>Khách hàng</h4>
+                                <span><%= numberOfCustomers%></span>
                             </div>
                         </div>
-                        <a href="/AdminController/adminListCustomer">
-                            <div class="card-footer" style="background-color: #f4bb14;">
-                                <span class="float-left" style="text-decoration: none">Chi tiết</span>
-                                <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
+                        <div class="bot-statistic">
+                            <a href="/AdminController/adminListCustomer">Xem chi tiết <i class="fa-solid fa-circle-info"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="sta-item sta-staff">
+                        <div class="top-statistic">
+                            <i class="fa-solid fa-user statistic-icon"></i>
+                            <div class="statistic-infor">
+                                <h4>Nhân viên</h4>
+                                <span><%= numberOfStaffs %></span>
                             </div>
-                        </a>
+                        </div>
+                        <div class="bot-statistic">
+                            <a href="/AdminController/adminListStaff">Xem chi tiết <i class="fa-solid fa-circle-info"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="sta-item sta-revenue">
+                        <div class="top-statistic">
+                            <i class="fa-solid fa-coins statistic-icon"></i>
+                            <div class="statistic-infor">
+                                <h4>Doanh thu</h4>
+                                <span id="customer-count"><%= sumMoney%></span>
+                            </div>
+                        </div>
+                        <div class="bot-statistic">
+                            <a href="/AdminController/adminListOrderHistory">Xem chi tiết <i class="fa-solid fa-circle-info"></i></a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6" style="margin-top: 20px">
-                    <div class="card border-secondary">
-                        <div class="card-body text-white" style="background-color: #ffffff">
-                            <div class="row">
-                                <div class="col-3">
-                                    <i class="fa fa-user-tie fa-5x"></i>
-                                </div>
-                                <div class="col-9 text-right">
-                                    <h1><%= numberOfStaffs%></h1>
-                                    <h4>Nhân viên</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="/AdminController/adminListStaff">
-                            <div class="card-footer" style="background-color: #f4bb14">
-                                <span class="float-left">Chi tiết</span>
-                                <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6" style="margin-top: 20px">
-                    <div class="card border-success">
-                        <div class="card-body text-white" style="background-color: #ffffff">
-                            <div class="row">
-                                <div class="col-3">
-                                    <i class="fa fa-university fa-5x"></i>
-                                </div>
-                                <div class="col-9 text-right">
-                                    <h1 id="customer-count"><%= sumMoney%></h1>
-                                    <h4>Doanh thu</h4>
-                                </div>
-                            </div>
-
-                        </div>
-                        <a href="/AdminController/adminListOrderHistory">
-                            <div class="card-footer" style="background-color: #f4bb14">
-                                <span class="float-left">Chi tiết</span>
-                                <span class="float-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <!--END NAM CODE-->
 
             </div>
         </div>
