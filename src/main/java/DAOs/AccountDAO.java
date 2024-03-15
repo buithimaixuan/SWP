@@ -232,6 +232,21 @@ public class AccountDAO {
         }
         return list;
     }
+    public LinkedList<String> getAllEmailToResetPass() {
+        LinkedList<String> list = new LinkedList<>();
+        String sql = "select email from account where isDelete = 0";
+        try {
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String email = rs.getString("email");
+                list.add(email);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
 
     public LinkedList<String> getAllPhone() {
         LinkedList<String> list = new LinkedList<>();

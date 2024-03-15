@@ -7,6 +7,7 @@ package Controllers;
 import DAOs.OrderDAO;
 import DAOs.OrderDetailDAO;
 import Models.Chart;
+import Models.Staff;
 import Models.chartPro;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
@@ -73,40 +74,46 @@ public class ChartController extends HttpServlet {
         HttpSession session = request.getSession();
         OrderDAO chartDAO = new OrderDAO();
         String path = request.getRequestURI();
-        OrderDetailDAO chartOrderDetailDAO = new OrderDetailDAO();
-        List<chartPro> chartDataListProduct = chartOrderDetailDAO.getChartDataProduct();
-        List<chartPro> chartDataListDay = chartOrderDetailDAO.getChartDataDay();
-        request.setAttribute("ChartDataProduct", chartDataListProduct);
-        request.setAttribute("ChartDataProductDay", chartDataListDay);
-        if (path.endsWith("/ChartController/Chart")) {
-            List<Chart> chartDataList = chartDAO.getChartData();
-            request.setAttribute("chartData", chartDataList);
+        Staff staff = (Staff) request.getSession().getAttribute("staff");
+        if (staff != null) {
+            OrderDetailDAO chartOrderDetailDAO = new OrderDetailDAO();
+            List<chartPro> chartDataListProduct = chartOrderDetailDAO.getChartDataProduct();
+            List<chartPro> chartDataListDay = chartOrderDetailDAO.getChartDataDay();
+            request.setAttribute("ChartDataProduct", chartDataListProduct);
+            request.setAttribute("ChartDataProductDay", chartDataListDay);
+            if (path.endsWith("/ChartController/Chart")) {
+                List<Chart> chartDataList = chartDAO.getChartData();
+                request.setAttribute("chartData", chartDataList);
 
-            request.getRequestDispatcher("/chart.jsp").forward(request, response);
+                request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
-        } else if (path.endsWith("/ChartController/ChartYear")) {
+            } else if (path.endsWith("/ChartController/ChartYear")) {
 //            List<Chart> chartDataList = chartDAO.getChartData();
 //            OrderDAO chartDAO = new OrderDAO();
-            int year = Integer.parseInt(session.getAttribute("year").toString());
-            List<Chart> chartDataListY = chartDAO.getMonthInYear(year);
-            request.setAttribute("chartData", chartDataListY);
-            request.setAttribute("selectedYear", year);
+                int year = Integer.parseInt(session.getAttribute("year").toString());
+                List<Chart> chartDataListY = chartDAO.getMonthInYear(year);
+                request.setAttribute("chartData", chartDataListY);
+                request.setAttribute("selectedYear", year);
 //            response.sendRedirect("/ChartController/ChartYear");
-            request.setAttribute("chartData", chartDataListY);
-            request.getRequestDispatcher("/chart.jsp").forward(request, response);
+                request.setAttribute("chartData", chartDataListY);
+                request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
-        } else if (path.endsWith("/ChartController/ChartMonth")) {
-            int yearM = Integer.parseInt(session.getAttribute("yearM").toString());
-            int month = Integer.parseInt(session.getAttribute("month").toString());
+            } else if (path.endsWith("/ChartController/ChartMonth")) {
+                int yearM = Integer.parseInt(session.getAttribute("yearM").toString());
+                int month = Integer.parseInt(session.getAttribute("month").toString());
 //            List<Chart> chartDataList = chartDAO.getChartData();
-            List<Chart> chartDataListM = chartDAO.getMonthInMonth(yearM, month);
-            request.setAttribute("chartData", chartDataListM);
-            request.setAttribute("selectedYear", yearM);
-            request.setAttribute("selectedMonth", month);
-            request.setAttribute("chartData", chartDataListM);
-            request.getRequestDispatcher("/chart.jsp").forward(request, response);
+                List<Chart> chartDataListM = chartDAO.getMonthInMonth(yearM, month);
+                request.setAttribute("chartData", chartDataListM);
+                request.setAttribute("selectedYear", yearM);
+                request.setAttribute("selectedMonth", month);
+                request.setAttribute("chartData", chartDataListM);
+                request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
+            }
+        }else{
+            response.sendRedirect("/LoginController");
         }
+
     }
 
     /**

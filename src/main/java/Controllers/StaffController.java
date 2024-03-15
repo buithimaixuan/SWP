@@ -20,6 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 
 /**
  *
@@ -74,33 +75,38 @@ public class StaffController extends HttpServlet {
         HttpSession session = request.getSession();//tao session
         String url = request.getRequestURI();
         StaffDAO sdao = new StaffDAO();
+        Staff stafff = (Staff) request.getSession().getAttribute("staff");
+        if (stafff != null) {
+            if (url.endsWith("/StaffController")) {
+                request.getRequestDispatcher("/profileStaff.jsp").forward(request, response);
+            } else if (url.startsWith("/StaffController/DetailStaff")) {
+                String[] s = url.split("/");
+                int staffId = Integer.parseInt(s[s.length - 1]);
+                Staff staff = sdao.getStaffById(staffId);
 
-        if (url.endsWith("/StaffController")) {
-            request.getRequestDispatcher("/profileStaff.jsp").forward(request, response);
-        } else if (url.startsWith("/StaffController/DetailStaff")) {
-            String[] s = url.split("/");
-            int staffId = Integer.parseInt(s[s.length - 1]);
-            Staff staff = sdao.getStaffById(staffId);
+                session.setAttribute("getStaff", staff);
+                request.getRequestDispatcher("/DetailStaff.jsp").forward(request, response);
+            } else if (url.startsWith("/StaffController/EditStaff")) {
+                String[] s = url.split("/");
+                int staffId = Integer.parseInt(s[s.length - 1]);
+                Staff staff = sdao.getStaffById(staffId);
 
-            session.setAttribute("getStaff", staff);
-            request.getRequestDispatcher("/DetailStaff.jsp").forward(request, response);
-        } else if (url.startsWith("/StaffController/EditStaff")) {
-            String[] s = url.split("/");
-            int staffId = Integer.parseInt(s[s.length - 1]);
-            Staff staff = sdao.getStaffById(staffId);
+                session.setAttribute("getStaff", staff);
+                request.getRequestDispatcher("/EditStaff.jsp").forward(request, response);
+            } else if (url.startsWith("/StaffController/DeleteStaff")) {
+                String[] s = url.split("/");
+                int staffId = Integer.parseInt(s[s.length - 1]);
+                Staff staff = sdao.getStaffById(staffId);
 
-            session.setAttribute("getStaff", staff);
-            request.getRequestDispatcher("/EditStaff.jsp").forward(request, response);
-        } else if (url.startsWith("/StaffController/DeleteStaff")) {
-            String[] s = url.split("/");
-            int staffId = Integer.parseInt(s[s.length - 1]);
-            Staff staff = sdao.getStaffById(staffId);
-
-            session.setAttribute("getStaff", staff);
-            request.getRequestDispatcher("/DeleteStaff.jsp").forward(request, response);
-        } else if(url.endsWith("/StaffController/Create")){
-            request.getRequestDispatcher("/AddnewStaff.jsp").forward(request, response);
+                session.setAttribute("getStaff", staff);
+                request.getRequestDispatcher("/DeleteStaff.jsp").forward(request, response);
+            } else if (url.endsWith("/StaffController/Create")) {
+                request.getRequestDispatcher("/AddnewStaff.jsp").forward(request, response);
+            }
+        } else {
+            response.sendRedirect("/LoginController");
         }
+
     }
 
     /**
@@ -119,10 +125,50 @@ public class StaffController extends HttpServlet {
         AccountDAO adao = new AccountDAO();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
+
+        AccountDAO accdao = new AccountDAO();
+        CustomerDAO cusdao = new CustomerDAO();
+
+        String usern = request.getParameter("user");
+        LinkedList<String> listUsername = accdao.getAllUserName();
+        for (String s : listUsername) {
+            if (s.equals(usern)) {
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.print("This username is already existed!");
+                break;
+            }
+        }
+
+        String emailStaff = request.getParameter("email");
+        LinkedList<String> listEmail = accdao.getAllEmail();
+        for (String s : listEmail) {
+            if (s.equals(emailStaff)) {
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.print("This email is already existed!");
+                break;
+            }
+        }
+
+//        check duplicate username
+        String userPhone = request.getParameter("phone");
+        LinkedList<String> listPhone = accdao.getAllPhone();
+        for (String s : listPhone) {
+            if (s.equals(userPhone)) {
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                out.print("This phone is already existed!");
+                break;
+            }
+        }
+        
+        
+        
         if (request.getParameter("btnAddStaff") != null) {
 
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String username = request.getParameter("user");
+            String password = request.getParameter("pass");
             String fullname = request.getParameter("fullname");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
@@ -130,7 +176,7 @@ public class StaffController extends HttpServlet {
             String gender = request.getParameter("gender");
             String address = request.getParameter("address");
             String position = request.getParameter("position");
-            Date begin_work = Date.valueOf(request.getParameter("begin_work"));
+            Date begin_work = Date.valueOf(request.getParameter("daywork"));
 
             Account acc = new Account(0, username, password, fullname, phone, email, 0, 0);
             int acc_id = adao.createAcc(acc);

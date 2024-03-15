@@ -76,9 +76,15 @@ public class UpdateCustomerController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();//tao session
         String path = request.getRequestURI();
-        if (path.endsWith("/UpdateCustomerController")) {
-            request.getRequestDispatcher("/profile.jsp").forward(request, response);
+        Customer cus = (Customer) request.getSession().getAttribute("account");
+        if (cus != null) {
+            if (path.endsWith("/UpdateCustomerController")) {
+                request.getRequestDispatcher("/profile.jsp").forward(request, response);
+            }
+        } else {
+            response.sendRedirect("/LoginController");
         }
+        
     }
 
     /**
@@ -97,7 +103,7 @@ public class UpdateCustomerController extends HttpServlet {
         Customer cs = (Customer) request.getSession().getAttribute("account");
         String phoneNumber = as.getPhone_number();
         String email = as.getEmail();
-
+        
         AccountDAO adao = new AccountDAO();
         CustomerDAO cdao = new CustomerDAO();
         StaffDAO sdao = new StaffDAO();
@@ -130,21 +136,21 @@ public class UpdateCustomerController extends HttpServlet {
 //        }
         if (request.getParameter(
                 "btnChangePass") != null) {
-
+            
             System.out.println("done connect");
             String oldPassword = request.getParameter("oldPass");
-
+            
             String newPassword = request.getParameter("newP");
             String newPasswordHashed = Utils.Hashing.getMd5(newPassword);
-
+            
             String confirmPassword = request.getParameter("confirm");
-
+            
             if (!adao.checkPassword(oldPassword)) {
                 session.setAttribute("duplicateError", "PassError");
                 response.sendRedirect("/UpdateCustomerController");
                 return;
             }
-
+            
             System.out.println("done check OldPass");
 
             // lấy account trong session
@@ -166,7 +172,7 @@ public class UpdateCustomerController extends HttpServlet {
 //            int staId = ss.getStaff_id();
 
             System.out.println(username + ".." + accId);
-
+            
             Account acdc = new Account(accId, username, newPasswordHashed, fullname, phoneNumber, email, 0, 0);
             Customer cus = new Customer(cusId, accId, username, newPasswordHashed, fullname, avatar, phoneNumber, email, 0, 0);
 //            Staff sta = new Staff(staId, accId, username, newPassword, fullname, phoneNumber, email, birthday, gender, address, position, begin, end, 0, 0);
@@ -179,9 +185,9 @@ public class UpdateCustomerController extends HttpServlet {
             System.out.println("ok update account");
             if (resultAcc > 0 && resultCus > 0) {
                 session.setAttribute("account", cus);
-
+                
                 response.sendRedirect("/UpdateCustomerController");
-
+                
             } else {
                 //thất bại
                 session.setAttribute("fail", "That bai");
@@ -189,12 +195,12 @@ public class UpdateCustomerController extends HttpServlet {
             }
         }
         if (request.getParameter("btnUpdatefProfile") != null) {
-
+            
             System.out.println("done connect");
-
+            
             String fileName = null;
             String pathAvatar = request.getParameter("avatar_old");
-
+            
             try {
                 Part part = request.getPart("avatar");
                 String realPart = request.getServletContext().getRealPath("/images");
@@ -210,7 +216,7 @@ public class UpdateCustomerController extends HttpServlet {
                 } else {
                     // Không có file mới được chọn, sử dụng giá trị hình cũ
                     pathAvatar = request.getParameter("avatar_old");
-
+                    
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -222,7 +228,7 @@ public class UpdateCustomerController extends HttpServlet {
             boolean emailExists = false;
             boolean phoneExists = false;
             boolean usernameExists = false;
-
+            
             if (emailUserC.equals(email)) {
                 // Nếu email nhập vào giống với email trong session
                 if (!phoneUser.equals(phoneNumber)) {
@@ -239,7 +245,7 @@ public class UpdateCustomerController extends HttpServlet {
 //                    usernameExists = adao.checkUsernameExists(usernameUser);
                 }
             }
-
+            
             if (emailExists && phoneExists) {
                 session.setAttribute("phoneCk", phoneUser);
                 session.setAttribute("emailCk", emailUserC);
@@ -263,23 +269,23 @@ public class UpdateCustomerController extends HttpServlet {
                 String fullnameU = request.getParameter("fullname");
                 String emailU = request.getParameter("email");
                 String phoneU = request.getParameter("phone");
-
+                
                 int accId = as.getAcc_id();
                 int cusId = cs.getCus_id();
                 String password = as.getPassword();
                 String username = as.getUsername();
-
+                
                 System.out.println(username + ".update." + accId);
                 Account acdc = new Account(accId, username, password, fullnameU, phoneU, emailU, 0, 0);
                 Customer cus = new Customer(cusId, accId, username, password, fullnameU, pathAvatar, phoneU, emailU, 0, 0);
-
+                
                 System.out.println("hinh....." + pathAvatar);
                 int resultAcc = adao.updateAcc(acdc);
                 int resultCus = cdao.updateCus(cus);
-
-                System.out.println("ok update account...." +phoneU);
+                
+                System.out.println("ok update account...." + phoneU);
                 if (resultAcc > 0 && resultCus > 0) {
-
+                    
                     session.setAttribute("account", cus);
                     response.sendRedirect("/UpdateCustomerController");
                 } else {

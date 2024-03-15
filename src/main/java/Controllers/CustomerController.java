@@ -12,6 +12,7 @@ import Models.Account;
 import Models.Customer;
 import Models.News;
 import Models.Product;
+import Models.Staff;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -78,6 +79,8 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();//tao session
         String path = request.getRequestURI();
+         Staff staff = (Staff) request.getSession().getAttribute("staff");
+        
         if (path.endsWith("/CustomerController/Create")) {
             request.getRequestDispatcher("/AddCusAdmin.jsp").forward(request, response);
         } else if (path.endsWith("/CustomerController/DeleteCusAdmin")) {
