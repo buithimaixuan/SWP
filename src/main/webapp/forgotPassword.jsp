@@ -33,10 +33,10 @@
                     <form class="card mt-4" action="ResetPasswordController" method="post" onsubmit="return enterEmail();">
                         <div class="card-body">
                             <div class="form-group validate">
-                                <label for="email-for-pass">Enter your email address</label> 
+                                <label for="email-for-pass">Nhập Email của bạn</label> 
                                 <input class="form-control" type="text" name="email" id="email"><small
-                                    class="form-text text-muted">Enter the registered email address . Then we'll
-                                    email a OTP to this address.</small>
+                                    class="form-text text-muted">Nhập email đã đăng ký tài khoản và đảm bảo rằng tài khoản còn hiệu lực. 
+                                    Chúng tôi sẽ gửi mã OTP đến địa chỉ email này.</small>
                                 <span class="error"></span>
                             </div>
                         </div>

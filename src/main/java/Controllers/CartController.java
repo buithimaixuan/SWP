@@ -65,89 +65,94 @@ public class CartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CartDAO cdao = new CartDAO();
-        ProductDAO  pdao = new ProductDAO();
+        ProductDAO pdao = new ProductDAO();
         String path = request.getRequestURI();
-        
-        if (path.endsWith("/CartController")) {
-            Customer cus = (Customer) request.getSession().getAttribute("account");
-            System.out.println(cus.getCus_id());
-            LinkedList<Cart> listCart = null;
-            try {
-                listCart = cdao.getAllCarts(cus.getCus_id());
-            } catch (SQLException ex) {
-                Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println(listCart);
-            request.setAttribute("listCart", listCart);
-            request.getRequestDispatcher("/cart.jsp").forward(request, response);
-        } else if (path.startsWith("/CartController/delete/")) {
-            Customer cus = (Customer) request.getSession().getAttribute("account");
-            String[] s = path.split("/");
-            int pro_id = Integer.parseInt(s[s.length - 1]);
-            int isDelete = cdao.delete(cus.getCus_id(), pro_id);
+        Customer customer = (Customer) request.getSession().getAttribute("account");
+        if (customer != null) {
+            if (path.endsWith("/CartController")) {
+                Customer cus = (Customer) request.getSession().getAttribute("account");
+                System.out.println(cus.getCus_id());
+                LinkedList<Cart> listCart = null;
+                try {
+                    listCart = cdao.getAllCarts(cus.getCus_id());
+                } catch (SQLException ex) {
+                    Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                System.out.println(listCart);
+                request.setAttribute("listCart", listCart);
+                request.getRequestDispatcher("/cart.jsp").forward(request, response);
+            } else if (path.startsWith("/CartController/delete/")) {
+                Customer cus = (Customer) request.getSession().getAttribute("account");
+                String[] s = path.split("/");
+                int pro_id = Integer.parseInt(s[s.length - 1]);
+                int isDelete = cdao.delete(cus.getCus_id(), pro_id);
 
-            if (isDelete != 0) {
-                response.sendRedirect("/CartController");
-            } else {
-                response.sendRedirect("/CartController");
-            }
-        } else if(path.startsWith("/CartController/decreaseQuantity/")){
-            Customer cus = (Customer) request.getSession().getAttribute("account");
-            String[] s = path.split("/");
-            
-            int proId = Integer.parseInt(s[s.length - 1]);
-            int current_quantity = cdao.getCurrentQuantity(cus.getCus_id(), proId);
-            
-            if ((current_quantity - 1) == 0) {
-                response.sendRedirect("/CartController");
-            } else {
-                int isUpdateDecrease = cdao.updateQuantityCart(cus.getCus_id(), proId, current_quantity - 1);
-                Cart cart = cdao.getCartByProAndCusID(cus.getCus_id(), proId);
+                if (isDelete != 0) {
+                    response.sendRedirect("/CartController");
+                } else {
+                    response.sendRedirect("/CartController");
+                }
+            } else if (path.startsWith("/CartController/decreaseQuantity/")) {
+                Customer cus = (Customer) request.getSession().getAttribute("account");
+                String[] s = path.split("/");
+
+                int proId = Integer.parseInt(s[s.length - 1]);
+                int current_quantity = cdao.getCurrentQuantity(cus.getCus_id(), proId);
+
+                if ((current_quantity - 1) == 0) {
+                    response.sendRedirect("/CartController");
+                } else {
+                    int isUpdateDecrease = cdao.updateQuantityCart(cus.getCus_id(), proId, current_quantity - 1);
+                    Cart cart = cdao.getCartByProAndCusID(cus.getCus_id(), proId);
+                    Product product = pdao.getProById(proId);
+                    if (isUpdateDecrease != 0) {
+                        double new_price = 0;
+                        if (product.getPro_price() > product.getDiscount()) {
+                            new_price = product.getDiscount() * cart.getPro_quantity();
+                        } else {
+                            new_price = product.getPro_price() * cart.getPro_quantity();
+                        }
+                        int isUpdatePrice = cdao.updatePriceCart(cus.getCus_id(), proId, new_price);
+                        response.sendRedirect("/CartController");
+                    } else {
+                        response.sendRedirect("/CartController");
+                    }
+                }
+            } else if (path.startsWith("/CartController/increaseQuantity/")) {
+                Customer cus = (Customer) request.getSession().getAttribute("account");
+                String[] s = path.split("/");
+
+                int proId = Integer.parseInt(s[s.length - 1]);
+                int current_quantity = cdao.getCurrentQuantity(cus.getCus_id(), proId);
                 Product product = pdao.getProById(proId);
-                if (isUpdateDecrease != 0) {
-                    double new_price = 0;
-                    if (product.getPro_price() > product.getDiscount()) {
-                        new_price = product.getDiscount() * cart.getPro_quantity();
-                    } else {
-                        new_price = product.getPro_price() * cart.getPro_quantity();
-                    }
-                    int isUpdatePrice = cdao.updatePriceCart(cus.getCus_id(), proId, new_price);
+
+                if ((current_quantity + 1) > product.getPro_quantity()) {
                     response.sendRedirect("/CartController");
                 } else {
-                    response.sendRedirect("/CartController");
-                }
-            }
-        } else if(path.startsWith("/CartController/increaseQuantity/")){
-            Customer cus = (Customer) request.getSession().getAttribute("account");
-            String[] s = path.split("/");
-            
-            int proId = Integer.parseInt(s[s.length - 1]);
-            int current_quantity = cdao.getCurrentQuantity(cus.getCus_id(), proId);
-            Product product = pdao.getProById(proId);
-            
-            if ((current_quantity + 1) > product.getPro_quantity()) {
-                response.sendRedirect("/CartController");
-            } else {
-                int isUpdateDecrease = cdao.updateQuantityCart(cus.getCus_id(), proId, current_quantity + 1);
-                Cart cart = cdao.getCartByProAndCusID(cus.getCus_id(), proId);
-                
-                if (isUpdateDecrease != 0) {
-                    double new_price = 0;
-                    if (product.getPro_price() > product.getDiscount()) {
-                        new_price = product.getDiscount() * cart.getPro_quantity();
+                    int isUpdateDecrease = cdao.updateQuantityCart(cus.getCus_id(), proId, current_quantity + 1);
+                    Cart cart = cdao.getCartByProAndCusID(cus.getCus_id(), proId);
+
+                    if (isUpdateDecrease != 0) {
+                        double new_price = 0;
+                        if (product.getPro_price() > product.getDiscount()) {
+                            new_price = product.getDiscount() * cart.getPro_quantity();
+                        } else {
+                            new_price = product.getPro_price() * cart.getPro_quantity();
+                        }
+
+                        int isUpdatePrice = cdao.updatePriceCart(cus.getCus_id(), proId, new_price);
+                        System.out.println(cart.getCart_price());
+                        response.sendRedirect("/CartController");
                     } else {
-                        new_price = product.getPro_price() * cart.getPro_quantity();
+                        response.sendRedirect("/CartController");
                     }
-
-                    int isUpdatePrice = cdao.updatePriceCart(cus.getCus_id(), proId, new_price);
-                    System.out.println(cart.getCart_price());
-                    response.sendRedirect("/CartController");
-                } else {
-                    response.sendRedirect("/CartController");
                 }
-            }
 
+            }
+        }else{
+            response.sendRedirect("/LoginController");
         }
+
     }
 
     /**

@@ -91,130 +91,135 @@ public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.endsWith("/AdminController")) {
-            request.getRequestDispatcher("/DashBoardSlideBarVer2.jsp").forward(request, response);
-        } else if (path.endsWith("/AdminController/adminListPro")) {
-            ProductDAO pdao = new ProductDAO();
-            LinkedList<Product> listPro = pdao.getAllProAdmin();
-            request.setAttribute("listPro", listPro);
-            request.getRequestDispatcher("/adminListPro.jsp").forward(request, response);
+        Staff staff = (Staff) request.getSession().getAttribute("staff");
+        if (staff != null) {
+            if (path.endsWith("/AdminController")) {
+                request.getRequestDispatcher("/DashBoardSlideBarVer2.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListPro")) {
+                ProductDAO pdao = new ProductDAO();
+                LinkedList<Product> listPro = pdao.getAllProAdmin();
+                request.setAttribute("listPro", listPro);
+                request.getRequestDispatcher("/adminListPro.jsp").forward(request, response);
 
-        } else if (path.endsWith("/AdminController/adminListProHistory")) {
-            ProductHistoryDAO phdao = new ProductHistoryDAO();
-            LinkedList<ProductHistory> listProHis = phdao.getAllProHis();
-            request.setAttribute("listProHis", listProHis);
-            request.getRequestDispatcher("/adminListProHis.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListProHistory")) {
+                ProductHistoryDAO phdao = new ProductHistoryDAO();
+                LinkedList<ProductHistory> listProHis = phdao.getAllProHis();
+                request.setAttribute("listProHis", listProHis);
+                request.getRequestDispatcher("/adminListProHis.jsp").forward(request, response);
 
-        } else if (path.endsWith("/AdminController/adminListSupplier")) {
-            SupplierDAO supDao = new SupplierDAO();
-            LinkedList<Supplier> listSup = supDao.getListSupplier();
-            request.setAttribute("listSup", listSup);
-            request.getRequestDispatcher("/AdminListSupplier.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListSupplier")) {
+                SupplierDAO supDao = new SupplierDAO();
+                LinkedList<Supplier> listSup = supDao.getListSupplier();
+                request.setAttribute("listSup", listSup);
+                request.getRequestDispatcher("/AdminListSupplier.jsp").forward(request, response);
 
-        } else if (path.endsWith("/AdminController/adminListOrder")) {
-            OrderDAO oDAO = new OrderDAO();
-            LinkedList<Order> orderList = oDAO.getAllOrders();
-            request.setAttribute("orderList", orderList);
+            } else if (path.endsWith("/AdminController/adminListOrder")) {
+                OrderDAO oDAO = new OrderDAO();
+                LinkedList<Order> orderList = oDAO.getAllOrders();
+                request.setAttribute("orderList", orderList);
 
-            request.getRequestDispatcher("/adminListOrder.jsp").forward(request, response);
-        } else if (path.endsWith("/AdminController/adminListOrderHistory")) {
-            OrderStatusHistoryDAO ohdao = new OrderStatusHistoryDAO();
-            LinkedList<OrderStatusHistory> listOrdHis = ohdao.getAllOrderStatus();
-            System.out.println("show order his ");
-            request.setAttribute("listOrdHis", listOrdHis);
-            System.out.println("set order ");
-            request.getRequestDispatcher("/adminListOrderHis.jsp").forward(request, response);
+                request.getRequestDispatcher("/adminListOrder.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListOrderHistory")) {
+                OrderStatusHistoryDAO ohdao = new OrderStatusHistoryDAO();
+                LinkedList<OrderStatusHistory> listOrdHis = ohdao.getAllOrderStatus();
+                System.out.println("show order his ");
+                request.setAttribute("listOrdHis", listOrdHis);
+                System.out.println("set order ");
+                request.getRequestDispatcher("/adminListOrderHis.jsp").forward(request, response);
 
-        } else if (path.endsWith("/AdminController/adminListNews")) {
-            NewsDAO newsDAO = new NewsDAO();
-            LinkedList<News> listNews = newsDAO.getAll();
-            
-            
-            request.setAttribute("listNews", listNews);
-            request.getRequestDispatcher("/adminListNews.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListNews")) {
+                NewsDAO newsDAO = new NewsDAO();
+                LinkedList<News> listNews = newsDAO.getAll();
 
-        } else if (path.endsWith("/AdminController/AddNews")) {
-            request.getRequestDispatcher("/AddNewsForm.jsp").forward(request, response);
+                request.setAttribute("listNews", listNews);
+                request.getRequestDispatcher("/adminListNews.jsp").forward(request, response);
 
-        } else if (path.endsWith("/AdminController/UpdateNews")) {
-            int news_id = Integer.parseInt(request.getParameter("news_id"));
+            } else if (path.endsWith("/AdminController/AddNews")) {
+                request.getRequestDispatcher("/AddNewsForm.jsp").forward(request, response);
 
-            NewsDAO newsDAO = new NewsDAO();
-            News news = newsDAO.getNews(news_id);
+            } else if (path.endsWith("/AdminController/UpdateNews")) {
+                int news_id = Integer.parseInt(request.getParameter("news_id"));
 
-            String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
-            request.setAttribute("news_id", news_id);
-            request.setAttribute("title", news.getTitle());
-            request.setAttribute("contentMain", news.getTitle_content());
-            request.setAttribute("image_url", images_url);
-            request.setAttribute("content1", news.getContent1());
-            request.setAttribute("content2", news.getContent2());
-            request.setAttribute("content3", news.getContent3());
-            request.setAttribute("dayWriteNews", news.getCreate_date());
+                NewsDAO newsDAO = new NewsDAO();
+                News news = newsDAO.getNews(news_id);
 
-            // Chuyển hướng tới trang UpdateNewsForm.jsp
-            request.getRequestDispatcher("/UpdateNewsForm.jsp").forward(request, response);
-        } else if (path.endsWith("/AdminController/DeleteNews")) {
-            int news_id = Integer.parseInt(request.getParameter("news_id"));
+                String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
+                request.setAttribute("news_id", news_id);
+                request.setAttribute("title", news.getTitle());
+                request.setAttribute("contentMain", news.getTitle_content());
+                request.setAttribute("image_url", images_url);
+                request.setAttribute("content1", news.getContent1());
+                request.setAttribute("content2", news.getContent2());
+                request.setAttribute("content3", news.getContent3());
+                request.setAttribute("dayWriteNews", news.getCreate_date());
 
-            NewsDAO newsDAO = new NewsDAO();
-            News news = newsDAO.getNews(news_id);
+                // Chuyển hướng tới trang UpdateNewsForm.jsp
+                request.getRequestDispatcher("/UpdateNewsForm.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/DeleteNews")) {
+                int news_id = Integer.parseInt(request.getParameter("news_id"));
 
-            String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
-            // Đặt thông tin tin tức vào thuộc tính của request để truyền tới trang UpdateNewsForm.jsp
-            request.setAttribute("news_id", news_id);
+                NewsDAO newsDAO = new NewsDAO();
+                News news = newsDAO.getNews(news_id);
 
-            request.setAttribute("title", news.getTitle());
-            request.setAttribute("contentMain", news.getTitle_content());
-            request.setAttribute("image_url", images_url);
-            request.setAttribute("content1", news.getContent1());
-            request.setAttribute("content2", news.getContent2());
-            request.setAttribute("content3", news.getContent3());
-            request.setAttribute("dayWriteNews", news.getCreate_date());
+                String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
+                // Đặt thông tin tin tức vào thuộc tính của request để truyền tới trang UpdateNewsForm.jsp
+                request.setAttribute("news_id", news_id);
 
-            // Chuyển hướng tới trang UpdateNewsForm.jsp
-            request.getRequestDispatcher("/DeleteNewsForm.jsp").forward(request, response);
-        } else if (path.endsWith("/AdminController/AdminNewsDetail")) {
-            int news_id = Integer.parseInt(request.getParameter("news_id"));
+                request.setAttribute("title", news.getTitle());
+                request.setAttribute("contentMain", news.getTitle_content());
+                request.setAttribute("image_url", images_url);
+                request.setAttribute("content1", news.getContent1());
+                request.setAttribute("content2", news.getContent2());
+                request.setAttribute("content3", news.getContent3());
+                request.setAttribute("dayWriteNews", news.getCreate_date());
 
-            NewsDAO newsDAO = new NewsDAO();
-            News news = newsDAO.getNews(news_id);
+                // Chuyển hướng tới trang UpdateNewsForm.jsp
+                request.getRequestDispatcher("/DeleteNewsForm.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/AdminNewsDetail")) {
+                int news_id = Integer.parseInt(request.getParameter("news_id"));
 
-            String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
-            request.setAttribute("news_id", news_id);
-            request.setAttribute("staff_id", news.getStaff_id());
-            request.setAttribute("title", news.getTitle());
-            request.setAttribute("contentMain", news.getTitle_content());
-            request.setAttribute("image_url", images_url);
-            request.setAttribute("content1", news.getContent1());
-            request.setAttribute("content2", news.getContent2());
-            request.setAttribute("content3", news.getContent3());
-            request.setAttribute("dayWriteNews", news.getCreate_date());
+                NewsDAO newsDAO = new NewsDAO();
+                News news = newsDAO.getNews(news_id);
 
-            // Chuyển hướng tới trang UpdateNewsForm.jsp
-            request.getRequestDispatcher("/AdminNewsDetail.jsp").forward(request, response);
-        } else if (path.endsWith("/AdminController/adminListNewsHistory")) {
-            request.getRequestDispatcher("/adminListNewsHis.jsp").forward(request, response);
+                String images_url = (news != null && news.getImage_url() != null) ? news.getImage_url() : "no_image.jpg";
+                request.setAttribute("news_id", news_id);
+                request.setAttribute("staff_id", news.getStaff_id());
+                request.setAttribute("title", news.getTitle());
+                request.setAttribute("contentMain", news.getTitle_content());
+                request.setAttribute("image_url", images_url);
+                request.setAttribute("content1", news.getContent1());
+                request.setAttribute("content2", news.getContent2());
+                request.setAttribute("content3", news.getContent3());
+                request.setAttribute("dayWriteNews", news.getCreate_date());
 
-        } else if (path.endsWith("/AdminController/adminListStaff")) {
-            request.getRequestDispatcher("/adminListStaff.jsp").forward(request, response);
+                // Chuyển hướng tới trang UpdateNewsForm.jsp
+                request.getRequestDispatcher("/AdminNewsDetail.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListNewsHistory")) {
+                request.getRequestDispatcher("/adminListNewsHis.jsp").forward(request, response);
 
-        } else if (path.endsWith("/AdminController/adminListCustomer")) {
-            CustomerDAO cdao = new CustomerDAO();
-            LinkedList<Customer> listCus = cdao.getAllCus();
-            request.setAttribute("listCus", listCus);
-            request.getRequestDispatcher("/adminListCustomer.jsp").forward(request, response);
-        } else if (path.endsWith("/AdminController/adminImportPro")) {
-            ProductDAO pdao = new ProductDAO();
-            LinkedList<Product> listPro = pdao.getAllProAdmin();
-            request.setAttribute("listPro", listPro);
-            request.getRequestDispatcher("/ListProToImport.jsp").forward(request, response);
-        }else if (path.endsWith("/AdminController/adminImportProHis")) {
-            ImportProductDAO pdao = new ImportProductDAO();
-            LinkedList<ImportProHistory> listPro = pdao.getImportProHis();
-            request.setAttribute("listImpHis", listPro);
-            request.getRequestDispatcher("/adminListImportProHis.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminListStaff")) {
+                request.getRequestDispatcher("/adminListStaff.jsp").forward(request, response);
+
+            } else if (path.endsWith("/AdminController/adminListCustomer")) {
+                CustomerDAO cdao = new CustomerDAO();
+                LinkedList<Customer> listCus = cdao.getAllCus();
+                request.setAttribute("listCus", listCus);
+                request.getRequestDispatcher("/adminListCustomer.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminImportPro")) {
+                ProductDAO pdao = new ProductDAO();
+                LinkedList<Product> listPro = pdao.getAllProAdmin();
+                request.setAttribute("listPro", listPro);
+                request.getRequestDispatcher("/ListProToImport.jsp").forward(request, response);
+            } else if (path.endsWith("/AdminController/adminImportProHis")) {
+                ImportProductDAO pdao = new ImportProductDAO();
+                LinkedList<ImportProHistory> listPro = pdao.getImportProHis();
+                request.setAttribute("listImpHis", listPro);
+                request.getRequestDispatcher("/adminListImportProHis.jsp").forward(request, response);
+            }
+        } else {
+            response.sendRedirect("/LoginController");
         }
+
     }
 
     /**

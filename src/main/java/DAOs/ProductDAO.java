@@ -313,7 +313,7 @@ public class ProductDAO {
         String sql = "SELECT top 4*\n"
                 + "FROM product\n"
                 + "INNER JOIN categories ON product.cat_id = categories.cat_id\n"
-                + "WHERE categories.cat_name = ?;";
+                + "WHERE categories.cat_name = ? and product.isDelete=0;";
         try {
 
             ps = conn.prepareStatement(sql);
@@ -347,7 +347,7 @@ public class ProductDAO {
         String sql = "SELECT top 4*\n"
                 + "FROM product\n"
                 + "INNER JOIN categories ON product.cat_id = categories.cat_id\n"
-                + "WHERE typeCategories = ?;";
+                + "WHERE typeCategories = ? and product.isDelete=0;";
         try {
 
             ps = conn.prepareStatement(sql);
@@ -380,7 +380,7 @@ public class ProductDAO {
      */
     public LinkedList<Product> getListProByProName(String pro_name) {
         LinkedList<Product> list = new LinkedList<>();
-        String sql = "select * from product where pro_name like N'%" + pro_name + "%';";
+        String sql = "select * from product where isDelete=0 and pro_name like N'%" + pro_name + "%';";
         try {
 
             ps = conn.prepareStatement(sql);

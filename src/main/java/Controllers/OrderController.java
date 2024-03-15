@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controllers;
 
 import DAOs.CartDAO;
@@ -50,34 +49,37 @@ import java.util.logging.Logger;
  * @author PC
  */
 public class OrderController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet OrderController</title>");  
+            out.println("<title>Servlet OrderController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet OrderController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet OrderController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -85,275 +87,281 @@ public class OrderController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         String path = request.getRequestURI();
-        
-        if (path.startsWith("/OrderController/OrderDetailAdmin/")) {
-            String s[] = path.split("/");
-            int orderID = Integer.parseInt(s[s.length - 1]);
-            OrderDAO oDAO = new OrderDAO();
-            OrderDetailDAO odDAO = new OrderDetailDAO();
-            CustomerDAO cuDAO = new CustomerDAO();
+        Customer customer = (Customer) request.getSession().getAttribute("account");
+        if (customer != null) {
+            if (path.startsWith("/OrderController/OrderDetailAdmin/")) {
+                String s[] = path.split("/");
+                int orderID = Integer.parseInt(s[s.length - 1]);
+                OrderDAO oDAO = new OrderDAO();
+                OrderDetailDAO odDAO = new OrderDetailDAO();
+                CustomerDAO cuDAO = new CustomerDAO();
 
-            Order getOrderByID = oDAO.getOrderByID(orderID);
-            LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
-            Customer cus = cuDAO.getCustomerByCusID(getOrderByID.getCus_id());
+                Order getOrderByID = oDAO.getOrderByID(orderID);
+                LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+                Customer cus = cuDAO.getCustomerByCusID(getOrderByID.getCus_id());
 
-            request.setAttribute("getOrderByID", getOrderByID);
-            request.setAttribute("odList", odList);
-            request.setAttribute("cus", cus);
-            request.getRequestDispatcher("/orderDetailAdmin.jsp").forward(request, response);
-        } else if (path.startsWith("/OrderController/UpdateOrderAdmin/")) {
-            String s[] = path.split("/");
-            int orderID = Integer.parseInt(s[s.length - 1]);
-            OrderDAO oDAO = new OrderDAO();
-            OrderDetailDAO odDAO = new OrderDetailDAO();
-            CustomerDAO cuDAO = new CustomerDAO();
+                request.setAttribute("getOrderByID", getOrderByID);
+                request.setAttribute("odList", odList);
+                request.setAttribute("cus", cus);
+                request.getRequestDispatcher("/orderDetailAdmin.jsp").forward(request, response);
+            } else if (path.startsWith("/OrderController/UpdateOrderAdmin/")) {
+                String s[] = path.split("/");
+                int orderID = Integer.parseInt(s[s.length - 1]);
+                OrderDAO oDAO = new OrderDAO();
+                OrderDetailDAO odDAO = new OrderDetailDAO();
+                CustomerDAO cuDAO = new CustomerDAO();
 
-            Order getOrderByID = oDAO.getOrderByID(orderID);
-            LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
-            Customer cus = cuDAO.getCustomerByCusID(getOrderByID.getCus_id());
+                Order getOrderByID = oDAO.getOrderByID(orderID);
+                LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+                Customer cus = cuDAO.getCustomerByCusID(getOrderByID.getCus_id());
 
-            request.setAttribute("getOrderByID", getOrderByID);
-            request.setAttribute("odList", odList);
-            request.setAttribute("cus", cus);
-            request.getRequestDispatcher("/EditOrderForm.jsp").forward(request, response);
-        } else if (path.startsWith("/OrderController/DeleteOrderAdmin/")) {
-            String s[] = path.split("/");
-            int orderID = Integer.parseInt(s[s.length - 1]);
-            OrderDAO oDAO = new OrderDAO();
-            OrderDetailDAO odDAO = new OrderDetailDAO();
-            CustomerDAO cuDAO = new CustomerDAO();
+                request.setAttribute("getOrderByID", getOrderByID);
+                request.setAttribute("odList", odList);
+                request.setAttribute("cus", cus);
+                request.getRequestDispatcher("/EditOrderForm.jsp").forward(request, response);
+            } else if (path.startsWith("/OrderController/DeleteOrderAdmin/")) {
+                String s[] = path.split("/");
+                int orderID = Integer.parseInt(s[s.length - 1]);
+                OrderDAO oDAO = new OrderDAO();
+                OrderDetailDAO odDAO = new OrderDetailDAO();
+                CustomerDAO cuDAO = new CustomerDAO();
 
-            Order getOrderByID = oDAO.getOrderByID(orderID);
-            LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
-            Customer cus = cuDAO.getCustomerByCusID(getOrderByID.getCus_id());
+                Order getOrderByID = oDAO.getOrderByID(orderID);
+                LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+                Customer cus = cuDAO.getCustomerByCusID(getOrderByID.getCus_id());
 
-            request.setAttribute("getOrderByID", getOrderByID);
-            request.setAttribute("odList", odList);
-            request.setAttribute("cus", cus);
-            request.getRequestDispatcher("/DeleteOrderForm.jsp").forward(request, response);
-        } else if (path.endsWith("/OrderController/BuyInShop")) {
-            Product proSessionBill = (Product) request.getSession().getAttribute("pro");
+                request.setAttribute("getOrderByID", getOrderByID);
+                request.setAttribute("odList", odList);
+                request.setAttribute("cus", cus);
+                request.getRequestDispatcher("/DeleteOrderForm.jsp").forward(request, response);
+            } else if (path.endsWith("/OrderController/BuyInShop")) {
+                Product proSessionBill = (Product) request.getSession().getAttribute("pro");
 
-            request.getSession().setAttribute("proSessionBill", proSessionBill);
-            request.getSession().setAttribute("proSessionCartBill", null);
-            response.sendRedirect("/OrderController/CheckOut");
-        } else if (path.endsWith("/OrderController/BuyInCart")) {
-            String[] proSessionCartBill = (String[]) request.getSession().getAttribute("listCheckCart");
+                request.getSession().setAttribute("proSessionBill", proSessionBill);
+                request.getSession().setAttribute("proSessionCartBill", null);
+                response.sendRedirect("/OrderController/CheckOut");
+            } else if (path.endsWith("/OrderController/BuyInCart")) {
+                String[] proSessionCartBill = (String[]) request.getSession().getAttribute("listCheckCart");
 
-            request.getSession().setAttribute("proSessionCartBill", proSessionCartBill);
-            request.getSession().setAttribute("proSessionBill", null);
-            response.sendRedirect("/OrderController/CheckOut");
-        } else if (path.endsWith("/OrderController/CheckOut")) {
-            Product finalPro = (Product) request.getSession().getAttribute("proSessionBill");
-            String[] finalCart = (String[]) request.getSession().getAttribute("proSessionCartBill");
+                request.getSession().setAttribute("proSessionCartBill", proSessionCartBill);
+                request.getSession().setAttribute("proSessionBill", null);
+                response.sendRedirect("/OrderController/CheckOut");
+            } else if (path.endsWith("/OrderController/CheckOut")) {
+                Product finalPro = (Product) request.getSession().getAttribute("proSessionBill");
+                String[] finalCart = (String[]) request.getSession().getAttribute("proSessionCartBill");
 
-            request.getSession().setAttribute("finalPro", finalPro);
-            request.getSession().setAttribute("finalCart", finalCart);
-            request.getRequestDispatcher("/checkOut.jsp").forward(request, response);
-        } else if (path.endsWith("/OrderController/PayBill")) {
-            OrderDAO oDAO = new OrderDAO();
-            ProductDAO pDAO = new ProductDAO();
-            OrderDetailDAO odtDAO = new OrderDetailDAO();
-            CartDAO caDAO = new CartDAO();
+                request.getSession().setAttribute("finalPro", finalPro);
+                request.getSession().setAttribute("finalCart", finalCart);
+                request.getRequestDispatcher("/checkOut.jsp").forward(request, response);
+            } else if (path.endsWith("/OrderController/PayBill")) {
+                OrderDAO oDAO = new OrderDAO();
+                ProductDAO pDAO = new ProductDAO();
+                OrderDetailDAO odtDAO = new OrderDetailDAO();
+                CartDAO caDAO = new CartDAO();
 
-            String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
+                String vnp_ResponseCode = request.getParameter("vnp_ResponseCode");
 
-            // Lay thong tin KH mua truc tiep
-            String fullname = (String) request.getSession().getAttribute("fullname");
-            String phonenumber = (String) request.getSession().getAttribute("phonenumber");
-            String email = (String) request.getSession().getAttribute("email");
-            String fullAddress = (String) request.getSession().getAttribute("fullAddress");
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDateTime now = LocalDateTime.now();
-            Date orderPayDate = Date.valueOf(dtf.format(now));
-            Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
+                // Lay thong tin KH mua truc tiep
+                String fullname = (String) request.getSession().getAttribute("fullname");
+                String phonenumber = (String) request.getSession().getAttribute("phonenumber");
+                String email = (String) request.getSession().getAttribute("email");
+                String fullAddress = (String) request.getSession().getAttribute("fullAddress");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDateTime now = LocalDateTime.now();
+                Date orderPayDate = Date.valueOf(dtf.format(now));
+                Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
 
-            // Lay thong tin sp khi mua truc tiep
-            Product getProInBill = (Product) request.getSession().getAttribute("finalPro");
-            String[] getCartInBill = (String[]) request.getSession().getAttribute("finalCart");
-            double amount = 0;
+                // Lay thong tin sp khi mua truc tiep
+                Product getProInBill = (Product) request.getSession().getAttribute("finalPro");
+                String[] getCartInBill = (String[]) request.getSession().getAttribute("finalCart");
+                double amount = 0;
 
-            // Kiem tra thanh toan thanh cong
-            if ("00".equals(vnp_ResponseCode)) {
-                // Tinh tong tien khi mua truc tiep
-                if (getProInBill != null) {
-                    int quantityBill = (Integer) request.getSession().getAttribute("quantityBuyNow");
-                    if (getProInBill.getDiscount() < getProInBill.getPro_price()) {
-                        amount = getProInBill.getDiscount() * quantityBill;
-                    } else {
-                        amount = getProInBill.getPro_price() * quantityBill;
-                    }
-
-                    Order orderPay = new Order(0, getCusWhenPay.getCus_id(), "VNPay", fullAddress, "Chờ xác nhận", orderPayDate, amount, 0);
-                    int addNewOrder = oDAO.addOrder(orderPay);
-
-                    if (addNewOrder > 0) {
-                        // Tao Order Detail
-                        Order getOrderWhenPay = oDAO.getOrderWhenPay(getCusWhenPay.getCus_id());
-                        OrderDetail odtAddNew = new OrderDetail(getOrderWhenPay.getO_id(), getProInBill.getPro_id(), quantityBill);
-                        int addOrderDetail = odtDAO.addOrderDetail(odtAddNew);
-
-                        // Cap nhat sl SP
-                        int quantityAfterPay = getProInBill.getPro_quantity() - quantityBill;
-                        Product editProPay = new Product(0, 0, "", "", "", "", 0.0, "", quantityAfterPay, 0.0, 0.0, "", orderPayDate, 0);
-                        int changeProQuan = pDAO.editProQuan(getProInBill.getPro_id(), editProPay);
-
-                        System.out.println("Mua thanh cong VNPAY");
-                    }
-                    response.sendRedirect("/OrderController/Success");
-                } else if (getCartInBill != null) {
-                    for (int i = 0; i < getCartInBill.length; i++) {
-                        int proID = Integer.parseInt(getCartInBill[i]);
-                        Cart getProCart = caDAO.getCartByProAndCusID(getCusWhenPay.getCus_id(), proID);
-                        Product getPro = pDAO.getProductByID(proID);
-
-                        if (getPro.getDiscount() < getPro.getPro_price()) {
-                            amount += getPro.getDiscount() * getProCart.getPro_quantity();
+                // Kiem tra thanh toan thanh cong
+                if ("00".equals(vnp_ResponseCode)) {
+                    // Tinh tong tien khi mua truc tiep
+                    if (getProInBill != null) {
+                        int quantityBill = (Integer) request.getSession().getAttribute("quantityBuyNow");
+                        if (getProInBill.getDiscount() < getProInBill.getPro_price()) {
+                            amount = getProInBill.getDiscount() * quantityBill;
                         } else {
-                            amount += getPro.getPro_price() * getProCart.getPro_quantity();
+                            amount = getProInBill.getPro_price() * quantityBill;
                         }
-                    }
 
-                    Order orderPay = new Order(0, getCusWhenPay.getCus_id(), "VNPay", fullAddress, "Chờ xác nhận", orderPayDate, amount, 0);
-                    int addNewOrder = oDAO.addOrder(orderPay);
+                        Order orderPay = new Order(0, getCusWhenPay.getCus_id(), "VNPay", fullAddress, "Chờ xác nhận", orderPayDate, amount, 0);
+                        int addNewOrder = oDAO.addOrder(orderPay);
 
-                    if (addNewOrder > 0) {
-                        Order getOrderWhenPay = oDAO.getOrderWhenPay(getCusWhenPay.getCus_id());
-                        int addOrderDetail = 0;
+                        if (addNewOrder > 0) {
+                            // Tao Order Detail
+                            Order getOrderWhenPay = oDAO.getOrderWhenPay(getCusWhenPay.getCus_id());
+                            OrderDetail odtAddNew = new OrderDetail(getOrderWhenPay.getO_id(), getProInBill.getPro_id(), quantityBill);
+                            int addOrderDetail = odtDAO.addOrderDetail(odtAddNew);
 
+                            // Cap nhat sl SP
+                            int quantityAfterPay = getProInBill.getPro_quantity() - quantityBill;
+                            Product editProPay = new Product(0, 0, "", "", "", "", 0.0, "", quantityAfterPay, 0.0, 0.0, "", orderPayDate, 0);
+                            int changeProQuan = pDAO.editProQuan(getProInBill.getPro_id(), editProPay);
+
+                            System.out.println("Mua thanh cong VNPAY");
+                        }
+                        response.sendRedirect("/OrderController/Success");
+                    } else if (getCartInBill != null) {
                         for (int i = 0; i < getCartInBill.length; i++) {
                             int proID = Integer.parseInt(getCartInBill[i]);
                             Cart getProCart = caDAO.getCartByProAndCusID(getCusWhenPay.getCus_id(), proID);
                             Product getPro = pDAO.getProductByID(proID);
 
-                            OrderDetail odtAddNew = new OrderDetail(getOrderWhenPay.getO_id(), getPro.getPro_id(), getProCart.getPro_quantity());
-                            addOrderDetail = odtDAO.addOrderDetail(odtAddNew);
-
-                            int quantityAfterPay = getPro.getPro_quantity() - getProCart.getPro_quantity();
-
-                            // Cap nhat sl sp sau khi mua
-                            Product editProPay = new Product(0, 0, "", "", "", "", 0.0, "", quantityAfterPay, 0.0, 0.0, "", orderPayDate, 0);
-                            int changeProQuan = pDAO.editProQuan(getPro.getPro_id(), editProPay);
-                            
-                            //Xoa gio hang sau khi mua
-                            int deleteCartAfterPay = caDAO.delete(getCusWhenPay.getCus_id(), proID);
+                            if (getPro.getDiscount() < getPro.getPro_price()) {
+                                amount += getPro.getDiscount() * getProCart.getPro_quantity();
+                            } else {
+                                amount += getPro.getPro_price() * getProCart.getPro_quantity();
+                            }
                         }
+
+                        Order orderPay = new Order(0, getCusWhenPay.getCus_id(), "VNPay", fullAddress, "Chờ xác nhận", orderPayDate, amount, 0);
+                        int addNewOrder = oDAO.addOrder(orderPay);
+
+                        if (addNewOrder > 0) {
+                            Order getOrderWhenPay = oDAO.getOrderWhenPay(getCusWhenPay.getCus_id());
+                            int addOrderDetail = 0;
+
+                            for (int i = 0; i < getCartInBill.length; i++) {
+                                int proID = Integer.parseInt(getCartInBill[i]);
+                                Cart getProCart = caDAO.getCartByProAndCusID(getCusWhenPay.getCus_id(), proID);
+                                Product getPro = pDAO.getProductByID(proID);
+
+                                OrderDetail odtAddNew = new OrderDetail(getOrderWhenPay.getO_id(), getPro.getPro_id(), getProCart.getPro_quantity());
+                                addOrderDetail = odtDAO.addOrderDetail(odtAddNew);
+
+                                int quantityAfterPay = getPro.getPro_quantity() - getProCart.getPro_quantity();
+
+                                // Cap nhat sl sp sau khi mua
+                                Product editProPay = new Product(0, 0, "", "", "", "", 0.0, "", quantityAfterPay, 0.0, 0.0, "", orderPayDate, 0);
+                                int changeProQuan = pDAO.editProQuan(getPro.getPro_id(), editProPay);
+
+                                //Xoa gio hang sau khi mua
+                                int deleteCartAfterPay = caDAO.delete(getCusWhenPay.getCus_id(), proID);
+                            }
+                        }
+                        System.out.println("Thanh toan VNPay thanh cong");
+
+                        response.sendRedirect("/OrderController/Success");
                     }
-                    System.out.println("Thanh toan VNPay thanh cong");
-                    
-                    response.sendRedirect("/OrderController/Success");
+                } else {
+                    response.sendRedirect("/OrderController/CheckOut");
                 }
-            } else {
-                response.sendRedirect("/OrderController/CheckOut");
-            }
-        } else if (path.endsWith("/OrderController/Success")) {
-            OrderDAO oDAO = new OrderDAO();
-            Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
+            } else if (path.endsWith("/OrderController/Success")) {
+                OrderDAO oDAO = new OrderDAO();
+                Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
 
-            Order getOrderWhenPay = oDAO.getOrderWhenPay(getCusWhenPay.getCus_id());
+                Order getOrderWhenPay = oDAO.getOrderWhenPay(getCusWhenPay.getCus_id());
 
-            request.setAttribute("getOrderWhenPay", getOrderWhenPay);
-            request.getRequestDispatcher("/paySuccess.jsp").forward(request, response);
-        } else if (path.startsWith("/OrderController/GetOrderList/")) {
-            System.out.println("Lay list loc");
-            String s[] = path.split("/");
-            String status = s[s.length - 1];
-            String addStatus = "";
-            System.out.println(status);
-            if (status.equals("CXN")) {
-                addStatus = "Chờ xác nhận";
-            } else if (status.equals("DXN")) {
-                addStatus = "Đã xác nhận";
-            } else if (status.equals("DGG")) {
-                addStatus = "Đang giao";
-            } else if (status.equals("DG")) {
-                addStatus = "Đã giao";
-            } else if (status.equals("DH")) {
-                addStatus = "Đã hủy";
-            } 
-            System.out.println(addStatus);
-            OrderDAO oDAO = new OrderDAO();
-            Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
-            
-            LinkedList<Order> orderListCusFil = oDAO.getAllOrdersByCusIdFil(getCusWhenPay.getCus_id(), addStatus);
-            
-            request.getSession().setAttribute("orderListCus", null);
-            request.getSession().setAttribute("orderListCusFil", orderListCusFil);
-            
-            response.sendRedirect("/OrderController/OrderList");
-        } else if (path.endsWith("/OrderController/GetAllOrderList")) {
-            System.out.println("Lay het list");
-            OrderDAO oDAO = new OrderDAO();
-            Customer cusSession = (Customer) request.getSession().getAttribute("account");
-            int cusID = cusSession.getCus_id();
+                request.setAttribute("getOrderWhenPay", getOrderWhenPay);
+                request.getRequestDispatcher("/paySuccess.jsp").forward(request, response);
+            } else if (path.startsWith("/OrderController/GetOrderList/")) {
+                System.out.println("Lay list loc");
+                String s[] = path.split("/");
+                String status = s[s.length - 1];
+                String addStatus = "";
+                System.out.println(status);
+                if (status.equals("CXN")) {
+                    addStatus = "Chờ xác nhận";
+                } else if (status.equals("DXN")) {
+                    addStatus = "Đã xác nhận";
+                } else if (status.equals("DGG")) {
+                    addStatus = "Đang giao";
+                } else if (status.equals("DG")) {
+                    addStatus = "Đã giao";
+                } else if (status.equals("DH")) {
+                    addStatus = "Đã hủy";
+                }
+                System.out.println(addStatus);
+                OrderDAO oDAO = new OrderDAO();
+                Customer getCusWhenPay = (Customer) request.getSession().getAttribute("account");
 
-            LinkedList<Order> orderListCus = oDAO.getAllOrdersByCusId(cusID);
-            
-            request.getSession().setAttribute("orderListCus", orderListCus);
-            request.getSession().setAttribute("orderListCusFil", null);
-            
-            response.sendRedirect("/OrderController/OrderList");
-        } else if (path.endsWith("/OrderController/OrderList")) {
-            request.getRequestDispatcher("/ListOrderCusVer2.jsp").forward(request, response);
-        } else if (path.startsWith("/OrderController/OrderDetailCustomer/")) {
-            String s[] = path.split("/");
-            int orderID = Integer.parseInt(s[s.length - 1]);
-            OrderDAO oDAO = new OrderDAO();
-            OrderDetailDAO odDAO = new OrderDetailDAO();
-            CustomerDAO cuDAO = new CustomerDAO();
-            
-            System.out.println("OrderID");
-            System.out.println(orderID);
+                LinkedList<Order> orderListCusFil = oDAO.getAllOrdersByCusIdFil(getCusWhenPay.getCus_id(), addStatus);
 
-            Order getOrderByID = oDAO.getOrderByID(orderID);
-            LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+                request.getSession().setAttribute("orderListCus", null);
+                request.getSession().setAttribute("orderListCusFil", orderListCusFil);
 
-            request.setAttribute("getOrderByID", getOrderByID);
-            request.setAttribute("odList", odList);
-            request.setAttribute("quantityOrderDetail", odList.size());
-            request.getRequestDispatcher("/OrderDetailCusVer2.jsp").forward(request, response);
-        } else if (path.startsWith("/OrderController/OrderDeleteCustomer/")) {
-            System.out.println("Huy don hang");
-            String s[] = path.split("/");
-            int orderID = Integer.parseInt(s[s.length - 1]);
-            OrderDAO oDAO = new OrderDAO();
-            Customer cusSession = (Customer) request.getSession().getAttribute("account");
+                response.sendRedirect("/OrderController/OrderList");
+            } else if (path.endsWith("/OrderController/GetAllOrderList")) {
+                System.out.println("Lay het list");
+                OrderDAO oDAO = new OrderDAO();
+                Customer cusSession = (Customer) request.getSession().getAttribute("account");
+                int cusID = cusSession.getCus_id();
 
-            Order orderEdit = new Order(0, 0, "", "", "Đã hủy", null, 0, 0);
-            int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+                LinkedList<Order> orderListCus = oDAO.getAllOrdersByCusId(cusID);
 
-            LinkedList<Order> orderListCus = (LinkedList<Order>) request.getSession().getAttribute("orderListCus");
-
-            LinkedList<Order> orderListCusFil = (LinkedList<Order>) request.getSession().getAttribute("orderListCusFil");
-
-            if (orderListCus != null) {
-                LinkedList<Order> orderListCus1 = oDAO.getAllOrdersByCusId(cusSession.getCus_id());
-                request.getSession().setAttribute("orderListCus", orderListCus1);
+                request.getSession().setAttribute("orderListCus", orderListCus);
                 request.getSession().setAttribute("orderListCusFil", null);
 
                 response.sendRedirect("/OrderController/OrderList");
-            } else if (orderListCusFil != null) {
-                String addStatus = "";
-                for (Order ord : orderListCusFil) {
-                    addStatus = ord.getStatus();
-                    break;
+            } else if (path.endsWith("/OrderController/OrderList")) {
+                request.getRequestDispatcher("/ListOrderCusVer2.jsp").forward(request, response);
+            } else if (path.startsWith("/OrderController/OrderDetailCustomer/")) {
+                String s[] = path.split("/");
+                int orderID = Integer.parseInt(s[s.length - 1]);
+                OrderDAO oDAO = new OrderDAO();
+                OrderDetailDAO odDAO = new OrderDetailDAO();
+                CustomerDAO cuDAO = new CustomerDAO();
+
+                System.out.println("OrderID");
+                System.out.println(orderID);
+
+                Order getOrderByID = oDAO.getOrderByID(orderID);
+                LinkedList<OrderDetail> odList = odDAO.getAllOrderDetailsByOrderID(orderID);
+
+                request.setAttribute("getOrderByID", getOrderByID);
+                request.setAttribute("odList", odList);
+                request.setAttribute("quantityOrderDetail", odList.size());
+                request.getRequestDispatcher("/OrderDetailCusVer2.jsp").forward(request, response);
+            } else if (path.startsWith("/OrderController/OrderDeleteCustomer/")) {
+                System.out.println("Huy don hang");
+                String s[] = path.split("/");
+                int orderID = Integer.parseInt(s[s.length - 1]);
+                OrderDAO oDAO = new OrderDAO();
+                Customer cusSession = (Customer) request.getSession().getAttribute("account");
+
+                Order orderEdit = new Order(0, 0, "", "", "Đã hủy", null, 0, 0);
+                int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+
+                LinkedList<Order> orderListCus = (LinkedList<Order>) request.getSession().getAttribute("orderListCus");
+
+                LinkedList<Order> orderListCusFil = (LinkedList<Order>) request.getSession().getAttribute("orderListCusFil");
+
+                if (orderListCus != null) {
+                    LinkedList<Order> orderListCus1 = oDAO.getAllOrdersByCusId(cusSession.getCus_id());
+                    request.getSession().setAttribute("orderListCus", orderListCus1);
+                    request.getSession().setAttribute("orderListCusFil", null);
+
+                    response.sendRedirect("/OrderController/OrderList");
+                } else if (orderListCusFil != null) {
+                    String addStatus = "";
+                    for (Order ord : orderListCusFil) {
+                        addStatus = ord.getStatus();
+                        break;
+                    }
+                    System.out.println("Trang thai");
+                    System.out.println(addStatus);
+
+                    LinkedList<Order> orderListCusFil1 = oDAO.getAllOrdersByCusIdFil(cusSession.getCus_id(), addStatus);
+                    request.getSession().setAttribute("orderListCus", null);
+                    request.getSession().setAttribute("orderListCusFil", orderListCusFil1);
+
+                    response.sendRedirect("/OrderController/OrderList");
                 }
-                System.out.println("Trang thai");
-                System.out.println(addStatus);
-
-                LinkedList<Order> orderListCusFil1 = oDAO.getAllOrdersByCusIdFil(cusSession.getCus_id(), addStatus);
-                request.getSession().setAttribute("orderListCus", null);
-                request.getSession().setAttribute("orderListCusFil", orderListCusFil1);
-
-                response.sendRedirect("/OrderController/OrderList");
             }
+        }else{
+            response.sendRedirect("/LoginController");
         }
-    } 
 
-    /** 
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -361,8 +369,8 @@ public class OrderController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
+            throws ServletException, IOException {
+
         // Cap nhat trang thai don hang
         if (request.getParameter("updateOrderAdminBtn") != null) {
             OrderDAO oDAO = new OrderDAO();
@@ -390,7 +398,7 @@ public class OrderController extends HttpServlet {
                 response.sendRedirect("/OrderController/UpdateOrderAdmin/" + orderID);
             }
         }
-        
+
         // Xoa don hang trong admin
         if (request.getParameter("deleteOrderBtn") != null) {
             OrderDAO oDAO = new OrderDAO();
@@ -413,7 +421,7 @@ public class OrderController extends HttpServlet {
                 response.sendRedirect("/OrderController/DeleteOrderAdmin/" + orderID);
             }
         }
-        
+
         // Tao don hang
         if (request.getParameter("payBtn") != null) {
             OrderDAO oDAO = new OrderDAO();
@@ -571,7 +579,7 @@ public class OrderController extends HttpServlet {
                             // Cap nhat sl sp sau khi mua
                             Product editProPay = new Product(0, 0, "", "", "", "", 0.0, "", quantityAfterPay, 0.0, 0.0, "", orderPayDate, 0);
                             int changeProQuan = pDAO.editProQuan(getPro.getPro_id(), editProPay);
-                            
+
                             //Xoa gio hang sau khi mua
                             int deleteCartAfterPay = caDAO.delete(getCusWhenPay.getCus_id(), proID);
                         }
@@ -650,8 +658,9 @@ public class OrderController extends HttpServlet {
         }
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

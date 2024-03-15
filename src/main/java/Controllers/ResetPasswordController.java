@@ -108,7 +108,7 @@ public class ResetPasswordController extends HttpServlet {
             HttpSession session = request.getSession();
             AccountDAO cdao = new AccountDAO();
             //get list email to check account of this email is already exist 
-            LinkedList<String> listEmail = cdao.getAllEmail();
+            LinkedList<String> listEmail = cdao.getAllEmailToResetPass();
             if (listEmail != null) {
                 boolean checkEmailExist = false;
                 for (String s : listEmail) {
@@ -156,8 +156,8 @@ public class ResetPasswordController extends HttpServlet {
 
                         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(sendTo, false));
                         //tieu de email
-                        msg.setSubject("Ma OTP");
-                        msg.setText("your OTP is: " + otp);
+                        msg.setSubject("Mã OTP");
+                        msg.setText("Mã OTP của bạn: " + otp);
                         Transport.send(msg);
 
                     } catch (MessagingException ex) {

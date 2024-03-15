@@ -50,7 +50,7 @@
                                             <label class="form-label">Email</label>
                                             <input type="email" id="email" name="email"
                                                    class="form-control form-control-lg" />
-                                            <span class="error""></span>
+                                            <span class="error"></span>
                                             <span class="text-danger" id="resultEmail"></span>
                                         </div>
 

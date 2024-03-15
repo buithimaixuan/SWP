@@ -7,6 +7,7 @@ package Controllers;
 import DAOs.ProductDAO;
 import DAOs.SupplierDAO;
 import Models.Product;
+import Models.Staff;
 import Models.Supplier;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,12 +62,18 @@ public class SupplierController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
-        if (path.endsWith("/SupplierController/AddSupplier")) {
-            ProductDAO dao = new ProductDAO();
-            LinkedList<Product> list = dao.getAllPro();
-            request.setAttribute("listPro", list);
-            request.getRequestDispatcher("/AddSupplier.jsp").forward(request, response);
+        Staff staff = (Staff) request.getSession().getAttribute("staff");
+        if (staff != null) {
+            if (path.endsWith("/SupplierController/AddSupplier")) {
+                ProductDAO dao = new ProductDAO();
+                LinkedList<Product> list = dao.getAllPro();
+                request.setAttribute("listPro", list);
+                request.getRequestDispatcher("/AddSupplier.jsp").forward(request, response);
+            }
+        } else {
+            response.sendRedirect("/LoginController");
         }
+
     }
 
     /**
