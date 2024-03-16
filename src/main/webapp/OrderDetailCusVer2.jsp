@@ -30,6 +30,9 @@
             ul{
                 padding: 0;
             }
+            .thongkegia p{
+                margin-bottom: 0;
+            }
         </style>
         
         <!--NAM CODE-->
@@ -111,7 +114,8 @@
                                     <%
                                         if (pro.getDiscount() < pro.getPro_price()) {
                                     %>
-                                    <p class="giathat">đ<%= pro.getDiscount() * elem.getQuantity() %></p>
+                                    <p class="giathat">đ<%= pro.getPro_price() * elem.getQuantity() %></p>
+                                    <p class="giagiam">đ<%= pro.getDiscount() * elem.getQuantity() %></p>
                                     <%
                                         } else {
                                     %>

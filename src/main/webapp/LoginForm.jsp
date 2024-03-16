@@ -57,7 +57,7 @@
                                             </div>
                                             <div class="pt-1 mb-4">
                                                 <input type="submit" class="btn btn-lg btn-block" name="btnLogin"
-                                                       value="Login" style="background-color: #f1a8b6;">
+                                                       value="Đăng nhập" style="background-color: #f1a8b6;">
                                             </div>
 
                                             <a class="small text-muted" href="/ResetPasswordController">Quên mật khẩu?</a>
