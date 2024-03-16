@@ -55,7 +55,17 @@
                                                                 <p class="text-muted mb-0 small">Số lượng: <%= elem.getQuantity()%></p>
                                                             </div>
                                                             <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                                                                <%
+                                                                    if (pro.getDiscount() < pro.getPro_price()) {
+                                                                %>
+                                                                <p class="text-muted mb-0 small"><%= pro.getDiscount() * elem.getQuantity()%></p>
+                                                                <%
+                                                                } else {
+                                                                %>
                                                                 <p class="text-muted mb-0 small"><%= pro.getPro_price() * elem.getQuantity()%></p>
+                                                                <%
+                                                                    }
+                                                                %>
                                                             </div>
                                                         </div>
                                                     </div>
