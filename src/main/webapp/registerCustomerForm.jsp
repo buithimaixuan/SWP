@@ -63,7 +63,7 @@
 
                                         </div>
                                         <div class="form-outline mb-2 validate">
-                                            <label class="form-label">Avatar</label>
+                                            <label class="form-label">Ảnh đại diện</label>
                                             <input type="file" id="avatar" name="avatar"
                                                    class="form-control form-control-lg" />
                                             <span class="error"></span>
@@ -87,8 +87,8 @@
                                         </div>
                                         <div class="pt-1 mb-2">
                                             <input type="submit" class="btn btn-lg btn-block" name="register"
-                                                   value="Create" style="background-color: #f1a8b6;">
-                                            <input type="reset" class="btn btn-lg btn-block" value="Reset"
+                                                   value="Đăng ký" style="background-color: #f1a8b6;">
+                                            <input type="reset" class="btn btn-lg btn-block" value="Làm mới"
                                                    style="background-color: #f1a8b6;">
                                         </div>
                                     </form>

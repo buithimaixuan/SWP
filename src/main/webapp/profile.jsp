@@ -129,14 +129,13 @@
                             <div class="col-md-12">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body" style="text-align: center;">
-                                        <p class="mb-4"><span class="font-italic me-1" style="color:rgb(247, 187, 9);">Change
-                                                Pasword</span>
+                                        <p class="mb-4"><span class="font-italic me-1" style="color:rgb(247, 187, 9);">Thay đổi mật khẩu</span>
                                         </p>
                                         <p class="mb-1" style="font-size: .77rem;">Ấn dô đây để đổi Mật khẩu</p>
                                         <p class="mb-1" style="font-size: .77rem;">Mật khẩu gồm chữ ,số.</p>
                                     </div>
                                     <div class="d-flex justify-content-center mb-2">
-                                        <a href="#changePass" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Change Password</a>
+                                        <a href="#changePass" type="button" class="btn" style="background-color: rgb(247, 187, 9);">Thay đổi mật khẩu</a>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +144,7 @@
 
 
                         <div class="col-lg-8" id="updateProfile">
-                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Update Information</h3>
+                            <h3 style="color: rgb(247, 187, 9);" class="my-3">Cập nhật hồ sơ</h3>
                         </div>
                         <div class="card mb-4">
                             <div class="card-body">
