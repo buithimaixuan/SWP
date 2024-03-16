@@ -45,7 +45,7 @@
         <div class="container">
             <div class="row">
 
-                <!--NAM CODE VIEW STATISTIC-->
+
                 <style>
                     .statistic a{
                         text-decoration: none;
@@ -71,7 +71,7 @@
                             <i class="fa-solid fa-user statistic-icon"></i>
                             <div class="statistic-infor">
                                 <h4>Nhân viên</h4>
-                                <span><%= numberOfStaffs %></span>
+                                <span><%= numberOfStaffs%></span>
                             </div>
                         </div>
                         <div class="bot-statistic">
@@ -99,7 +99,8 @@
         </div>
 
 
-
+                            
+        <!--UYÊN CODE-->
 
         <%        //       *******hiện theo lựa chọn********
             List<Chart> chartDataList = (List<Chart>) request.getAttribute("chartData");
@@ -294,16 +295,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
     <script>
         const xValues = [<%= xValues.toString()%>];
         const yValues = [<%= yValues.toString()%>];
@@ -329,23 +320,6 @@
             }
         });
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
