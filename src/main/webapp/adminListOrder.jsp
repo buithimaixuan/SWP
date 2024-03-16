@@ -66,11 +66,13 @@
                                     <td class="text-start align-middle">${ol.o_date}</td>
                                     <td class="text-start">
                                         <c:if test="${ol.isDelete == 0}">
-                                            <a href="/OrderController/OrderDetailAdmin/${ol.o_id}" class="btn btn-primary"><i class="fa fa-circle-info text-white"></i></a>
-                                            <a href="/OrderController/UpdateOrderAdmin/${ol.o_id}" class="btn btn-success"><i class="fa fa-file-lines text-white"></i></a>
-                                            <a href="/OrderController/DeleteOrderAdmin/${ol.o_id}" class="btn btn-danger"><i class="fa fa-trash text-white"></i></i></a>
+                                            <a href="/OrderController/OrderDetailAdmin/${ol.o_id}" class="btn btn-primary mt-3 mb-3">Xem chi tiết</a>
+                                            <a href="/OrderController/UpdateOrderAdmin/${ol.o_id}" class="btn btn-success mt-3 mb-3">Câp nhât</a>
+                                            <a href="/OrderController/DeleteOrderAdmin/${ol.o_id}" class="btn btn-danger mt-3 mb-3">Xóa</a>
                                         </c:if>
-                                        <c:if test="${ol.isDelete == 1}"></c:if>
+                                        <c:if test="${ol.isDelete == 1}">
+                                            <p class="btn btn-secondary mt-3">Ðã xóa</p>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
