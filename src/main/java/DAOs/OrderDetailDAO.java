@@ -167,6 +167,7 @@ public class OrderDetailDAO {
         String sql = "SELECT o.o_date, SUM(od.quantity) AS quantity\n" +
 "         FROM order_detail od\n" +
 "           INNER JOIN orders o ON od.o_id = o.o_id \n" +
+   "WHERE status = N'Đã giao' \n"+
 "           GROUP BY o.o_date \n" +
 "           ORDER BY o.o_date ASC;";
 

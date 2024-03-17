@@ -99,8 +99,11 @@
         </div>
 
 
-                            
+
         <!--UYÊN CODE-->
+
+
+        <!--BIỂU ĐỒ 1-->
 
         <%         //       *******hiện nguyên bảng)********
             List<Chart> chartDataList = (List<Chart>) request.getAttribute("chartData");
@@ -117,8 +120,7 @@
                 yValues.deleteCharAt(yValues.length() - 1);
             }
 
-          
-             //       *******hiện theo lựa chọn********
+            //       *******hiện theo lựa chọn********
             //        chartDAO chartDAO = new chartDAO();
             List<Chart> chartDataListYear = odao.getCMonth();
             StringBuilder mValues = new StringBuilder();
@@ -131,7 +133,7 @@
             nValues.deleteCharAt(nValues.length() - 1);
         %>
 
-
+        <!--BIỂU ĐỒ 1-->
         <div class="row">
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê</h1>
             <div class="col-7"  style="margin-top: 20px;margin-left: 80px;">
@@ -146,7 +148,7 @@
                     <div class="col-14 mb-4"  style="margin-left: 90px">
                         <label for="year" style="color: #3333ff">Năm:</label>
                         <select id="year" name="year" style="color: #3333ff" required>
-                            <option value="2022">2022</option>
+                         
                             <option value="2023">2023</option>
                             <option value="2024">2024</option>
                         </select>
@@ -183,8 +185,10 @@
 
 
 
-        <!--******//////**********++++*********////*********BIEU DO NGAY************++++**************//////************-->
 
+
+
+        <!--BIỂU ĐỒ 2-->
         <div class="row">
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm</h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:40px;">
@@ -194,6 +198,7 @@
 
         </div>
 
+        <!--BIỂU ĐỒ 2-->
         <%
             List<chartPro> chartDataListProduct = (List<chartPro>) request.getAttribute("ChartDataProduct");
             StringBuilder oValues = new StringBuilder();
@@ -212,6 +217,11 @@
             }
         %>
 
+
+
+
+
+        <!--BIỂU ĐỒ 3-->
         <div class="row">
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm theo ngày</h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
@@ -221,6 +231,7 @@
 
         </div>
 
+        <!--BIỂU ĐỒ 3-->
         <%
             List<chartPro> chartDataListDay = (List<chartPro>) request.getAttribute("ChartDataProductDay");
 
@@ -238,6 +249,12 @@
             }
         %>
 
+
+
+
+
+
+        <!--BIỂU ĐỒ 2-->
         <script>
             const oValues = [<%= oValues.toString()%>];
             const pValues = [<%= pValues.toString()%>];
@@ -263,6 +280,11 @@
                 }
             });
         </script>
+
+
+
+
+        <!--BIỂU ĐỒ 3-->
         <script>
             const aValues = [<%= aValues.toString()%>];
             const bValues = [<%= bValues.toString()%>];
@@ -295,7 +317,7 @@
 
 
 
-
+    <!--BIỂU ĐỒ 1-->
     <script>
         const xValues = [<%= xValues.toString()%>];
         const yValues = [<%= yValues.toString()%>];

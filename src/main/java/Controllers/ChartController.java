@@ -77,12 +77,12 @@ public class ChartController extends HttpServlet {
         Staff staff = (Staff) request.getSession().getAttribute("staff");
         if (staff != null) {
             OrderDetailDAO chartOrderDetailDAO = new OrderDetailDAO();
-            List<chartPro> chartDataListProduct = chartOrderDetailDAO.getChartDataProduct();
-            List<chartPro> chartDataListDay = chartOrderDetailDAO.getChartDataDay();
+            List<chartPro> chartDataListProduct = chartOrderDetailDAO.getChartDataProduct();//BIỂU ĐỒ 2 : thống kê sản phẩm đã bán từ trước đến nay
+            List<chartPro> chartDataListDay = chartOrderDetailDAO.getChartDataDay();// BIỂU ĐỒ 3  : thống kê sản phẩm theo tất cả các ngày từ trước đến nay
             request.setAttribute("ChartDataProduct", chartDataListProduct);
             request.setAttribute("ChartDataProductDay", chartDataListDay);
-            if (path.endsWith("/ChartController/Chart")) {
-                List<Chart> chartDataList = chartDAO.getChartData();
+            if (path.endsWith("/ChartController/Chart")) {   //BIỂU ĐỒ 1  : không chọn tháng,năm....  Ấn nút 'Biểu đồ chung'
+                List<Chart> chartDataList = chartDAO.getChartData();     
                 request.setAttribute("chartData", chartDataList);
 
                 request.getRequestDispatcher("/chart.jsp").forward(request, response);
@@ -90,7 +90,7 @@ public class ChartController extends HttpServlet {
                 
                 
                 //Chọn năm và ấn nút 'Biểu đồ năm'
-            } else if (path.endsWith("/ChartController/ChartYear")) {
+            } else if (path.endsWith("/ChartController/ChartYear")) { //BIỂU ĐỒ 1  : Có chọn năm - Ấn nút 'Biểu đồ năm'
 //            List<Chart> chartDataList = chartDAO.getChartData();
 //            OrderDAO chartDAO = new OrderDAO();
                 int year = Integer.parseInt(session.getAttribute("year").toString());
@@ -101,7 +101,7 @@ public class ChartController extends HttpServlet {
                 request.setAttribute("chartData", chartDataListY);
                 request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
-            } else if (path.endsWith("/ChartController/ChartMonth")) {
+            } else if (path.endsWith("/ChartController/ChartMonth")) { //BIỂU ĐỒ 1 : Có chọn năm , tháng - Ấn nút 'Biểu đồ tháng'
                 int yearM = Integer.parseInt(session.getAttribute("yearM").toString());
                 int month = Integer.parseInt(session.getAttribute("month").toString());
 //            List<Chart> chartDataList = chartDAO.getChartData();
