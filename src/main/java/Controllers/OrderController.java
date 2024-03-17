@@ -89,8 +89,9 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI();
+        Staff staff  = (Staff) request.getSession().getAttribute("staff");
         Customer customer = (Customer) request.getSession().getAttribute("account");
-        if (customer != null) {
+        if (staff != null) {
             if (path.startsWith("/OrderController/OrderDetailAdmin/")) {
                 String s[] = path.split("/");
                 int orderID = Integer.parseInt(s[s.length - 1]);
@@ -136,7 +137,9 @@ public class OrderController extends HttpServlet {
                 request.setAttribute("odList", odList);
                 request.setAttribute("cus", cus);
                 request.getRequestDispatcher("/DeleteOrderForm.jsp").forward(request, response);
-            } else if (path.endsWith("/OrderController/BuyInShop")) {
+            }
+        } else if (customer != null) {
+            if (path.endsWith("/OrderController/BuyInShop")) {
                 Product proSessionBill = (Product) request.getSession().getAttribute("pro");
 
                 request.getSession().setAttribute("proSessionBill", proSessionBill);
@@ -353,7 +356,7 @@ public class OrderController extends HttpServlet {
                     response.sendRedirect("/OrderController/OrderList");
                 }
             }
-        }else{
+        } else {
             response.sendRedirect("/LoginController");
         }
 

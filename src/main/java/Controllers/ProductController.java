@@ -1790,7 +1790,10 @@ public class ProductController extends HttpServlet {
                     if(pro.getPro_price() > pro.getDiscount()){
                         current_price = pro.getDiscount();
                     }
-                    int isChangeQuantity = cdao.updateQuantityCart(cus.getCus_id(), proId, addQuantityCart);
+                    int isChangeQuantity = 0;
+                    if(pro.getPro_quantity() >= addQuantityCart){
+                        isChangeQuantity = cdao.updateQuantityCart(cus.getCus_id(), proId, addQuantityCart);
+                    }
                     if(isChangeQuantity != 0){
                         int isChangePrice = cdao.updatePriceCart(cus.getCus_id(), proId, current_price * addQuantityCart);
                         response.sendRedirect("/HomeController");
