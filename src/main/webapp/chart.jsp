@@ -102,7 +102,7 @@
                             
         <!--UYÊN CODE-->
 
-        <%        //       *******hiện theo lựa chọn********
+        <%         //       *******hiện nguyên bảng)********
             List<Chart> chartDataList = (List<Chart>) request.getAttribute("chartData");
             StringBuilder xValues = new StringBuilder();
             StringBuilder yValues = new StringBuilder();
@@ -117,7 +117,8 @@
                 yValues.deleteCharAt(yValues.length() - 1);
             }
 
-            //       *******hiện nguyên bảng)********
+          
+             //       *******hiện theo lựa chọn********
             //        chartDAO chartDAO = new chartDAO();
             List<Chart> chartDataListYear = odao.getCMonth();
             StringBuilder mValues = new StringBuilder();
@@ -188,7 +189,7 @@
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm</h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
 
-                <canvas id="myChartProduct" style="width:100%;max-width:1300px;color: #99ccff"></canvas> 
+                <canvas id="myChartProduct" style="width:100%;max-width:1100px;color: #99ccff"></canvas> 
             </div>
 
         </div>
@@ -215,7 +216,7 @@
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm theo ngày</h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
 
-                <canvas id="myChartProductDay" style="width:100%;max-width:1300px;color: #99ccff"></canvas> 
+                <canvas id="myChartProductDay" style="width:100%;max-width:1150px;color: #99ccff"></canvas> 
             </div>
 
         </div>
