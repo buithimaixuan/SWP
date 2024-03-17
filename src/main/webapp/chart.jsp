@@ -84,7 +84,7 @@
                             <i class="fa-solid fa-coins statistic-icon"></i>
                             <div class="statistic-infor">
                                 <h4>Doanh thu</h4>
-                                <span id="customer-count"><%= sumMoney%></span>
+                                <span id="customer-count"><%= sumMoney%></span> <span>đ</span>
                             </div>
                         </div>
                         <div class="bot-statistic">
@@ -169,10 +169,10 @@
                     </div>
                     <div class="col-12" >
 
-                        <button style="margin-left: 80px;font-weight: bold" name="xemBieuDo" type="submit" class="custom-btn btn-5"><span>Biểu đồ Năm</span></button>
+                        <button style="margin-left: 50px;font-weight: bold" name="xemBieuDo" type="submit" class="custom-btn btn-5"><span>Biểu đồ Năm</span></button>
                         <button  style="font-weight: bold" name="xemBieuDoThang" type="submit" class="custom-btn btn-5"><span>Biểu đồ Tháng</span></button>
                         <hr>
-                        <button style="margin-left: 170px;font-weight: bold" class="custom-btn btn-5"<span><a type="button" href="/ChartController/Chart" style="text-decoration: none; color: black">Biểu đồ Chung</span></button>
+                        <button style="margin-left: 150px;font-weight: bold" class="custom-btn btn-5"<span><a type="button" href="/ChartController/Chart" style="text-decoration: none; color: black">Biểu đồ Chung</span></button>
 
                     </div>
 
@@ -187,9 +187,9 @@
 
         <div class="row">
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm</h1>
-            <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
+            <div class="col-12"  style="margin-top: 20px;margin-left:40px;">
 
-                <canvas id="myChartProduct" style="width:100%;max-width:1100px;color: #99ccff"></canvas> 
+                <canvas id="myChartProduct" style="width:100%;max-width:1000px;color: #99ccff"></canvas> 
             </div>
 
         </div>
@@ -216,7 +216,7 @@
             <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm theo ngày</h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
 
-                <canvas id="myChartProductDay" style="width:100%;max-width:1150px;color: #99ccff"></canvas> 
+                <canvas id="myChartProductDay" style="width:100%;max-width:1050px;color: #99ccff"></canvas> 
             </div>
 
         </div>

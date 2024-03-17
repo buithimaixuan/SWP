@@ -87,6 +87,9 @@ public class ChartController extends HttpServlet {
 
                 request.getRequestDispatcher("/chart.jsp").forward(request, response);
 
+                
+                
+                //Chọn năm và ấn nút 'Biểu đồ năm'
             } else if (path.endsWith("/ChartController/ChartYear")) {
 //            List<Chart> chartDataList = chartDAO.getChartData();
 //            OrderDAO chartDAO = new OrderDAO();
