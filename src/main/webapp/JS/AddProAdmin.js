@@ -88,23 +88,23 @@ function validateAddProduct() {
         isValid = false;
     }
     if (price === '') {
-        errorPrice.innerHTML = "Giá gốc sản phẩm không thể bỏ trống!";
+        errorPrice.innerHTML = "Giá bán sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (price !== '' && price <= 0) {
-        errorPrice.innerHTML = "Giá gốc sản phẩm không thể nhỏ hơn hoặc bằng 0!";
+        errorPrice.innerHTML = "Giá bán sản phẩm không thể nhỏ hơn hoặc bằng 0!";
         isValid = false;
     }
     if (realPrice === '') {
-        errorRealPrice.innerHTML = "Giá bán sản phẩm không thể bỏ trống!";
+        errorRealPrice.innerHTML = "Giá khuyến mãi sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (realPrice !== '' && realPrice <= 0) {
-        errorRealPrice.innerHTML = "Giá bán sản phẩm không thể nhỏ hơn hoặc bằng 0!";
+        errorRealPrice.innerHTML = "Giá khuyến mãi sản phẩm không thể nhỏ hơn hoặc bằng 0!";
         isValid = false;
     }
     if (parseFloat(realPrice) > parseFloat(price)) {
-        errorRealPrice.innerHTML = "Giá bán phải nhỏ hơn hoặc bằng giá gốc";
+        errorRealPrice.innerHTML = "Giá khuyến mãi phải nhỏ hơn hoặc bằng giá gốc";
         isValid = false;
     }
 

@@ -52,7 +52,7 @@
                                 <div class="form-hover">
                                     <input type="number" id="price" name="price" placeholder="Giá gốc"
                                            class="form-control form-control-lg" />
-                                    <label for="price" class="form-label">Giá gốc</label>
+                                    <label for="price" class="form-label">Giá bán</label>
                                 </div>
                                 <span class="error errorPrice text-danger fw-bold font-italic"></span>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="form-hover">
                                     <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán"
                                            class="form-control form-control-lg" />
-                                    <label for="realPrice" class="form-label">Giá bán</label>
+                                    <label for="realPrice" class="form-label">Giá khuyến mãi</label>
                                 </div>
                                 <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
                             </div>
@@ -227,7 +227,7 @@
                         <span class="error errorDescription text-danger font-italic fw-bold"></span>
                     </div>
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="AddProduct" class="btn btn-success w-100" style="font-size: 20px" value="Create New Product"/>
+                        <input type="submit" name="AddProduct" class="btn btn-success w-100" style="font-size: 20px" value="Tạo sản phẩm"/>
                     </div> 
                 </form>
             </div>

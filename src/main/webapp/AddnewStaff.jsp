@@ -157,7 +157,7 @@
                     </div>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btnAddStaff" class="btn btn-success w-100" style="font-size: 20px" value="Create Staff" />
+                        <input type="submit" name="btnAddStaff" class="btn btn-success w-100" style="font-size: 20px" value="Tạo mới nhân viên" />
                     </div>
                 </form>
             </div>

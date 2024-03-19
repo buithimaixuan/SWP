@@ -37,7 +37,7 @@
                 <form method="post" action="ProductController" enctype="multipart/form-data" 
                       class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px" onsubmit="return validateAddProduct()">
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Xóa sản phẩm</span>
+                        <span class="h3 fw-bold">Chi tiết sản phẩm</span>
                     </div>
                     <div class="d-flex" style="gap: 20px">
                         <div class="w-100">
@@ -62,7 +62,7 @@
                                 <div class="form-hover">
                                     <input type="number" id="price" name="price" placeholder="Giá gốc" value="${pEdit.pro_price}"
                                            class="form-control form-control-lg" readonly/>
-                                    <label for="price" class="form-label">Giá gốc</label>
+                                    <label for="price" class="form-label">Giá bán</label>
                                 </div>
                                 <span class="error errorPrice text-danger fw-bold font-italic"></span>
                             </div>
@@ -71,7 +71,7 @@
                                 <div class="form-hover">
                                     <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán" value="${pEdit.discount}"
                                            class="form-control form-control-lg" readonly />
-                                    <label for="realPrice" class="form-label">Giá bán</label>
+                                    <label for="realPrice" class="form-label">Giá khuyến mãi</label>
                                 </div>
                                 <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
                             </div>
@@ -240,7 +240,7 @@
                         <span class="error errorDescription text-danger font-italic fw-bold"></span>
                     </div>
                     <div class="form-outline mb-3 mt-4">
-                        <a class="btn btn-success w-100 text-decoration-none" href="/AdminController/adminListPro" style="font-size: 20px" >Back to list</a>
+                        <a class="btn btn-success w-100 text-decoration-none" href="/AdminController/adminListPro" style="font-size: 20px" >Quay về danh sách sản phẩm</a>
                     </div> 
                 </form>
             </div>

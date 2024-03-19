@@ -42,10 +42,10 @@
         <div>
             <%@include file="DashBoardSlideBarVer2.jsp" %>
             <div style="flex: 1; position: absolute; width: 80%;top: 0; left: 265px;">
-                <h1 class="m-2">Danh sách nhà cung cáp</h1>  </p>
+                <h1 class="m-2">Danh sách nhà cung cấp</h1>  </p>
                 <div class="mx-2 ms-1 border border-2 p-2 m-2">
                     <p class="btn btn-warning m-2" style="width: 200px;">
-                        <a href="/SupplierController/AddSupplier" class="text-decoration-none text-dark">Thêm nhà cung cáp</a>
+                        <a href="/SupplierController/AddSupplier" class="text-decoration-none text-dark">Thêm nhà cung cấp</a>
                     </p>
                     <table id="example" class="table table-responsive" style="width:100%">
                         <thead>

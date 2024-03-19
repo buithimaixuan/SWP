@@ -198,7 +198,7 @@
                                         </div>
                                         <div class="row mb-6">
                                             <div class="col-md-12 d-flex justify-content-end">
-                                                <button name="btnUpdatefStaff" type="submit" style="background-color: rgb(247, 187, 9);" class="btn">Update</button>
+                                                <button name="btnUpdatefStaff" type="submit" style="background-color: rgb(247, 187, 9);" class="btn">Cập nhật</button>
                                             </div>
                                         </div>
                                     </form>
