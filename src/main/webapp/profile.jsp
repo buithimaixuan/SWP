@@ -342,7 +342,7 @@
 
                 // Kiểm tra Fullname không được để trống và không chứa kí tự đặc biệt
                 if (fullname.trim() === '' || fullname.length > 15 || !/^[a-zA-Z1-9\s]+$/.test(fullname)) {
-                    fullnameError.textContent = 'Họ tên không dài quá 15 kí tự và không có kí tự đặc biệt..';
+                    fullnameError.textContent = 'Họ tên không dài quá 15 kí tự và không có kí tự đặc biệt.';
                     event.preventDefault();
                 } else {
                     fullnameError.textContent = '';
