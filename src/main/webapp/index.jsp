@@ -462,10 +462,17 @@
                                                     </c:if>
 
                                                 </div>
-                                                <button class="card_buy" type="submit" name="btnAddCart">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                    <span>Thêm</span>
-                                                </button>
+                                                <c:if test="${p.pro_quantity <= 0}">
+                                                    <p style="color: #ff6223">Hết hàng</p>
+                                                </c:if>
+
+                                                <c:if test="${p.pro_quantity > 0}">
+                                                                                  
+                                                    <button class="card_buy" type="submit" name="btnAddCart">
+                                                        <i class="fa-solid fa-cart-shopping"></i>
+                                                                 <span>Thêm</span>   
+                                                    </button>
+                                                </c:if>
                                             </div>
                                         </div>
                                     </form>    
@@ -507,10 +514,19 @@
                                                     </c:if>
 
                                                 </div>
-                                                <button class="card_buy" name="btnAddCart" type="submit">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                    <span>Thêm</span>
-                                                </button>
+
+                                                <c:if test="${p.pro_quantity <= 0}">
+                                                 <p style="color: #ff6223">Hết hàng</p>
+                                                </c:if>
+
+                                                <c:if test="${p.pro_quantity > 0}">
+                                                                                       
+                                                    <button class="card_buy" type="submit" name="btnAddCart">
+                                                        <i class="fa-solid fa-cart-shopping"></i>
+                                                          <span>Thêm</span>     
+                                                    </button>
+                                                </c:if>                                            
+
                                             </div>
                                         </div>
                                     </form>    
