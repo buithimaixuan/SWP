@@ -321,14 +321,26 @@ public class OrderController extends HttpServlet {
                 request.setAttribute("quantityOrderDetail", odList.size());
                 request.getRequestDispatcher("/OrderDetailCusVer2.jsp").forward(request, response);
             } else if (path.startsWith("/OrderController/OrderDeleteCustomer/")) {
-                System.out.println("Huy don hang");
                 String s[] = path.split("/");
                 int orderID = Integer.parseInt(s[s.length - 1]);
                 OrderDAO oDAO = new OrderDAO();
+                OrderDetailDAO odtDAO = new OrderDetailDAO();
+                ProductDAO pDAO = new ProductDAO();
+
+                LinkedList<OrderDetail> odList = odtDAO.getAllOrderDetailsByOrderID(orderID);
+
                 Customer cusSession = (Customer) request.getSession().getAttribute("account");
 
                 Order orderEdit = new Order(0, 0, "", "", "Đã hủy", null, 0, 0);
+
                 int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+
+                for (OrderDetail odt : odList) {
+                    Product getPro = pDAO.getProById(odt.getPro_id());
+                    int backQuantit = getPro.getPro_quantity() + odt.getQuantity();
+                    Product updateCancelPro = new Product(odt.getPro_id(), 0, "", "", "", "", 0.0, "", backQuantit, 0.0, 0.0, "", null, 0);
+                    int backOrderQuan = pDAO.editProQuan(odt.getPro_id(), updateCancelPro);
+                }
 
                 LinkedList<Order> orderListCus = (LinkedList<Order>) request.getSession().getAttribute("orderListCus");
 
@@ -377,6 +389,9 @@ public class OrderController extends HttpServlet {
         // Cap nhat trang thai don hang
         if (request.getParameter("updateOrderAdminBtn") != null) {
             OrderDAO oDAO = new OrderDAO();
+            OrderDetailDAO odtDAO = new OrderDetailDAO();
+            ProductDAO pDAO = new ProductDAO();
+
             OrderStatusHistoryDAO oshDAO = new OrderStatusHistoryDAO();
 
             int orderID = Integer.parseInt(request.getParameter("orderID"));
@@ -388,7 +403,24 @@ public class OrderController extends HttpServlet {
 
             Order getOrder = oDAO.getOrderByID(orderID);
             Order orderEdit = new Order(0, 0, "", "", statusOrder, getOrder.getO_date(), 0, 0);
-            int editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+
+            LinkedList<OrderDetail> odList = odtDAO.getAllOrderDetailsByOrderID(orderID);
+            
+            int editOrderStatus = 0;
+
+            if (statusOrder.equals("Đã hủy")) {
+                System.out.println("Huy don tu admin");
+                editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+
+                for (OrderDetail odt : odList) {
+                    Product getPro = pDAO.getProById(odt.getPro_id());
+                    int backQuantit = getPro.getPro_quantity() + odt.getQuantity();
+                    Product updateCancelPro = new Product(odt.getPro_id(), 0, "", "", "", "", 0.0, "", backQuantit, 0.0, 0.0, "", null, 0);
+                    int backOrderQuan = pDAO.editProQuan(odt.getPro_id(), updateCancelPro);
+                }
+            } else {
+                editOrderStatus = oDAO.editOrderStatus(orderID, orderEdit);
+            }
 
             if (!getOrder.getStatus().equals(statusOrder)) {
                 OrderStatusHistory ordHis = new OrderStatusHistory(0, orderID, staffID, statusOrder, "Cập nhật", orderStatusDate);

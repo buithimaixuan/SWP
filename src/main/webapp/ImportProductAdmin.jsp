@@ -77,7 +77,7 @@
 
 
                         <div class="form-outline mb-3 mt-4">
-                            <input type="submit" name="ImportPro" class="btn btn-success w-100" style="font-size: 20px" value="Xac nhan dat hang"/>
+                            <input type="submit" name="ImportPro" class="btn btn-success w-100" style="font-size: 20px" value="Xác nhận đặt hàng"/>
                         </div> 
                 </form>
             </div>

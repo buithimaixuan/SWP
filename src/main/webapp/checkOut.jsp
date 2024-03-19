@@ -91,7 +91,7 @@
         <%@include file="headOfCart.jsp" %>
         <div class="container col-10 my-5 br-2 rounded">
             <h3 style="color: #3e3e3e; font-family: Arial, Helvetica, sans-serif; font-size: 27px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px">Group4 Store</h3>
-            <form class="row g-3" action="OrderController" method="post">
+            <form class="row g-3" action="OrderController" method="post" onsubmit="return checkValid()">
                 <%
                     String[] listCartBuy = (String[]) request.getSession().getAttribute("finalCart");
                     double amount = 0;
@@ -201,7 +201,7 @@
                                 onclick="validateForm()">ĐẶT HÀNG</button>
                     </div>
                 </div>
-                
+
                 <div class="col-8">
                     <div class="row">
                         <div class="col-6">
@@ -230,10 +230,10 @@
                                         </div>
                                         <div class="col-12" style="padding-bottom: 15px;">
                                             <div class="input-group">
-                                                <input name="address1" class="input" required type="text" id="address" style="width: 100%;">
+                                                <input name="address1" class="input" type="text" id="address" style="width: 100%;">
                                                 <label class="label" for="address">Address</label>
                                             </div>
-                                            <div class="error-message" id="address-error"></div>
+                                            <span class="errorAddress text-danger fw-bold font-italic"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -288,32 +288,52 @@
 
 
         <script>
-            function validateForm() {
-                var form = document.getElementById('checkoutForm');
-                var inputs = form.querySelectorAll('input[required]');
-                var isValid = true;
+//            function validateForm() {
+//                var form = document.getElementById('checkoutForm');
+//                var inputs = form.querySelectorAll('input[required]');
+//                var isValid = true;
+//
+//                var phoneRegex = /^\d{10,11}$/;
+//                var emailRegex = /^\S+@\S+\.\S+$/;
+//
+//                inputs.forEach(function (input) {
+//                    var errorId = input.id + '-error';
+//                    var errorMessage = '';
+//
+//                    if (!input.value.trim()) {
+//                        errorMessage = 'Please enter information.';
+//                        isValid = false;
+//                    } else if (input.id === 'phone' && !phoneRegex.test(input.value)) {
+//                        errorMessage = 'Phone is invalid.';
+//                        isValid = false;
+//                    } else if (input.id === 'email' && !emailRegex.test(input.value)) {
+//                        errorMessage = 'Email is invalid.';
+//                        isValid = false;
+//                    }
+//
+//                    document.getElementById(errorId).textContent = errorMessage;
+//                    input.classList.toggle('invalid-field', errorMessage !== '');
+//                });
+//
+//                return isValid;
+//            }
+            function checkValid() {
+                var address = document.getElementById('address').value.trim();
+                //loi o trang checkOut
 
-                var phoneRegex = /^\d{10,11}$/;
-                var emailRegex = /^\S+@\S+\.\S+$/;
+                var errorAddress = document.querySelector(".errorAddress");
 
-                inputs.forEach(function (input) {
-                    var errorId = input.id + '-error';
-                    var errorMessage = '';
+                errorAddress.innerHTML = '';
 
-                    if (!input.value.trim()) {
-                        errorMessage = 'Please enter information.';
-                        isValid = false;
-                    } else if (input.id === 'phone' && !phoneRegex.test(input.value)) {
-                        errorMessage = 'Phone is invalid.';
-                        isValid = false;
-                    } else if (input.id === 'email' && !emailRegex.test(input.value)) {
-                        errorMessage = 'Email is invalid.';
-                        isValid = false;
-                    }
 
-                    document.getElementById(errorId).textContent = errorMessage;
-                    input.classList.toggle('invalid-field', errorMessage !== '');
-                });
+                let isValid = true;
+
+                // bao loi cho trang add News
+
+                if (address === '') {
+                    errorAddress.innerHTML = "Địa chỉ không được để trống!";
+                    isValid = false;
+                }
 
                 return isValid;
             }
