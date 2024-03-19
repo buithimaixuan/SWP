@@ -99,13 +99,13 @@
         </style>
     </head>
     <body>
-        <%@include file="headOfCart.jsp" %>
+        <%@include file="headOfHome.jsp" %>
         <!--        <header>
                     <h1>Header here</h1>
                 </header>-->
         <main>
             <section>
-                <div style="margin-left: 740px">
+                <div style="margin-left: 600px">
                     <marquee height="70" scrollamount="25" width="40%" style="font-size: 60px;color: rgb(247, 187, 9)">Love Cake Store</marquee>
                 </div>
                 <!--<h2>Introduce</h2>-->
@@ -117,27 +117,27 @@
                     <div class="team-member">
                         <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="1">
                         <h4>Trần Phương Nam</h4>
-                        <p>CE12345</p>
+                        <p>CE170126</p>
                     </div>
                     <div class="team-member">
                         <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
                         <h4>Nguyễn Hữu Thực</h4>
-                        <p>CE12345</p>
+                        <p>CE171748</p>
                     </div>
                     <div class="team-member">
                         <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
                         <h4>Bùi Thị Mai Xuân</h4>
-                        <p>CE12345</p>
+                        <p>CE170377</p>
                     </div>
                     <div class="team-member">
                         <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
                         <h4>Vũ Minh Uyên</h4>
-                        <p>CE12345</p>
+                        <p>CE171809</p>
                     </div>
                     <div class="team-member">
                         <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
                         <h4>Đặng Nguyễn Đăng Khoa</h4>
-                        <p>CE12345</p>
+                        <p>CE172075</p>
                     </div>
 
                 </div>
