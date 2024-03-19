@@ -152,24 +152,24 @@
                                     <div class="row mb-3">
                                         <label for="fullname" class="col-sm-2 col-form-label">Họ Tên</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" value="${account.fullname}" required=""/>
-                                            <span id="fullnameError" class="error"></span>
+                                            <input type="text" id="fullname" name="fullname" class="form-control form-control-lg" value="${account.fullname}" />
+                                            <span style="color: red" id="fullnameError" class="error"></span>
                                             <span class="text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-3" type="hidden">
                                         <!--<label type="hidden" for="username" class="col-sm-2 col-form-label">UserName</label>-->
                                         <div class="col-sm-10">
-                                            <input type="hidden" type="text" id="username" name="username" class="form-control form-control-lg" value="${account.username}" required=""/>
-                                            <span id="usernameError" class="error"></span>
+                                            <input type="hidden" type="text" id="username" name="username" class="form-control form-control-lg" value="${account.username}" />
+                                            <span style="color: red" id="usernameError" class="error"></span>
                                             <span class="text-danger" id="duplicateUserNameError"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="email" name="email" class="form-control form-control-lg" value="${account.email}" required=""/>
-                                            <span id="emailError" class="error"></span>
+                                            <input type="text" id="email" name="email" class="form-control form-control-lg" value="${account.email}" />
+                                            <span style="color: red" id="emailError" class="error"></span>
                                             <span class="text-danger" id="duplicateEmailError"></span>
                                             <span class="text-danger" id="duplicateEmailPhoneError"></span>
                                         </div>
@@ -177,15 +177,12 @@
                                     <div class="row mb-3">
                                         <label for="phone" class="col-sm-2 col-form-label">SĐT</label>
                                         <div class="col-sm-10">
-                                            <input type="text" id="phone" name="phone" class="form-control form-control-lg" value="${account.phone_number}" required=""/>
-                                            <span id="phoneError" class="error"></span>
+                                            <input type="text" id="phone" name="phone" class="form-control form-control-lg" value="${account.phone_number}" />
+                                            <span style="color: red" id="phoneError" class="error"></span>
                                             <span class="text-danger" id="duplicatePhoneError"></span>
                                             <span class="text-danger" id="duplicateEmailPhoneError"></span>
                                         </div>
                                     </div>
-
-
-
 
                                     <div class="row mb-3">
                                         <div class="col-md-9">
@@ -217,13 +214,14 @@
                         </div>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <form action="UpdateCustomerController" method="post" enctype="multipart/form-data" >
+                                <form action="UpdateCustomerController" id="updatePass"  method="post" enctype="multipart/form-data" >
                                     <div class="row mb-3">
                                         <label for="old" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="old" value=""
                                                    name="oldPass">
                                             <div id="oldError" class="text-danger"></div>
+                                            <span style="color: red" id="passOldError" class="error"></span>
                                             <span class="text-danger" id="duplicatePassError"></span>
                                         </div>
                                     </div>
@@ -234,6 +232,7 @@
                                             <input type="password" class="form-control" id="newP" name="newP"
                                                    placeholder="Enter your new password">
                                             <div id="errorDiv"></div>
+                                            <span style="color: red" id="passNewError" class="error"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -242,6 +241,7 @@
                                             <input type="password" class="form-control" id="confirm" name="confirm"
                                                    placeholder="Enter new password again">
                                             <div id="errorDiv"></div>
+                                            <span style="color: red" id="passConfirmError" class="error"></span>
                                         </div>
                                     </div>
                                     <div class="row mb-6">
@@ -305,10 +305,10 @@
                         // Hiển thị thông báo trùng phone
                         out.println("document.getElementById('duplicatePassError').innerText = '" + errorMessage + "';");
                     }
+
             %>
             // Xóa thuộc tính duplicateError khỏi session sau khi hiển thị cảnh báo
-            <%
-                    session.removeAttribute("duplicateError");
+            <%                    session.removeAttribute("duplicateError");
                 }
             %>
         </script>
@@ -341,16 +341,15 @@
                 var emailError = document.getElementById('emailError');
 
                 // Kiểm tra Fullname không được để trống và không chứa kí tự đặc biệt
-                if (fullname.trim() === '' || !/^[a-zA-Z\s]+$/.test(fullname)) {
-                    fullnameError.textContent = 'Fullnamephải chứa ít nhất một kí tự không phải số hoặc kí tự đặc biệt.';
+                if (fullname.trim() === '' || fullname.length > 15 || !/^[a-zA-Z1-9\s]+$/.test(fullname)) {
+                    fullnameError.textContent = 'Họ tên không dài quá 15 kí tự và không có kí tự đặc biệt..';
                     event.preventDefault();
                 } else {
                     fullnameError.textContent = '';
                 }
-
                 // Kiểm tra Phone có đúng định dạng và bắt đầu bằng số 0
                 if (!/^(0)\d{9}$/.test(phone)) {
-                    phoneError.textContent = 'Số điện thoại không hợp lệ.';
+                    phoneError.textContent = 'Vui lòng nhập Số điện thoại đầy đủ và hợp lệ.';
                     event.preventDefault();
                 } else {
                     phoneError.textContent = '';
@@ -358,11 +357,48 @@
 
                 // Kiểm tra Email có đúng định dạng
                 if (!/^\S+@\S+\.\S+$/.test(email)) {
-                    emailError.textContent = 'Email không hợp lệ, vui lòng nhập lại đúng định dạng.';
+                    emailError.textContent = 'Vui lòng nhập Email đầy đủ và hợp lệ.';
                     event.preventDefault();
                 } else {
                     emailError.textContent = '';
                 }
+            });
+        </script>
+
+
+
+        <script>
+            document.getElementById('updatePass').addEventListener('submit', function (event) {
+                var old = document.getElementById('old').value;
+                var newP = document.getElementById('newP').value;
+                var confirm = document.getElementById('confirm').value;
+
+                var passOldError = document.getElementById('passOldError');
+                var passNewError = document.getElementById('passNewError');
+                var passConfirmError = document.getElementById('passConfirmError');
+
+                // Kiểm tra Fullname không được để trống và không chứa kí tự đặc biệt
+                if (old.trim() === '') {
+                    passOldError.textContent = 'Không được để trống trường này.';
+                    event.preventDefault();
+                } else {
+                    passOldError.textContent = '';
+                }
+
+                if (newP.trim() === '') {
+                    passNewError.textContent = 'Không được để trống trường này.';
+                    event.preventDefault();
+                } else {
+                    passNewError.textContent = '';
+                }
+
+                if (confirm.trim() === '') {
+                    passConfirmError.textContent = 'Không được để trống trường này.';
+                    event.preventDefault();
+                } else {
+                    passConfirmError.textContent = '';
+                }
+
             });
         </script>
 
