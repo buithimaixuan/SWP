@@ -4,7 +4,6 @@
  */
 package DAOs;
 
-
 import DB.DBConnection;
 import Models.Chart;
 import Models.OrderDetail;
@@ -24,9 +23,10 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class OrderDetailDAO {
+
     Connection conn;
 
-    public OrderDetailDAO(){
+    public OrderDetailDAO() {
         try {
             conn = DBConnection.connect();
         } catch (ClassNotFoundException ex) {
@@ -105,7 +105,7 @@ public class OrderDetailDAO {
         }
         return count;
     }
-    
+
     public LinkedList<OrderDetail> getAllOrderDetailsByOrderID(int o_id) {
         LinkedList<OrderDetail> orderDetailList = new LinkedList<>();
         String sql = "select * from [order_detail] where o_id = ?";
@@ -122,10 +122,8 @@ public class OrderDetailDAO {
         }
         return orderDetailList;
     }
-    
-    
-    
-       public List<chartPro> getChartDataProduct() {
+
+    public List<chartPro> getChartDataProduct() {
         List<chartPro> chartDataListProduct = new ArrayList<>();
 
         // Tạo câu truy vấn SQL
@@ -149,7 +147,7 @@ public class OrderDetailDAO {
                 System.out.println("......" + quantity);
 
                 // Tạo đối tượng Chart và thêm vào danh sách
-                chartDataListProduct.add(new chartPro( name, quantity));
+                chartDataListProduct.add(new chartPro(name, quantity));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,18 +156,16 @@ public class OrderDetailDAO {
         // Trả về danh sách dữ liệu của biểu đồ
         return chartDataListProduct;
     }
-       
-       
-        public List<chartPro> getChartDataDay() {
+
+    public List<chartPro> getChartDataDay() {
         List<chartPro> chartDataListDay = new ArrayList<>();
 
         // Tạo câu truy vấn SQL
-        String sql = "SELECT o.o_date, SUM(od.quantity) AS quantity\n" +
-"         FROM order_detail od\n" +
-"           INNER JOIN orders o ON od.o_id = o.o_id \n" +
-   "WHERE status = N'Đã giao' \n"+
-"           GROUP BY o.o_date \n" +
-"           ORDER BY o.o_date ASC;";
+        String sql = "SELECT YEAR([o_date]) AS year, SUM(od.quantity) AS quantity\n"
+                + "    FROM order_detail od\n"
+                + "          INNER JOIN orders o ON od.o_id = o.o_id\n"
+                + "WHERE status = N'Đã giao'\n"
+                + "       GROUP BY YEAR([o_date])";
 
         // Thực thi câu truy vấn và xử lý kết quả
         try ( PreparedStatement preparedStatement = conn.prepareStatement(sql);  ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -177,11 +173,11 @@ public class OrderDetailDAO {
             // Duyệt qua các dòng kết quả
             while (resultSet.next()) {
                 // Lấy dữ liệu từ kết quả
-                String o_date = resultSet.getString("o_date");
+                String year = resultSet.getString("year");
                 int quantity = resultSet.getInt("quantity");
 
                 // Tạo đối tượng Chart và thêm vào danh sách
-                chartDataListDay.add(new chartPro(o_date, quantity));
+                chartDataListDay.add(new chartPro(year, quantity));
             }
         } catch (SQLException e) {
             e.printStackTrace();

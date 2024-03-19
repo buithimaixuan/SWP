@@ -102,7 +102,7 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btnDeleteCus" class="btn btn-success w-100" style="font-size: 20px" value="Delete Customer"/>
+                        <input type="submit" name="btnDeleteCus" class="btn btn-success w-100" style="font-size: 20px" value="Xóa khách hàng"/>
                     </div>  
                 </form>
             </div>
