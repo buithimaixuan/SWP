@@ -108,7 +108,7 @@
                     <span class="error text-danger fw-bold font-italic text-center"></span>
 
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="btn-UpdateNews" class="btn btn-success w-100" style="font-size: 20px" value="Thêm tin tức"/>
+                        <input type="submit" name="btn-UpdateNews" class="btn btn-success w-100" style="font-size: 20px" value="Sửa tin tức"/>
                     </div>  
                 </form>
             </div>

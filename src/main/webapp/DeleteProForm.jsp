@@ -234,7 +234,7 @@
                         <span class="error errorDescription text-danger font-italic fw-bold"></span>
                     </div>
                     <div class="form-outline mb-3 mt-4">
-                        <input type="submit" name="DeletePro" class="btn btn-success w-100" style="font-size: 20px" value="Delete Product"/>
+                        <input type="submit" name="DeletePro" class="btn btn-success w-100" style="font-size: 20px" value="Xóa sản phẩm"/>
                     </div> 
                 </form>
             </div>

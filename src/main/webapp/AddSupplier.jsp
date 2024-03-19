@@ -35,7 +35,7 @@
                 <form method="post" action="SupplierController" class="border border-2 rounded-4 p-4 pt-2" style="margin: 0px 30px;" 
                       onsubmit="return validateAddSupplier()" >
                     <div class="text-center mb-3">
-                        <span class="h3 fw-bold">Thêm mới nha cung cấp</span>
+                        <span class="h3 fw-bold">Thêm mới nhà cung cấp</span>
                     </div>
                     <div style="gap: 20px;">
                         <div class="w-100">
@@ -43,7 +43,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="proName" name="proName" placeholder="Tên nha cung cap"
                                            class="form-control form-control-lg" />
-                                    <label for="proName" class="form-label">Tên nha cung cấp</label>
+                                    <label for="proName" class="form-label">Tên nhà cung cấp</label>
                                 </div>
                                 <span class="error errorProName text-danger fw-bold font-italic"></span>
                             </div>
@@ -69,7 +69,7 @@
                                 <span class="errorAddress text-danger fw-bold font-italic"></span>
                             </div>
                             <div class="form-outline mt-3 w-100 mb-0">
-                                <label class="form-label h5">Tên sản phẩm cung cap</label>
+                                <label class="form-label h5">Tên sản phẩm cung cấp</label>
                                 <div class="form-hover">
                                     <select class="w-100 form-control form-control-lg" name="pro_id">
                                         <c:forEach items="${listPro}" var="c">
@@ -81,7 +81,7 @@
 
                         </div>
                         <div class="form-outline mb-3 mt-4">
-                            <input type="submit" name="AddSupplier" class="btn btn-success w-100" style="font-size: 20px" value="Create Supplier"/>
+                            <input type="submit" name="AddSupplier" class="btn btn-success w-100" style="font-size: 20px" value="Thêm mới"/>
                         </div> 
                 </form>
             </div>
