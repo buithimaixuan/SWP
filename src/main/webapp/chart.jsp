@@ -190,7 +190,7 @@
 
         <!--BIỂU ĐỒ 2-->
         <div class="row">
-            <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm</h1>
+            <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm đã bán </h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:40px;">
 
                 <canvas id="myChartProduct" style="width:100%;max-width:1000px;color: #99ccff"></canvas> 
@@ -223,10 +223,10 @@
 
         <!--BIỂU ĐỒ 3-->
         <div class="row">
-            <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm theo ngày</h1>
+            <h1 style="margin-top: 50px" class='txtretroshadow'>Biểu đồ Thống kê sản phẩm đã bán  qua các năm</h1>
             <div class="col-12"  style="margin-top: 20px;margin-left:80px;">
 
-                <canvas id="myChartProductDay" style="width:100%;max-width:1050px;color: #99ccff"></canvas> 
+                <canvas id="myChartProductDay" style="width:100%;max-width:1000px;color: #99ccff"></canvas> 
             </div>
 
         </div>
@@ -275,7 +275,7 @@
                     legend: {display: false},
                     title: {
                         display: true,
-                        text: "Biểu đồ thống kê sản phẩm."
+                        text: "Biểu đồ thống kê sản phẩm đã bán."
                     }
                 }
             });
@@ -305,7 +305,7 @@
                     legend: {display: false},
                     title: {
                         display: true,
-                        text: "Biểu đồ thống kê số lượng sản phẩm các ngày trong năm."
+                        text: "Biểu đồ thống kê số lượng sản phẩm đã bán  qua các năm."
                     }
                 }
             });
