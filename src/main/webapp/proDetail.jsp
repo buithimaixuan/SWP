@@ -75,24 +75,36 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="option_product">
-                                <button type="submit" name="btnBuyNow" class="buyNow_btn text-decoration-none">
-                                    <div>
-                                        <i class="fa-solid fa-bag-shopping"></i>Mua ngay
-                                    </div>
-                                    <div>
-                                        Giao hàng tận tay quý khách
-                                    </div>
-                                </button>
-                                <button href="submit" name="btnAddCartDetail" class="addCart_btn text-decoration-none">
-                                    <div>
-                                        <i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng
-                                    </div>
-                                    <div>
-                                        Chọn vào giỏ hàng để mua
-                                    </div>
-                                </button>
+
+
+
+                            <c:if test="${pro.pro_quantity <= 0}">
+                                <h1 style="color: #ff6223">Hết hàng</h1>
+                            </c:if>
+
+                            <c:if test="${pro.pro_quantity > 0}">
+
+
+                                <div class="option_product">
+                                    <button type="submit" name="btnBuyNow" class="buyNow_btn text-decoration-none">
+                                        <div>
+                                            <i class="fa-solid fa-bag-shopping"></i>Mua ngay
+                                        </div>
+                                        <div>
+                                            Giao hàng tận tay quý khách
+                                        </div>
+                                    </button>
+                                    <button href="submit" name="btnAddCartDetail" class="addCart_btn text-decoration-none">
+                                        <div>
+                                            <i class="fa-solid fa-cart-shopping"></i>Thêm vào giỏ hàng
+                                        </div>
+                                        <div>
+                                            Chọn vào giỏ hàng để mua
+                                        </div>
+                                    </button>
+                             
                             </div>
+                                   </c:if>
                         </div>
 
                         <div class="more_infor">
@@ -131,11 +143,11 @@
                     <div class="hot_product_title">
                         SẢN PHẨM HOT NHẤT
                     </div>
-                    
+
                     <!--NAM CODE HOT PRODUCT-->
                     <div class="list_card_item">
                         <c:forEach items="${listProHot}" var="proHot">
- 
+
                             <!--NAM CODE-->
                             <form action="ProductController" method="post" class="card_product">
                                 <input type="hidden" name="product-id" value="${proHot.pro_id}"/>

@@ -467,10 +467,10 @@
                                                 </c:if>
 
                                                 <c:if test="${p.pro_quantity > 0}">
-                                                                                  
+
                                                     <button class="card_buy" type="submit" name="btnAddCart">
                                                         <i class="fa-solid fa-cart-shopping"></i>
-                                                                 <span>Thêm</span>   
+                                                        <span>Thêm</span>   
                                                     </button>
                                                 </c:if>
                                             </div>
@@ -516,14 +516,14 @@
                                                 </div>
 
                                                 <c:if test="${p.pro_quantity <= 0}">
-                                                 <p style="color: #ff6223">Hết hàng</p>
+                                                    <p style="color: #ff6223">Hết hàng</p>
                                                 </c:if>
 
                                                 <c:if test="${p.pro_quantity > 0}">
-                                                                                       
+
                                                     <button class="card_buy" type="submit" name="btnAddCart">
                                                         <i class="fa-solid fa-cart-shopping"></i>
-                                                          <span>Thêm</span>     
+                                                        <span>Thêm</span>     
                                                     </button>
                                                 </c:if>                                            
 
