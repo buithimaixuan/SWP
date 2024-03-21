@@ -14,21 +14,26 @@ var yyyy = today.getFullYear();
 // Format ngày thành YYYY-MM-DD (định dạng ngày của trường input type="date")
 var formattedDate = yyyy + '-' + mm + '-' + dd;
 
-// Gán giá trị ngày mặc định là ngày hôm nay
-document.getElementById('dayWriteNews').value = formattedDate;
-
 document.getElementById('dayWriteNews').addEventListener('change', function () {
     selectedDate = new Date(this.value);
 
-    // So sánh ngày được chọn với ngày hiện tại
-    if (selectedDate > today) {
-        document.getElementById('ErrorDay').innerHTML = "Ngày không thể lớn hơn ngày hiện tại.";
+    // Tính toán tuổi
+    var ageDiff = today.getFullYear() - selectedDate.getFullYear();
+    var monthDiff = today.getMonth() - selectedDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < selectedDate.getDate())) {
+        ageDiff--;
+    }
+
+    // Kiểm tra tuổi
+    if (ageDiff < 18) {
+        document.getElementById('ErrorDay').innerHTML = "Ngày không hợp lệ. Bạn phải chọn ngày lớn hơn hoặc bằng 18 tuổi.";
         document.getElementById('dayWriteNews').value = formattedDate; // Xóa giá trị của trường input
     } else {
         document.getElementById('ErrorDay').innerHTML = "";
     }
 });
 
+// ngay lam viec
 document.getElementById('daywork').value = formattedDate;
 
 document.getElementById('daywork').addEventListener('change', function () {
