@@ -25,7 +25,7 @@
                         <p>Thay đổi mật khẩu của bạn qua 3 bước. Nó sẽ giúp bạn bảo vệ mật khẩu của bạn.!</p>
                         <ol class="list-unstyled">
                             <li><span class="text-primary text-medium">1. </span>Nhập Email của bạn.</li>
-                            <li><span class="text-primary text-medium">2. </span>Hệ thống sẽ gửi mã OTP đến Email của bạn.s</li>
+                            <li><span class="text-primary text-medium">2. </span>Hệ thống sẽ gửi mã OTP đến Email của bạn.</li>
                             <li><span class="text-primary text-medium">3. </span>Enter the OTP on the 
                                 next page</li>
                         </ol>

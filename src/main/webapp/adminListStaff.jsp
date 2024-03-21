@@ -94,6 +94,7 @@
 
                                 if (rs != null) {
                                     while (rs.next()) {
+                                    if(!rs.getString("username").equals("admin")){
                             %>
                             <tr>
                                 <td class="text-start align-middle nv-tab"><%= rs.getInt("staff_id")%></td>
@@ -112,7 +113,7 @@
                                     } else {
                                     %>
                                     <a href="/StaffController/DetailStaff/<%= rs.getInt("staff_id")%>" class="action_staff view_detail">Xem chi tiết</a>
-                                    <small style="font-size: 13px; color: #3e3e3e1f; font-style: italic">Tài khoản vô hiệu hóa</small>
+                                    <small style="font-size: 13px; color: #3e3e3e; font-style: italic">Tài khoản vô hiệu hóa</small>
                                     <%
                                         }
                                     %>
@@ -120,6 +121,7 @@
                                 </td>
                             </tr>
                             <%
+                                }
                                 }
                             } else {
                             %>

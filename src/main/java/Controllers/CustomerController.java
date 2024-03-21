@@ -79,27 +79,30 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();//tao session
         String path = request.getRequestURI();
-         Staff staff = (Staff) request.getSession().getAttribute("staff");
-        
-        if (path.endsWith("/CustomerController/Create")) {
-            request.getRequestDispatcher("/AddCusAdmin.jsp").forward(request, response);
-        } else if (path.endsWith("/CustomerController/DeleteCusAdmin")) {
-            int cus_id = Integer.parseInt(request.getParameter("cus_id"));
-            CustomerDAO acdao = new CustomerDAO();
-            Customer cuss = acdao.getCustomer(cus_id);
-            request.setAttribute("username", cuss.getUsername());
-            request.setAttribute("password", cuss.getPassword());
-            request.setAttribute("fullname", cuss.getFullname());
-            request.setAttribute("avatar", cuss.getAvatar());
-            request.setAttribute("phone_number", cuss.getPhone_number());
-            request.setAttribute("email", cuss.getEmail());
-            request.setAttribute("code_reset", cuss.getCode_reset());
-            request.setAttribute("isDelete", cuss.getIsDelete());
-            request.setAttribute("acc_id", cuss.getAcc_id());
-            request.setAttribute("cus_id", cuss.getCus_id());
+        Staff staff = (Staff) request.getSession().getAttribute("staff");
+        if (staff != null) {
+            if (path.endsWith("/CustomerController/Create")) {
+                request.getRequestDispatcher("/AddCusAdmin.jsp").forward(request, response);
+            } else if (path.endsWith("/CustomerController/DeleteCusAdmin")) {
+                int cus_id = Integer.parseInt(request.getParameter("cus_id"));
+                CustomerDAO acdao = new CustomerDAO();
+                Customer cuss = acdao.getCustomer(cus_id);
+                request.setAttribute("username", cuss.getUsername());
+                request.setAttribute("password", cuss.getPassword());
+                request.setAttribute("fullname", cuss.getFullname());
+                request.setAttribute("avatar", cuss.getAvatar());
+                request.setAttribute("phone_number", cuss.getPhone_number());
+                request.setAttribute("email", cuss.getEmail());
+                request.setAttribute("code_reset", cuss.getCode_reset());
+                request.setAttribute("isDelete", cuss.getIsDelete());
+                request.setAttribute("acc_id", cuss.getAcc_id());
+                request.setAttribute("cus_id", cuss.getCus_id());
 
-            request.getRequestDispatcher("/DeleteCusAdmin.jsp").forward(request, response);
-        } else if (path.endsWith("/CustomerController/ok")) {
+                request.getRequestDispatcher("/DeleteCusAdmin.jsp").forward(request, response);
+            }
+        }
+
+        if (path.endsWith("/CustomerController/ok")) {
             request.getRequestDispatcher("/ok.jsp").forward(request, response);
         } else if (path.endsWith("CustomerController/listNews")) {
             NewsDAO newsDAO = new NewsDAO();
@@ -113,7 +116,7 @@ public class CustomerController extends HttpServlet {
         } else if (path.endsWith("CustomerController/newsDetail")) {
             ProductDAO proDAO = new ProductDAO();
             LinkedList<Product> product = proDAO.getTop4Pro();
-            
+
             int news_id = Integer.parseInt(request.getParameter("news_id"));
             NewsDAO newsDAO = new NewsDAO();
             News news = newsDAO.getNews(news_id);
@@ -150,7 +153,7 @@ public class CustomerController extends HttpServlet {
             if (s.equals(usern)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This username is already existed!");
+                out.print("Tên đăng nhập này đã tồn tại!");
                 break;
             }
         }
@@ -161,7 +164,7 @@ public class CustomerController extends HttpServlet {
             if (s.equals(emailUser)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This email is already existed!");
+                out.print("Địa chỉ email này đã tồn tại!");
                 break;
             }
         }
@@ -173,7 +176,7 @@ public class CustomerController extends HttpServlet {
             if (s.equals(userPhone)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This phone is already existed!");
+                out.print("Số điện thoại này đã tồn tại!");
                 break;
             }
         }

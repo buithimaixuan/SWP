@@ -77,7 +77,7 @@
                                         <c:if test="${ph.isDelete==0}" >
                                             <a href="/ProductController/Detail/${ph.pro_id}" class="btn btn-primary mt-3">Xem chi tiết</i></a>
 
-                                            <a href="/ProductController/Edit/${ph.pro_id}" class="btn btn-success mt-3">Câp nhât</a>
+                                            <a href="/ProductController/Edit/${ph.pro_id}" class="btn btn-success mt-3">Cập nhật</a>
                                             <a href="/ProductController/Delete/${ph.pro_id}" class="btn btn-danger mt-3">Xóa</a>
                                         </c:if>
                                         <c:if test="${ph.isDelete!=0}">

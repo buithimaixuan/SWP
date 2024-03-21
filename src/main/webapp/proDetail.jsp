@@ -19,7 +19,7 @@
     <body>
         <%--<%@include file="headOfCart.jsp" %>--%>
         <%@include file="headOfHome.jsp" %>
-        <main>
+        <main style="margin-bottom: 100px;">
             <div class="content">
 
                 <div id="address_page">
@@ -68,7 +68,7 @@
                                           onclick="this.parentNode.querySelector('input[type=number]').stepDown();">
                                         <i class="fa-solid fa-minus"></i>
                                     </span>
-                                    <input type="number" name="quantityBuyInShop" value="1" min="1" max="${pro.pro_quantity}">
+                                    <input type="number" name="quantityBuyInShop" value="1" min="1" max="${pro.pro_quantity}" onchange="if(this.value == 0)this.value=1;">
                                     <span class="increase"
                                           onclick="this.parentNode.querySelector('input[type=number]').stepUp();">
                                         <i class="fa-solid fa-plus"></i>
@@ -102,9 +102,9 @@
                                             Chọn vào giỏ hàng để mua
                                         </div>
                                     </button>
-                             
-                            </div>
-                                   </c:if>
+
+                                </div>
+                            </c:if>
                         </div>
 
                         <div class="more_infor">
@@ -185,7 +185,7 @@
                 </div>
             </div>
         </main>
-
+        <%@include file="footerOfHome.jsp" %>
 
         <script src="/JS/product_detail.js"></script>
     </body>

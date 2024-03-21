@@ -54,18 +54,18 @@
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="price" name="price" placeholder="Giá gốc" value="${pEdit.pro_price}"
+                                    <input type="number" id="price" name="price" placeholder="Giá bán" value="${pEdit.pro_price}"
                                            class="form-control form-control-lg" readonly/>
-                                    <label for="price" class="form-label">Giá gốc</label>
+                                    <label for="price" class="form-label">Giá bán</label>
                                 </div>
                                 <span class="error errorPrice text-danger fw-bold font-italic"></span>
                             </div>
 
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
-                                    <input type="number" id="realPrice" name="realPrice" placeholder="Giá bán" value="${pEdit.discount}"
+                                    <input type="number" id="realPrice" name="realPrice" placeholder="Giá khuyến mãi" value="${pEdit.discount}"
                                            class="form-control form-control-lg" readonly />
-                                    <label for="realPrice" class="form-label">Giá bán</label>
+                                    <label for="realPrice" class="form-label">Giá khuyến mãi</label>
                                 </div>
                                 <span class="error errorRealPrice text-danger fw-bold font-italic"></span>
                             </div>
@@ -83,7 +83,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="brand" name="brand" placeholder="Thương hiệu" 
                                            class="form-control form-control-lg" value="${pEdit.brand}" readonly/>
-                                    <label class="form-label">Thương hiệu (option)</label>
+                                    <label class="form-label">Thương hiệu</label>
                                 </div>
                                 <span class="error errorBrand text-danger fw-bold font-italic"></span>
                             </div>
@@ -92,7 +92,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="mass" name="mass" placeholder="Khối lượng"
                                            class="form-control form-control-lg" value="${pEdit.mass}" readonly/>
-                                    <label class="form-label">Khối lượng (option)</label>
+                                    <label class="form-label">Khối lượng</label>
                                 </div>
                                 <span class="error errorMass text-danger fw-bold font-italic"></span>
                             </div>
@@ -103,7 +103,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="ingredient" name="ingredient" placeholder="Thành phần"
                                            class="form-control form-control-lg" value="${pEdit.ingredient}" readonly/>
-                                    <label class="form-label">Thành phần (option)</label>
+                                    <label class="form-label">Thành phần</label>
                                 </div>
                                 <span class="error errorIngredient text-danger fw-bold font-italic"></span>
                             </div>

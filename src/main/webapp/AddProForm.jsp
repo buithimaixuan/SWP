@@ -79,7 +79,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="brand" name="brand" placeholder="Thương hiệu"
                                            class="form-control form-control-lg" />
-                                    <label class="form-label">Thương hiệu (option)</label>
+                                    <label class="form-label">Thương hiệu </label>
                                 </div>
                                 <span class="error errorBrand text-danger fw-bold font-italic"></span>
                             </div>
@@ -88,7 +88,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="mass" name="mass" placeholder="Khối lượng"
                                            class="form-control form-control-lg" />
-                                    <label class="form-label">Khối lượng (option)</label>
+                                    <label class="form-label">Khối lượng </label>
                                 </div>
                                 <span class="error errorMass text-danger fw-bold font-italic"></span>
                             </div>
@@ -99,7 +99,7 @@
                                 <div class="form-hover">
                                     <input type="text" id="ingredient" name="ingredient" placeholder="Thành phần"
                                            class="form-control form-control-lg" />
-                                    <label class="form-label">Thành phần (option)</label>
+                                    <label class="form-label">Thành phần</label>
                                 </div>
                                 <span class="error errorIngredient text-danger fw-bold font-italic"></span>
                             </div>
