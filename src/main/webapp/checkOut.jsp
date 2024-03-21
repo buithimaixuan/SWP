@@ -272,7 +272,7 @@
                                         <input type="radio" class="form-check-input cod" name="paymentMethod" value="VNPay">
                                         <label class="form-check-label">VNPay</label>
                                     </div>
-                                    <img src="https://th.bing.com/th/id/OIP.8A3oGCqKXQ3uYNyfTXyNNgAAAA?w=181&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                                    <img src="https://vinadesign.vn/uploads/images/2023/05/vnpay-logo-vinadesign-25-12-57-55.jpg"
                                          alt="" style="width: 10%;">
                                 </li>
                             </div>
