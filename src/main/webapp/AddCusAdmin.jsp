@@ -24,7 +24,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        
+        <title>Thêm mới khách hàng</title>
     </head>
     <body>
         <div class="row">
