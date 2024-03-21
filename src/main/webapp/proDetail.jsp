@@ -110,7 +110,7 @@
                         <div class="more_infor">
                             <div class="freeShip">
                                 <div></div>
-                                Sản phẩm luôn nhận giao hàng Online. Freeship mọi đơn từ 500K nhập "FREESHIP"
+                                Sản phẩm luôn nhận giao hàng Online.
                             </div>
                             <div class="more_infor_content">
                                 <div class="brand">
@@ -126,7 +126,7 @@
                                     - Trọng lượng: <span>${pro.mass}kg</span>
                                 </div>
                                 <div class="usesage">
-                                    - Công dụng: <span>${pro.pro_description}</span>
+                                    - Mô tả: <span>${pro.pro_description}</span>
                                 </div>
                                 <div class="preserve">
                                     - Số lượng trong kho: <span>${pro.pro_quantity}</span>

@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="infor_cart">
                                             <p><%= pro.getPro_name()%></p>
-                                            <p class="price_cart">Don gia: 
+                                            <p class="price_cart">Đơn giá: 
                                                 <span>
                                                     <%
                                                         if (pro.getDiscount() < pro.getPro_price()) {
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="bot_cart">
-                                    <a class="deleteCart" onclick="return confirm('Do you want to delete this cart?')" href="/CartController/delete/<%= item.getPro_id()%>">Xóa</a>
+                                    <a class="deleteCart" onclick="return confirm('Bạn có muốn xóa sản phẩm này không?')" href="/CartController/delete/<%= item.getPro_id()%>">Xóa</a>
                                     <p style="font-weight: 700;">Thành tiền: <span style="font-weight: 500;"><%= item.getCart_price()%></span></p>
                                 </div>
                             </div>

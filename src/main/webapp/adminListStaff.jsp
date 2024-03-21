@@ -145,7 +145,7 @@
         <script>
             new DataTable('#listStaff');
 
-            document.querySelector('.dt-length label').innerText = "Chọc lọc";
+            document.querySelector('.dt-length label').innerText = "Chọn lọc";
             document.querySelector('.dt-search label').innerText = "Tìm kiếm:"
         </script>
     </body>
