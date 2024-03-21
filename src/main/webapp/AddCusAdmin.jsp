@@ -24,6 +24,7 @@
                 border-radius: 0.5rem;
             }
         </style>
+        
     </head>
     <body>
         <div class="row">
