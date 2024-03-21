@@ -1690,7 +1690,7 @@ public class ProductController extends HttpServlet {
                 ProductHistoryDAO ph = new ProductHistoryDAO();
                 ProductHistory proHis = new ProductHistory(0, staff.getStaff_id(), proEdit.getPro_id(), cat_id, proName,
                         pro.getPro_image(), orgin, brand, mass, ingredient, quantity, price, discount, description,
-                        0, "Cap nhat", create_date);
+                        0, "Cập nhật", create_date);
                 int addPh = ph.addProHistory(proHis);
 
                 int editProImage1 = pIdao.editProImages(listPI.get(0).getPro_img_id(), "images/" + fileName2);

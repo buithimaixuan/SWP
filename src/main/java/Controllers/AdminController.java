@@ -208,7 +208,39 @@ public class AdminController extends HttpServlet {
             } else if (path.endsWith("/AdminController/adminImportPro")) {
                 ProductDAO pdao = new ProductDAO();
                 LinkedList<Product> listPro = pdao.getAllProAdmin();
-                request.setAttribute("listPro", listPro);
+                SupplierDAO supdao = new SupplierDAO();
+                LinkedList<Supplier> listSup = supdao.getListSupplier();
+                LinkedList<Product> listProHasSup = new LinkedList<>();
+                LinkedList<Product> listProNoSup = new LinkedList<>();
+                int count = -1;
+                for (Product product : listPro) {
+                    count = 0;
+                    for (Supplier sup : listSup) {
+                        if (sup.getPro_id() == product.getPro_id()) {
+                            count++;
+                        }
+
+                    }
+                    if (count == 0) {
+                        listProNoSup.add(product);
+                    }
+                }
+
+                int count1 = -1;
+                for (Product product : listPro) {
+                    count1 = 0;
+                    for (Supplier sup : listSup) {
+                        if (sup.getPro_id() == product.getPro_id()) {
+                            count1++;
+                        }
+                    }
+                    if (count1 != 0) {
+                        listProHasSup.add(product);
+                    }
+                }
+
+                request.setAttribute("listPro", listProHasSup);
+                request.setAttribute("listProNoSup", listProNoSup);
                 request.getRequestDispatcher("/ListProToImport.jsp").forward(request, response);
             } else if (path.endsWith("/AdminController/adminImportProHis")) {
                 ImportProductDAO pdao = new ImportProductDAO();
@@ -307,7 +339,7 @@ public class AdminController extends HttpServlet {
                     String content3 = request.getParameter("content3");
                     Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
 
-                    News news = new News(0, staff.getStaff_id(), title, image_url, title_content, content1, content2, content3, create_date, 0);
+                    News news = new News(0, staff.getStaff_id(), title, "images/" + image_url, title_content, content1, content2, content3, create_date, 0);
                     newsDAO.UpdateNews(news, news_id);
 
                     String action = "Chinh sua";

@@ -100,7 +100,7 @@ public class RegisterController extends HttpServlet {
             if (s.equals(usern)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This username is already existed!");
+                out.print("Tên đăng nhập này đã tồn tại!");
                 break;
             }
         }
@@ -111,7 +111,7 @@ public class RegisterController extends HttpServlet {
             if (s.equals(emailUser)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This email is already existed!");
+                out.print("Email này đã tồn tại!");
                 break;
             }
         }
@@ -123,7 +123,7 @@ public class RegisterController extends HttpServlet {
             if (s.equals(userPhone)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This phone is already existed!");
+                out.print("Số điện thoại này đã tồn tại!");
                 break;
             }
         }

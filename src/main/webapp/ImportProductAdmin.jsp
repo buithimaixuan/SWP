@@ -99,7 +99,7 @@
                               var isValid = true;
 
                               if (quantity === '') {
-                                  errorQuantity.innerHTML = "Nhap so luong!";
+                                  errorQuantity.innerHTML = "Nhập số lượng!";
                                   isValid = false;
                               }
 
