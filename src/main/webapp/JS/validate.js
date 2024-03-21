@@ -25,17 +25,17 @@ function validateInputs() {
     const user = username.value.trim();
     const pwd = password.value.trim();
     if (user === "") {
-        setError(username, "Username is require!");
+        setError(username, "Bắt buộc nhập!");
         check = false;
     } else if (user.length > 100) {
-        setError(username, "Username length cannot greater than 100 character");
+        setError(username, "Tên đăng nhập dưới 100 kí tự");
         check = false;
     } else {
         setSuccess(username);
     }
 
     if (pwd === "") {
-        setError(password, "Password is require!");
+        setError(password, "Bắt buộc nhập!");
         check = false;
     } else {
         setSuccess(password);
@@ -54,48 +54,47 @@ function validateResgisterCus() {
     const emailHidden = document.getElementById("resultEmail").innerHTML;
     const phoneHidden = document.getElementById("resultPhone").innerHTML;
     const usernameHidden = document.getElementById("result").innerHTML;
-    
+
     if (avatar.value.trim() === "") {
-        setError(avatar, "avatar is require");
+        setError(avatar, "Bắt buộc chọn!");
         check = false;
     } else if (!checkImage(avatar.value.trim())) {
-        setError(avatar, "File must be images as 'jpg' or 'png' or 'jpeg'");
+        setError(avatar, "File phải là định dạng 'jpg' , 'png' hoặc 'jpeg'");
         check = false;
     } else {
         setSuccess(avatar);
     }
 
     if (fullname.value.trim() === "") {
-        setError(fullname, "Fullname is require!");
+        setError(fullname, "Bắt buộc nhập!");
         check = false;
     } else {
         setSuccess(fullname);
     }
 
     if (email.value.trim() === "") {
-        setError(email, "Email is require!");
+        setError(email, "Bắt buộc nhập!");
         check = false;
     } else if (!isValidEmail(email.value.trim())) {
-        setError(email, "Please enter right form of email!");
+        setError(email, "Vui lòng nhập đúng định dạng Email!");
         check = false;
     } else {
-        if (emailHidden.trim() === "This email is already existed!") {
+        if (emailHidden.trim() === "Email đã tồn tại!") {
             setError(email, "");
             check = false;
         } else {
             setSuccess(email);
-
         }
     }
 
     if (phone.value.trim() === "") {
-        setError(phone, "Phone is require!");
+        setError(phone, "Bắt buộc nhập!");
         check = false;
     } else if (!isVietnamesePhoneNumber(phone.value.trim())) {
-        setError(phone, "Phone number must is vietnamese phone number!");
+        setError(phone, "Số điện thoại phải đúng định dạng Việt Nam!");
         check = false;
     } else {
-        if (phoneHidden.trim() === "This phone is already existed!") {
+        if (phoneHidden.trim() === "Số điện thoại đã tồn tại!") {
             setError(phone, "");
             check = false;
         } else {
@@ -105,20 +104,24 @@ function validateResgisterCus() {
     }
 
     if (password.value.trim() === "") {
-        setError(password, "Password is require!");
+        setError(password, "Bắt buộc nhập!");
         check = false;
-    } else {
+    } else if (password.value.trim.length < 6 || password.value.trim.length > 6) {
+        setError(password, "Mật khẩu từ 6 đến 20 kí tự!");
+        check = false;
+    } else
+    {
         setSuccess(password);
     }
 
     if (username.value.trim() === "") {
-        setError(username, "Username is require!");
+        setError(username, "Bắt buộc nhập!");
         check = false;
     } else if (username.value.length > 100) {
-        setError(username, "Username length cannot greater than 100 character");
+        setError(username, "Tên đăng nhập dưới 100 kí tự");
         check = false;
     } else {
-        if (usernameHidden.trim() === "This username is already existed!") {
+        if (usernameHidden.trim() === "Tên đăng nhập đã tồn tại!") {
             setError(username, "");
             check = false;
         } else {
@@ -127,7 +130,7 @@ function validateResgisterCus() {
         }
     }
 
-    
+
 
 
     return check;

@@ -100,8 +100,8 @@ function validateFormCus() {
 
     }
 
-    if (password !== '' && (password.length < 5 || password.length > 10)) {
-        errorPass.innerHTML = "Độ dài của mật khẩu phải lớn hơn 5 và nhỏ hơn hoặc bằng 10 kí tự!";
+    if (password !== '' && (password.length < 6 || password.length > 20)) {
+        errorPass.innerHTML = "Độ dài của mật khẩu phải lớn hơn 6 và nhỏ hơn hoặc bằng 20 kí tự!";
         isValid = false;
 
     }
