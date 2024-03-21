@@ -307,7 +307,7 @@ public class AdminController extends HttpServlet {
                     String content3 = request.getParameter("content3");
                     Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
 
-                    News news = new News(0, staff.getStaff_id(), title, image_url, title_content, content1, content2, content3, create_date, 0);
+                    News news = new News(0, staff.getStaff_id(), title, "images/" + image_url, title_content, content1, content2, content3, create_date, 0);
                     newsDAO.UpdateNews(news, news_id);
 
                     String action = "Chinh sua";
