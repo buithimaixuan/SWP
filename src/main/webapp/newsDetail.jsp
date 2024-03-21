@@ -17,7 +17,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tin tức</title>
+        <title>${news.getTitle()}</title>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <%@include file="headOfHome.jsp" %>
         <link rel="stylesheet" href="../CSS/newsDetail.css"/>
