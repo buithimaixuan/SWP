@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../CSS/thongke.css"/>
-
+    <title>Thống kê</title>
 
 </head>
 <body>
@@ -148,7 +148,7 @@
                     <div class="col-14 mb-4"  style="margin-left: 90px">
                         <label for="year" style="color: #3333ff">Năm:</label>
                         <select id="year" name="year" style="color: #3333ff" required>
-                         
+
                             <option value="2023">2023</option>
                             <option value="2024">2024</option>
                         </select>

@@ -10,7 +10,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dash Board</title>
         <link rel="stylesheet" href="/CSS/dashboardnamver2.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <style>
