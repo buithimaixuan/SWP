@@ -228,7 +228,7 @@
                                         <label for="newP" class="col-sm-2 col-form-label">Mật khẩu mới</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="newP" name="newP"
-                                                    placeholder="Nhập mật khẩu mới." >
+                                                   placeholder="Nhập mật khẩu mới." >
                                             <div id="errorDiv"></div>
                                             <span style="color: red" id="passNewError" class="error"></span>
                                         </div>
@@ -237,7 +237,7 @@
                                         <label for="confirm" class="col-sm-2 col-form-label">Xác nhận Mật khẩu</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="confirm" name="confirm"
-                                                    placeholder="Nhập mật khẩu mới lại lần nữa.">
+                                                   placeholder="Nhập mật khẩu mới lại lần nữa.">
                                             <div id="errorDiv"></div>
                                             <span style="color: red" id="passConfirmError" class="error"></span>
                                         </div>
@@ -386,12 +386,18 @@
                 if (newP.trim() === '') {
                     passNewError.textContent = 'Không được để trống trường này.';
                     event.preventDefault();
+                } else if (newP.trim().length < 3 || newP.trim().length > 15) {
+                    passNewError.textContent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
+                    event.preventDefault();
                 } else {
                     passNewError.textContent = '';
                 }
 
                 if (confirm.trim() === '') {
                     passConfirmError.textContent = 'Không được để trống trường này.';
+                    event.preventDefault();
+                } else if (confirm.trim().length < 3 || confirm.trim().length > 15) {
+                    passConfirmError.textContent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
                     event.preventDefault();
                 } else {
                     passConfirmError.textContent = '';

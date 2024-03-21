@@ -58,17 +58,17 @@ function validateInputs() {
     const user = username.value.trim();
     const pwd = password.value.trim();
     if (user === "") {
-        setError(username, "Username is require!");
+        setError(username, "Bắt buộc!");
         check ++;
     } else if (user.length > 100) {
-        setError(username, "Username length cannot greater than 100 character");
+        setError(username, "Không hợp lệ.");
         check ++;
     } else {
         setSuccess(username);
     }
 
     if (pwd === "") {
-        setError(password, "Password is require!");
+        setError(password, "Bắt buộc!");
         check ++;
     } else {
         setSuccess(password);

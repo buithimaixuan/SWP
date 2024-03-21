@@ -182,7 +182,7 @@
                                             <input type="date" id="birthday" name="birthday" class="form-control form-control-lg" value="${staff.birthday}"/>
                                             <span id="dateError" class="text-danger font-italic"></span>
                                         </div>
-                                      
+
                                     </div>
                                     <div class="row mb-3">
                                         <label for="fullName" class="col-sm-2 col-form-label">Địa chỉ</label>
@@ -437,12 +437,18 @@
         if (newP.trim() === '') {
             passNewError.textContent = 'Không được để trống trường này.';
             event.preventDefault();
+        } else if (newP.trim().length < 3 || newP.trim().length > 15) {
+            passNewError.textContent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
+            event.preventDefault();
         } else {
             passNewError.textContent = '';
         }
 
         if (confirm.trim() === '') {
             passConfirmError.textContent = 'Không được để trống trường này.';
+            event.preventDefault();
+        } else if (confirm.trim().length < 3 || confirm.trim().length > 15) {
+            passConfirmError.textCo ntent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
             event.preventDefault();
         } else {
             passConfirmError.textContent = '';
