@@ -302,7 +302,7 @@ public class AdminController extends HttpServlet {
                     newsDAO.AddNewNews(staff_id, title, "images/" + image_url, title_content, content1, content2, content3, create_date);
 
                     int news_id = newsDAO.getLatestNewsId();
-                    String action = "Them";
+                    String action = "Thêm";
 
                     NewsHistory newsHis = new NewsHistory(0, news_id, staff_id, action, title, image_url, title_content, content1, content2, content3, create_date, 0);
                     NewsHistoryDAO newsHisDAO = new NewsHistoryDAO();
@@ -342,7 +342,7 @@ public class AdminController extends HttpServlet {
                     News news = new News(0, staff.getStaff_id(), title, "images/" + image_url, title_content, content1, content2, content3, create_date, 0);
                     newsDAO.UpdateNews(news, news_id);
 
-                    String action = "Chinh sua";
+                    String action = "Chỉnh sửa";
 
                     NewsHistoryDAO newsHisDAO = new NewsHistoryDAO();
                     NewsHistory newsHis = new NewsHistory(0, news_id, staff.getStaff_id(), action, title, image_url, title_content, content1, content2, content3, create_date, 0);
@@ -381,7 +381,7 @@ public class AdminController extends HttpServlet {
                 Date create_date = Date.valueOf(request.getParameter("dayWriteNews"));
                 newsDAO.DeleteNews(news_id);
 
-                String action = "Xoa";
+                String action = "Xóa";
 
                 NewsHistoryDAO newsHisDAO = new NewsHistoryDAO();
                 NewsHistory newsHis = new NewsHistory(0, news_id, staff.getStaff_id(), action, title, image_url, title_content, content1, content2, content3, create_date, 0);
