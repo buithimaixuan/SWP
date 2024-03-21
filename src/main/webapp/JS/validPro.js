@@ -13,21 +13,25 @@ var yyyy = today.getFullYear();
 var formattedDate = yyyy + '-' + mm + '-' + dd;
 
 // Gán giá trị ngày mặc định là ngày hôm nay
-document.getElementById('birthday').value = formattedDate;
+//document.getElementById('birthday').value = formattedDate;
 
 // Bắt sự kiện thay đổi của trường input
 document.getElementById('birthday').addEventListener('change', function () {
     selectedDate = new Date(this.value);
 
-    // So sánh ngày được chọn với ngày hiện tại
-    if (selectedDate > today) {
-        document.getElementById('dateError').innerHTML = "Ngày sinh không hợp lệ.";
-        document.getElementById('birthday').value = formattedDate; // Xóa giá trị của trường input
+    var age = today.getFullYear() - selectedDate.getFullYear();
+    var month = today.getMonth() - selectedDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < selectedDate.getDate())) {
+        age--;
+    }
+
+    if (age < 18) {
+        document.getElementById('dateError').innerHTML = "Nhân viên phải lớn hơn hoặc bằng 18 tuổi.";
+//        document.getElementById('birthday').value = formattedDate;
     } else {
         document.getElementById('dateError').innerHTML = "";
     }
 });
-
 
 const form = document.getElementById('updateForm');
 
@@ -59,17 +63,17 @@ function validateInputs() {
     const pwd = password.value.trim();
     if (user === "") {
         setError(username, "Bắt buộc!");
-        check ++;
+        check++;
     } else if (user.length > 100) {
         setError(username, "Không hợp lệ.");
-        check ++;
+        check++;
     } else {
         setSuccess(username);
     }
 
     if (pwd === "") {
         setError(password, "Bắt buộc!");
-        check ++;
+        check++;
     } else {
         setSuccess(password);
     }
@@ -81,10 +85,10 @@ function validateResgisterCus() {
     const email = document.getElementById("email");
     const phone = document.getElementById("phone");
     if (email.value.trim() === "") {
-        setError(email, "Email is require!");
+        setError(email, "Bắt buộc nhập!");
         check++;
     } else if (!isValidEmail(email.value.trim())) {
-        setError(email, "Please enter right form of email!");
+        setError(email, "Vui lòng nhập đúng định dạng!");
         check++;
     } else {
         setSuccess(email);
@@ -92,10 +96,10 @@ function validateResgisterCus() {
 
 
     if (phone.value.trim() === "") {
-        setError(phone, "Phone is require!");
+        setError(phone, "Bắt buộc nhập!");
         check++;
     } else if (!isVietnamesePhoneNumber(phone.value.trim())) {
-        setError(phone, "Phone number must is vietnamese phone number!");
+        setError(phone, "Vui lòng nhập đúng định dạng!");
         check++;
     } else {
         setSuccess(phone);
