@@ -284,23 +284,23 @@
         if (duplicateError != null) {
             String errorMessage = "";
             if (duplicateError.equals("both")) {
-                errorMessage = emailCk + " and " + phoneCk + " are already existed!";
+                errorMessage = emailCk + " and " + phoneCk + " đã tồn tại!";
                 out.println("document.getElementById('duplicateEmailPhoneError').innerText = '" + errorMessage + "';");
             } else if (duplicateError.equals("username")) {
-                errorMessage = "Please re-enter, " + usernameUserCk + " already exists";
+                errorMessage = "Vui lòng nhập lại, " + usernameUserCk + " đã tồn tại";
                 // Hiển thị thông báo trùng email
                 out.println("document.getElementById('duplicateUserError').innerText = '" + errorMessage + "';");
             } else if (duplicateError.equals("email")) {
-                errorMessage = "Please re-enter, " + emailCk + " already exists";
+                errorMessage = "Vui lòng nhập lại, " + emailCk + " đã tồn tại";
                 // Hiển thị thông báo trùng email
                 out.println("document.getElementById('duplicateEmailError').innerText = '" + errorMessage + "';");
             } else if (duplicateError.equals("phone")) {
-                errorMessage = "Please re-enter, " + phoneCk + " already exists";
+                errorMessage = "Vui lòng nhập lại, " + phoneCk + " đã tồn tại";
                 // Hiển thị thông báo trùng phone
                 out.println("document.getElementById('duplicatePhoneError').innerText = '" + errorMessage + "';");
 
             } else if (duplicateError.equals("PassError")) {
-                errorMessage = "Incorrect password! You can not change password!!!";
+                errorMessage = "Sai mật khẩu , bạn không thể thay đổi mật khẩu!!!";
                 // Hiển thị thông báo trùng phone
                 out.println("document.getElementById('duplicatePassError').innerText = '" + errorMessage + "';");
             }
