@@ -180,7 +180,9 @@
                                         <label for="fullName" class="col-sm-2 col-form-label">Sinh nhật</label>
                                         <div class="col-sm-10">
                                             <input type="date" id="birthday" name="birthday" class="form-control form-control-lg" value="${staff.birthday}"/>
+                                            <span id="dateError" class="text-danger font-italic"></span>
                                         </div>
+                                      
                                     </div>
                                     <div class="row mb-3">
                                         <label for="fullName" class="col-sm-2 col-form-label">Địa chỉ</label>
@@ -218,18 +220,17 @@
                                         <label for="old" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="oldPass" 
-                                                   name="oldPass" >
+                                                   name="oldPass"  placeholder="Nhập mật khẩu cũ." >
                                             <div id="oldError" class="text-danger"></div>     
                                             <span style="color: red" id="passOldError" class="error"></span>
                                             <span class="text-danger" id="duplicatePassError"></span>
                                         </div>
                                     </div>
-
                                     <div class="row mb-3">
                                         <label for="newP" class="col-sm-2 col-form-label">Mật khẩu mới</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="newP" name="newP"
-                                                   placeholder="Enter your new password" >
+                                                   placeholder="Nhập mật khẩu mới." >
                                             <div id="errorDiv"></div>
                                             <span style="color: red" id="passNewError" class="error"></span>
                                         </div>
@@ -238,7 +239,7 @@
                                         <label for="confirm" class="col-sm-2 col-form-label">Xác nhận Mật khẩu</label>
                                         <div class="col-sm-10">
                                             <input type="password" class="form-control" id="confirm" name="confirm"
-                                                   placeholder="Enter new password again">
+                                                   placeholder="Nhập mật khẩu mới lại lần nữa.">
                                             <div id="errorDiv"></div>
                                             <span style="color: red" id="passConfirmError" class="error"></span>
                                         </div>
