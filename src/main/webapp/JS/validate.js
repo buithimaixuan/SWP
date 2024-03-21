@@ -25,17 +25,17 @@ function validateInputs() {
     const user = username.value.trim();
     const pwd = password.value.trim();
     if (user === "") {
-        setError(username, "Username is require!");
+        setError(username, "Tên đăng nhập không thể bỏ trống!");
         check = false;
     } else if (user.length > 100) {
-        setError(username, "Username length cannot greater than 100 character");
+        setError(username, "Tên đăng nhập không thể lớn hơn 100 kí tự");
         check = false;
     } else {
         setSuccess(username);
     }
 
     if (pwd === "") {
-        setError(password, "Password is require!");
+        setError(password, "Mật khẩu không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(password);
@@ -56,30 +56,30 @@ function validateResgisterCus() {
     const usernameHidden = document.getElementById("result").innerHTML;
     
     if (avatar.value.trim() === "") {
-        setError(avatar, "avatar is require");
+        setError(avatar, "Avatar không thể bỏ trống!");
         check = false;
     } else if (!checkImage(avatar.value.trim())) {
-        setError(avatar, "File must be images as 'jpg' or 'png' or 'jpeg'");
+        setError(avatar, "File hình phải là file 'jpg' or 'png' or 'jpeg'");
         check = false;
     } else {
         setSuccess(avatar);
     }
 
     if (fullname.value.trim() === "") {
-        setError(fullname, "Fullname is require!");
+        setError(fullname, "Họ và tên không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(fullname);
     }
 
     if (email.value.trim() === "") {
-        setError(email, "Email is require!");
+        setError(email, "Email không thể bỏ trống!");
         check = false;
     } else if (!isValidEmail(email.value.trim())) {
-        setError(email, "Please enter right form of email!");
+        setError(email, "Hãy nhập đúng định dạng email!");
         check = false;
     } else {
-        if (emailHidden.trim() === "This email is already existed!") {
+        if (emailHidden.trim() === "Email này đã tồn tại!") {
             setError(email, "");
             check = false;
         } else {
@@ -89,13 +89,13 @@ function validateResgisterCus() {
     }
 
     if (phone.value.trim() === "") {
-        setError(phone, "Phone is require!");
+        setError(phone, "Số điện thoại không thể bỏ trống!");
         check = false;
     } else if (!isVietnamesePhoneNumber(phone.value.trim())) {
-        setError(phone, "Phone number must is vietnamese phone number!");
+        setError(phone, "Hãy nhập đúng số điện thoại VN!");
         check = false;
     } else {
-        if (phoneHidden.trim() === "This phone is already existed!") {
+        if (phoneHidden.trim() === "Số điện thoại này đã tồn tại!") {
             setError(phone, "");
             check = false;
         } else {
@@ -105,20 +105,20 @@ function validateResgisterCus() {
     }
 
     if (password.value.trim() === "") {
-        setError(password, "Password is require!");
+        setError(password, "Mật khẩu không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(password);
     }
 
     if (username.value.trim() === "") {
-        setError(username, "Username is require!");
+        setError(username, "Tên đăng nhập không thể bỏ trống!");
         check = false;
     } else if (username.value.length > 100) {
-        setError(username, "Username length cannot greater than 100 character");
+        setError(username, "Tên đăng nhập không thể lớn hơn 100 kí tự");
         check = false;
     } else {
-        if (usernameHidden.trim() === "This username is already existed!") {
+        if (usernameHidden.trim() === "Tên đăng nhập này đã tồn tại!") {
             setError(username, "");
             check = false;
         } else {

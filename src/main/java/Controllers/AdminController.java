@@ -208,7 +208,39 @@ public class AdminController extends HttpServlet {
             } else if (path.endsWith("/AdminController/adminImportPro")) {
                 ProductDAO pdao = new ProductDAO();
                 LinkedList<Product> listPro = pdao.getAllProAdmin();
-                request.setAttribute("listPro", listPro);
+                SupplierDAO supdao = new SupplierDAO();
+                LinkedList<Supplier> listSup = supdao.getListSupplier();
+                LinkedList<Product> listProHasSup = new LinkedList<>();
+                LinkedList<Product> listProNoSup = new LinkedList<>();
+                int count = -1;
+                for (Product product : listPro) {
+                    count = 0;
+                    for (Supplier sup : listSup) {
+                        if (sup.getPro_id() == product.getPro_id()) {
+                            count++;
+                        }
+
+                    }
+                    if (count == 0) {
+                        listProNoSup.add(product);
+                    }
+                }
+
+                int count1 = -1;
+                for (Product product : listPro) {
+                    count1 = 0;
+                    for (Supplier sup : listSup) {
+                        if (sup.getPro_id() == product.getPro_id()) {
+                            count1++;
+                        }
+                    }
+                    if (count1 != 0) {
+                        listProHasSup.add(product);
+                    }
+                }
+
+                request.setAttribute("listPro", listProHasSup);
+                request.setAttribute("listProNoSup", listProNoSup);
                 request.getRequestDispatcher("/ListProToImport.jsp").forward(request, response);
             } else if (path.endsWith("/AdminController/adminImportProHis")) {
                 ImportProductDAO pdao = new ImportProductDAO();

@@ -135,7 +135,7 @@ public class StaffController extends HttpServlet {
             if (s.equals(usern)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This username is already existed!");
+                out.print("Tên đăng nhập này đã tồn tại!");
                 break;
             }
         }
@@ -146,7 +146,7 @@ public class StaffController extends HttpServlet {
             if (s.equals(emailStaff)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This email is already existed!");
+                out.print("Địa chỉ email này đã tồn tại!");
                 break;
             }
         }
@@ -158,7 +158,7 @@ public class StaffController extends HttpServlet {
             if (s.equals(userPhone)) {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
-                out.print("This phone is already existed!");
+                out.print("Số điện thoại này đã tồn tại!");
                 break;
             }
         }
@@ -291,7 +291,7 @@ public class StaffController extends HttpServlet {
             } else {
 
                 //thất bại
-                session.setAttribute("failll", "That bai");
+                session.setAttribute("failll", "thất bại");
                 response.sendRedirect("/StaffController");
             }
         }

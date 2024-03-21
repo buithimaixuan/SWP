@@ -113,7 +113,7 @@ function validateAddProduct() {
         isValid = false;
     }
     if (description !== '' && (description.length < 10 || description.length > 1000)) {
-        errorDescription.innerHTML = "Ðô dài cua mô tả sản phẩm phai lon hon 10 và nho hon hoac bang 1000 kí tu!";
+        errorDescription.innerHTML = "Độ dài của mô tả sản phẩm phải lớn 10 và nhỏ hơn hoặc bằng 1000 kí tự!";
         isValid = false;
     }
     if (mass === '') {
@@ -125,11 +125,11 @@ function validateAddProduct() {
         isValid = false;
     }
     if (brand === '') {
-        errorBrand.innerHTML = "Thuong hieu sản phẩm không thể bỏ trống!";
+        errorBrand.innerHTML = "Thương hiệu sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     if (ingredient === '') {
-        errorIngredient.innerHTML = "Thành phàn sản phẩm không thể bỏ trống!";
+        errorIngredient.innerHTML = "Thành phần sản phẩm không thể bỏ trống!";
         isValid = false;
     }
     return isValid;
@@ -155,7 +155,7 @@ function validateAddSupplier() {
     var isValid = true;
 
     if (proName === '') {
-        errorProName.innerHTML = "Tên nhà cung cap không thể bỏ trống!";
+        errorProName.innerHTML = "Tên nhà cung cấp không thể bỏ trống!";
         isValid = false;
     }
     if (email === '') {
@@ -175,11 +175,11 @@ function validateAddSupplier() {
         isValid = false;
     }
     if (address === '') {
-        errorAddress.innerHTML = "Dia chi nhà cung cap không thể bỏ trống!";
+        errorAddress.innerHTML = "Địa chỉ nhà cung cấp không thể bỏ trống!";
         isValid = false;
     }
     if (address !== '' && (address.length < 20 || address.length > 1000)) {
-        errorAddress.innerHTML = "Dia chi nhà cung cap không thể nho hon 20!";
+        errorAddress.innerHTML = "Địa chỉ nhà cung cấp không thể nhỏ hơn 20!";
         isValid = false;
     }
     return isValid;

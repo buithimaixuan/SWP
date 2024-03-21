@@ -107,7 +107,7 @@
                                             <div class="control_quantity">
                                                 <a name="decrease_quan" href="/CartController/decreaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepDown();"><i class="fa-solid fa-minus"></i></a>
                                             </div>
-                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" value="<%= item.getPro_quantity()%>" min="1" max="<%= pro.getPro_quantity()%>"/>
+                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" value="<%= item.getPro_quantity()%>" min="1" max="<%= pro.getPro_quantity()%>" onchange="if(this.value == 0)this.value=1;"/>
                                             <div class="control_quantity">
                                                 <a name="increase_quan" href="/CartController/increaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepUp();"><i class="fa-solid fa-plus"></i></a>
                                             </div>
