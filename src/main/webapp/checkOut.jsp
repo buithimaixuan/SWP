@@ -22,7 +22,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Trang thanh toán</title>
+        <title>Trang thanh toán </title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
               type="text/css">
 

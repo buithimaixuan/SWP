@@ -36,7 +36,7 @@
                 display: flex;
             }
         </style>
-        <title>Quản lý tài khoản</title>
+        <title>Quản lý tài khoản </title>
     </head>
     <body>
         <div>

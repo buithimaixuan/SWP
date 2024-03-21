@@ -24,7 +24,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Xóa khách hàng</title>
+        <title>Xóa khách hàng </title>
     </head>
     <body>
         <div class="row">

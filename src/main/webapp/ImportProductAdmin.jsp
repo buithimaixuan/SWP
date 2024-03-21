@@ -23,7 +23,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Nhập sản phẩm</title>
+        <title>Nhập sản phẩm </title>
     </head>
     <body>
         <div class="row">

@@ -23,7 +23,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Create New Product</title>
+        <title>Thêm mới sản phẩm </title>
     </head>
     <body>
         <div class="row">

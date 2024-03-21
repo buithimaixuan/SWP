@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../CSS/thongke.css"/>
-    <title>Thống kê</title>
+    <title>Thống kê </title>
 
 </head>
 <body>

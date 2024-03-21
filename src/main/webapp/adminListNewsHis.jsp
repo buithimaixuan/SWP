@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
-        <title>Lịch sử tin tức</title>
+        <title>Lịch sử tin tức </title>
         <style>
             .btn{
                 cursor: pointer;

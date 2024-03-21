@@ -16,7 +16,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Danh sách tin tức</title>
+        <title>Danh sách tin tức </title>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../CSS/listAllNews.css"/></head>
         <%@include file="headOfHome.jsp" %>

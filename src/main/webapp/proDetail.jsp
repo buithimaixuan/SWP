@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Chi tiết sản phẩm</title>
+        <title>Chi tiết sản phẩm </title>
         <link rel="stylesheet" href="/CSS/proDetail.css"/>
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
     </head>

@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="/CSS/paySuccessStyle.css"/>
         <link rel="icon" type="image/png" href="/images/Lovecake.png">
-        <title>Thanh toán thành công</title> 
+        <title>Thanh toán thành công </title> 
     </head>
     <body>
         <%@include file="headOfHome.jsp" %>

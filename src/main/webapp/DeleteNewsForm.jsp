@@ -25,7 +25,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Xóa tin tức</title>
+        <title>Xóa tin tức </title>
     </head>
     <body>
         <div class="row">
