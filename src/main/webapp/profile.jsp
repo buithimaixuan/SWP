@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Hồ sơ Khách hàng</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -185,16 +185,16 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <div class="col-md-9">
+                                        <!--<div class="col-md-9">-->
                                             <label for="avatar" class="col-sm-2 col-form-label">Ảnh đại diện</label>
                                             <div class="col-sm-10">
                                                 <input type="file" class="form-control" id="avatar" name="avatar">
                                                 <input type="hidden" id="avatar_old" class="form-control" name="avatar_old" value="${account.avatar}">
 
                                             </div>
-                                        </div>
+                                        <!--</div>-->
                                         <div class="col-md-3">
-                                            <img src="${account.avatar}" alt="" style="max-width: 70%;">
+                                            <img src="${account.avatar}" alt="" style="max-width: 70%; margin-left: 150px">
                                         </div>
                                     </div>
 
@@ -216,7 +216,7 @@
                                     <div class="row mb-3">
                                         <label for="old" class="col-sm-2 col-form-label">Mật khẩu cũ</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="old" value=""
+                                            <input type="password" class="form-control" id="oldPass" value=""
                                                    name="oldPass" placeholder="Nhập mật khẩu cũ.">
                                             <div id="oldError" class="text-danger"></div>
                                             <span style="color: red" id="passOldError" class="error"></span>
@@ -339,14 +339,14 @@
                 var emailError = document.getElementById('emailError');
 
                 // Kiểm tra Fullname không được để trống và không chứa kí tự đặc biệt
-                if (fullname.trim() === '' || fullname.length > 15 || !/^[a-zA-Z1-9\s]+$/.test(fullname)) {
-                    fullnameError.textContent = 'Họ tên không dài quá 15 kí tự và không có kí tự đặc biệt.';
+                if (fullname.trim() === '' || fullname.length > 20 || fullname.length < 6 || !/^[a-zA-Z\s]+$/.test(fullname)) {
+                    fullnameError.textContent = 'Họ tên không dài quá 20 kí tự và không có kí tự đặc biệt.';
                     event.preventDefault();
                 } else {
                     fullnameError.textContent = '';
                 }
                 // Kiểm tra Phone có đúng định dạng và bắt đầu bằng số 0
-                if (!/^(0)\d{9}$/.test(phone)) {
+                if (!/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(phone)) {
                     phoneError.textContent = 'Vui lòng nhập Số điện thoại đầy đủ và hợp lệ.';
                     event.preventDefault();
                 } else {
@@ -367,7 +367,7 @@
 
         <script>
             document.getElementById('updatePass').addEventListener('submit', function (event) {
-                var old = document.getElementById('old').value;
+                var old = document.getElementById('oldPass').value;
                 var newP = document.getElementById('newP').value;
                 var confirm = document.getElementById('confirm').value;
 
@@ -386,8 +386,8 @@
                 if (newP.trim() === '') {
                     passNewError.textContent = 'Không được để trống trường này.';
                     event.preventDefault();
-                } else if (newP.trim().length < 3 || newP.trim().length > 15) {
-                    passNewError.textContent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
+                } else if (newP.trim().length < 6 || newP.trim().length > 20) {
+                    passNewError.textContent = 'Độ dài của chuỗi phải từ 6 đến 20 ký tự.';
                     event.preventDefault();
                 } else {
                     passNewError.textContent = '';
@@ -396,8 +396,8 @@
                 if (confirm.trim() === '') {
                     passConfirmError.textContent = 'Không được để trống trường này.';
                     event.preventDefault();
-                } else if (confirm.trim().length < 3 || confirm.trim().length > 15) {
-                    passConfirmError.textContent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
+                } else if (confirm.trim().length < 6 || confirm.trim().length > 20) {
+                    passConfirmError.textContent = 'Độ dài của chuỗi phải từ 6 đến 20 ký tự.';
                     event.preventDefault();
                 } else {
                     passConfirmError.textContent = '';
