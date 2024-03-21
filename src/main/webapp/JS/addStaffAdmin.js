@@ -75,26 +75,26 @@ function validateStaff() {
 
 
     if (fullname.value.trim() === "") {
-        setError(fullname, "Fullname is require!");
+        setError(fullname, "Họ và tên không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(fullname);
     }
     if (address.value.trim() === "") {
-        setError(address, "Address is require!");
+        setError(address, "Địa chỉ không thể bỏ trống");
         check = false;
     } else {
         setSuccess(address);
     }
 
     if (email.value.trim() === "") {
-        setError(email, "Email is require!");
+        setError(email, "Email không thể bỏ trống!");
         check = false;
     } else if (!isValidEmail(email.value.trim())) {
-        setError(email, "Please enter right form of email!");
+        setError(email, "Hãy nhập đúng định dạng email!");
         check = false;
     } else {
-        if (emailHidden.trim() === "This email is already existed!") {
+        if (emailHidden.trim() === "Địa chỉ email này đã tồn tại!") {
             setError(email, "");
             check = false;
         } else {
@@ -104,13 +104,13 @@ function validateStaff() {
     }
 
     if (phone.value.trim() === "") {
-        setError(phone, "Phone is require!");
+        setError(phone, "Số điện thoại không thể bỏ trống!");
         check = false;
     } else if (!isVietnamesePhoneNumber(phone.value.trim())) {
-        setError(phone, "Phone number must is vietnamese phone number!");
+        setError(phone, "Hãy nhập đúng định dạng số điện VN!");
         check = false;
     } else {
-        if (phoneHidden.trim() === "This phone is already existed!") {
+        if (phoneHidden.trim() === "Số điện thoại này đã tồn tại!") {
             setError(phone, "");
             check = false;
         } else {
@@ -120,20 +120,20 @@ function validateStaff() {
     }
 
     if (password.value.trim() === "") {
-        setError(password, "Password is require!");
+        setError(password, "Mật khẩu không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(password);
     }
 
     if (username.value.trim() === "") {
-        setError(username, "Username is require!");
+        setError(username, "Tên đăng nhập không thể bỏ trống!");
         check = false;
     } else if (username.value.length > 100) {
-        setError(username, "Username length cannot greater than 100 character");
+        setError(username, "Tên đăng nhập không thể quá 100 kí tự!");
         check = false;
     } else {
-        if (usernameHidden.trim() === "This username is already existed!") {
+        if (usernameHidden.trim() === "Tên đăng nhập này đã tồn tại!") {
             setError(username, "");
             check = false;
         } else {

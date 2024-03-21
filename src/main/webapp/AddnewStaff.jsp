@@ -136,9 +136,9 @@
                             <div class="form-group form-outline mt-4 w-100">
                                 <div class="form-hover">
                                     <select id="position" name="position" class="w-100 form-control form-control-lg" >
-                                        <option value="product manager">product manager</option>
-                                        <option value="order manager">order manager</option>
-                                        <option value="news manager">news manager</option>
+                                        <option value="product manager">Product manager</option>
+                                        <option value="order manager">Order manager</option>
+                                        <option value="news manager">News manager</option>
                                     </select>
                                 </div>
                                 <span class="error text-danger fw-bold font-italic"></span>

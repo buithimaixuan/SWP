@@ -114,12 +114,12 @@
                                     <%
                                         if (pro.getDiscount() < pro.getPro_price()) {
                                     %>
-                                    <p class="giathat">đ<%= pro.getPro_price() * elem.getQuantity() %></p>
-                                    <p class="giagiam">đ<%= pro.getDiscount() * elem.getQuantity() %></p>
+                                    <p class="giathat"><%= pro.getPro_price() * elem.getQuantity() %>đ</p>
+                                    <p class="giagiam"><%= pro.getDiscount() * elem.getQuantity() %>đ</p>
                                     <%
                                         } else {
                                     %>
-                                    <p class="giagiam">đ<%= pro.getPro_price() * elem.getQuantity() %></p>
+                                    <p class="giagiam"><%= pro.getPro_price() * elem.getQuantity() %>đ</p>
                                     <%
                                         } 
                                     %>
@@ -133,7 +133,7 @@
                         <div class="tongtien">
                             <div class="thongkegia">
                                 <p><i class="fa-solid fa-money-bill"></i><span>Thành tiền: </span></p>
-                                <span class="giacuoicung">đ${getOrderByID.total_price}</span>
+                                <span class="giacuoicung">${getOrderByID.total_price}đ</span>
                             </div>
                         </div>
                     </div>

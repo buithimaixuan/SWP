@@ -87,7 +87,7 @@
                                                     <div class="right_thongtindonhang">
                                                         <p>Phương thức thanh toán: <span>${ol.payment}</span></p>
                                                         <p>Trạng thái đơn hàng: <span>${ol.status}</span></p>
-                                                        <p>Tổng tiền: <span>đ${ol.total_price}</span></p>
+                                                        <p>Tổng tiền: <span>${ol.total_price}đ</span></p>
                                                     </div>
                                                 </div>
                                                 <div class="bot_donhang">
@@ -97,7 +97,7 @@
                                                             <c:otherwise>
                                                                 <a class="xemchitiet" href="/OrderController/OrderDetailCustomer/${ol.o_id}">Xem chi tiết</a>
                                                                 <c:if test="${ol.status == 'Chờ xác nhận' || ol.status == 'Đã xác nhận'}">
-                                                                    <a class="huydon" href="/OrderController/OrderDeleteCustomer/${ol.o_id}">Hủy đơn</a>
+                                                                    <a class="huydon" href="/OrderController/OrderDeleteCustomer/${ol.o_id}" onclick="return confirm('Bạn có chắc muốn hủy đơn hàng này không?')">Hủy đơn</a>
                                                                 </c:if>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -119,7 +119,7 @@
                                                 <div class="right_thongtindonhang">
                                                     <p>Phương thức thanh toán: <span>${ol.payment}</span></p>
                                                     <p>Trạng thái đơn hàng: <span>${ol.status}</span></p>
-                                                    <p>Tổng tiền: <span>đ${ol.total_price}</span></p>
+                                                    <p>Tổng tiền: <span>${ol.total_price}đ</span></p>
                                                 </div>
                                             </div>
                                             <div class="bot_donhang">

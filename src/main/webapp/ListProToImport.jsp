@@ -63,12 +63,35 @@
                                         <img src="/${ph.pro_image}" alt="alt" style="width: 70px; height: 70px;"/>
                                     </td>
                                     <td class="text-start align-middle">${ph.pro_name}</td>
-                                    
+
 
                                     <td class="text-start align-middle">${ph.pro_quantity}</td>
                                     <td class="text-start">
                                         <c:if test="${ph.isDelete==0}" >
                                             <a href="/ProductController/ImportPro/${ph.pro_id}" class="btn btn-primary mt-3">Nhập hàng</i></a>
+                                        </c:if>
+                                        <c:if test="${ph.isDelete==1}" >
+                                            <p style="font-style: italic;">Đã xóa</p>
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            <c:forEach items="${listProNoSup}" var="p">
+                                <tr>
+                                    <td class="text-start align-middle">${p.pro_id}</td>
+                                    <td class="text-start align-middle">
+                                        <img src="/${p.pro_image}" alt="alt" style="width: 70px; height: 70px;"/>
+                                    </td>
+                                    <td class="text-start align-middle">${p.pro_name}</td>
+
+
+                                    <td class="text-start align-middle">${p.pro_quantity}</td>
+                                    <td class="text-start">
+                                        <c:if test="${p.isDelete==0}" >
+                                            <p style="font-style: italic;">Cần bổ sung nhà cung cấp</p>
+                                        </c:if>
+                                        <c:if test="${p.isDelete==1}" >
+                                            <p style="font-style: italic;">Đã xóa</p>
                                         </c:if>
                                     </td>
                                 </tr>

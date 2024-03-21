@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="infor_cart">
                                             <p><%= pro.getPro_name()%></p>
-                                            <p class="price_cart">Don gia: 
+                                            <p class="price_cart">Đơn giá: 
                                                 <span>
                                                     <%
                                                         if (pro.getDiscount() < pro.getPro_price()) {
@@ -107,7 +107,7 @@
                                             <div class="control_quantity">
                                                 <a name="decrease_quan" href="/CartController/decreaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepDown();"><i class="fa-solid fa-minus"></i></a>
                                             </div>
-                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" value="<%= item.getPro_quantity()%>" min="1" max="<%= pro.getPro_quantity()%>"/>
+                                            <input type="number" name="quantity" class="quantity proQuantity form-control text-center" value="<%= item.getPro_quantity()%>" min="1" max="<%= pro.getPro_quantity()%>" onchange="if(this.value == 0)this.value=1;"/>
                                             <div class="control_quantity">
                                                 <a name="increase_quan" href="/CartController/increaseQuantity/<%= pro.getPro_id()%>" onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepUp();"><i class="fa-solid fa-plus"></i></a>
                                             </div>
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="bot_cart">
-                                    <a class="deleteCart" onclick="return confirm('Do you want to delete this cart?')" href="/CartController/delete/<%= item.getPro_id()%>">Xóa</a>
+                                    <a class="deleteCart" onclick="return confirm('Bạn có muốn xóa sản phẩm này không?')" href="/CartController/delete/<%= item.getPro_id()%>">Xóa</a>
                                     <p style="font-weight: 700;">Thành tiền: <span style="font-weight: 500;"><%= item.getCart_price()%></span></p>
                                 </div>
                             </div>

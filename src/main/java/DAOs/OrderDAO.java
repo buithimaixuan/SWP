@@ -135,7 +135,7 @@ public class OrderDAO {
 
     public LinkedList<Order> getAllOrdersByCusId(int cus_id) {
         LinkedList<Order> orderList = new LinkedList<>();
-        String sql = "select * from [orders] where cus_id=?";
+        String sql = "select * from [orders] where cus_id=? order by o_id desc";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, cus_id);
