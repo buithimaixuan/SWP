@@ -67,7 +67,7 @@
                                     <td class="text-start">
                                         <c:if test="${ol.isDelete == 0}">
                                             <a href="/OrderController/OrderDetailAdmin/${ol.o_id}" class="btn btn-primary mt-3 mb-3">Xem chi tiết</a>
-                                            <c:if test="${ol.status !='Đã hủy'}">
+                                            <c:if test="${ol.status !='Đã hủy' && ol.status !='Đã giao'}">
                                                 <a href="/OrderController/UpdateOrderAdmin/${ol.o_id}" class="btn btn-success mt-3 mb-3">Cập nhật</a>
                                             </c:if>
                                             <a href="/OrderController/DeleteOrderAdmin/${ol.o_id}" class="btn btn-danger mt-3 mb-3">Xóa</a>

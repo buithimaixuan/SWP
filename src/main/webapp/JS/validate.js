@@ -75,7 +75,7 @@ function validateResgisterCus() {
     if (email.value.trim() === "") {
         setError(email, "Email không thể bỏ trống!");
         check = false;
-    } else if (!isValidEmail(email.value.trim())) {
+    } else if (email !== '' && !isValidEmail(email.value.trim())) {
         setError(email, "Hãy nhập đúng định dạng email!");
         check = false;
     } else {

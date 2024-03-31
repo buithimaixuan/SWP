@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Hồ sơ nhân viên</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -177,7 +177,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">Sinh nhật</label>
+                                        <label for="birthday" class="col-sm-2 col-form-label">Sinh nhật</label>
                                         <div class="col-sm-10">
                                             <input type="date" id="birthday" name="birthday" class="form-control form-control-lg" value="${staff.birthday}"/>
                                             <span id="dateError" class="text-danger font-italic"></span>
@@ -185,7 +185,7 @@
 
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">Địa chỉ</label>
+                                        <label for="address" class="col-sm-2 col-form-label">Địa chỉ</label>
                                         <div class="col-sm-10">
                                             <input type="text" id="address" name="address" class="form-control form-control-lg" value="${staff.address}"  />
                                             <span class="error"></span>
@@ -193,7 +193,7 @@
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="fullName" class="col-sm-2 col-form-label">Vị trí</label>
+                                        <label for="position" class="col-sm-2 col-form-label">Vị trí</label>
                                         <div class="col-sm-10">
                                             <input readonly="" type="text" id="position" name="position" class="form-control form-control-lg" value="${staff.position}" />
                                         </div>
@@ -204,11 +204,8 @@
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
-
-
 
                         <div class="col-lg-8" id="changePass">
                             <h3 style="color: rgb(247, 187, 9);" class="my-3">Đổi mật khẩu</h3>
@@ -344,7 +341,34 @@
 </script>
 
 <script>
+    var today = new Date();
+    var selectedDate;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // nếu ngày và tháng nhỏ hơn 10 thì số đầu sẽ là số 0
+    var yyyy = today.getFullYear();
+    var countError = 0;
+
+    function checkBirthDate() {
+        selectedDate = new Date(document.getElementById('birthday').value);
+        console.log(selectedDate);
+
+        var age = today.getFullYear() - selectedDate.getFullYear();
+        var month = today.getMonth() - selectedDate.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < selectedDate.getDate())) {
+            age--;
+        }
+
+        if (age < 18) {
+            document.getElementById('dateError').innerHTML = "Nhân viên phải lớn hơn hoặc bằng 18 tuổi.";
+            countError = -1;
+        } else {
+            document.getElementById('dateError').innerHTML = "";
+            countError = 1;
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
+
         const form = document.getElementById("updateForm");
         const fullnameInput = document.getElementById("fullname");
         const phoneInput = document.getElementById("phone");
@@ -361,8 +385,8 @@
             if (!fullnameInput.value.trim()) {
                 showError(fullnameInput, "Vui lòng nhập Họ tên đầy đủ và hợp lệ.", "fullnameError");
                 isValid = false;
-            } else if (fullname.length > 15 || !/^[a-zA-Z1-9\s]+$/.test(fullnameInput.value)) {
-                showError(fullnameInput, "Họ tên không dài quá 15 kí tự và không có kí tự đặc biệt.", "fullnameError");
+            } else if (fullname.length > 20 || fullname.length < 6 || !/^[a-zA-Z\s]+$/.test(fullnameInput.value)) {
+                showError(fullnameInput, "Họ tên không dài quá 20 kí tự và không có kí tự đặc biệt.", "fullnameError");
                 isValid = false;
             }
 
@@ -379,7 +403,7 @@
             if (!phoneInput.value.trim()) {
                 showError(phoneInput, "Vui lòng nhập Số điện thoại đầy đủ và hợp lệ.", "phoneError");
                 isValid = false;
-            } else if (!/^0[0-9]{9}$/.test(phoneInput.value)) {
+            } else if (!/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(phoneInput.value)) {
                 showError(phoneInput, "Vui lòng nhập Số điện thoại đầy đủ và hợp lệ.", "phoneError");
                 isValid = false;
             }
@@ -392,9 +416,13 @@
                 showError(addressInput, "Vui lòng nhập địa chỉ đầy đủ và hợp lệ.", "addressError");
                 isValid = false;
             }
+            
+            checkBirthDate();
+            
+            console.log(countError);
 
             // Nếu form không hợp lệ, ngăn chặn gửi form
-            if (!isValid) {
+            if (!isValid || countError===-1) {
                 event.preventDefault();
             }
         });
@@ -418,7 +446,7 @@
 
 <script>
     document.getElementById('updatePass').addEventListener('submit', function (event) {
-        var old = document.getElementById('old').value;
+        var old = document.getElementById('oldPass').value;
         var newP = document.getElementById('newP').value;
         var confirm = document.getElementById('confirm').value;
 
@@ -428,27 +456,27 @@
 
         // Kiểm tra Fullname không được để trống và không chứa kí tự đặc biệt
         if (old.trim() === '') {
-            passOldError.textContent = 'Không được để trống trường này.';
+            passOldError.textContent = 'Không được để trống phần này.';
             event.preventDefault();
         } else {
             passOldError.textContent = '';
         }
 
         if (newP.trim() === '') {
-            passNewError.textContent = 'Không được để trống trường này.';
+            passNewError.textContent = 'Không được để trống phần này.';
             event.preventDefault();
-        } else if (newP.trim().length < 3 || newP.trim().length > 15) {
-            passNewError.textContent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
+        } else if (newP.trim().length < 6 || newP.trim().length > 20) {
+            passNewError.textContent = 'Độ dài của chuỗi phải từ 6 đến 20 ký tự.';
             event.preventDefault();
         } else {
             passNewError.textContent = '';
         }
 
         if (confirm.trim() === '') {
-            passConfirmError.textContent = 'Không được để trống trường này.';
+            passConfirmError.textContent = 'Không được để trống phần này.';
             event.preventDefault();
-        } else if (confirm.trim().length < 3 || confirm.trim().length > 15) {
-            passConfirmError.textCo ntent = 'Độ dài của chuỗi phải từ 3 đến 15 ký tự.';
+        } else if (confirm.trim().length < 6 || confirm.trim().length > 20) {
+            passConfirmError.textContent = 'Độ dài của chuỗi phải từ 6 đến 20 ký tự.';
             event.preventDefault();
         } else {
             passConfirmError.textContent = '';

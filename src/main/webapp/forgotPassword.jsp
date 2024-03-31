@@ -22,7 +22,7 @@
                 <div class="col-lg-8 col-md-10">
                     <div class="forgot">
                         <h2>Bạn quên mật khẩu ?</h2>
-                        <p>Thay đổi mật khẩu của bạn qua 3 bước. Nó sẽ giúp bạn bảo vệ mật khẩu của bạn.!</p>
+                        <p>Thay đổi mật khẩu của bạn qua 3 bước. Nó sẽ giúp bạn bảo vệ mật khẩu của bạn!</p>
                         <ol class="list-unstyled">
                             <li><span class="text-primary text-medium">1. </span>Nhập Email của bạn.</li>
                             <li><span class="text-primary text-medium">2. </span>Hệ thống sẽ gửi mã OTP đến Email của bạn.</li>
@@ -37,17 +37,17 @@
                                 <input class="form-control" type="text" name="email" id="email"><small
                                     class="form-text text-muted">Nhập email đã đăng ký tài khoản và đảm bảo rằng tài khoản còn hiệu lực. 
                                     Chúng tôi sẽ gửi mã OTP đến địa chỉ email này.</small>
+                                <br>
                                 <span class="error"></span>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-success" type="submit" name="btnForgotPass">Submit</button>
-                            <a class="btn btn-danger" href="/LoginController">Back to
-                                Login</a>
+                            <button class="btn btn-success" type="submit" name="btnForgotPass">Gửi mã</button>
+                            <a class="btn btn-danger" href="/LoginController">Quay về trang đăng nhập</a>
                         </div>
                     </form>
                     <c:if test="${messageErrorEmail!=null}">
-                        <span class="text-danger">Not found this email!</span>
+                        <span class="text-danger">Không tìm thấy email này!</span>
                     </c:if>
                 </div>
             </div>
@@ -55,6 +55,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-        <script src="./JS/forgotPass.js"></script>
+        <script src="/JS/forgotPass.js"></script>
     </body>
 </html>

@@ -98,7 +98,7 @@
             function enterCodeReset() {
                 let check = true;
                 if (opt.value.trim() === "") {
-                    setError(opt, "Please enter code reset!");
+                    setError(opt, "Hãy nhập mã OTP!");
                     check = false;
                 } else {
                     setSuccess(opt);
