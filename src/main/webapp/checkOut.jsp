@@ -179,7 +179,7 @@
                             <c:when test="${finalCart != null}">
                                 <h4 style="color: #ee4d2d;"><%= amount%>đ </h4>
                             </c:when>
-                            <c:when test="${finalCart != null}">
+                            <c:when test="${finalPro != null}">
                                 <c:choose>
                                     <c:when test="${finalPro.discount < finalPro.pro_price}">
                                         <h4 style="color: #ee4d2d;">${finalPro.discount*quantityBuyNow}đ </h4>

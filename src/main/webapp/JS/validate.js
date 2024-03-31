@@ -25,17 +25,17 @@ function validateInputs() {
     const user = username.value.trim();
     const pwd = password.value.trim();
     if (user === "") {
-        setError(username, "Bắt buộc nhập!");
+        setError(username, "Tên đăng nhập không thể bỏ trống!");
         check = false;
     } else if (user.length > 100) {
-        setError(username, "Tên đăng nhập dưới 100 kí tự");
+        setError(username, "Tên đăng nhập không thể lớn hơn 100 kí tự");
         check = false;
     } else {
         setSuccess(username);
     }
 
     if (pwd === "") {
-        setError(password, "Bắt buộc nhập!");
+        setError(password, "Mật khẩu không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(password);
@@ -54,47 +54,48 @@ function validateResgisterCus() {
     const emailHidden = document.getElementById("resultEmail").innerHTML;
     const phoneHidden = document.getElementById("resultPhone").innerHTML;
     const usernameHidden = document.getElementById("result").innerHTML;
-
+    
     if (avatar.value.trim() === "") {
-        setError(avatar, "Bắt buộc chọn!");
+        setError(avatar, "Avatar không thể bỏ trống!");
         check = false;
     } else if (!checkImage(avatar.value.trim())) {
-        setError(avatar, "File phải là định dạng 'jpg' , 'png' hoặc 'jpeg'");
+        setError(avatar, "File hình phải là file 'jpg' or 'png' or 'jpeg'");
         check = false;
     } else {
         setSuccess(avatar);
     }
 
     if (fullname.value.trim() === "") {
-        setError(fullname, "Bắt buộc nhập!");
+        setError(fullname, "Họ và tên không thể bỏ trống!");
         check = false;
     } else {
         setSuccess(fullname);
     }
 
     if (email.value.trim() === "") {
-        setError(email, "Bắt buộc nhập!");
+        setError(email, "Email không thể bỏ trống!");
         check = false;
-    } else if (!isValidEmail(email.value.trim())) {
-        setError(email, "Vui lòng nhập đúng định dạng Email!");
+    } else if (email !== '' && !isValidEmail(email.value.trim())) {
+        setError(email, "Hãy nhập đúng định dạng email!");
         check = false;
     } else {
-        if (emailHidden.trim() === "Email đã tồn tại!") {
+        if (emailHidden.trim() === "Email này đã tồn tại!") {
             setError(email, "");
             check = false;
         } else {
             setSuccess(email);
+
         }
     }
 
     if (phone.value.trim() === "") {
-        setError(phone, "Bắt buộc nhập!");
+        setError(phone, "Số điện thoại không thể bỏ trống!");
         check = false;
     } else if (!isVietnamesePhoneNumber(phone.value.trim())) {
-        setError(phone, "Số điện thoại phải đúng định dạng Việt Nam!");
+        setError(phone, "Hãy nhập đúng số điện thoại VN!");
         check = false;
     } else {
-        if (phoneHidden.trim() === "Số điện thoại đã tồn tại!") {
+        if (phoneHidden.trim() === "Số điện thoại này đã tồn tại!") {
             setError(phone, "");
             check = false;
         } else {
@@ -104,24 +105,20 @@ function validateResgisterCus() {
     }
 
     if (password.value.trim() === "") {
-        setError(password, "Bắt buộc nhập!");
+        setError(password, "Mật khẩu không thể bỏ trống!");
         check = false;
-    } else if (password.value.trim.length < 6 || password.value.trim.length > 6) {
-        setError(password, "Mật khẩu từ 6 đến 20 kí tự!");
-        check = false;
-    } else
-    {
+    } else {
         setSuccess(password);
     }
 
     if (username.value.trim() === "") {
-        setError(username, "Bắt buộc nhập!");
+        setError(username, "Tên đăng nhập không thể bỏ trống!");
         check = false;
     } else if (username.value.length > 100) {
-        setError(username, "Tên đăng nhập dưới 100 kí tự");
+        setError(username, "Tên đăng nhập không thể lớn hơn 100 kí tự");
         check = false;
     } else {
-        if (usernameHidden.trim() === "Tên đăng nhập đã tồn tại!") {
+        if (usernameHidden.trim() === "Tên đăng nhập này đã tồn tại!") {
             setError(username, "");
             check = false;
         } else {
@@ -130,7 +127,7 @@ function validateResgisterCus() {
         }
     }
 
-
+    
 
 
     return check;

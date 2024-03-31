@@ -13,7 +13,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hồ sơ nhân viên</title
+        <title>Hồ sơ nhân viên</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -341,10 +341,34 @@
 </script>
 
 <script>
-    
-    
-    
+    var today = new Date();
+    var selectedDate;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // nếu ngày và tháng nhỏ hơn 10 thì số đầu sẽ là số 0
+    var yyyy = today.getFullYear();
+    var countError = 0;
+
+    function checkBirthDate() {
+        selectedDate = new Date(document.getElementById('birthday').value);
+        console.log(selectedDate);
+
+        var age = today.getFullYear() - selectedDate.getFullYear();
+        var month = today.getMonth() - selectedDate.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < selectedDate.getDate())) {
+            age--;
+        }
+
+        if (age < 18) {
+            document.getElementById('dateError').innerHTML = "Nhân viên phải lớn hơn hoặc bằng 18 tuổi.";
+            countError = -1;
+        } else {
+            document.getElementById('dateError').innerHTML = "";
+            countError = 1;
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
+
         const form = document.getElementById("updateForm");
         const fullnameInput = document.getElementById("fullname");
         const phoneInput = document.getElementById("phone");
@@ -392,9 +416,13 @@
                 showError(addressInput, "Vui lòng nhập địa chỉ đầy đủ và hợp lệ.", "addressError");
                 isValid = false;
             }
+            
+            checkBirthDate();
+            
+            console.log(countError);
 
             // Nếu form không hợp lệ, ngăn chặn gửi form
-            if (!isValid) {
+            if (!isValid || countError===-1) {
                 event.preventDefault();
             }
         });

@@ -3,36 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
  */
 
-var today = new Date();
-var selectedDate;
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); // nếu ngày và tháng nhỏ hơn 10 thì số đầu sẽ là số 0
-var yyyy = today.getFullYear();
-
-// Format ngày thành YYYY-MM-DD (định dạng ngày của trường input type="date")
-var formattedDate = yyyy + '-' + mm + '-' + dd;
-
-// Gán giá trị ngày mặc định là ngày hôm nay
-//document.getElementById('birthday').value = formattedDate;
-
-// Bắt sự kiện thay đổi của trường input
-document.getElementById('birthday').addEventListener('change', function () {
-    selectedDate = new Date(this.value);
-
-    var age = today.getFullYear() - selectedDate.getFullYear();
-    var month = today.getMonth() - selectedDate.getMonth();
-    if (month < 0 || (month === 0 && today.getDate() < selectedDate.getDate())) {
-        age--;
-    }
-
-    if (age < 18) {
-        document.getElementById('dateError').innerHTML = "Nhân viên phải lớn hơn hoặc bằng 18 tuổi.";
-//        document.getElementById('birthday').value = formattedDate;
-    } else {
-        document.getElementById('dateError').innerHTML = "";
-    }
-});
-
 const form = document.getElementById('updateForm');
 
 form.addEventListener('submit', function (e) {
