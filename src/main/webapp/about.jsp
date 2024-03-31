@@ -115,27 +115,27 @@
                 <h2>Our Team</h2>
                 <div class="team-members">
                     <div class="team-member">
-                        <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="1">
+                        <img src="/images/nam.jpg" alt="1">
                         <h4>Trần Phương Nam</h4>
                         <p>CE170126</p>
                     </div>
                     <div class="team-member">
-                        <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
+                        <img src="/images/thuc.jpg" alt="2">
                         <h4>Nguyễn Hữu Thực</h4>
                         <p>CE171748</p>
                     </div>
                     <div class="team-member">
-                        <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
+                        <img src="/images/xuan.jpg" alt="2">
                         <h4>Bùi Thị Mai Xuân</h4>
                         <p>CE170377</p>
                     </div>
                     <div class="team-member">
-                        <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
+                        <img src="/images/uyenv.jpg" alt="2">
                         <h4>Vũ Minh Uyên</h4>
                         <p>CE171809</p>
                     </div>
                     <div class="team-member">
-                        <img src="https://th.bing.com/th/id/OIP.yif1nrvGQSG1VsoQh3PSuQHaHa?rs=1&pid=ImgDetMain" alt="2">
+                        <img src="/images/khoa.jpg" alt="2">
                         <h4>Đặng Nguyễn Đăng Khoa</h4>
                         <p>CE172075</p>
                     </div>

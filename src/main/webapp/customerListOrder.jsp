@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.bootstrap5.css"/>
-        <title>JSP Page</title>
+        <title>Danh sách đơn hàng</title>
     </head>
     <body>
         <%@include file="headOfCart.jsp" %>

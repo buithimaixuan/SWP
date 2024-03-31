@@ -24,7 +24,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Thêm tin tức</title>
+        <title>Chỉnh sửa tin tức</title>
     </head>
     <body>
         <div class="row">

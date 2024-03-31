@@ -22,7 +22,7 @@
                 border-radius: 0.5rem;
             }
         </style>
-        <title>Update Product</title>
+        <title>Cập nhật sản phẩm</title>
     </head>
     <body>
         <div class="row">

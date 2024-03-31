@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link rel="stylesheet" href="/CSS/footer.css">
         <script src="https://kit.fontawesome.com/1bd9fa3a2e.js" crossorigin="anonymous"></script>
-        <title>JSP Page</title>
     </head>
     <body>
         <footer class="text-center text-lg-start text-white" style="background-color: #d5e3e4">
